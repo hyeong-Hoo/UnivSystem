@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-인덱스말고헬로
+인덱스말고헬로말고치킨
 </body>
 </html>
