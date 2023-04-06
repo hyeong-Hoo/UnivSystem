@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 
-public class helloController {
+public class login {
 	
-	@GetMapping("/hello")
-	public String hello(){
+	@GetMapping("/login")
+	public String login(){
 		
-		return "hello";
+		return "login";
 	}
 }
