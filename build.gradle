@@ -57,7 +57,8 @@ testImplementation 'io.projectreactor:reactor-test'
 
 //Other:
 implementation 'org.springframework.boot:spring-boot-starter-groovy-templates'
-implementation 'org.springframework.session:spring-session-jdbc'
+//implementation 'org.springframework.session:spring-session-jdbc'
+
 compileOnly 'org.projectlombok:lombok'
 developmentOnly 'org.springframework.boot:spring-boot-devtools'
 annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
