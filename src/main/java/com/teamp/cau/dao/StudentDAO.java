@@ -12,7 +12,8 @@ import com.teamp.cau.dto.StudentDTO;
 
 public interface StudentDAO {
 
-	public List<StudentDTO> studentList();
+	List<StudentDTO> studentList(String KORN_FLNM);
+
 	
 
 	
