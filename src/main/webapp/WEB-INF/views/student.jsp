@@ -18,6 +18,7 @@
 휴대전화 <input> 최종변동상태 <input>  <br>
 전화번호 <input> 졸업일자 <input> <br>
 지도교수 <input>  <br>
+ddd
 </c:forEach>
 
 						
