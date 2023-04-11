@@ -2,6 +2,7 @@ package com.teamp.cau.controller;
 
 import java.util.List;
 
+import org.mariadb.jdbc.util.log.ConsoleLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +28,9 @@ public class StudentController {
 	public List<StudentDTO> student(@RequestParam("KORN_FLNM") String KORN_FLNM) {
 		
 		
-		List<StudentDTO> studentList = studentService.studentList(KORN_FLNM);		
-		System.out.println(studentList);	
+		List<StudentDTO> studentList = studentService.studentList(KORN_FLNM);
+		
+		
 		return studentList;
 	}
 
