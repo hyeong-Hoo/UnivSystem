@@ -32,12 +32,5 @@ public class mainController {
 		 
 		return "tables";
 	}
-	
-	@PostMapping("/test")
-	@ResponseBody
-	public String test() {
-		
-		
-	}
 }
 

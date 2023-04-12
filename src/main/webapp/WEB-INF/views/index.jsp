@@ -12,7 +12,7 @@
     <meta name="author" content="">
 
     <title>SB Admin 2 - Dashboard</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -30,9 +30,9 @@ $(function() {
                    var menuid = "menu" + divid;
                    var contentid = "content" + divid;
                    var btn = "<div class='tap'><span class='barmenu'"+"id="+menuid+"></span><input class='closebtn' type='button' value='x'"+"id="+btnid+"></div>";
-                   var content = "<div class='content'"+"id="+contentid+"></div>"
+                   var content = "<div class='testcontent'"+"id="+contentid+"></div>"
                          $.ajax({
-                            url : "/test",
+                            url : "/tester",
                             type : "post",
                             cache : false,
                             dataType : "html",
@@ -43,9 +43,9 @@ $(function() {
                          });
                    if ($("#"+contentid).length) {
                       $("#" + contentid).remove();
-                      $("#content").append(content);
+                      $("#contentbox").append(content);
                    } else {
-                      $("#content").append(content);
+                      $("#contentbox").append(content);
                    }
                       if ($("#" + menuid).length) {
                          
@@ -55,7 +55,7 @@ $(function() {
                       }
                       $("#"+menuid).click(function() {
                          $.ajax({
-                            url : "/test",
+                            url : "/tester",
                             type : "post",
                             cache : false,
                             dataType : "html",
@@ -66,9 +66,9 @@ $(function() {
                          });
                          if ($("#"+contentid).length) {
                             $("#" + contentid).remove();
-                            $("#content").append(content);
+                            $("#contentbox").append(content);
                          } else {
-                            $("#content").append(content);
+                            $("#contentbox").append(content);
                          }
                          
                       });
@@ -85,24 +85,30 @@ $(function() {
 span{
 display: block;
 }
-.barmenu {
-   float: left;
-   color: white;
-}
-
 .box{
 width:inherit;
-height: 580px;
-background-color: black;
+height: auto;
 }
 .menubar{
 width: inherit;
 height: 30px;
-background-color: blue;
+text-align:center;
+line-height: 30px;
+background-color: #4D72DF;
 }
+.barmenu {
+	display: block;
+   float: left;
+   color: white;
+}
+.closebtn {
+   float: left;
+   
+}
+
 .contentbox{
 width: inherit;
-height: 550px;
+height: auto;
 position: relative;
 }
 .testcontent{
