@@ -115,7 +115,7 @@
   <h2>학생 정보</h2>
   <form>
     <div class="form-group row">
-      <label for="name" class="col-sm-2 col-form-label">순번</label>
+      <label for="name" class="col-sm-2 col-form-label">번호</label>
       <div class="col-sm-4">
         <input class="form-control" id="no" readonly>
       </div>
@@ -191,7 +191,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th scope="col">순번</th>
+				<th scope="col">번호</th>
 				<th scope="col">이름</th>
 				<th scope="col">나이</th>
 				<th scope="col">생년월일</th>
