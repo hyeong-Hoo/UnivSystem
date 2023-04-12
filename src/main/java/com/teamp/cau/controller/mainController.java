@@ -2,6 +2,8 @@ package com.teamp.cau.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class mainController {
@@ -29,6 +31,13 @@ public class mainController {
 	public String tables() {
 		 
 		return "tables";
+	}
+	
+	@PostMapping("/test")
+	@ResponseBody
+	public String test() {
+		
+		
 	}
 }
 

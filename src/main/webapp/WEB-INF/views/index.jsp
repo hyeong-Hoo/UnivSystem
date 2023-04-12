@@ -12,7 +12,7 @@
     <meta name="author" content="">
 
     <title>SB Admin 2 - Dashboard</title>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js">
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -21,10 +21,94 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<script type="text/javascript">
+$(function() {
+
+    $(".collapse-item").click(function() {
+                   var divid = $(this).attr('id');
+                   var btnid = "btn" + divid;
+                   var menuid = "menu" + divid;
+                   var contentid = "content" + divid;
+                   var btn = "<div class='tap'><span class='barmenu'"+"id="+menuid+"></span><input class='closebtn' type='button' value='x'"+"id="+btnid+"></div>";
+                   var content = "<div class='content'"+"id="+contentid+"></div>"
+                         $.ajax({
+                            url : "/test",
+                            type : "post",
+                            cache : false,
+                            dataType : "html",
+                            data : {id : divid},
+                            success : function(good) {
+                               $("#" + contentid).load(good);
+                            }
+                         });
+                   if ($("#"+contentid).length) {
+                      $("#" + contentid).remove();
+                      $("#content").append(content);
+                   } else {
+                      $("#content").append(content);
+                   }
+                      if ($("#" + menuid).length) {
+                         
+                      } else {
+                         $("#menubar").append(btn);
+                         $("#" + menuid).text($(this).text());
+                      }
+                      $("#"+menuid).click(function() {
+                         $.ajax({
+                            url : "/test",
+                            type : "post",
+                            cache : false,
+                            dataType : "html",
+                            data : {id : divid},
+                            success : function(good) {
+                               $("#" + contentid).load(good);
+                            }
+                         });
+                         if ($("#"+contentid).length) {
+                            $("#" + contentid).remove();
+                            $("#content").append(content);
+                         } else {
+                            $("#content").append(content);
+                         }
+                         
+                      });
+                      $(document).on("click", "#"+btnid,
+                            function() {
+                               $(this).parent().remove();
+                               $("#" + contentid).remove();
+                            });
+                });
+
+ });
+</script>
 <style type="text/css">
-.testcontent{
+span{
+display: block;
+}
+.barmenu {
+   float: left;
+   color: white;
+}
+
+.box{
 width:inherit;
-height: auto;
+height: 580px;
+background-color: black;
+}
+.menubar{
+width: inherit;
+height: 30px;
+background-color: blue;
+}
+.contentbox{
+width: inherit;
+height: 550px;
+position: relative;
+}
+.testcontent{
+width: inherit;
+height: inherit;
+position: absolute;
 background-color: white;
 }
 </style>
@@ -91,10 +175,10 @@ background-color: white;
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">학생관리</h6>
-                        <a class="collapse-item" href="utilities-color">기준정보관리</a>
-                        <a class="collapse-item" href="utilities-border">학적부여관리</a>
-                        <a class="collapse-item" href="utilities-animation">입학정원관리</a>
-                        <a class="collapse-item" href="utilities-other">개인신상조회</a>
+                        <span class="collapse-item" id="1">기준정보관리</span>
+                        <span class="collapse-item" id="2">학적부여관리</span>
+                        <span class="collapse-item" id="3">입학정원관리</span>
+                        <span class="collapse-item" id="4">개인신상조회</span>
                     </div>
                 </div>
             </li>
@@ -221,12 +305,10 @@ background-color: white;
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        
-                    </div>
-                    <div class="testcontent">
+                    
+                    <div class="box">
+                    	<div class="menubar" id="menubar"></div>
+                    	<div class="contentbox" id="contentbox"></div>
                     </div>
 
                 </div>
