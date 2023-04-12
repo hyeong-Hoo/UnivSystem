@@ -21,7 +21,13 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+<style type="text/css">
+.testcontent{
+width:inherit;
+height: auto;
+background-color: white;
+}
+</style>
 </head>
 
 <body id="page-top">
@@ -219,6 +225,8 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                         
+                    </div>
+                    <div class="testcontent">
                     </div>
 
                 </div>
