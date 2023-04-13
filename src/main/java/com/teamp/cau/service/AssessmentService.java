@@ -14,8 +14,19 @@ public class AssessmentService {
 	@Autowired
 	private AssessmentDAO assessmentDAO;
 
-	public List<AssessmentDTO> asmList() {
-		return assessmentDAO.asmList();
+
+	public List<AssessmentDTO> data() {
+		return assessmentDAO.data() ;
 	}
+
+
+	public void updateAssessment(List<AssessmentDTO> assessments) {
+	    for (AssessmentDTO assessment : assessments) {
+	        assessmentDAO.updateAssessment(assessment);
+	    }
+	}
+
+
+		
 
 }

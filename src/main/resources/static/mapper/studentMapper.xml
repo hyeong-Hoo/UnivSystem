@@ -10,7 +10,6 @@
 	    FROM STUD_INFO
 		WHERE KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
 	
-	
 	</select>
 	
 

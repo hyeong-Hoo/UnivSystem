@@ -11,7 +11,16 @@ import com.teamp.cau.dto.AssessmentDTO;
 @Mapper
 public interface AssessmentDAO {
 
-	List<AssessmentDTO> asmList();
+	List<AssessmentDTO> data();
+
+	void updateAvg();
+
+	void updateAssessment(AssessmentDTO assessment);
+
+	
+
+	
+
 
 
 }

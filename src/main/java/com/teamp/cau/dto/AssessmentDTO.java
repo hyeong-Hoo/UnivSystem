@@ -6,5 +6,6 @@ import lombok.Data;
 public class AssessmentDTO {
 	
 	private int STUD_NO, math, english, avg;
+	private boolean passed, evee;
 
 }
