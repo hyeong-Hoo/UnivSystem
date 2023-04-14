@@ -258,36 +258,27 @@
             }
             
             
-            //var form = $('#formbox')[0];
             var formData = new FormData();
             var ls_id = $('#id')[0].value;
             var ls_pwd = $('#pwd')[0].value;
             $.ajax({
-            	  type : 'POST'
-            	, url : '/login.jsp'
-            	, data : { id: ls_id, pwd : ls_pwd}
-            	//csrf : '1af0987a-0284-4cb5-9771-00f7b0bb0935'
-            	, datatype : 'text'
-            	/*, enctype: 'multipart/form-data'
-            	, processData: true
-                , contentType: false
-                , cache: false*/
-            	, success : function(data, status, xhr) {
-            		
-            		if (data.indexOf('Login Page') > -1) {
-            			var html = $('<div></div>');
-            			html.html(data);
-            			
-            			var text = $('#errorText', html).text();
-            			alert(text);
-            			
-            			location.reload();
-            		} else {
-            			window.location = '/ps';
-            		}
-            		
-            		
-            	}
+            	  type : 'POST',
+            	 url : "http://localhost/login",
+            	 data : { id: ls_id, pwd : ls_pwd},
+            	 
+          	
+            success:function(json){
+    				if(json==""){
+    					alert("id나 비밀번호를 확인하세요.");
+    					$("#id").val("");
+    					$("#pwd").val("");
+    				}else{
+    					sessionStorage.setItem("login",JSON.stringify(json));
+    					alert(json.name+"님 환영합니다.");
+    					location.href="ps";
+    				}
+    				
+    			}
             	, error : function(xhr, status, err) {
             		if (err == null || err == undefined) {
             			alert('로그인 중 에러가 발생하였습니다.');
@@ -299,28 +290,23 @@
             			}
             		}
             		
-            		//alert(err);
             		
             		isSending = false;
             	}
             });
             
-            //document.getElementById("formbox").submit();
         };
 
         function loginenter(event, type) {
             if (event.keyCode == 13) {
             	event.preventDefault();
             	
-                //doLogin(event);
                 
             } else if (event.keyCode == 8) {
             	
             } else {
             	var ls_id = $('#id')[0].value;
             	ls_id = ls_id.replace(/[^A-Za-z0-9]/g, '');
-                //ls_id = ls_id.replace(/[^A-Z0-9]/gi, '');
-                //ls_id = ls_id.toUpperCase();
                 $('#id')[0].value = ls_id;
             }
         };
@@ -343,14 +329,14 @@
 		<section id="content_space">
 		    <div id="contect_box">
 				<img id="logo_1" src="https://kmu.dev.wizian.co.kr/images/login/logo-kmu_36.png" alt="경민대학교"/>
-                <form id="formbox" name="LoginPage" action="/login/Login.do" method="POST">
+                <form id="formbox" name="LoginPage" action="/login" method="POST">
                    <div id="userposition">
 					   <input class="login_radio_userdiv" type="radio" id="userdiv01" name="userdiv" value="stud"/><label class="login_label_userdiv" for="userdiv01">학생</label>
 					   <input class="login_radio_userdiv" type="radio" id="userdiv02" name="userdiv" value="emp" checked/><label class="login_label_userdiv" for="userdiv02">교직원</label>
                    </div>
                     <input class="imput_box" type="text" id="id" name="id" placeholder="ID 입력하세요." value="" onkeyup="loginenter(event, type)" style="ime-mode:disabled">
                     <input class="imput_box" type="password" id="pwd" name="pwd" placeholder="Password 입력하세요." value="" onkeyup="loginenter(event, type)" style="ime-mode:disabled"/>
-                    <input type="hidden" id="_csrf" name="_csrf" value="1af0987a-0284-4cb5-9771-00f7b0bb0935" />
+<!--                     <input type="hidden" id="_csrf" name="_csrf" value="1af0987a-0284-4cb5-9771-00f7b0bb0935" /> -->
                     <button id="logoinbtn" type="submit" onclick="doLogin(event)">LOGIN</button>
                     <p id="idsave_box">
 		                <input id="idsave" type="checkbox" value="idsave" name="id_save"/>
@@ -367,9 +353,6 @@
 	</article>
 	<p id="errorText"  style="visibility:hidden"></p>
 </body>
-<script>
-	
-</script>
 
 <script>
 	function onload() {

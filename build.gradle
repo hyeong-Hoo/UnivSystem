@@ -22,9 +22,10 @@ dependencies {
 	
 //Spring Boot Web:
 implementation 'org.springframework.boot:spring-boot-starter-web'
+implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
 implementation 'org.springframework.boot:spring-boot-starter-web-services'
 implementation 'org.springframework.boot:spring-boot-starter-webflux'
-//implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 implementation	'javax.servlet:jstl:1.2'//jsp
 implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 
@@ -48,6 +49,8 @@ implementation 'com.auth0:java-jwt:3.18.2'
 implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
 runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
 runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+implementation 'org.springframework.boot:spring-boot-starter-security'
+
 
 //Testing:
 testImplementation('org.springframework.boot:spring-boot-starter-test') {
