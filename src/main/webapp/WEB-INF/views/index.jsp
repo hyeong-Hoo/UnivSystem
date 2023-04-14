@@ -21,6 +21,62 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<style type="text/css">
+span{
+display: block;
+}
+.box{
+width: calc(100% - 225px;);
+height: auto;
+}
+.menubar{
+width: auto;
+height: 30px;
+padding-left:20px;
+text-align:center;
+line-height: 30px;
+background-color: #4D72DF;
+font-size: 12px;
+}
+.barmenu {
+	display: block;
+   float: left;
+   color: white;
+}
+.closebtn {
+   float: left;
+   background-color: #4D72DF;
+   border: none;
+   color: white;
+   height: 30px;
+   text-align: center;
+   line-height: 30px;
+   border-top-right-radius: 5px;
+}
+
+.contentbox{
+width: inherit;
+height: auto;
+position: relative;
+}
+.testcontent{
+width: inherit;
+height: inherit;
+position: absolute;
+background-color: white;
+}
+.on1{
+border-top-left-radius: 5px;
+background-color: white;
+color: black;
+}
+.on2{
+background-color: white;
+color: black;
+}
+
+
+</style>    
 <script type="text/javascript">
 $(function() {
 
@@ -42,18 +98,33 @@ $(function() {
                             }
                          });
                    if ($("#"+contentid).length) {
-                      $("#" + contentid).remove();
+                      $("#contentbox").empty();
                       $("#contentbox").append(content);
                    } else {
                       $("#contentbox").append(content);
                    }
                       if ($("#" + menuid).length) {
-                         
+                    	  $("#"+menuid).attr('class','barmenu on1');
+                          $("#"+menuid).next().attr('class','closebtn on2');
+                          $("#"+menuid).parent().prevAll().children('span').attr('class','barmenu');
+                          $("#"+menuid).parent().prevAll().children('input').attr('class','closebtn');
+                          $("#"+menuid).parent().nextAll().children('span').attr('class','barmenu');
+                          $("#"+menuid).parent().nextAll().children('input').attr('class','closebtn');
                       } else {
                          $("#menubar").append(btn);
                          $("#" + menuid).text($(this).text());
-                      }
+                        	 $("#"+menuid).attr('class','barmenu on1');
+                             $("#"+menuid).next().attr('class','closebtn on2');
+                             $("#"+menuid).parent().prevAll().children('span').attr('class','barmenu');
+                             $("#"+menuid).parent().prevAll().children('input').attr('class','closebtn');
+                     }
                       $("#"+menuid).click(function() {
+                    	  $("#"+menuid).attr('class','barmenu on1');
+                          $("#"+menuid).next().attr('class','closebtn on2');
+                          $(this).parent().prevAll().children('span').attr('class','barmenu');
+                          $(this).parent().prevAll().children('input').attr('class','closebtn');
+                          $(this).parent().nextAll().children('span').attr('class','barmenu');
+                          $(this).parent().nextAll().children('input').attr('class','closebtn');
                          $.ajax({
                             url : "/tester",
                             type : "post",
@@ -65,8 +136,8 @@ $(function() {
                             }
                          });
                          if ($("#"+contentid).length) {
-                            $("#" + contentid).remove();
-                            $("#contentbox").append(content);
+                        	 $("#contentbox").empty();
+                             $("#contentbox").append(content);
                          } else {
                             $("#contentbox").append(content);
                          }
@@ -77,47 +148,20 @@ $(function() {
                                $(this).parent().remove();
                                $("#" + contentid).remove();
                             });
+                      $(document).on("click", ".on2", function(){
+                    	  if($(this).parent().prev().val() == "undefined"){
+              	  			$(this).parent().next().children('span').trigger('click');
+              	  		}else if($(this).parent().prev().val() == ""){
+              	  			$(this).parent().prev().children('span').trigger('click');
+              	  		}else{
+              	  			
+              	  		} 
+                      });
                 });
 
  });
 </script>
-<style type="text/css">
-span{
-display: block;
-}
-.box{
-width:inherit;
-height: auto;
-}
-.menubar{
-width: inherit;
-height: 30px;
-text-align:center;
-line-height: 30px;
-background-color: #4D72DF;
-}
-.barmenu {
-	display: block;
-   float: left;
-   color: white;
-}
-.closebtn {
-   float: left;
-   
-}
 
-.contentbox{
-width: inherit;
-height: auto;
-position: relative;
-}
-.testcontent{
-width: inherit;
-height: inherit;
-position: absolute;
-background-color: white;
-}
-</style>
 </head>
 
 <body id="page-top">
@@ -172,13 +216,11 @@ background-color: white;
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>학생관리</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">학생관리</h6>
                         <span class="collapse-item" id="1">기준정보관리</span>
@@ -309,15 +351,13 @@ background-color: white;
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
 
-                    
                     <div class="box">
                     	<div class="menubar" id="menubar"></div>
                     	<div class="contentbox" id="contentbox"></div>
                     </div>
 
-                </div>
+                
                 <!-- /.container-fluid -->
 
             </div>

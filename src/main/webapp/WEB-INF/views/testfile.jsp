@@ -17,5 +17,8 @@ background-color: white;
 <div class="box">
 테스트중
 </div>
+<div class="box" id="box">
+이것만 나오는지 테스트
+</div>
 </body>
 </html>
