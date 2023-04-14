@@ -29,43 +29,42 @@ $(document).ready(function () {
            {
                data: "passed",
                render: function (data, type, row) {
-                   var 
-                   options = '<option value="true" ' + (data ? 'selected' : '') + '>합격자</option>';
-                   options += '<option value="false" ' + (!data ? 'selected' : '') + '>불합격자</option>';
-                   return '<select name="classification" class="form-control">' + options + '</select>';
+            	   var options = '';
+                   if (data == true) {
+                       options += '<option value="true" selected>합격자</option>';
+                       options += '<option value="false">불합격자</option>';
+                   } else {
+                       options += '<option value="true">합격자</option>';
+                       options += '<option value="false" selected>불합격자</option>';
+                   }
+                   return '<select id="passed-' + row.stud_NO + '" name="classification" class="form-control">' + options + '</select>';
                }
            }
-          
-           
-          
-       ], createdRow: function (row, data, dataIndex) {
-           $(row).attr('rowId', dataIndex);
-       }
-    
+       ]
       });
+    
     $('#saveBtn').click(function() {
-        var data = $('#mytable').DataTable().data();
-        var rows = [];
-        data.each(function(item) {
-            var row = {};
-            row.stud_NO = item.stud_NO;
-            row.math = item.math;
-            row.english = item.english;
-            row.avg = item.avg;
-            row.passed = $('select[name="classification"]').eq(item.id).val() === "true" ? true : false;
-            rows.push(row);
-        });
-        console.log(rows);
+        var tableData = $('#mytable').DataTable().data().toArray();
+        var updatedData = [];
+        for (var i = 0; i < tableData.length; i++) {
+            var row = tableData[i];
+            var passed = $('#passed-' + row.stud_NO).val() == "true" ? true : false; // 각 행에 대한 id 값을 이용하여 선택자를 지정
+            updatedData.push({
+                STUD_NO: row.stud_NO,
+                passed: passed
+            });
+        }
+        
         $.ajax({
+            type: 'POST',
             url: '/save',
-            method: 'post',
-            data: JSON.stringify(rows),
-            contentType: "application/json",
-            success: function() {
-                alert("Data saved successfully.");
+            data: JSON.stringify(updatedData),
+            contentType: 'application/json; charset=utf-8',
+            success: function(result) {
+                alert('저장되었습니다.');
             },
             error: function() {
-                alert("Error while saving data.");
+                alert('저장 중 오류가 발생하였습니다.');
             }
         });
     });
