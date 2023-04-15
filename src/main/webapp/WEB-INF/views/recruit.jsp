@@ -7,7 +7,7 @@
 <title>모집요강</title>
 </head>
 <body>
-<div>
+<div class="box" id="box">
 	<div>
 		<table>
 			<thead>
@@ -18,11 +18,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>					
-				</tr>
+				
 			</tbody>
 		</table>
 	</div>
@@ -39,9 +35,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					
-				</tr>
+				
 			</tbody>
 		</table>
 	</div>
