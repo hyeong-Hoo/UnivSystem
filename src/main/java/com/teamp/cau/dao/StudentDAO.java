@@ -14,8 +14,4 @@ public interface StudentDAO {
 
 	List<StudentDTO> studentList(String KORN_FLNM);
 
-	
-
-	
-
 }

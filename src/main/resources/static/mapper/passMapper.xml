@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="list">
+
+	<select id="detail" resultType="PassDTO">
+		SELECT PDF
+		FROM STUD_INFO
+	</select>
+
+	<select id="studentList" parameterType="PassDTO"
+		resultType="PassDTO">
+
+<![CDATA[
+		SELECT *
+		FROM STUD_INFO
+		WHERE PASS_INFO  <  3  AND  KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
+		ORDER BY SCHOOLSCORE DESC
+		LIMIT 30;
+]]>
+	</select>
+</mapper>
