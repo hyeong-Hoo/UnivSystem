@@ -8,6 +8,12 @@
 <meta charset="UTF-8">
 <title>지원자 평가</title>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+	
 </head>
 
 <!-- jquery CDN -->
@@ -23,6 +29,7 @@ $(document).ready(function () {
         },
        columns: [
            {data: "stud_NO"},
+           {data: "category"},
            {data: "math"},
            {data: "english"}, 
            {data: "avg"},
@@ -40,8 +47,19 @@ $(document).ready(function () {
                    return '<select id="passed-' + row.stud_NO + '" name="classification" class="form-control">' + options + '</select>';
                }
            }
-       ]
-      });
+       ],
+       initComplete: function () {
+           /* Column별 검색기능 추가 */
+           $('#mytable_filter').prepend('<select id="select" class="form-control"></select>');
+           $('#mytable > thead > tr').children().each(function (indexInArray, valueOfElement) { 
+               $('#select').append('<option>'+valueOfElement.innerHTML+'</option>');
+           });
+           $('.datatables_filter input').unbind().bind('keyup', function () {
+               var colIndex = document.querySelector('#select').selectedIndex;
+               table.column(colIndex).search(this.value).draw();
+           });
+      }
+    });
     
     $('#saveBtn').click(function() {
         var tableData = $('#mytable').DataTable().data().toArray();
@@ -69,6 +87,8 @@ $(document).ready(function () {
         });
     });
 });
+
+
 	
 
 </script>
@@ -77,7 +97,8 @@ $(document).ready(function () {
 <table id="mytable" class="display" style="width:100%">
         <thead>
             <tr>
-                <th>테스트1</th>
+                <th>번호</th>
+                <th>유형</th>                
                 <th>테스트2</th>
                 <th>테스트3</th>
                 <th>테스트4</th>
@@ -98,5 +119,9 @@ $(document).ready(function () {
 
 <!-- grid  -->
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
 </body>
 </html>
