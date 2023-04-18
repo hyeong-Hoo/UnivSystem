@@ -11,9 +11,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CAU - 부서정보관리 </title>
+    <title>CAU - 입학사정관리  </title>
 
-    <!-- 커스텀 폰트  for this template-->
+    <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -39,9 +39,10 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">CAU </div>
             </a>
-            
-            <!-- 구분선 -->
-            <hr class="sidebar-divider">
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
 
             <!-- Nav Item - 공통관리  Collapse Menu -->
             <li class="nav-item">
@@ -223,146 +224,11 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-<!--                     <div class="d-sm-flex align-items-center justify-content-between mb-4"> -->
-<!--                         <h1 class="h3 mb-0 text-gray-800">부서정보관리 </h1> -->
-<!--                     </div> -->
-					
-					<!-- Datatables Example -->
-					<div class="card shadow mb-4">
-						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">부서정보관리</h6>
-						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<div id="dataTable_wrapper" class="dataTalbes_wrapper dt-bootstrap4">
-									<div class="row">
-										<div class="col-sm-12 col-md-6">
-											<div class="dataTables_length" id="dataTable_length">
-												<label>
-													show
-													<select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
-														<option value="10">10</option>
-														<option value="20">20</option>
-														<option value="50">50</option>
-														<option value="100">100</option>
-													</select>
-												</label>
-											</div>
-										</div>
-										<div class="col-sm-12 col-me-6">
-											<div id="dataTable_filter" class="dataTables_filter">
-												<label>
-												search
-												<input type="search" class="form-control form-control-sm" placeholder="검색어를 입력하세요" aria-controls="dataTable">
-												</label>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<table class="table table-borderd dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-												<thead>
-													<tr>
-														<th rowspan="1" colspan="1">Name</th>
-														<th rowspan="1" colspan="1">Position</th>
-														<th rowspan="1" colspan="1">Office</th>
-														<th rowspan="1" colspan="1">Age</th>
-														<th rowspan="1" colspan="1">Start date</th>
-														<th rowspan="1" colspan="1">Salary</th>
-													</tr>
-												</thead>
-<!-- 												<thead> -->
-<!-- 													<tr role="row"> -->
-<!-- 														<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width:57px;"> -->
-<!-- 														"Name" -->
-<!-- 														</th> -->
-<!-- 														<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width:57px;"> -->
-<!-- 														"Position" -->
-<!-- 														</th> -->
-<!-- 														<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width:57px;"> -->
-<!-- 														"Office" -->
-<!-- 														</th> -->
-<!-- 														<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width:57px;"> -->
-<!-- 														"Age" -->
-<!-- 														</th> -->
-<!-- 														<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width:57px;"> -->
-<!-- 														"Start date" -->
-<!-- 														</th> -->
-<!-- 														<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width:57px;"> -->
-<!-- 														"Salary" -->
-<!-- 														</th> -->
-<!-- 													</tr> -->
-<!-- 												</thead> -->
-<!-- 												<tfoot> -->
-<!-- 													<tr> -->
-<!-- 														<th rowspan="1" colspan="1">Name</th> -->
-<!-- 														<th rowspan="1" colspan="1">Position</th> -->
-<!-- 														<th rowspan="1" colspan="1">Office</th> -->
-<!-- 														<th rowspan="1" colspan="1">Age</th> -->
-<!-- 														<th rowspan="1" colspan="1">Start date</th> -->
-<!-- 														<th rowspan="1" colspan="1">Salary</th> -->
-<!-- 													</tr> -->
-<!-- 												</tfoot> -->
-												<tbody>
-													<tr class="odd">
-														<td class="sorting_1">이름</td>
-														<td>지위</td>
-														<td>사무실 위치</td>
-														<td>나이</td>
-														<td>시작일</td>
-														<td>금액</td>
-													</tr>
-													<tr class="even">
-														<td class="sorting_1">이름</td>
-														<td>지위</td>
-														<td>사무실 위치</td>
-														<td>나이</td>
-														<td>시작일</td>
-														<td>금액</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12 col-md-5">
-											<div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-											페이지 수 1/10
-											</div>
-										</div>
-										<div class="col-sm-12 col-md-7">
-											<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-												<ul class="pagination">
-													<li class="paginate_button page-item previous disabled" id="dataTable_previous">
-														<a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-													</li>
-													<li class="paginate_button page-item active">
-														<a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-													</li>
-													<li class="paginate_button page-item" id="dataTable_previous">
-														<a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-													</li>
-													<li class="paginate_button page-item" id="dataTable_previous">
-														<a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-													</li>
-													<li class="paginate_button page-item" id="dataTable_previous">
-														<a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-													</li>
-													<li class="paginate_button page-item" id="dataTable_previous">
-														<a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-													</li>
-													<li class="paginate_button page-item next" id="dataTable_next">
-														<a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">Next</a>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        
+                    </div>
+
                 </div>
                 <!-- /.container-fluid -->
 

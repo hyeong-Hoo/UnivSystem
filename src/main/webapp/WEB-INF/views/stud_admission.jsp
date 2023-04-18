@@ -1,7 +1,35 @@
 <!DOCTYPE html>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
+
+<style>
+.box{height: 40px; width: 100%; text-align: center; color: black; border-radius: 3px; background-color: #a2bfdd;}
+ul, li{display: block; list-style: none; float: left;}
+.t1{width: 30%; position: relative; top: 5px;}
+.t2{width: 30%; position: relative; top: 7px;}
+.t3{width: 30%; position: relative; top: 5px;}
+.t4{width: 10%; position: relative; top: 5px;}
+p{color: black;}
+table{width: 100%; border-top: 2px solid #1716b6;}
+thead{background-color: #c6cdd4; }
+th{ height: 35px; color: black;}
+td{height: 35px;}
+.process{ width: 5%; text-align: center;}
+.entrance{ width: 5%; text-align: center;}
+.schoolno{ width: 10%; text-align: center;}
+.name{ width: 10%; text-align: center;}
+.birth{ width: 10%; text-align: center;}
+.gender{ width: 5%; text-align: center;}
+.major{ width: 20%; text-align: center;}
+.daynight{ width: 5%; text-align: center;}
+.grade{ width: 5%; text-align: center;}
+.class{ width: 5%; text-align: center;}
+.status{ width: 10%; text-align: center;}
+.entrancedate{width: 10%; text-align: center;}
+</style>
+
 
 <head>
 
@@ -11,9 +39,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CAU - 부서정보관리 </title>
+    <title>CAU - 입학정원관리  </title>
 
-    <!-- 커스텀 폰트  for this template-->
+    <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -39,9 +67,10 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">CAU </div>
             </a>
-            
-            <!-- 구분선 -->
-            <hr class="sidebar-divider">
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
 
             <!-- Nav Item - 공통관리  Collapse Menu -->
             <li class="nav-item">
@@ -138,7 +167,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">교직관리</h6>
                         <a class="collapse-item" href="pr_standard">기준정보관리</a>
-                        <a class="collapse-item" href="pr_all">교수정보+아이디입력+평가항목권한</a>
+                        <a class="collapse-item" href="pr_info">교수정보</a>
+                        <a class="collapse-item" href="pr_authority">평가항목권한</a>
                     </div>
                 </div>
             </li>
@@ -223,145 +253,64 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-<!--                     <div class="d-sm-flex align-items-center justify-content-between mb-4"> -->
-<!--                         <h1 class="h3 mb-0 text-gray-800">부서정보관리 </h1> -->
-<!--                     </div> -->
-					
-					<!-- Datatables Example -->
-					<div class="card shadow mb-4">
-						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">부서정보관리</h6>
-						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<div id="dataTable_wrapper" class="dataTalbes_wrapper dt-bootstrap4">
-									<div class="row">
-										<div class="col-sm-12 col-md-6">
-											<div class="dataTables_length" id="dataTable_length">
-												<label>
-													show
-													<select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
-														<option value="10">10</option>
-														<option value="20">20</option>
-														<option value="50">50</option>
-														<option value="100">100</option>
-													</select>
-												</label>
-											</div>
-										</div>
-										<div class="col-sm-12 col-me-6">
-											<div id="dataTable_filter" class="dataTables_filter">
-												<label>
-												search
-												<input type="search" class="form-control form-control-sm" placeholder="검색어를 입력하세요" aria-controls="dataTable">
-												</label>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<table class="table table-borderd dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-												<thead>
-													<tr>
-														<th rowspan="1" colspan="1">Name</th>
-														<th rowspan="1" colspan="1">Position</th>
-														<th rowspan="1" colspan="1">Office</th>
-														<th rowspan="1" colspan="1">Age</th>
-														<th rowspan="1" colspan="1">Start date</th>
-														<th rowspan="1" colspan="1">Salary</th>
-													</tr>
-												</thead>
-<!-- 												<thead> -->
-<!-- 													<tr role="row"> -->
-<!-- 														<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width:57px;"> -->
-<!-- 														"Name" -->
-<!-- 														</th> -->
-<!-- 														<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width:57px;"> -->
-<!-- 														"Position" -->
-<!-- 														</th> -->
-<!-- 														<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width:57px;"> -->
-<!-- 														"Office" -->
-<!-- 														</th> -->
-<!-- 														<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width:57px;"> -->
-<!-- 														"Age" -->
-<!-- 														</th> -->
-<!-- 														<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width:57px;"> -->
-<!-- 														"Start date" -->
-<!-- 														</th> -->
-<!-- 														<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width:57px;"> -->
-<!-- 														"Salary" -->
-<!-- 														</th> -->
-<!-- 													</tr> -->
-<!-- 												</thead> -->
-<!-- 												<tfoot> -->
-<!-- 													<tr> -->
-<!-- 														<th rowspan="1" colspan="1">Name</th> -->
-<!-- 														<th rowspan="1" colspan="1">Position</th> -->
-<!-- 														<th rowspan="1" colspan="1">Office</th> -->
-<!-- 														<th rowspan="1" colspan="1">Age</th> -->
-<!-- 														<th rowspan="1" colspan="1">Start date</th> -->
-<!-- 														<th rowspan="1" colspan="1">Salary</th> -->
-<!-- 													</tr> -->
-<!-- 												</tfoot> -->
-												<tbody>
-													<tr class="odd">
-														<td class="sorting_1">이름</td>
-														<td>지위</td>
-														<td>사무실 위치</td>
-														<td>나이</td>
-														<td>시작일</td>
-														<td>금액</td>
-													</tr>
-													<tr class="even">
-														<td class="sorting_1">이름</td>
-														<td>지위</td>
-														<td>사무실 위치</td>
-														<td>나이</td>
-														<td>시작일</td>
-														<td>금액</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12 col-md-5">
-											<div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-											페이지 수 1/10
-											</div>
-										</div>
-										<div class="col-sm-12 col-md-7">
-											<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-												<ul class="pagination">
-													<li class="paginate_button page-item previous disabled" id="dataTable_previous">
-														<a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-													</li>
-													<li class="paginate_button page-item active">
-														<a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-													</li>
-													<li class="paginate_button page-item" id="dataTable_previous">
-														<a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-													</li>
-													<li class="paginate_button page-item" id="dataTable_previous">
-														<a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-													</li>
-													<li class="paginate_button page-item" id="dataTable_previous">
-														<a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-													</li>
-													<li class="paginate_button page-item" id="dataTable_previous">
-														<a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-													</li>
-													<li class="paginate_button page-item next" id="dataTable_next">
-														<a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">Next</a>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">탭 이름</h1>
+                    </div>
+               		<!-- Divider -->
+          			<hr class="sidebar-divider">
+          			<form action="" method="post" id="">
+					<!-- searchbox -->
+					<ul class="box">
+						<li class="t1">학번(이름)&nbsp; <input type="text"> </li>
+						<li class="t2">학적상태&nbsp; 
+							<select class="animated--grow-in">
+								<option value="ing">재학</option>
+								<option value="rest">휴학</option>
+								<option value="out">중퇴</option>
+								<option value="need">필요한거</option>
+							</select>
+						</li>
+						<li class="t3">소속학과&nbsp; <input type="text"> </li>
+						<li class="t4"><button class="search_btn" type="button"><img alt="icon" src="img/search_icon.png" width="20" height="20"></button></li>
+					</ul>
+					</form>
+					<!-- info list -->
+					<p>학생 정보</p>
+					<table border="1">
+						<thead>
+						<tr>
+							<th class="process">과정</th>
+							<th class="entrance">입학</th>
+							<th class="schoolno">학번</th>
+							<th class="name">이름</th>
+							<th class="birth">생년월일</th>
+							<th class="gender">성별</th>
+							<th class="major">소속학과</th>
+							<th class="daynight">주야</th>
+							<th class="grade">학년</th>
+							<th class="class">분반</th>
+							<th class="status">학적상태</th>
+							<th class="entrancedate">입학일자</th>
+						</tr>
+						</thead>
+						
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+						
+					</table>
 					
                 </div>
                 <!-- /.container-fluid -->
