@@ -10,7 +10,7 @@
 		FROM Assessment
 
 	</select>
-	<update id="updateAssessment" parameterType="com.teamp.cau.dto.AssessmentDTO">
+	<update id="updateAssessment">
 		UPDATE Assessment SET
 		passed = #{passed}
 		WHERE STUD_NO = #{stud_NO}

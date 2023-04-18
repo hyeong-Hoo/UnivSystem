@@ -39,6 +39,7 @@ public class AssessmentController {
 	@PostMapping("/save")	
 	public String saveAssessment(@RequestBody List<AssessmentDTO> assessments) {
 	    assessmentService.updateAssessment(assessments);
+	    System.out.println(assessments);
 	    return "success";
 	}
 
