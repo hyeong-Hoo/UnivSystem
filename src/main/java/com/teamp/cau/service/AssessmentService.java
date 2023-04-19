@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.teamp.cau.dao.AssessmentDAO;
 import com.teamp.cau.dto.AssessmentDTO;
+import com.teamp.cau.dto.StudentDTO;
 
 @Service
 public class AssessmentService {
@@ -15,16 +16,19 @@ public class AssessmentService {
 	private AssessmentDAO assessmentDAO;
 
 
-	public List<AssessmentDTO> data() {
+	public List<StudentDTO> data() {
 		return assessmentDAO.data() ;
 	}
 
 
-	public void updateAssessment(List<AssessmentDTO> assessments) {
-	    for (AssessmentDTO assessment : assessments) {
+	public void updateAssessment(List<StudentDTO> assessments) {
+	    for (StudentDTO assessment : assessments) {
 	        assessmentDAO.updateAssessment(assessment);
 	    }
 	}
+
+
+	
 
 
 		

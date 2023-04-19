@@ -3,15 +3,15 @@
 
 <mapper namespace="com.teamp.cau.dao.AssessmentDAO">
 
-	<select id="data" parameterType="AssessmentDTO"
-		resultType="AssessmentDTO">
+	<select id="data" parameterType="StudentDTO"
+		resultType="StudentDTO">
 
 		SELECT *
-		FROM Assessment
+		FROM STUD_INFO
 
 	</select>
 	<update id="updateAssessment">
-		UPDATE Assessment SET
+		UPDATE STUD_INFO SET
 		passed = #{passed}
 		WHERE STUD_NO = #{stud_NO}
 	</update>

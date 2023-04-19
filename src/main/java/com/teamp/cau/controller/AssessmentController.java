@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.teamp.cau.dto.AssessmentDTO;
+import com.teamp.cau.dto.StudentDTO;
 import com.teamp.cau.service.AssessmentService;
 
 @Controller
@@ -28,16 +29,16 @@ public class AssessmentController {
 	
 	@ResponseBody		
 	@GetMapping("/asm")
-	public List<AssessmentDTO> asm() {
+	public List<StudentDTO> asm() {
 		
-		List<AssessmentDTO> data = assessmentService.data();
+		List<StudentDTO> data = assessmentService.data();
 	    return data;
 		
 	}
 	
 	@ResponseBody
 	@PostMapping("/save")	
-	public String saveAssessment(@RequestBody List<AssessmentDTO> assessments) {
+	public String saveAssessment(@RequestBody List<StudentDTO> assessments) {
 	    assessmentService.updateAssessment(assessments);
 	    System.out.println(assessments);
 	    return "success";
