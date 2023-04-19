@@ -243,8 +243,7 @@ $(function() {
                         <a class="collapse-item" href="blank">기준정보관리</a>
                         <a class="collapse-item" href="login">고교정보관리 </a>
                         <a class="collapse-item" href="register">환산등급관리 </a>
-                        <a class="collapse-item" href="blank">모집요강관리</a>
-                        <a class="collapse-item" href="forgot-password">선발전형배점 </a>
+                        <a class="collapse-item" id="10">모집요강</a>
                         <a class="collapse-item" href="404">입학원서관리</a>
                         <a class="collapse-item" href="blank">입학학생관리</a>
                         <a class="collapse-item" href="blank">지원자확인용</a>
