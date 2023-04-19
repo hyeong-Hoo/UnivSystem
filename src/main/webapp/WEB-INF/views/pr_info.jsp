@@ -11,16 +11,16 @@ ul, li{display: block; list-style: none; float: left;}
 .t2{width: 40%; position: relative; top: 7px;}
 .t3{width: 20%; position: relative; top: 5px;}
 table{width: 100%; background-color: #c6cdd4; color: black;}
-.major_code{width:7%; text-align: center;}
-.name{width:8%; text-align: center;}
+.major_code{width:6%; text-align: center;}
+.name{width:6%; text-align: center;}
 .birth{width:10%; text-align: center;}
 .email{width:17%; text-align: center;}
-.telno{width:10%; text-align: center;}
-.addr{width:18%; text-align: center;}
-.detail_addr{width:10%; text-align: center;}
-.gender{width:5%; text-align: center;}
-.userno{width:10%; text-align: center;}
-.authority{width:5%; text-align: center;}
+.telno{width:13%; text-align: center;}
+.addr{width:17%; text-align: center;}
+.detail_addr{width:14%; text-align: center;}
+.gender{width:4%; text-align: center;}
+.userno{width:7%; text-align: center;}
+.authority{width:6%; text-align: center;}
 
 
 </style>

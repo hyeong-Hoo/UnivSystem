@@ -32,7 +32,7 @@ public class professorController {
 	
 	@PostMapping("/pr_search")
 	public ModelAndView search(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView();
+		ModelAndView mv = new ModelAndView("pr_info");
 		HashMap<String, Object> list = new HashMap<String, Object>();
 		//List<HashMap<String, Object>> qrlist = sqlsession.selectList("INSTR_INFO.searchlist", list);
 		String search = request.getParameter("search");
