@@ -10,16 +10,16 @@ ul, li{display: block; list-style: none; float: left;}
 .t1{width: 40%; position: relative; top: 5px;}
 .t2{width: 40%; position: relative; top: 7px;}
 .t3{width: 20%; position: relative; top: 5px;}
-table{width: 100%; background-color: #c6cdd4; color: black;}
+table{width: 100%; color: black;}
+thead{background-color: #c6cdd4;}
 .major_code{width:6%; text-align: center;}
 .name{width:6%; text-align: center;}
 .birth{width:10%; text-align: center;}
-.email{width:17%; text-align: center;}
-.telno{width:13%; text-align: center;}
-.addr{width:17%; text-align: center;}
-.detail_addr{width:14%; text-align: center;}
-.gender{width:4%; text-align: center;}
-.userno{width:7%; text-align: center;}
+.email{width:18%; text-align: center;}
+.telno{width:14%; text-align: center;}
+.addr{width:18%; text-align: center;}
+.detail_addr{width:16%; text-align: center;}
+.gender{width:6%; text-align: center;}
 .authority{width:6%; text-align: center;}
 
 
@@ -36,9 +36,7 @@ table{width: 100%; background-color: #c6cdd4; color: black;}
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -277,11 +275,10 @@ table{width: 100%; background-color: #c6cdd4; color: black;}
 								<th class="addr">주소</th>
 								<th class="detail_addr">상세주소</th>
 								<th class="gender">성별</th>
-								<th class="userno">사용자번호</th>
 								<th class="authority">평가권한</th>
 							</tr>
 						</thead>
-						<c:forEach items="${searchlist }" var="pr">
+						<c:forEach items="${list }" var="pr">
 						<tbody>
 							<tr>
 								<td class="major_code">${pr.INSTR_NO }</td>
@@ -292,7 +289,6 @@ table{width: 100%; background-color: #c6cdd4; color: black;}
 								<td class="addr">${pr.ADDR }</td>
 								<td class="detail_addr">${pr.DADDR }</td>
 								<td class="gender">${pr.GENDER_CD }</td>
-								<td class="userno">${pr.USER_NO }</td>
 								<td class="authority">${pr.ENDST_NO }</td>
 							</tr>
 						</tbody>

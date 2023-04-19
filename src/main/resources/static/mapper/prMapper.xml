@@ -6,7 +6,7 @@
     <mapper namespace="INSTR_INFO">
     
     <!-- 교수정보  가져오기 -->
-    <select id="searchlist" parameterType="HashMap" resultType="HashMap">
+    <select id="prlist" resultType="com.teamp.cau.dto.professorDTO">
     	select * from INSTR_INFO 
     	
     </select>

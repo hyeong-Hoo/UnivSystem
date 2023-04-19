@@ -140,7 +140,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">교직관리</h6>
                         <a class="collapse-item" href="pr_standard">기준정보관리</a>
-                        <a class="collapse-item" href="pr_all">교수정보+아이디입력+평가항목권한</a>
+                        <a class="collapse-item" href="pr_info">교수정보</a>
+                        <a class="collapse-item" href="pr_authority">평가항목권한</a>
                     </div>
                 </div>
             </li>

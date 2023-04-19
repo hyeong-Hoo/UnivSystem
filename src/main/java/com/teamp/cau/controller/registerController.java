@@ -10,14 +10,5 @@ public class registerController {
 	public String standard() {
 		return "regi_standard";
 	}
-	
-	@GetMapping("/regi_regi_cost")
-	public String cost() {
-		return "regi_cost";
-	}
-	
-	@GetMapping("/regi_costall")
-	public String costall() {
-		return "regi_costall";
-	}
+
 }
