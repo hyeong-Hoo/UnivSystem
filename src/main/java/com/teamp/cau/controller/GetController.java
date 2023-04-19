@@ -29,4 +29,8 @@ public class GetController {
 		return "recruit";
 		
 	}
+	@GetMapping("/grid")
+	public String grid() {
+		return "grid";
+	}
 }

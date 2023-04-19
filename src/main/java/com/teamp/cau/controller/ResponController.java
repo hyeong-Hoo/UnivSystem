@@ -17,6 +17,8 @@ public class ResponController {
 			result="/testfile";
 		}else if(test2 == 3) {
 			result="/testfile2";
+		}else if(test2 == 4) {
+			result="/grid";
 		}else if(test2 == 10) {
 			result="/recruit";
 		}
