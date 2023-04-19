@@ -19,4 +19,16 @@
 		LIMIT 30;
 ]]>
 	</select>
+	<update id="Passupdate" parameterType="PassDTO">
+		UPDATE STUD_INFO
+		SET
+		PASS_INFO=${PASS_INFO}
+		WHERE STUD_NO=${STUD_NO}
+
+	</update>
+	<select id="result" resultType="int" parameterType="PassDTO">
+		SELECT PASS_INFO
+		FROM STUD_INFO
+		WHERE STUD_NO=${STUD_NO};
+	</select>
 </mapper>

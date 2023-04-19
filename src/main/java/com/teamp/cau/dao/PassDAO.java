@@ -21,4 +21,12 @@ public class PassDAO {
 		return sqlSession.selectList("list.studentList",KORN_FLNM);
 	}
 
+	public Object passUpdate(PassDTO passDTO) {
+		return sqlSession.update("list.Passupdate",passDTO);
+	}
+
+	public int result(PassDTO passDTO) {
+		return sqlSession.selectOne("list.result",passDTO);
+	}
+
 }

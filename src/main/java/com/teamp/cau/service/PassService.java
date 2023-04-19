@@ -22,4 +22,12 @@ public class PassService {
 		return passDAO.studentList(KORN_FLNM);
 	}
 
+	public void passUpdate(PassDTO passDTO) {
+		passDAO.passUpdate(passDTO);
+	}
+
+	public int result(PassDTO passDTO) {
+		return passDAO.result(passDTO);
+	}
+
 }

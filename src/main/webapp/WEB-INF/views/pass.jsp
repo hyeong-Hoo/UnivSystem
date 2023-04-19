@@ -48,16 +48,17 @@ $(function(){
 
 						$.each(data, function(i, info) {
 							var pass_state="abc";
+							var selectid="creditSelect"+info.pass_INFO;
 							if(info.pass_INFO==0){pass_state="문자대기"}
 							else if(info.pass_INFO==1){pass_state="예치금 대기"}
 							else if(info.pass_INFO==2){pass_state="합격"}
 							else if(info.pass_INFO==3){pass_state="합격의지없음"}
 							else if(info.pass_INFO==4){pass_state="예치금반환(환불)"}
 							var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
-							+ '<th scope="row">' + info.stud_NO
+							+ '<th scope="row" class="button_name">' + info.stud_NO
 							+ '</th>' 
 							//+ '<td> <input type="checkbox" name="' + info.stud_NO + '"></td>'
-							+ '<td>' + info.korn_FLNM + '</td>' 
+							+ '<td >' + info.korn_FLNM + '</td>' 
 							+'<td>' + info.age + '</td>'
 							+ '<td>' + info.user_BRDT + '</td>'
 							+ '<td>' + info.gender_CD + '</td>'
@@ -69,19 +70,46 @@ $(function(){
 							+ '<td>' + info.addr + '</td>' 
 							+'<td>'	+ info.daddr + '</td>' 
 							+ '<td>' +'<input type="button" onclick="open3(' + info.pdf + ')"value="pdf보기" /></td>' 
-							+ '<td> <select class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
-							+'</tr>';
+							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
+							+'<td> <input type="button" class="" value="문자보내기"></td>'
+							+'<td> <input type="button" class="button_save" value="저장하기"></td></tr>';
 							$('.table_body').append(str);
-							$(".creditSelect").val(info.pass_INFO).attr("selected", "selected");
+							$('#'+selectid).val(info.pass_INFO).attr("selected", "selected");
 						});
 					}
 
 				});
 			});
-	$('#searchStudent').click(function() {
-		
-	});
-
+	
+	$(document).on("click",".button_save",function(){
+		var find = $(this).parent().prevAll(".find_Select").children(".creditSelect").val();
+		var state = $(this).parent().prevAll(".button_name").text();
+		var creditSelect= $(this).parent().prevAll(".creditSelect");
+		$.ajax({
+			url : '/passUpdate',
+			type : 'POST',
+			data : {"stud_NO" : state , "PASS_INFO":find	},	
+			dataType : "html", 
+			success : function(active){
+			active
+				if(active == "0"){
+				alert("문자대기");
+			} else if(active == "1"){
+				alert("예치금 대기");
+			
+			} else if(active == "2"){
+				alert("합격");
+			
+			} else if(active == "3"){
+				alert("합격의지없음");
+			
+			} else if(active == "4"){
+				alert("예치금반환(환불)");
+			}
+		}
+			});
+		});
+	
 	$('.table_body').on('click', 'tr', function() {
 		  // 클릭된 행의 각 셀 값을 가져옵니다.
 		  var stud_NO = $(this).find('th').text();
@@ -228,6 +256,8 @@ overflow: scroll;
 				<th scope="col">상세주소</th>
 				<th scope="col">PDF보기</th>
 				<th scope="col">합격여부</th>
+				<th scope="col">문자보내기</th>
+				<th scope="col">저장하기</th>
 			</tr>
 		</thead>
 		<tbody class="table_body">
