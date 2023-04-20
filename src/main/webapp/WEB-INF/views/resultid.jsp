@@ -7,10 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Email</title>
+<title>USER_ID</title>
 </head>
 <body>
-dddd
-    <div>Email: ${email}</div>
+<div>USER_ID: ${USER_ID}</div>
 </body>
 </html>

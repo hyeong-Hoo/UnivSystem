@@ -4,58 +4,62 @@
     <!-- User 테이블 가져오기 -->
     <select id="getUserList" resultType="com.teamp.cau.vo.UserVo">
         SELECT *
-        FROM User
+        FROM USER_INFO
     </select>
 
     <!-- 회원가입 -->
     <insert id="insertUser">
-        INSERT INTO User
-            (name, username, email, password, address, phone, website, company)
+        INSERT INTO USER_INFO
+            (USER_ID, PSWD, KORN_FLNM, USER_BRDT, EML_ADDR, TELNO )
         VALUES
-            (#{name}, #{username}, #{email}, #{password}, #{address}, #{phone}, #{website}, #{company})
+            (#{USER_ID}, #{PSWD}, #{KORN_FLNM}, #{USER_BRDT}, #{EML_ADDR}, #{TELNO})
     </insert>
 
     <!-- 회원 정보 가져오기 -->
-    <select id="getUserByEmail" resultType="com.teamp.cau.vo.UserVo">
-        SELECT *
-        FROM User
-        WHERE email = #{email}
-    </select>
-
     <select id="getUserById" resultType="com.teamp.cau.vo.UserVo">
         SELECT *
-        FROM User
-        WHERE id = #{id}
+        FROM USER_INFO
+        WHERE USER_ID = #{USER_ID}
     </select>
 
-    <!-- 회원정보 수정 -->
+    <select id="getUserByNo" resultType="com.teamp.cau.vo.UserVo">
+        SELECT *
+        FROM USER_INFO
+        WHERE USER_NO = #{USER_NO}
+    </select>
+
+    <!-- 비밀번호 수정 -->
     <update id="updateUser">
-        UPDATE User
-        SET name = #{name},
-            username = #{username},
-            email = #{email},
-            password = #{password},
-            address = #{address},
-            phone = #{phone},
-            website = #{website},
-            company = #{company}
-        WHERE id = #{id}
+        UPDATE USER_INFO
+        SET PSWD = #{PSWD}
+        WHERE USER_NO = #{USER_NO}
     </update>
 
     <!-- 탈퇴 -->
     <delete id="deleteUser">
         DELETE
-        FROM User
-        WHERE id = #{id}
+        FROM USER_INFO
+        WHERE USER_NO = #{USER_NO}
     </delete>
     
     <!-- 아이디찾기 -->
-    <select id="findEmailByNameAndPhone" parameterType="map" resultType="com.teamp.cau.vo.UserVo">
-    SELECT email FROM User WHERE name = #{name} AND phone = #{phone}
+    <select id="findIdByNameAndTel" parameterType="map" resultType="com.teamp.cau.vo.UserVo">
+    SELECT USER_ID FROM USER_INFO WHERE KORN_FLNM = #{KORN_FLNM} AND TELNO = #{TELNO}
 </select>
 
 <!-- 비번찾기 -->
 <select id="findPassword" parameterType="map" resultType="com.teamp.cau.vo.UserVo">
-    SELECT password FROM User WHERE email = #{email} AND name = #{name} AND phone = #{phone}
+    SELECT PSWD FROM USER_INFO WHERE USER_ID = #{USER_ID} AND KORN_FLNM = #{KORN_FLNM} AND TELNO = #{TELNO} 
 </select>
+
+<!-- 비밀번호초기화 및 입력 -->
+<update id="updatePassword" parameterType="map">
+    UPDATE USER_INFO SET PSWD = #{PSWD} WHERE TELNO = #{TELNO}
+</update>
+
+
+
+
+
+
 </mapper>

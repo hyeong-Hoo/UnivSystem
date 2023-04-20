@@ -1,5 +1,9 @@
 package com.teamp.cau.service;
 
+import java.io.Console;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,30 +29,30 @@ public class UserService {
         return userMapper.getUserList();
     }
 
-    public UserVo getUserById(Long id) {
-        return userMapper.getUserById(id);
+    public UserVo getUserByNo(Long USER_NO) {
+        return userMapper.getUserByNo(USER_NO);
     }
 
-    public UserVo getUserByEmail(String email) {
-        return userMapper.getUserByEmail(email);
+    public UserVo getUserById(String USER_ID) {
+        return userMapper.getUserById(USER_ID);
     }
 
     public void signup(UserVo userVo) { // 회원 가입
-        if (!userVo.getUsername().equals("") && !userVo.getEmail().equals("")) {
+        if (!userVo.getUSER_ID().equals("")) {
 		    // password는 암호화해서 DB에 저장           
-            userVo.setPassword(passwordEncoder.encode(userVo.getPassword()));
+            userVo.setPSWD(passwordEncoder.encode(userVo.getPSWD()));
             userMapper.insertUser(userVo);
         }
     }
 
     public void edit(UserVo userVo) { // 회원 정보 수정
  		// password는 암호화해서 DB에 저장      
-        userVo.setPassword(passwordEncoder.encode(userVo.getPassword()));
+        userVo.setPSWD(passwordEncoder.encode(userVo.getPSWD()));
         userMapper.updateUser(userVo);
     }
 
-    public void withdraw(Long id) { // 회원 탈퇴
-        userMapper.deleteUser(id);
+    public void withdraw(Long USER_NO) { // 회원 탈퇴
+        userMapper.deleteUser(USER_NO);
     }
 
     public PasswordEncoder passwordEncoder() {
@@ -57,19 +61,19 @@ public class UserService {
     
     
     
-    public String findEmailByNameAndPhone(String name, String phone) {
+    public String findIdByNameAndTel(String KORN_FLNM, String TELNO) {
         Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("name", name);
-        paramMap.put("phone", phone);
-        UserVo findid = userMapper.findEmailByNameAndPhone(paramMap);
+        paramMap.put("KORN_FLNM", KORN_FLNM);
+        paramMap.put("TELNO", TELNO);
+        UserVo findid = userMapper.findIdByNameAndTel(paramMap);
         if (findid == null) {
             return null;
         }
-        return findid.getEmail();
+        return findid.getUSER_ID();
     }
     
     
-    public String findPassword(String email, String name, String phone) {
+    /*public String findPassword(String email, String name, String phone) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("email", email);
         paramMap.put("name", name);
@@ -79,6 +83,29 @@ public class UserService {
             return null;
         }
         return findpass.getPassword();
+    }*/
+    
+    private SecureRandom random = new SecureRandom();
+    public String resetPassword(String USER_ID, String KORN_FLNM, String TELNO) {
+        // 사용자 확인
+        UserVo user = userMapper.findPassword(USER_ID, KORN_FLNM, TELNO);
+        if (user == null) {
+            return null;
+        }
+
+        // 6자리 난수 생성
+        byte[] bytes = new byte[4];
+        random.nextBytes(bytes);
+        String tempPassword = Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
+
+        // 암호화된 비밀번호 생성
+        String encryptedPassword = passwordEncoder.encode(tempPassword);
+        // DB에 암호화된 비밀번호 저장
+        userMapper.updatePassword(TELNO, encryptedPassword);
+
+        return tempPassword;
     }
+
     
 }
+

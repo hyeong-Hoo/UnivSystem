@@ -7,27 +7,25 @@
 <title>Home</title>
 </head>
 <body>
-    <h2>${user.username}님의 회원 정보</h2>
+    <h2>${user.KORN_FLNM}님의 회원 정보</h2>
 
-    <p>name: ${user.name}</p>
-    <p>username: ${user.username}</p>
-    <p>email: ${user.email}</p>
-    <p>password: ${user.password}</p>
-    <p>address: ${user.address}</p>
-    <p>phone: ${user.phone}</p>
-    <p>website: ${user.website}</p>
-    <p>company: ${user.company}</p>
+    <p>USER_ID: ${user.USER_ID}</p>
+    <p>PSWD: ${user.PSWD}</p>
+    <p>USER_BRDT: ${user.USER_BRDT}</p>
+    <p>EML_ADDR: ${user.EML_ADDR}</p>
+    <p>TELNO: ${user.TELNO}</p>
+   <p> ${userAuthority}</p>
 
-    <button type="button" onclick="location.href='update'">수정하기</button>
+    <button type="button" onclick="location.href='update'">비밀번호 변경하기</button>
 
     <form action="/logout" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <button type="submit">로그아웃</button>
     </form>
 
-    <form action="/delete" method="post">
+<!--     <form action="/delete" method="post"> 
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <button type="submit">탈퇴하기</button>
-    </form>
+    </form>-->
 </body>
 </html>

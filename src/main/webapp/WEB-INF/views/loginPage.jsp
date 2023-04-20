@@ -16,10 +16,10 @@
 
         <h2>로그인</h2>
             <div>
-                <input type="text" name="email" placeholder="Email"/>
+                <input type="text" name="USER_ID" placeholder="USER_ID"/>
             </div>
             <div>
-                <input type="password" name="password" placeholder="Password"/>
+                <input type="password" name="PSWD" placeholder="PSWD"/>
             </div>
 
             <button type="submit">로그인</button>

@@ -4,10 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>완료됨</title>
+<title>학사관리페이지</title>
 </head>
 <body>
-내정보
-<button type="button" onclick="location.href='signup'">비밀번호 변경</button>
+학사관리페이지
+
+마이페이지
+<button type="button" onclick="location.href='/'">마이페이지</button>
+<br><br><br>
+
 </body>
 </html>

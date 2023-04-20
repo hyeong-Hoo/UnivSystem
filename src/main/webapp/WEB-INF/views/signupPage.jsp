@@ -12,30 +12,23 @@
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
         <div>
-            <input type="text" name="name" placeholder="Name"/>
+            <input type="text" name="USER_ID" placeholder="USER_ID"/>
         </div>
         <div>
-            <input type="text" name="username" placeholder="*Username"/>
+            <input type="text" name="PSWD" placeholder="PSWD"/>
         </div>
         <div>
-            <input type="text" name="email" placeholder="*Email"/>
+            <input type="text" name="KORN_FLNM" placeholder="KORN_FLNM"/>
         </div>
         <div>
-            <input type="password" name="password" placeholder="Password"/>
+            <input type="password" name="USER_BRDT" placeholder="USER_BRDT"/>
         </div>
         <div>
-            <input type="text" name="address" placeholder="Address"/>
+            <input type="text" name="EML_ADDR" placeholder="EML_ADDR"/>
         </div>
         <div>
-            <input type="text" name="phone" placeholder="Phone"/>
+            <input type="text" name="TELNO" placeholder="TELNO"/>
         </div>
-        <div>
-            <input type="text" name="website" placeholder="Website"/>
-        </div>
-        <div>
-            <input type="text" name="company" placeholder="Company"/>
-        </div>
-
         <button type="submit">회원가입</button>
     </form>
 </body>

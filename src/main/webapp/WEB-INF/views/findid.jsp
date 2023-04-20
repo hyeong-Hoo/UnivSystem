@@ -8,38 +8,38 @@
 
 
 <script>
-var path = "${pageContext.request.contextPath }";
+// var path = "${pageContext.request.contextPath }";
  
-$(document).ready(function() {
-var msg = "${msg}";
-if(msg != ""){
-alert(msg);    
-}
-});
+// $(document).ready(function() {
+// var msg = "${msg}";
+// if(msg != ""){
+// alert(msg);    
+// }
+// });
  
  
-function fnSubmit() {
+// function fnSubmit() {
  
-//var tel_rule = /^\d{2,3}-\d{3,4}-\d{4}$/;
+// //var tel_rule = /^\d{2,3}-\d{3,4}-\d{4}$/;
  
-if ($("#name").val() == null || $("#name").val() == "") {
-alert("이름을 입력해주세요.");
-$("#name").focus();
+// if ($("#name").val() == null || $("#name").val() == "") {
+// alert("이름을 입력해주세요.");
+// $("#name").focus();
  
-return false;
-}
+// return false;
+// }
  
-if ($("#phone").val() == null || $("#phone").val() == "") {
-alert("전화번호를 입력해주세요.");
-$("#phone").focus();
+// if ($("#phone").val() == null || $("#phone").val() == "") {
+// alert("전화번호를 입력해주세요.");
+// $("#phone").focus();
  
-return false;
-}
+// return false;
+// }
  
-if(!tel_rule.test($("#phone").val())){
-alert("전화번호 형식에 맞게 입력해주세요.");
-return false;
-}
+// if(!tel_rule.test($("#phone").val())){
+// alert("전화번호 형식에 맞게 입력해주세요.");
+// return false;
+// }
  
  
 //if (confirm("아이디를 찾으시겠습니까?")) {
@@ -48,7 +48,7 @@ return false;
  
 //return false;
 //}
-}
+// }
  
 </script>
 <head>
@@ -59,9 +59,9 @@ return false;
 <form action="/findid" method="post" onsubmit="return fnSubmit();">
     <div>
       <div>Name</div>
-      <div><input type="text" id="name" name="name" placeholder="Enter name..."></div>
-      <div>Phone number</div>
-      <div><input type="text" id="phone" name="phone" placeholder="Enter phone..."></div>
+      <div><input type="text" id="KORN_FLNM" name="KORN_FLNM" placeholder="Enter name..."></div>
+      <div>Tel number</div>
+      <div><input type="text" id="TELNO" name="TELNO" placeholder="Enter phone..."></div>
       <div><input type="submit" value="Search"></div>
     </div>
   </form>

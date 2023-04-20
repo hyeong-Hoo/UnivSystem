@@ -12,39 +12,48 @@
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
         <p>
-            Name<br>
-            <input type="text" name="name" value="${user.name}"/>
+            사용자ID<br>
+            <input type="text" name="USER_ID" value="${user.USER_ID}" readonly/>
         </p>
         <p>
-            Username<br>
-            <input type="text" name="username" value="${user.username}"/>
+            사용자이름<br>
+            <input type="text" name="KORN_FLNM" value="${user.KORN_FLNM}" readonly />
         </p>
         <p>
-            Email<br>
-            <input type="text" name="email" value="${user.email}"/>
+            사용자 핸드폰번호<br>
+            <input type="text" name="TELNO" value="${user.TELNO}" readonly/>
         </p>
         <p>
-            Password<br>
-            <input type="password" name="password" placeholder="Password를 입력해주세요"/>
+            새 비밀번호입력<br>
+            <input type="password" name="PSWD"  placeholder="새 비밀번호를 입력해주세요"/>
         </p>
         <p>
-            Address<br>
-            <input type="text" name="address" value="${user.address}"/>
+            새 비밀번호확인<br>
+            <input type="password" name="PSWD_CONFIRM"  placeholder="다시 한번 입력해주세요"/>
         </p>
-        <p>
-            Phone<br>
-            <input type="text" name="phone" value="${user.phone}"/>
-        </p>
-        <p>
-            Website<br>
-            <input type="text" name="website" value="${user.website}"/>
-        </p>
-        <p>
-            Company<br>
-            <input type="text" name="company" value="${user.company}"/>
-        </p>
+      
+         <p style="color:red" id="pswd-error"></p>
+    <button type="submit" onclick="return validate()">저장하기</button>
+</form>
 
-        <button type="submit">저장하기</button>
-    </form>
+<script type="text/javascript">
+function validate() {
+    var newPassword = document.getElementsByName("PSWD")[0].value;
+    var newPasswordConfirm = document.getElementsByName("PSWD_CONFIRM")[0].value;
+    if(newPassword.length < 8) {
+        document.getElementById("pswd-error").innerHTML = "비밀번호는 8자 이상이어야 합니다.";
+        return false;
+    } else if(newPassword !== newPasswordConfirm) {
+        document.getElementById("pswd-error").innerHTML = "비밀번호가 서로 일치하지 않습니다.";
+        return false;
+    } else {
+        document.getElementById("pswd-error").innerHTML = "";
+    }
+
+    // 새 비밀번호만 서버로 전송
+    document.getElementsByName("PSWD_CONFIRM")[0].disabled = true;
+    return true;
+}
+</script>
 </body>
 </html>
