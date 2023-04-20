@@ -162,75 +162,31 @@ overflow: scroll;
 </style>
 <body>
 
-
-
-	<div class="container">
-		<h2>학생 정보</h2>
-		<form>
-			<div class="form-group row">
-				<label for="name" class="col-sm-2 col-form-label">순번</label>
-				<div class="col-sm-4">
-					<input class="form-control" id="no" readonly>
-				</div>
-				<label for="korean-name" class="col-sm-2 col-form-label">이름</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="name2" readonly>
-				</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<div class="dataTables_length" id="dataTable_length">
+				<label>지원 학과 <select
+					class="custom-select custom-select-sm form-control form-control-sm">
+						<c:forEach var="${a }" items="c">
+						<option>${c. }</option>
+						</c:forEach>
+				</select>
+				</label> <label>지원 전형 <select
+					class="custom-select custom-select-sm form-control form-control-sm">
+						<c:forEach var="${b}" items="d">
+						${d. }</c:forEach>
+				</select>
+				</label>
 			</div>
-			<div class="form-group row">
-				<label for="department" class="col-sm-2 col-form-label">나이</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="age" readonly>
-				</div>
-				<label for="entrance-date" class="col-sm-2 col-form-label">생년월일</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="brdt" readonly>
-				</div>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<div id="dataTable_filter" class="dataTables_filter">
+				<label>Search:<input type="search"
+					class="form-control form-control-sm" placeholder=""
+					aria-controls="dataTable"></label>
 			</div>
-			<div class="form-group row">
-				<label for="english-name" class="col-sm-2 col-form-label">성별</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="gender" readonly>
-				</div>
-				<label for="social-number" class="col-sm-2 col-form-label">이메일</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="email" readonly>
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="grade" class="col-sm-2 col-form-label">전화번호</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="tel" readonly>
-				</div>
-				<label for="status" class="col-sm-2 col-form-label">비상전화번호</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="retel" readonly>
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="class" class="col-sm-2 col-form-label">관계</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="who" readonly>
-				</div>
-				<label for="cellphone" class="col-sm-2 col-form-label">우편번호</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="zipnum" readonly>
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="class" class="col-sm-2 col-form-label">주소</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="adr" readonly>
-				</div>
-				<label for="cellphone" class="col-sm-2 col-form-label">상세주소</label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="detailadr" readonly>
-				</div>
-			</div>
-		</form>
+		</div>
 	</div>
-
-
 
 	<br>
 	<br>
