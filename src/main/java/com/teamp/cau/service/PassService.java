@@ -18,8 +18,8 @@ public class PassService {
 		return passDAO.detail(PDF);
 }
 
-	public  List<PassDTO> studentList(String KORN_FLNM) {
-		return passDAO.studentList(KORN_FLNM);
+	public  List<PassDTO> studentList(PassDTO passDTO) {
+		return passDAO.studentList(passDTO);
 	}
 
 	public void passUpdate(PassDTO passDTO) {
@@ -29,5 +29,14 @@ public class PassService {
 	public int result(PassDTO passDTO) {
 		return passDAO.result(passDTO);
 	}
+
+	public List<PassDTO> departmentList() {
+		return passDAO.departmentList();
+	}
+
+	public List<PassDTO> categoryList() {
+		return passDAO.categoryList();
+	}
+
 
 }

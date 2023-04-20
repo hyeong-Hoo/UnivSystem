@@ -17,8 +17,8 @@ public class PassDAO {
 		return sqlSession.selectOne("list.detail", PDF);
 	}
 
-	public List<PassDTO> studentList(String KORN_FLNM) {
-		return sqlSession.selectList("list.studentList",KORN_FLNM);
+	public List<PassDTO> studentList(PassDTO passDTO) {
+		return sqlSession.selectList("list.studentList",passDTO);
 	}
 
 	public Object passUpdate(PassDTO passDTO) {
@@ -28,5 +28,14 @@ public class PassDAO {
 	public int result(PassDTO passDTO) {
 		return sqlSession.selectOne("list.result",passDTO);
 	}
+
+	public List<PassDTO> departmentList() {
+		return sqlSession.selectList("list.department");
+	}
+
+	public List<PassDTO> categoryList() {
+		return sqlSession.selectList("list.categoryList");
+	}
+
 
 }

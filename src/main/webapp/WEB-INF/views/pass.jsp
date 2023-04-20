@@ -25,8 +25,7 @@ $(function(){
 					url : '/passInfo',
 					type : 'GET',
 					data : {
-						"KORN_FLNM" : $('#name').val()
-					},
+						"KORN_FLNM" : $('#name').val(),"department" : $('#department').val(), "category":$('#category').val()},
 					dataType : "json",
 					success : function(data) {
 						$('.table_body').empty(); // 기존 테이블 데이터를 지웁니다.
@@ -66,10 +65,6 @@ $(function(){
 							+ '<td>' + info.telno + '</td>'
 							+ '<td>' + info.rel_TELNO + '</td>'
 							+ '<td>' + info.rel_CD + '</td>'
-							+ '<td>' + info.zip + '</td>' 
-							+ '<td>' + info.addr + '</td>' 
-							+'<td>'	+ info.daddr + '</td>' 
-							+ '<td>' +'<input type="button" onclick="open3(' + info.pdf + ')"value="pdf보기" /></td>' 
 							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
 							+'<td> <input type="button" class="" value="문자보내기"></td>'
 							+'<td> <input type="button" class="button_save" value="저장하기"></td></tr>';
@@ -121,11 +116,7 @@ $(function(){
 		  var telno = $(this).find('td:eq(5)').text();
 		  var rel_TELNO = $(this).find('td:eq(6)').text();
 		  var rel_CD = $(this).find('td:eq(7)').text();
-		  var zip = $(this).find('td:eq(8)').text();
-		  var addr = $(this).find('td:eq(9)').text();
-		  var daddr = $(this).find('td:eq(10)').text();
-		  var pdf = $(this).find('td:eq(11)').text();
-		  var PASS_INFO = $(this).find('td:eq(12)').text();
+		  var PASS_INFO = $(this).find('td:eq(8)').text();
 
 		  // 입력란에 값을 채웁니다.
 		  
@@ -138,10 +129,6 @@ $(function(){
 		  $('#tel').val(telno);
 		  $('#retel').val(rel_TELNO);
 		  $('#who').val(rel_CD);
-		  $('#zipnum').val(zip);
-		  $('#adr').val(addr);
-		  $('#detailadr').val(daddr);
-		  $('#pdf').val(pdf);
 		  $('#PASS_INFO').val(PASS_INFO);
 		  // 나머지 입력란에도 마찬가지로 값을 채워줍니다.
 		  // ...
@@ -159,31 +146,34 @@ div:100%;
 height:600px;
 overflow: scroll;
 }
+.text_right{
+text-align: right;
+}
 </style>
 <body>
-
 	<div class="row">
 		<div class="col-sm-12 col-md-6">
 			<div class="dataTables_length" id="dataTable_length">
-				<label>지원 학과 <select
-					class="custom-select custom-select-sm form-control form-control-sm">
-						<c:forEach var="${a }" items="c">
-						<option>${c. }</option>
+				<label>지원 학과 
+				<select 	class="custom-select custom-select-sm form-control form-control-sm" id="department">
+						<c:forEach  items="${list_d}" var="d">
+						<option>${d.department }</option>
 						</c:forEach>
 				</select>
-				</label> <label>지원 전형 <select
-					class="custom-select custom-select-sm form-control form-control-sm">
-						<c:forEach var="${b}" items="d">
-						${d. }</c:forEach>
+				</label> <label>지원 전형<select
+					class="custom-select custom-select-sm form-control form-control-sm" id="category">
+						<c:forEach  items="${list_c}" var="c">
+						<option>${c.category }</option>
+						</c:forEach>
 				</select>
 				</label>
 			</div>
 		</div>
 		<div class="col-sm-12 col-md-6">
-			<div id="dataTable_filter" class="dataTables_filter">
-				<label>Search:<input type="search"
-					class="form-control form-control-sm" placeholder=""
-					aria-controls="dataTable"></label>
+			<div id="dataTable_filter" class="dataTables_filter text_right">
+				<label> 학생 이름: <input type="text" id="name">
+					<button type="button" id="searchStudent">검색</button>
+				</label>
 			</div>
 		</div>
 	</div>
@@ -191,9 +181,7 @@ overflow: scroll;
 	<br>
 	<br>
 	<br>
-	<br> 학생 이름:
-	<input type="text" id="name">
-	<button type="button" id="searchStudent">검색</button>
+	<br> 
 <div class="scroll">
 	<table class="table">
 		<thead>
@@ -205,12 +193,8 @@ overflow: scroll;
 				<th scope="col">성별</th>
 				<th scope="col">이메일</th>
 				<th scope="col">전화번호</th>
-				<th scope="col">비상전번</th>
-				<th scope="col">비상누구</th>
-				<th scope="col">우편번호</th>
-				<th scope="col">주소</th>
-				<th scope="col">상세주소</th>
-				<th scope="col">PDF보기</th>
+				<th scope="col">비상연락처</th>
+				<th scope="col">가족관계</th>
 				<th scope="col">합격여부</th>
 				<th scope="col">문자보내기</th>
 				<th scope="col">저장하기</th>
