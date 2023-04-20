@@ -45,7 +45,7 @@
 
 							$.each(data, function(i, info) {
 								var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
-								+ '<th scope="row">' + info.stud_NO
+								+ '<th scope="row">' + info.appl_NO
 								+ '</th>' + '<td>' + info.korn_FLNM
 								+ '</td>' + '<td>' + info.age + '</td>'
 								+ '<td>' + info.user_BRDT + '</td>'
@@ -69,7 +69,7 @@
 		
 		$('.table_body').on('click', 'tr', function() {
 			  // 클릭된 행의 각 셀 값을 가져옵니다.
-			  var stud_NO = $(this).find('th').text();
+			  var appl_NO = $(this).find('th').text();
 			  var korn_FLNM = $(this).find('td:eq(0)').text();
 			  var age = $(this).find('td:eq(1)').text();
 			  var user_BRDT = $(this).find('td:eq(2)').text();
@@ -83,7 +83,7 @@
 			  var daddr = $(this).find('td:eq(10)').text();
 
 			  // 입력란에 값을 채웁니다.
-			  $('#no').val(stud_NO);
+			  $('#no').val(appl_NO);
 			  $('#name2').val(korn_FLNM);
 			  $('#age').val(age);
 			  $('#brdt').val(user_BRDT);

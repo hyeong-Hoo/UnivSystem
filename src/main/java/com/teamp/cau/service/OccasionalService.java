@@ -5,24 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.teamp.cau.dao.AssessmentDAO;
+import com.teamp.cau.dao.OccasionalDAO;
 import com.teamp.cau.dto.StudentDTO;
 
 @Service
-public class AssessmentService {
+public class OccasionalService {
 	
 	@Autowired
-	private AssessmentDAO assessmentDAO;
+	private OccasionalDAO occasionalDAO;
 
 
 	public List<StudentDTO> data() {
-		return assessmentDAO.data() ;
+		return occasionalDAO.data() ;
 	}
 
 
 	public void updateAssessment(List<StudentDTO> assessments) {
 	    for (StudentDTO assessment : assessments) {
-	        assessmentDAO.updateAssessment(assessment);
+	    	occasionalDAO.updateAssessment(assessment);
 	    }
 	}
 

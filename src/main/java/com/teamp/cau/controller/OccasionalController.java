@@ -11,34 +11,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.teamp.cau.dto.StudentDTO;
-import com.teamp.cau.service.AssessmentService;
+import com.teamp.cau.service.OccasionalService;
 
 @Controller
 
-public class AssessmentController {
+public class OccasionalController {
 	@Autowired
-	private AssessmentService assessmentService;
+	private OccasionalService occasionalService;
 	
 	
 	
-	@GetMapping("/assessment")
-	public String assessment() {
-		return "assessment";
+	@GetMapping("/occasional")
+	public String occasional() {
+		return "occasional";
 	}
 	
 	@ResponseBody		
-	@GetMapping("/asm")
-	public List<StudentDTO> asm() {
+	@GetMapping("/ocs")
+	public List<StudentDTO> ocs() {
 		
-		List<StudentDTO> data = assessmentService.data();
+		List<StudentDTO> data = occasionalService.data();
 	    return data;
 		
 	}
 	
 	@ResponseBody
-	@PostMapping("/save")	
+	@PostMapping("/saves")	
 	public String saveAssessment(@RequestBody List<StudentDTO> assessments) {
-	    assessmentService.updateAssessment(assessments);
+		occasionalService.updateAssessment(assessments);
 	    System.out.println(assessments);
 	    return "success";
 	}

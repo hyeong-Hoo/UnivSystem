@@ -58,7 +58,7 @@
 $(document).ready(function () {
     var table = $('#mytable').DataTable({
         ajax: {
-            url: '/asm',
+            url: '/ocs',
             type: 'GET',
             dataSrc: ''
         },
@@ -67,9 +67,8 @@ $(document).ready(function () {
       	  { data: "category" },
       	  { data: "korn_FLNM" },
       	  { data: "department" },
-      	  { data: "korean" },
-      	  { data: "math" },
-      	  { data: "english" },
+      	  { data: "grade" },
+      	  { data: "interview" },
       	  { data: "avg" },
       	  {
       	    data: "passed",
@@ -85,7 +84,6 @@ $(document).ready(function () {
       	             options.replace('value="' + selected + '"', 'value="' + selected + '" selected') +
       	             '</select>';
       	    }
-      	       	 
       	  }
       	],
 
@@ -153,7 +151,7 @@ $(document).ready(function () {
         
         $.ajax({
             type: 'POST',
-            url: '/save',
+            url: '/saves',
             data: JSON.stringify(updatedData),
             contentType: 'application/json; charset=utf-8',
             success: function(result) {
@@ -188,9 +186,8 @@ $(document).ready(function () {
                 <th>유형</th>   
                 <th>이름</th>  
                 <th>지원학과</th>   
-                <th>언어</th>        
-                <th>수학</th>
-                <th>영어</th>
+                <th>내신등급점수</th>        
+                <th>면접점수</th>
                 <th>평균</th>
                 <th>구분</th>
                 

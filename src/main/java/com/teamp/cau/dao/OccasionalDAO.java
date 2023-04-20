@@ -9,17 +9,11 @@ import com.teamp.cau.dto.StudentDTO;
 
 @Repository
 @Mapper
-public interface AssessmentDAO {
+public interface OccasionalDAO {
 
 	List<StudentDTO> data();
 
 	void updateAssessment(StudentDTO assessment);
-
-
-	
-
-	
-
 
 
 }

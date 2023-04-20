@@ -5,9 +5,9 @@
 	
 	<select id="studentList" parameterType="StudentDTO" resultType="StudentDTO">
 	
-		SELECT STUD_NO, KORN_FLNM, USER_BRDT, GENDER_CD, EML_ADDR, TELNO, REL_TELNO,
+		SELECT APPL_NO, KORN_FLNM, USER_BRDT, GENDER_CD, EML_ADDR, TELNO, REL_TELNO,
 	        REL_CD, ZIP, ADDR, DADDR, AGE 
-	    FROM STUD_INFO
+	    FROM APPL_INFO
 		WHERE KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
 	
 	</select>
