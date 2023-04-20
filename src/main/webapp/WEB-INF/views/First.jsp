@@ -27,7 +27,7 @@
 
 
 
-
+ㅇㅇㅇㅇㅇㅇ
 학사관리 페이지
 <button type="button" onclick="location.href='First3'"> 학사관리페이지로이동</button>
 <br><br><br>
