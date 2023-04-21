@@ -88,18 +88,18 @@ $(function(){
 			success : function(active){
 			active
 				if(active == "0"){
-				alert("문자대기");
+				alert("문자대기로 변경");
 			} else if(active == "1"){
-				alert("예치금 대기");
+				alert("예치금 대기로변경");
 			
 			} else if(active == "2"){
-				alert("합격");
+				alert("합격으로 변경");
 			
 			} else if(active == "3"){
-				alert("합격의지없음");
+				alert("합격의지없음으로 변경");
 			
 			} else if(active == "4"){
-				alert("예치금반환(환불)");
+				alert("예치금반환(환불)로 변경");
 			}
 		}
 			});
