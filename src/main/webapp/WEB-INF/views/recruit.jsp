@@ -44,6 +44,13 @@ line-height: 20px;
 font-size: 15px;
 }
 </style>
+<script type="text/javascript">
+$(function(){
+	$("#check").click(function(){
+		
+	});
+});
+</script>
 </head>
 <body>
 <div class="box">
