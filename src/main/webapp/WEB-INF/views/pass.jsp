@@ -54,11 +54,10 @@ $(function(){
 							else if(info.pass_INFO==3){pass_state="합격의지없음"}
 							else if(info.pass_INFO==4){pass_state="예치금반환(환불)"}
 							var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
-							+ '<th scope="row" class="button_name">' + info.stud_NO
-							+ '</th>' 
-							//+ '<td> <input type="checkbox" name="' + info.stud_NO + '"></td>'
+							+ '<th scope="row" class="checkbox_i"> <input type="checkbox" value="'+ info.korn_FLNM%+info.telno%+info.pass_INFO+'" name=""></th>' 
+							+ '<td scope="row" class="button_name">' + info.stud_NO	+ '</td>' 
 							+ '<td class="name_m">' + info.korn_FLNM + '</td>' 
-							+'<td>' + info.age + '</td>'
+							+ '<td>' + info.age + '</td>'
 							+ '<td>' + info.user_BRDT + '</td>'
 							+ '<td>' + info.gender_CD + '</td>'
 							+ '<td>' + info.eml_ADDR + '</td>'
@@ -137,16 +136,16 @@ $(function(){
 
 		$('.table_body').on('click', 'tr', function() {
 			// 클릭된 행의 각 셀 값을 가져옵니다.
-			var stud_NO = $(this).find('th').text();
-			var korn_FLNM = $(this).find('td:eq(0)').text();
-			var age = $(this).find('td:eq(1)').text();
-			var user_BRDT = $(this).find('td:eq(2)').text();
-			var gender_CD = $(this).find('td:eq(3)').text();
-			var eml_ADDR = $(this).find('td:eq(4)').text();
-			var telno = $(this).find('td:eq(5)').text();
-			var rel_TELNO = $(this).find('td:eq(6)').text();
-			var rel_CD = $(this).find('td:eq(7)').text();
-			var PASS_INFO = $(this).find('td:eq(8)').text();
+			var stud_NO = $(this).find('td:eq(0)').text();
+			var korn_FLNM = $(this).find('td:eq(1)').text();
+			var age = $(this).find('td:eq(2)').text();
+			var user_BRDT = $(this).find('td:eq(3)').text();
+			var gender_CD = $(this).find('td:eq(4)').text();
+			var eml_ADDR = $(this).find('td:eq(5)').text();
+			var telno = $(this).find('td:eq(6)').text();
+			var rel_TELNO = $(this).find('td:eq(7)').text();
+			var rel_CD = $(this).find('td:eq(8)').text();
+			var PASS_INFO = $(this).find('td:eq(9)').text();
 
 			// 입력란에 값을 채웁니다.
 
@@ -216,6 +215,7 @@ text-align: right;
 	<table class="table">
 		<thead>
 			<tr>
+				<th scope="col">체크</th>
 				<th scope="col">순번</th>
 				<th scope="col">이름</th>
 				<th scope="col">나이</th>
