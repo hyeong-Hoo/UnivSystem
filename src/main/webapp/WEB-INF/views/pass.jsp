@@ -57,16 +57,16 @@ $(function(){
 							+ '<th scope="row" class="button_name">' + info.stud_NO
 							+ '</th>' 
 							//+ '<td> <input type="checkbox" name="' + info.stud_NO + '"></td>'
-							+ '<td >' + info.korn_FLNM + '</td>' 
+							+ '<td class="name_m">' + info.korn_FLNM + '</td>' 
 							+'<td>' + info.age + '</td>'
 							+ '<td>' + info.user_BRDT + '</td>'
 							+ '<td>' + info.gender_CD + '</td>'
 							+ '<td>' + info.eml_ADDR + '</td>'
-							+ '<td>' + info.telno + '</td>'
+							+ '<td class="telno_m">' + info.telno + '</td>'
 							+ '<td>' + info.rel_TELNO + '</td>'
 							+ '<td>' + info.rel_CD + '</td>'
 							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
-							+'<td> <input type="button" class="" value="문자보내기"></td>'
+							+'<td> <input type="button" class="permit" value="문자보내기"></td>'
 							+'<td> <input type="button" class="button_save" value="저장하기"></td></tr>';
 							$('.table_body').append(str);
 							$('#'+selectid).val(info.pass_INFO).attr("selected", "selected");
@@ -76,65 +76,95 @@ $(function(){
 				});
 			});
 	
-	$(document).on("click",".button_save",function(){
-		var find = $(this).parent().prevAll(".find_Select").children(".creditSelect").val();
-		var state = $(this).parent().prevAll(".button_name").text();
-		var creditSelect= $(this).parent().prevAll(".creditSelect");
-		$.ajax({
-			url : '/passUpdate',
-			type : 'POST',
-			data : {"stud_NO" : state , "PASS_INFO":find	},	
-			dataType : "html", 
-			success : function(active){
-			active
-				if(active == "0"){
-				alert("문자대기로 변경");
-			} else if(active == "1"){
-				alert("예치금 대기로변경");
-			
-			} else if(active == "2"){
-				alert("합격으로 변경");
-			
-			} else if(active == "3"){
-				alert("합격의지없음으로 변경");
-			
-			} else if(active == "4"){
-				alert("예치금반환(환불)로 변경");
+	$(document).on("click", ".permit", function() {
+			var korn_FLNM = $(this).parent().prevAll(".name_m").text();
+			var telno = $(this).parent().prevAll(".telno_m").text();
+
+			if ($(confirm(korn_FLNM + "님에게 문자를 보내시겠습니까?"))) {
+				$.ajax({
+					url : "/permit",
+					type : "post",
+					cache : false,
+					dataType : "html",
+					data : {
+						"korn_FLNM" : korn_FLNM,
+						"telno" : telno
+					},
+					success : function() {
+						alert("승인완료");
+					}
+				});
 			}
-		}
-			});
 		});
-	
-	$('.table_body').on('click', 'tr', function() {
-		  // 클릭된 행의 각 셀 값을 가져옵니다.
-		  var stud_NO = $(this).find('th').text();
-		  var korn_FLNM = $(this).find('td:eq(0)').text();
-		  var age = $(this).find('td:eq(1)').text();
-		  var user_BRDT = $(this).find('td:eq(2)').text();
-		  var gender_CD = $(this).find('td:eq(3)').text();
-		  var eml_ADDR = $(this).find('td:eq(4)').text();
-		  var telno = $(this).find('td:eq(5)').text();
-		  var rel_TELNO = $(this).find('td:eq(6)').text();
-		  var rel_CD = $(this).find('td:eq(7)').text();
-		  var PASS_INFO = $(this).find('td:eq(8)').text();
+		$(document)
+				.on(
+						"click",
+						".button_save",
+						function() {
+							var find = $(this).parent().prevAll(".find_Select")
+									.children(".creditSelect").val();
+							var state = $(this).parent()
+									.prevAll(".button_name").text();
+							var creditSelect = $(this).parent().prevAll(
+									".creditSelect");
+							$.ajax({
+								url : '/passUpdate',
+								type : 'POST',
+								data : {
+									"stud_NO" : state,
+									"PASS_INFO" : find
+								},
+								dataType : "html",
+								success : function(active) {
+									active
+									if (active == "0") {
+										alert("문자대기로 변경");
+									} else if (active == "1") {
+										alert("예치금 대기로변경");
 
-		  // 입력란에 값을 채웁니다.
-		  
-		  $('#no').val(stud_NO);
-		  $('#name2').val(korn_FLNM);
-		  $('#age').val(age);
-		  $('#brdt').val(user_BRDT);
-		  $('#gender').val(gender_CD);
-		  $('#email').val(eml_ADDR);
-		  $('#tel').val(telno);
-		  $('#retel').val(rel_TELNO);
-		  $('#who').val(rel_CD);
-		  $('#PASS_INFO').val(PASS_INFO);
-		  // 나머지 입력란에도 마찬가지로 값을 채워줍니다.
-		  // ...
+									} else if (active == "2") {
+										alert("합격으로 변경");
+
+									} else if (active == "3") {
+										alert("합격의지없음으로 변경");
+
+									} else if (active == "4") {
+										alert("예치금반환(환불)로 변경");
+									}
+								}
+							});
+						});
+
+		$('.table_body').on('click', 'tr', function() {
+			// 클릭된 행의 각 셀 값을 가져옵니다.
+			var stud_NO = $(this).find('th').text();
+			var korn_FLNM = $(this).find('td:eq(0)').text();
+			var age = $(this).find('td:eq(1)').text();
+			var user_BRDT = $(this).find('td:eq(2)').text();
+			var gender_CD = $(this).find('td:eq(3)').text();
+			var eml_ADDR = $(this).find('td:eq(4)').text();
+			var telno = $(this).find('td:eq(5)').text();
+			var rel_TELNO = $(this).find('td:eq(6)').text();
+			var rel_CD = $(this).find('td:eq(7)').text();
+			var PASS_INFO = $(this).find('td:eq(8)').text();
+
+			// 입력란에 값을 채웁니다.
+
+			$('#no').val(stud_NO);
+			$('#name2').val(korn_FLNM);
+			$('#age').val(age);
+			$('#brdt').val(user_BRDT);
+			$('#gender').val(gender_CD);
+			$('#email').val(eml_ADDR);
+			$('#tel').val(telno);
+			$('#retel').val(rel_TELNO);
+			$('#who').val(rel_CD);
+			$('#PASS_INFO').val(PASS_INFO);
+			// 나머지 입력란에도 마찬가지로 값을 채워줍니다.
+			// ...
 
 		});
-});
+	});
 </script>
 </head>
 <style>

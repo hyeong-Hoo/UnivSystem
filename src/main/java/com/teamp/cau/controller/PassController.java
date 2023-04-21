@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.codehaus.groovy.runtime.metaclass.NewStaticMetaMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,5 +59,13 @@ public class PassController {
 		passService.passUpdate(passDTO);
 		int result=passService.result(passDTO);
 		return String.valueOf(result);
+	}
+	@PostMapping("/permit")
+	@ResponseBody
+	public String permit(@RequestParam("korn_FLNM") String korn_FLNM, @RequestParam("telno") String telno) {
+		message message = new message();
+		String content = korn_FLNM+"님 국민은행 938002-00-123456 으로 입금해주시면 예약이 확정됩니다.";
+		message.sendSMS(telno, content);
+		return "";
 	}
 }
