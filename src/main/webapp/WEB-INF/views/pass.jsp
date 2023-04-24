@@ -21,6 +21,8 @@
 		}	
 $(function(){
 	$('#searchStudent').click(function() {
+				  $("input:checkbox[id='check_all']").prop("checked", false);
+
 				$.ajax({
 					url : '/passInfo',
 					type : 'GET',
