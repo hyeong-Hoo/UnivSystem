@@ -54,7 +54,7 @@ $(function(){
 							else if(info.pass_INFO==3){pass_state="합격의지없음"}
 							else if(info.pass_INFO==4){pass_state="예치금반환(환불)"}
 							var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
-							+ '<th scope="row" class="checkbox_i"> <input type="checkbox" value="'+ info.korn_FLNM%+info.telno%+info.pass_INFO+'" name=""></th>' 
+							+ '<td scope="row" class="checkbox_i"> <input type="checkbox" value="'+ info.korn_FLNM%+info.telno%+info.pass_INFO+'" name="checkbox_c"></td>' 
 							+ '<td scope="row" class="button_name">' + info.stud_NO	+ '</td>' 
 							+ '<td class="name_m">' + info.korn_FLNM + '</td>' 
 							+ '<td>' + info.age + '</td>'
@@ -95,11 +95,25 @@ $(function(){
 				});
 			}
 		});
-		$(document)
-				.on(
-						"click",
-						".button_save",
-						function() {
+	$('.permit1').click(function() {
+	    var checkBoxArr = new Array(); 
+		var num=0;
+	  $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
+	 	 var name_m = $(this).closest('tr').find('.name_m').text();
+	 	 var telno_m = $(this).closest('tr').find('.telno_m').text();
+		num=num+1;
+		
+	  	checkBoxArr[i] = {"no" : i, "name_m" : name_m, "telno_m":telno_m}
+	});
+	alert(checkBoxArr);
+	  $.ajax({
+			url : "/permit1",
+			type : "post",
+			cache : false,
+	      	data: { "checkBoxArr" : checkBoxArr ,"num" : num }      // folder seq 값을 가지고 있음.
+	   });
+	});
+		$(document)	.on("click",".button_save",	function() {
 							var find = $(this).parent().prevAll(".find_Select")
 									.children(".creditSelect").val();
 							var state = $(this).parent()
@@ -136,16 +150,16 @@ $(function(){
 
 		$('.table_body').on('click', 'tr', function() {
 			// 클릭된 행의 각 셀 값을 가져옵니다.
-			var stud_NO = $(this).find('td:eq(0)').text();
-			var korn_FLNM = $(this).find('td:eq(1)').text();
-			var age = $(this).find('td:eq(2)').text();
-			var user_BRDT = $(this).find('td:eq(3)').text();
-			var gender_CD = $(this).find('td:eq(4)').text();
-			var eml_ADDR = $(this).find('td:eq(5)').text();
-			var telno = $(this).find('td:eq(6)').text();
-			var rel_TELNO = $(this).find('td:eq(7)').text();
-			var rel_CD = $(this).find('td:eq(8)').text();
-			var PASS_INFO = $(this).find('td:eq(9)').text();
+			var stud_NO = $(this).find('td:eq(1)').text();
+			var korn_FLNM = $(this).find('td:eq(2)').text();
+			var age = $(this).find('td:eq(3)').text();
+			var user_BRDT = $(this).find('td:eq(4)').text();
+			var gender_CD = $(this).find('td:eq(5)').text();
+			var eml_ADDR = $(this).find('td:eq(6)').text();
+			var telno = $(this).find('td:eq(7)').text();
+			var rel_TELNO = $(this).find('td:eq(8)').text();
+			var rel_CD = $(this).find('td:eq(9)').text();
+			var PASS_INFO = $(this).find('td:eq(10)').text();
 
 			// 입력란에 값을 채웁니다.
 
@@ -232,6 +246,7 @@ text-align: right;
 		</thead>
 		<tbody class="table_body">
 		</tbody>
+		<input type="button" class="permit1" value="문자보내기"> 
 	</table>
 </div>
 

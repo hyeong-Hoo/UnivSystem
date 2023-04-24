@@ -1,10 +1,14 @@
 package com.teamp.cau.controller;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.bouncycastle.jcajce.provider.digest.GOST3411.HashMac;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.RepositoryQuery;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,6 +70,21 @@ public class PassController {
 		message message = new message();
 		String content = korn_FLNM+"님 국민은행 938002-00-123456 으로 입금해주시면 예약이 확정됩니다.";
 		message.sendSMS(telno, content);
+		return "";
+	}       
+	@PostMapping("/permit1")
+	@ResponseBody
+	public String permit1(@RequestParam HashMap<String, Object> param,@RequestParam("num") int num) {
+		message message = new message();
+		for(int i=0;i<num;i++) {
+			System.out.println(i);
+			System.out.println(param.get("checkBoxArr[0][name_m]"));			
+			System.out.println(param.get("checkBoxArr[0][telno_m]"));			
+		}
+		
+		//String content = korn_FLNM+"님 국민은행 938002-00-123456 으로 입금해주시면 등록이 확정이됩니다..";
+		//message.sendSMS(telno, content);
+		
 		return "";
 	}
 }
