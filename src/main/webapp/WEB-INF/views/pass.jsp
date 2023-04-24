@@ -54,8 +54,8 @@ $(function(){
 							else if(info.pass_INFO==3){pass_state="합격의지없음"}
 							else if(info.pass_INFO==4){pass_state="예치금반환(환불)"}
 							var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
-							+ '<td scope="row" class="checkbox_i"> <input type="checkbox" value="'+ info.korn_FLNM%+info.telno%+info.pass_INFO+'" name="checkbox_c"></td>' 
-							+ '<td scope="row" class="button_name">' + info.stud_NO	+ '</td>' 
+							+ '<td scope="row" class="checkbox_i"> <input type="checkbox" class="checkbox_a" name="checkbox_c"></td>' 
+							+ '<td class="button_name">' + info.stud_NO	+ '</td>' 
 							+ '<td class="name_m">' + info.korn_FLNM + '</td>' 
 							+ '<td>' + info.age + '</td>'
 							+ '<td>' + info.user_BRDT + '</td>'
@@ -65,7 +65,6 @@ $(function(){
 							+ '<td>' + info.rel_TELNO + '</td>'
 							+ '<td>' + info.rel_CD + '</td>'
 							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
-							+'<td> <input type="button" class="permit" value="문자보내기"></td>'
 							+'<td> <input type="button" class="button_save" value="저장하기"></td></tr>';
 							$('.table_body').append(str);
 							$('#'+selectid).val(info.pass_INFO).attr("selected", "selected");
@@ -75,26 +74,7 @@ $(function(){
 				});
 			});
 	
-	$(document).on("click", ".permit", function() {
-			var korn_FLNM = $(this).parent().prevAll(".name_m").text();
-			var telno = $(this).parent().prevAll(".telno_m").text();
 
-			if ($(confirm(korn_FLNM + "님에게 문자를 보내시겠습니까?"))) {
-				$.ajax({
-					url : "/permit",
-					type : "post",
-					cache : false,
-					dataType : "html",
-					data : {
-						"korn_FLNM" : korn_FLNM,
-						"telno" : telno
-					},
-					success : function() {
-						alert("승인완료");
-					}
-				});
-			}
-		});
 	$('.permit1').click(function() {
 	    var checkBoxArr = new Array(); 
 		var num=0;
@@ -177,6 +157,20 @@ $(function(){
 			// ...
 
 		});
+		$(document).on('click','#check_all',function(){
+			  if($('#check_all').is(':checked')){
+			       $('.checkbox_a').prop('checked',true);
+			    }else{
+			       $('.checkbox_a').prop('checked',false);
+			    }
+		});
+		$(document).on('click','.checkbox_a',function(){
+		    if($('input[class=checkbox_a]:checked').length==$('.checkbox_a').length){
+		        $('#check_all').prop('checked',true);
+		    }else{
+		       $('#check_all').prop('checked',false);
+		    }
+		});
 	});
 </script>
 </head>
@@ -229,7 +223,7 @@ text-align: right;
 	<table class="table">
 		<thead>
 			<tr>
-				<th scope="col">체크</th>
+				<th scope="col"><input type="checkbox" id="check_all"></th>
 				<th scope="col">순번</th>
 				<th scope="col">이름</th>
 				<th scope="col">나이</th>
@@ -240,7 +234,6 @@ text-align: right;
 				<th scope="col">비상연락처</th>
 				<th scope="col">가족관계</th>
 				<th scope="col">합격여부</th>
-				<th scope="col">문자보내기</th>
 				<th scope="col">저장하기</th>
 			</tr>
 		</thead>
