@@ -76,15 +76,11 @@ public class PassController {
 	@ResponseBody
 	public String permit1(@RequestParam HashMap<String, Object> param,@RequestParam("num") int num) {
 		message message = new message();
-		for(int i=0;i<num;i++) {
-			System.out.println(i);
-			System.out.println(param.get("checkBoxArr[0][name_m]"));			
-			System.out.println(param.get("checkBoxArr[0][telno_m]"));			
+		for(int i=0;i<num;i++) {			
+			String telno= (String) param.get("checkBoxArr["+i+"][telno_m]");
+			String content = param.get("checkBoxArr["+i+"][name_m]")+"님 국민은행 938002-00-123456 으로 입금해주시면 등록이 확정이됩니다..";
+			message.sendSMS(telno, content);
 		}
-		
-		//String content = korn_FLNM+"님 국민은행 938002-00-123456 으로 입금해주시면 등록이 확정이됩니다..";
-		//message.sendSMS(telno, content);
-		
 		return "";
 	}
 }
