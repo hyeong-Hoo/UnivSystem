@@ -10,8 +10,9 @@
 대학교메인페이지 입니다
 
 
-로그인
+
 <% if (request.getUserPrincipal() == null) { %>
+로그인
     <!-- 로그인 버튼 -->
     <button type="button" onclick="location.href='loginPage'">로그인페이지</button>
 <% } else { %>
@@ -27,7 +28,7 @@
 
 
 
-ㅇㅇㅇㅇㅇㅇ
+
 학사관리 페이지
 <button type="button" onclick="location.href='First3'"> 학사관리페이지로이동</button>
 <br><br><br>

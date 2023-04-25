@@ -22,7 +22,7 @@
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <button type="submit">로그아웃</button>
     </form>
-
+<button type="button" onclick="location.href='First'">홈으로</button>
 <!--     <form action="/delete" method="post"> 
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <button type="submit">탈퇴하기</button>

@@ -14,19 +14,11 @@ public class UserVo {
     private String PSWD_CHG_YN;
     private String PSWD_CHG_DT;
     private int PSWD_ERR_NMTM;
-    private int USER_VALUE;
-    
-    public int getUSER_VALUE() {
-        return USER_VALUE;
+    private UserRoleEnum ROLE_CODE; // 추가된 필드
+
+    public enum UserRoleEnum {
+        STUDENT, PROFESSOR, ADMIN;
+
     }
-
-    public void setUSER_VALUE(int USER_VALUE) {
-        this.USER_VALUE = USER_VALUE;
-    }
-
-	
-
-
-	
-
+		
 }

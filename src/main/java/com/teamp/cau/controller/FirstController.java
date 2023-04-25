@@ -2,7 +2,6 @@ package com.teamp.cau.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,7 +13,6 @@ public class FirstController {
 	public String First() {
 		return "First";
 	}
-    
 	
 	@GetMapping("/First2") // 학교소개페이지
 	public String First2() {

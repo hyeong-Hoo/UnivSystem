@@ -6,8 +6,6 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -32,11 +30,10 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class UserController {
-    @Autowired
+   
+	@Autowired
     private UserService userService;
     private final SmsService smsService;
-    
-    
     
     
     @GetMapping("/")
@@ -49,7 +46,6 @@ public class UserController {
         model.addAttribute("user", userVo);
 
         return "home";
-        
     }
     
    
@@ -67,7 +63,66 @@ public class UserController {
             return "loginPage";
         return "redirect:/";
     }
-/*
+
+    @GetMapping("/update")
+    public String editPage(Model model) { // 회원 정보 수정 페이지
+        Long USER_NO = (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserVo userVo = userService.getUserByNo(USER_NO);
+        model.addAttribute("user", userVo);
+        return "editPage";
+    }
+
+    @PostMapping("/update")
+    public String edit(UserVo userVo) { // 회원 정보 수정
+        Long USER_NO = (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        userVo.setUSER_NO(USER_NO);
+        userService.edit(userVo);
+        return "redirect:/";
+    }
+    
+    @GetMapping("/findid")
+    public String findid() {   //아이디 찾기 페이지
+        return "findid";
+    }
+    
+    
+    @PostMapping("/findid")	//아이디 찾기
+    public String findIdByNameAndTel(@RequestParam String KORN_FLNM, @RequestParam String TELNO, Model model) {
+        String USER_ID = userService.findIdByNameAndTel(KORN_FLNM, TELNO);
+        if (USER_ID == null) {
+            model.addAttribute("error", "User not found");
+            return "error";
+        }
+        model.addAttribute("USER_ID", USER_ID);
+        return "resultid";
+    }
+    
+    @GetMapping("/findpass")	// 비밀번호 찾기 페이지
+    public String findpass() {  
+        return "findpass";
+    }
+
+    @PostMapping("/findpass")	// 비밀번호 찾기
+    public String findPass(@RequestParam String USER_ID, @RequestParam String KORN_FLNM, @RequestParam String TELNO, @RequestParam(required = false) boolean sms, Model model) throws JsonProcessingException, RestClientException, URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
+        String tempPassword = userService.resetPassword(USER_ID, KORN_FLNM, TELNO);
+        if (tempPassword == null) {
+            model.addAttribute("error", "User not found");
+            return "error";
+        }
+        
+        // SMS 발송을 선택한 경우
+        if (sms) {
+            MessageDTO messageDto = new MessageDTO();
+            messageDto.setTo(TELNO);
+            messageDto.setContent("임시 비밀번호는 " + tempPassword + "입니다.");
+            SmsResponseDTO response = smsService.sendSms(messageDto);
+            model.addAttribute("response", response);
+        }
+        
+        model.addAttribute("tempPassword", tempPassword);
+        return "resultpass";
+    }
+    /*
     @GetMapping("/signup")
     public String signupPage() {  // 회원 가입 페이지
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -88,22 +143,6 @@ public class UserController {
         }
         return "redirect:/login";
     }
-*/
-    @GetMapping("/update")
-    public String editPage(Model model) { // 회원 정보 수정 페이지
-        Long USER_NO = (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserVo userVo = userService.getUserByNo(USER_NO);
-        model.addAttribute("user", userVo);
-        return "editPage";
-    }
-
-    @PostMapping("/update")
-    public String edit(UserVo userVo) { // 회원 정보 수정
-        Long USER_NO = (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        userVo.setUSER_NO(USER_NO);
-        userService.edit(userVo);
-        return "redirect:/";
-    }
 
     @PostMapping("/delete")
     public String withdraw(HttpSession session) { // 회원 탈퇴
@@ -114,77 +153,6 @@ public class UserController {
         SecurityContextHolder.clearContext(); // SecurityContextHolder에 남아있는 token 삭제
         return "redirect:/";
     }
-    
-    
-    
-    @GetMapping("/findid")
-    public String findid() {  // 
-        return "findid";
-    }
-    
-    
-    @PostMapping("/findid")
-    public String findIdByNameAndTel(@RequestParam String KORN_FLNM, @RequestParam String TELNO, Model model) {
-        String USER_ID = userService.findIdByNameAndTel(KORN_FLNM, TELNO);
-        if (USER_ID == null) {
-            model.addAttribute("error", "User not found");
-            return "error";
-        }
-        model.addAttribute("USER_ID", USER_ID);
-        return "resultid";
-    }
-    
-    /*@GetMapping("/findpass")
-    public String findpass() {  // 
-        return "findpass";
-    }
-    
-    @PostMapping("/findpass")
-    public String findPass(@RequestParam String name, @RequestParam String phone,@RequestParam String email, Model model) {
-        String password = userService.findPassword(email , name, phone);
-        if (password == null) {
-            model.addAttribute("error", "User not found");
-            return "error";
-        }
-        model.addAttribute("password", password);
-        return "resultpass";
-    }
-    @PostMapping("/findpass")
-    public String findPass(@RequestParam String name, @RequestParam String phone, @RequestParam String email, Model model) {
-        String tempPassword = userService.resetPassword(email, name, phone);
-        if (tempPassword == null) {
-            model.addAttribute("error", "User not found");
-            return "error";
-        }
-        model.addAttribute("tempPassword", tempPassword);
-        return "resultpass";
-    }*/
-    @GetMapping("/findpass")
-    public String findpass() {  
-        return "findpass";
-    }
-
-    @PostMapping("/findpass")
-    public String findPass(@RequestParam String USER_ID, @RequestParam String KORN_FLNM, @RequestParam String TELNO, @RequestParam(required = false) boolean sms, Model model) throws JsonProcessingException, RestClientException, URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
-        String tempPassword = userService.resetPassword(USER_ID, KORN_FLNM, TELNO);
-        if (tempPassword == null) {
-            model.addAttribute("error", "User not found");
-            return "error";
-        }
-        
-        // SMS 발송을 선택한 경우
-        if (sms) {
-            MessageDTO messageDto = new MessageDTO();
-            messageDto.setTo(TELNO);
-            messageDto.setContent("임시 비밀번호는 " + tempPassword + "입니다.");
-            SmsResponseDTO response = smsService.sendSms(messageDto);
-            model.addAttribute("response", response);
-        }
-        
-        model.addAttribute("tempPassword", tempPassword);
-        return "resultpass";
-    }
-
-
+*/
     
 }

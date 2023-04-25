@@ -1,8 +1,6 @@
 package com.teamp.cau.service;
 
-import java.io.Console;
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +53,7 @@ public class UserService {
         userMapper.deleteUser(USER_NO);
     }
 
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() { 
         return this.passwordEncoder;
     }
     
@@ -72,18 +70,6 @@ public class UserService {
         return findid.getUSER_ID();
     }
     
-    
-    /*public String findPassword(String email, String name, String phone) {
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("email", email);
-        paramMap.put("name", name);
-        paramMap.put("phone", phone);
-        UserVo findpass = userMapper.findPassword(paramMap);
-        if (findpass == null) {
-            return null;
-        }
-        return findpass.getPassword();
-    }*/
     
     private SecureRandom random = new SecureRandom();
     public String resetPassword(String USER_ID, String KORN_FLNM, String TELNO) {
