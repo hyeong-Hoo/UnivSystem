@@ -38,5 +38,9 @@ public class PassService {
 		return passDAO.categoryList();
 	}
 
+	public List<PassDTO> studentValue(PassDTO passDTO) {
+		return passDAO.studentValue(passDTO);
+	}
+
 
 }

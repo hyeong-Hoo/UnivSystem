@@ -37,5 +37,9 @@ public class PassDAO {
 		return sqlSession.selectList("list.categoryList");
 	}
 
+	public List<PassDTO> studentValue(PassDTO passDTO) {
+		return sqlSession.selectList("list.studentValue",passDTO);
+	}
+
 
 }

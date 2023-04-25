@@ -27,7 +27,7 @@ $(function(){
 						"KORN_FLNM" : $('#name').val(),"department" : $('#department').val(), "category":$('#category').val()},
 					dataType : "json",
 					success : function(data) {
-						$('.x').empty(); // 기존 테이블 데이터를 지웁니다.
+						$('.table_body').empty(); // 기존 테이블 데이터를 지웁니다.
 						$('#no').val('');
 						  $('#name2').val('');
 						  $('#age').val('');
@@ -132,7 +132,7 @@ $(function(){
 	});
 	//       입학확정버튼
 	$('.admission').click(function() {
-		if(confirm("저장을 하시겠습니까?")){
+		if(confirm("체크된 인원들을 입학 확정시키겠습니까?")){
 	    var checkBoxArr = new Array(); 
 		var num=0;
 	  $("input:checkbox[name='checkbox_c']:checked").each(function(i) {

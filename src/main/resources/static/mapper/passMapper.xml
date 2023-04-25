@@ -39,4 +39,12 @@
 		SELECT DISTINCT category
 		FROM APPL_INFO
 	</select>
+	<select id="studentValue" parameterType="PassDTO"	resultType="PassDTO">
+		
+		SELECT *
+		FROM APPL_INFO
+		WHERE   appl_NO = #{appl_NO}
+		ORDER BY avg DESC
+		
+	</select>
 </mapper>

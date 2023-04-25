@@ -92,17 +92,15 @@ public class PassController {
 		return "";
 	}
 	@ResponseBody
-	@PostMapping("/StudentID")
+	@PostMapping("/admission")
 	public String StudentID(@RequestParam HashMap<String, Object> param,@RequestParam("num") int num) {
 		PassDTO passDTO = new PassDTO();
 		for(int i=0;i<num;i++) {
-		int PASS_INFO=Integer.parseInt((String) param.get("checkBoxArr["+i+"][PASS_INFO]"));
 		int appl_NO=Integer.parseInt((String) param.get("checkBoxArr["+i+"][appl_NO]"));
-		System.out.println(PASS_INFO);
-		System.out.println(appl_NO);
 		passDTO.setAppl_NO(appl_NO);
-		passDTO.setPASS_INFO(PASS_INFO);
-		passService.passUpdate(passDTO);
+		List<PassDTO> list_a = passService.studentValue(passDTO);
+		//		passDTO.setAppl_NO(appl_NO);
+		//		passService.passUpdate(passDTO);
 		}
 		return "";
 	}     
