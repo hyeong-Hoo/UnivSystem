@@ -1,5 +1,8 @@
 package com.teamp.cau.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -22,13 +25,7 @@ public class GetController {
 		
 		return "testfile2";
 	}
-	//모집요강
-	@GetMapping("/recruit")
-	public String recruit() {
-		
-		return "recruit";
-		
-	}
+	
 	@GetMapping("/grid")
 	public String grid() {
 		return "grid";

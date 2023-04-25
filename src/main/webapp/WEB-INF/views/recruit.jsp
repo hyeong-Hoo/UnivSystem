@@ -10,7 +10,11 @@
    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
    crossorigin="anonymous">
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-<title>모집요강</title>
+<script type="text/javascript">
+
+
+</script>
+<title>모집인원관리</title>
 <style type="text/css">
 body{
 margin: 0;
@@ -43,6 +47,12 @@ text-align: center;
 line-height: 20px;
 font-size: 15px;
 }
+.select{
+float:left;
+}
+.a{
+margin-right: 5px;
+}
 </style>
 <script type="text/javascript">
 $(function(){
@@ -55,30 +65,27 @@ $(function(){
 <body>
 <div class="box">
 	<div class="btn_box">
+		<select class="select a" id="year"></select>
+		<select class="select" id="depart"></select>
 		<button type="button" class="btn" id="check">조회</button>
 		<button type="button" class="btn" id="save">저장</button>
 	</div>
 	<div class="select_box">
-		<select id="year"></select>
-		<select id="depart"></select>
+		
 	</div>
 	<div>
 		<table id="mytable">
 			<thead>
 				<tr>
-					<th>모집학과</th>
+					<th>학과</th>
 					<th>입학정원</th>
-					<th>최초인원</th>
-					<th>추가인원</th>
-					<th>선발인원</th>
+					<th>최초인원</th> <!-- 지원자수 -->
 					<th>합격인원</th>
 					<th>예비인원</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td></td>
-					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
