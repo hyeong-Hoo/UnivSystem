@@ -38,7 +38,7 @@ $(function(){
 						  $('#email').val('');
 						  $('#tel').val('');
 						  $('#retel').val('');
-						  $('#who').val('');
+						  $('#avg').val('');
 						  $('#zipnum').val('');
 						  $('#adr').val('');
 						  $('#detailadr').val('');
@@ -60,7 +60,7 @@ $(function(){
 							+ '<td>' + info.eml_ADDR + '</td>'
 							+ '<td class="telno_m">' + info.telno + '</td>'
 							+ '<td>' + info.rel_TELNO + '</td>'
-							+ '<td>' + info.rel_CD + '</td>'
+							+ '<td>' + info.avg + '</td>'
 							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
 							+'<td> <input type="button" class="button_save" value="저장하기"></td></tr>';
 							$('.table_body').append(str);
@@ -153,7 +153,7 @@ $(function(){
 			var eml_ADDR = $(this).find('td:eq(7)').text();
 			var telno = $(this).find('td:eq(8)').text();
 			var rel_TELNO = $(this).find('td:eq(9))').text();
-			var rel_CD = $(this).find('td:eq(10)').text();
+			var avg = $(this).find('td:eq(10)').text();
 			var PASS_INFO = $(this).find('td:eq(11)').text();
 
 			// 입력란에 값을 채웁니다.
@@ -166,7 +166,7 @@ $(function(){
 			$('#email').val(eml_ADDR);
 			$('#tel').val(telno);
 			$('#retel').val(rel_TELNO);
-			$('#who').val(rel_CD);
+			$('#avg').val(avg);
 			$('#PASS_INFO').val(PASS_INFO);
 			// 나머지 입력란에도 마찬가지로 값을 채워줍니다.
 			// ...
@@ -248,7 +248,7 @@ text-align: right;
 				<th scope="col">이메일</th>
 				<th scope="col">전화번호</th>
 				<th scope="col">비상연락처</th>
-				<th scope="col">가족관계</th>
+				<th scope="col">평균점수</th>
 				<th scope="col">합격여부</th>
 				<th scope="col">저장하기</th>
 			</tr>

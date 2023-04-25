@@ -61,7 +61,7 @@ public class PassController {
 		message message = new message();
 		for(int i=0;i<num;i++) {			
 			String telno= (String) param.get("checkBoxArr["+i+"][telno_m]");
-			String content = param.get("checkBoxArr["+i+"][name_m]")+"님의 합격순서는  "+ param.get("checkBoxArr["+i+"][passrank]")+"입니다.";
+			String content = param.get("checkBoxArr["+i+"][name_m]")+"님의 합격순번은  "+ param.get("checkBoxArr["+i+"][passrank]")+"입니다.";
 			message.sendSMS(telno, content);
 		}
 		return "";
