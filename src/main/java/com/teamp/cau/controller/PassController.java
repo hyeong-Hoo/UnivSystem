@@ -1,8 +1,10 @@
 package com.teamp.cau.controller;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,6 +34,9 @@ public class PassController {
 		ModelAndView mv = new ModelAndView("pass");
 		mv.addObject("list_d", list_d);
 		mv.addObject("list_c", list_c);
+//		Calendar cal = Calendar.getInstance();
+//        int year = cal.get(Calendar.YEAR);
+//        System.out.println("현재 년도: " + year);
 		return mv;
 	}
 	
@@ -44,17 +49,24 @@ public class PassController {
 		passDTO.setKORN_FLNM(KORN_FLNM);
 		List<PassDTO> list = passService.studentList(passDTO);
 		return list;
-	}
+	}   
 	@ResponseBody
-	@PostMapping("/passUpdate")
-	public String passUpdate(@RequestParam("appl_NO") int a,@RequestParam("PASS_INFO") int b) {
+	@PostMapping("/passUpdate1")
+	public String passUpdate1(@RequestParam HashMap<String, Object> param,@RequestParam("num") int num) {
 		PassDTO passDTO = new PassDTO();
-		passDTO.setAppl_NO(a);
-		passDTO.setPASS_INFO(b);
+		for(int i=0;i<num;i++) {
+		int PASS_INFO=Integer.parseInt((String) param.get("checkBoxArr["+i+"][PASS_INFO]"));
+		int appl_NO=Integer.parseInt((String) param.get("checkBoxArr["+i+"][appl_NO]"));
+		System.out.println(PASS_INFO);
+		System.out.println(appl_NO);
+		passDTO.setAppl_NO(appl_NO);
+		passDTO.setPASS_INFO(PASS_INFO);
 		passService.passUpdate(passDTO);
-		int result=passService.result(passDTO);
-		return String.valueOf(result);
+		}
+		return "";
 	}     
+	//예비번호 문자보내기버튼
+
 	@PostMapping("/permit1")
 	@ResponseBody
 	public String permit1(@RequestParam HashMap<String, Object> param,@RequestParam("num") int num) {
@@ -66,6 +78,8 @@ public class PassController {
 		}
 		return "";
 	}
+	//계좌번호 문자보내기 버튼
+	
 	@PostMapping("/permit2")
 	@ResponseBody
 	public String permit2(@RequestParam HashMap<String, Object> param,@RequestParam("num") int num) {
@@ -77,4 +91,20 @@ public class PassController {
 		}
 		return "";
 	}
+	@ResponseBody
+	@PostMapping("/StudentID")
+	public String StudentID(@RequestParam HashMap<String, Object> param,@RequestParam("num") int num) {
+		PassDTO passDTO = new PassDTO();
+		for(int i=0;i<num;i++) {
+		int PASS_INFO=Integer.parseInt((String) param.get("checkBoxArr["+i+"][PASS_INFO]"));
+		int appl_NO=Integer.parseInt((String) param.get("checkBoxArr["+i+"][appl_NO]"));
+		System.out.println(PASS_INFO);
+		System.out.println(appl_NO);
+		passDTO.setAppl_NO(appl_NO);
+		passDTO.setPASS_INFO(PASS_INFO);
+		passService.passUpdate(passDTO);
+		}
+		return "";
+	}     
+	
 }
