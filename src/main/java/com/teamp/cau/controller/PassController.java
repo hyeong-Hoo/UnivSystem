@@ -45,41 +45,35 @@ public class PassController {
 		List<PassDTO> list = passService.studentList(passDTO);
 		return list;
 	}
-		
-	@GetMapping("/viewPDF")
-	public ModelAndView viewPDF(HttpServletRequest request) {
-		String PDF=request.getParameter("PDF");
-		ModelAndView mv = new ModelAndView("viewPDF");
-		PassDTO detail = passService.detail(PDF);
-		mv.addObject("detail", detail);
-		return mv;
-	}
 	@ResponseBody
 	@PostMapping("/passUpdate")
-	public String passUpdate(@RequestParam("stud_NO") int a,@RequestParam("PASS_INFO") int b) {
+	public String passUpdate(@RequestParam("appl_NO") int a,@RequestParam("PASS_INFO") int b) {
 		PassDTO passDTO = new PassDTO();
-		passDTO.setSTUD_NO(a);
+		passDTO.setAppl_NO(a);
 		passDTO.setPASS_INFO(b);
 		passService.passUpdate(passDTO);
 		int result=passService.result(passDTO);
 		return String.valueOf(result);
-	}
-	@PostMapping("/permit")
-	@ResponseBody
-	public String permit(@RequestParam("korn_FLNM") String korn_FLNM, @RequestParam("telno") String telno) {
-		message message = new message();
-		String content = korn_FLNM+"님 국민은행 938002-00-123456 으로 입금해주시면 예약이 확정됩니다.";
-		message.sendSMS(telno, content);
-		return "";
-	}       
+	}     
 	@PostMapping("/permit1")
 	@ResponseBody
 	public String permit1(@RequestParam HashMap<String, Object> param,@RequestParam("num") int num) {
 		message message = new message();
 		for(int i=0;i<num;i++) {			
-		//	String telno= (String) param.get("checkBoxArr["+i+"][telno_m]");
-		//	String content = param.get("checkBoxArr["+i+"][name_m]")+"님 국민은행 938002-00-123456 으로 입금해주시면 등록이 확정이됩니다..";
-		//	message.sendSMS(telno, content);
+			String telno= (String) param.get("checkBoxArr["+i+"][telno_m]");
+			String content = param.get("checkBoxArr["+i+"][name_m]")+"님의 합격순서는  "+ param.get("checkBoxArr["+i+"][passrank]")+"입니다.";
+			message.sendSMS(telno, content);
+		}
+		return "";
+	}
+	@PostMapping("/permit2")
+	@ResponseBody
+	public String permit2(@RequestParam HashMap<String, Object> param,@RequestParam("num") int num) {
+		message message = new message();
+		for(int i=0;i<num;i++) {			
+			String telno= (String) param.get("checkBoxArr["+i+"][telno_m]");
+			String content = param.get("checkBoxArr["+i+"][name_m]")+"님 국민은행 938002-00-123456 으로 입금해주시면 등록이 확정이됩니다..";
+			message.sendSMS(telno, content);
 		}
 		return "";
 	}

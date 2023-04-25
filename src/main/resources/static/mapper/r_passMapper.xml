@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="list">
+<mapper namespace="r_list">
 
 	<select id="detail" resultType="PassDTO">
 		SELECT PDF
@@ -13,11 +13,12 @@
 		
 		SELECT *
 		FROM APPL_INFO
-		WHERE PASS_INFO  <![CDATA[<]]> 3  AND  department = #{department} AND  category =#{category}  AND  KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
+		WHERE department = #{department} AND  category =#{category}  AND  KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
 		ORDER BY avg DESC
 		LIMIT 30;
 		
 	</select>
+
 	<update id="Passupdate" parameterType="PassDTO">
 		UPDATE APPL_INFO
 		SET
@@ -29,7 +30,7 @@
 		SELECT
 		PASS_INFO
 		FROM APPL_INFO
-		WHERE appl_NO=#{appl_NO};
+		WHERE appl_NO=#{appl_NO}
 	</select>
 	<select id="department" resultType="PassDTO">
 		SELECT DISTINCT department

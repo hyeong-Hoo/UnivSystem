@@ -23,7 +23,7 @@ $(function(){
 	$('#searchStudent').click(function() {
 				  $("input:checkbox[id='check_all']").prop("checked", false);
 				$.ajax({
-					url : '/passInfo',
+					url : '/r_passInfo',
 					type : 'GET',
 					data : {
 						"KORN_FLNM" : $('#name').val(),"department" : $('#department').val(), "category":$('#category').val()},
@@ -46,26 +46,44 @@ $(function(){
 						  $('#PASS_INFO').val('');
 					
 
-						$.each(data, function(i, info) {
-							var selectid="creditSelect"+info.pass_INFO;
-							var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
-							+ '<td scope="row" class="checkbox_i"> <input type="checkbox" class="checkbox_a" name="checkbox_c"></td>' 
-							if(i<=30){str += '<td class="passrank">' + (i+1)	+ '번</td>' ;}
-							else{str += '<td class="passrank">예비' + i-29	+ '번</td>' ;}
-						 	str += '<td class="button_name">' + info.appl_NO	+ '</td>' 
-							+ '<td class="name_m">' + info.korn_FLNM + '</td>' 
-							+ '<td>' + info.age + '</td>'
-							+ '<td>' + info.user_BRDT + '</td>'
-							+ '<td>' + info.gender_CD + '</td>'
-							+ '<td>' + info.eml_ADDR + '</td>'
-							+ '<td class="telno_m">' + info.telno + '</td>'
-							+ '<td>' + info.rel_TELNO + '</td>'
-							+ '<td>' + info.rel_CD + '</td>'
-							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
-							+'<td> <input type="button" class="button_save" value="저장하기"></td></tr>';
-							$('.table_body').append(str);
-							$('#'+selectid).val(info.pass_INFO).attr("selected", "selected");
-						});
+						  $.each(data, function(i, info) {
+							  var selectid="creditSelect"+info.pass_INFO;
+							  var passRank = info.passRank;
+							  if(i<=30){
+							  var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
+							  + '<td scope="row" class="checkbox_i"> <input type="checkbox" class="checkbox_a" name="checkbox_c"></td>' 
+							  + '<td class="button_name">' + (i+1)	+ '번</td>' 
+							  + '<td class="name_m">' + info.korn_FLNM + '</td>' 
+							  + '<td>' + info.age + '</td>'
+							  + '<td>' + info.user_BRDT + '</td>'
+							  + '<td>' + info.gender_CD + '</td>'
+							  + '<td>' + info.eml_ADDR + '</td>'
+							  + '<td class="telno_m">' + info.telno + '</td>'
+							  + '<td>' + info.rel_TELNO + '</td>'
+							  + '<td>' + info.rel_CD + '</td>'
+							  + '<td class="find_Select"> <select id="' + selectid + '" class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
+							  + '<td> <input type="button" class="button_save" value="저장하기"></td></tr>';
+						  }
+						  else {
+							  var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
+							  + '<td scope="row" class="checkbox_i"> <input type="checkbox" class="checkbox_a" name="checkbox_c"></td>' 
+							  + '<td class="button_name">예비' + (i-29) 	+ '번</td>' 
+							  + '<td class="name_m">' + info.korn_FLNM + '</td>' 
+							  + '<td>' + info.age + '</td>'
+							  + '<td>' + info.user_BRDT + '</td>'
+							  + '<td>' + info.gender_CD + '</td>'
+							  + '<td>' + info.eml_ADDR + '</td>'
+							  + '<td class="telno_m">' + info.telno + '</td>'
+							  + '<td>' + info.rel_TELNO + '</td>'
+							  + '<td>' + info.rel_CD + '</td>'
+							  + '<td class="find_Select"> <select id="' + selectid + '" class="creditSelect"><option value=5>추가합격대상자</option></select></td>'
+							  + '<td> <input type="button" class="button_save" value="저장하기"></td></tr>';
+						  }
+							  $('.table_body').append(str);
+							  $('#' + selectid).val(info.pass_INFO).attr("selected", "selected");
+							});
+
+
 					}
 
 				});
@@ -74,30 +92,10 @@ $(function(){
 
 	$('.permit1').click(function() {
 	    var checkBoxArr = new Array(); 
-		var num=0;
 	  $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
 	 	 var name_m = $(this).closest('tr').find('.name_m').text();
 	 	 var telno_m = $(this).closest('tr').find('.telno_m').text();
-	 	 var passrank = $(this).closest('tr').find('.passrank').text();
-
-		num=num+1;
-	  	checkBoxArr[i] = {"no" : i, "name_m" : name_m, "telno_m":telno_m,"passrank":passrank}
-	});
-	alert(checkBoxArr);
-	  $.ajax({
-			url : "/permit1",
-			type : "post",
-			cache : false,
-	      	data: { "checkBoxArr" : checkBoxArr ,"num" : num }      // folder seq 값을 가지고 있음.
-	   });
-	});
-	$('.permit2').click(function() {
-	    var checkBoxArr = new Array(); 
-		var num=0;
-	  $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
-	 	 var name_m = $(this).closest('tr').find('.name_m').text();
-	 	 var telno_m = $(this).closest('tr').find('.telno_m').text();
-		num=num+1;
+		
 	  	checkBoxArr[i] = {"no" : i, "name_m" : name_m, "telno_m":telno_m}
 	});
 	alert(checkBoxArr);
@@ -119,7 +117,7 @@ $(function(){
 								url : '/passUpdate',
 								type : 'POST',
 								data : {
-									"appl_NO" : state,
+									"stud_NO" : state,
 									"PASS_INFO" : find
 								},
 								dataType : "html",
@@ -145,20 +143,18 @@ $(function(){
 
 		$('.table_body').on('click', 'tr', function() {
 			// 클릭된 행의 각 셀 값을 가져옵니다.
-			var appl_NO = $(this).find('td:eq(2)').text();
-			var korn_FLNM = $(this).find('td:eq(3)').text();
-			var age = $(this).find('td:eq(4)').text();
-			var user_BRDT = $(this).find('td:eq(5)').text();
-			var gender_CD = $(this).find('td:eq(6)').text();
-			var eml_ADDR = $(this).find('td:eq(7)').text();
-			var telno = $(this).find('td:eq(8)').text();
-			var rel_TELNO = $(this).find('td:eq(9))').text();
-			var rel_CD = $(this).find('td:eq(10)').text();
-			var PASS_INFO = $(this).find('td:eq(11)').text();
+			var korn_FLNM = $(this).find('td:eq(2)').text();
+			var age = $(this).find('td:eq(3)').text();
+			var user_BRDT = $(this).find('td:eq(4)').text();
+			var gender_CD = $(this).find('td:eq(5)').text();
+			var eml_ADDR = $(this).find('td:eq(6)').text();
+			var telno = $(this).find('td:eq(7)').text();
+			var rel_TELNO = $(this).find('td:eq(8)').text();
+			var rel_CD = $(this).find('td:eq(9)').text();
+			var PASS_INFO = $(this).find('td:eq(10)').text();
 
 			// 입력란에 값을 채웁니다.
 
-			$('#no').val(appl_NO);
 			$('#name2').val(korn_FLNM);
 			$('#age').val(age);
 			$('#brdt').val(user_BRDT);
@@ -239,8 +235,7 @@ text-align: right;
 		<thead>
 			<tr>
 				<th scope="col"><input type="checkbox" id="check_all"></th>
-				<th scope="col">성적순번</th>
-				<th scope="col">지원서번호</th>
+				<th scope="col">번호</th>
 				<th scope="col">이름</th>
 				<th scope="col">나이</th>
 				<th scope="col">생년월일</th>
@@ -255,8 +250,7 @@ text-align: right;
 		</thead>
 		<tbody class="table_body">
 		</tbody>
-		<input type="button" class="permit1" value="예비번호 문자보내기"> <br>
-		<input type="button" class="permit2" value="계좌번호 문자보내기"> 
+		<input type="button" class="permit1" value="문자보내기"> 
 	</table>
 </div>
 
