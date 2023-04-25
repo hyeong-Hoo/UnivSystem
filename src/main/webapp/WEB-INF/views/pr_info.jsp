@@ -12,14 +12,15 @@ ul, li{display: block; list-style: none; float: left;}
 .t3{width: 20%; position: relative; top: 5px;}
 table{width: 100%; color: black;}
 thead{background-color: #c6cdd4;}
-.major_code{width:6%; text-align: center;}
+.pr_no{width:7%; text-align: center;}
+.major{width:9%; text-align: center;}
 .name{width:6%; text-align: center;}
 .birth{width:10%; text-align: center;}
-.email{width:18%; text-align: center;}
+.email{width:14%; text-align: center;}
 .telno{width:14%; text-align: center;}
-.addr{width:18%; text-align: center;}
-.detail_addr{width:16%; text-align: center;}
-.gender{width:6%; text-align: center;}
+.addr{width:16%; text-align: center;}
+.detail_addr{width:14%; text-align: center;}
+.gender{width:4%; text-align: center;}
 .authority{width:6%; text-align: center;}
 
 
@@ -160,7 +161,7 @@ thead{background-color: #c6cdd4;}
                         <h6 class="collapse-header">교직관리</h6>
                         <a class="collapse-item" href="pr_standard">기준정보관리</a>
                         <a class="collapse-item" href="pr_info">교수정보</a>
-                        <a class="collapse-item" href="pr_authority">평가항목권한</a>
+                        <a class="collapse-item" href="pr_authority">면접 평가</a>
                     </div>
                 </div>
             </li>
@@ -252,11 +253,11 @@ thead{background-color: #c6cdd4;}
           			<hr class="sidebar-divider">
                     <!-- 페이지 헤더  -->
                     <div class="search">
-                        <form action="" method="post" id="">
+                        <form action="/pr_info" method="post" id="alt">
 						<!-- searchbox -->
 						<ul class="box">
-							<li class="t1">교수이름 &nbsp; <input type="text"> </li>
-							<li class="t2">학과코드 &nbsp; <input type="text"></li>
+							<li class="t1">교수이름 &nbsp; <input type="text" name="name_search" id="name_search" value=${name_search }></li>
+							<li class="t2">학과명 &nbsp; <input type="text" name="code_search" id="code_search" value=${code_search }></li>
 							<li class="t3"><button class="search_btn" type="button"><img alt="icon" src="img/search_icon.png" width="20" height="20"></button></li>
 						</ul>
 						</form>
@@ -267,7 +268,8 @@ thead{background-color: #c6cdd4;}
 					<table border="1">
 						<thead>
 							<tr>
-								<th class="major_code">학과코드</th>
+								<th class="pr_no">교수번호</th>
+								<th class="major">학과명</th>
 								<th class="name">한글성명</th>
 								<th class="birth">생년월일</th>
 								<th class="email">이메일</th>
@@ -281,14 +283,15 @@ thead{background-color: #c6cdd4;}
 						<c:forEach items="${list }" var="pr">
 						<tbody>
 							<tr>
-								<td class="major_code">${pr.INSTR_NO }</td>
+								<td class="pr_no">${pr.INSTR_NO }</td>
+								<td class="major">${pr.CRCLM }</td>
 								<td class="name">${pr.KORN_FLNM }</td>
 								<td class="birth">${pr.USER_BRDT }</td>
 								<td class="email">${pr.EML_ADDR }</td>
 								<td class="telno">${pr.TELNO }</td>
 								<td class="addr">${pr.ADDR }</td>
 								<td class="detail_addr">${pr.DADDR }</td>
-								<td class="gender">${pr.GENDER_CD }</td>
+								<td class="gender">${pr.GENDER }</td>
 								<td class="authority">${pr.ENDST_NO }</td>
 							</tr>
 						</tbody>
@@ -359,5 +362,13 @@ thead{background-color: #c6cdd4;}
     <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
-
+<script>
+$(function(){
+	$(".search_btn").click(function(){
+		$("#code_search").val();
+		$("#name_search").val();
+		$("#alt").submit();
+	})
+})
+</script>
 </html>

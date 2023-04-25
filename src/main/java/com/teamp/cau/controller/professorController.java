@@ -2,6 +2,7 @@ package com.teamp.cau.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,16 +36,21 @@ public class professorController {
 		return mv;
 	}
 	
-//	@PostMapping("/pr_search")
-//	public ModelAndView search(HttpServletRequest request) {
-//		ModelAndView mv = new ModelAndView("pr_info");
-//		HashMap<String, Object> list = new HashMap<String, Object>();
-//		//List<HashMap<String, Object>> qrlist = sqlsession.selectList("INSTR_INFO.searchlist", list);
-//		String search = request.getParameter("search");
-//		
-//		
-//		return mv;
-//	}
+	@PostMapping("/pr_info")
+	public ModelAndView search(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("pr_info");
+		HashMap<String, Object> search = new HashMap<>();
+		String name_search = request.getParameter("name_search");
+		String code_search = request.getParameter("code_search");
+		System.out.println(name_search);
+		System.out.println(code_search);
+		HashMap<String,String> map=new HashMap<>();
+		map.put("name_search", name_search);
+		map.put("code_search", code_search);
+		List<professorDTO> list = prService.selectList(map);
+		mv.addObject("list", list);
+		return mv;
+	}
 	
 	@GetMapping("/pr_authority")
 	public String give_auth() {

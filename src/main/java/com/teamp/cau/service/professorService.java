@@ -1,5 +1,6 @@
 package com.teamp.cau.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,10 @@ public class professorService {
 
 	public List<professorDTO> prinfo() {
 		return prDAO.prinfo();
+	}
+
+	public List<professorDTO> selectList(HashMap<String, String> search) {
+		return prDAO.search(search);
 	}
 	
 }

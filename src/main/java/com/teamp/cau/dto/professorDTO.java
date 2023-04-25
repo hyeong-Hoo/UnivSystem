@@ -2,8 +2,16 @@ package com.teamp.cau.dto;
 
 public class professorDTO {
 
-	private String KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, ADDR, DADDR, GENDER_CD, ENDST_NO;
+	private String KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, ADDR, DADDR, GENDER, ENDST_NO, CRCLM;
 	private int INSTR_NO;
+
+	public String getCRCLM() {
+		return CRCLM;
+	}
+
+	public void setCRCLM(String cRCLM) {
+		CRCLM = cRCLM;
+	}
 
 	public int getINSTR_NO() {
 		return INSTR_NO;
@@ -12,6 +20,8 @@ public class professorDTO {
 	public void setINSTR_NO(int iNSTR_NO) {
 		INSTR_NO = iNSTR_NO;
 	}
+
+
 
 	public String getKORN_FLNM() {
 		return KORN_FLNM;
@@ -61,12 +71,12 @@ public class professorDTO {
 		DADDR = dADDR;
 	}
 
-	public String getGENDER_CD() {
-		return GENDER_CD;
+	public String getGENDER() {
+		return GENDER;
 	}
 
-	public void setGENDER_CD(String gENDER_CD) {
-		GENDER_CD = gENDER_CD;
+	public void setGENDER(String gENDER) {
+		GENDER = gENDER;
 	}
 
 

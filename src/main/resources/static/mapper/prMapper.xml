@@ -10,4 +10,24 @@
     	select * from INSTR_INFO 
     	
     </select>
+    
+      <select id="search" parameterType="HashMap" resultType="com.teamp.cau.dto.professorDTO">
+    	select * from INSTR_INFO
+    		<choose>
+    			<when test="name_search != null and code_search != null">
+    				where korn_flnm like '%${name_search}%' and crclm like '%${code_search}%';
+    			</when>
+    			<when test="name_search != null and (code_search == null or code_search == '')">
+    				where korn_flnm like '%${name_search}%';
+    			</when>
+    			<when test="(name_search == null or name_search =='') and code_search != null">
+    			where crclm like '%${code_search}%';
+    			</when>
+    			<otherwise>
+				</otherwise>
+    		</choose>
+    </select>
+    
+    
+   
     </mapper>

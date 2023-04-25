@@ -1,5 +1,6 @@
 package com.teamp.cau.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,6 +17,9 @@ public class professorDAO {
 
 	public List<professorDTO> prinfo() {
 		return sqlsession.selectList("INSTR_INFO.prlist");
+	}
+	public List<professorDTO> search(HashMap<String,String> map){
+		return sqlsession.selectList("INSTR_INFO.search",map);
 	}
 	
 	
