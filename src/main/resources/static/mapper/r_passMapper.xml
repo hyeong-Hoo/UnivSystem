@@ -13,7 +13,7 @@
 		
 		SELECT *
 		FROM APPL_INFO
-		WHERE department = #{department} AND  category =#{category}  AND  KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
+		WHERE PASS_INFO  <![CDATA[<]]> 6  AND department = #{department} AND  category =#{category}  AND  KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
 		ORDER BY avg DESC
 		LIMIT 30;
 		

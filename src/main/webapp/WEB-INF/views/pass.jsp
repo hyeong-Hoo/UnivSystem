@@ -16,9 +16,7 @@
 	crossorigin="anonymous">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-	function popup(){
-		  window.open("localhost/${pdf}","_blank", 'width=1000px,height=1000px,scrollbars=yes');
-		}	
+
 $(function(){
 	$('#searchStudent').click(function() {
 				  $("input:checkbox[id='check_all']").prop("checked", false);
@@ -29,7 +27,7 @@ $(function(){
 						"KORN_FLNM" : $('#name').val(),"department" : $('#department').val(), "category":$('#category').val()},
 					dataType : "json",
 					success : function(data) {
-						$('.table_body').empty(); // 기존 테이블 데이터를 지웁니다.
+						$('.x').empty(); // 기존 테이블 데이터를 지웁니다.
 						$('#no').val('');
 						  $('#name2').val('');
 						  $('#age').val('');
@@ -52,7 +50,7 @@ $(function(){
 							+ '<td scope="row" class="checkbox_i"> <input type="checkbox" class="checkbox_a" name="checkbox_c"></td>' 
 							if(i<=30){str += '<td class="passrank">' + (i+1)	+ '번</td>' ;}
 							else{str += '<td class="passrank">예비' + i-29	+ '번</td>' ;}
-						 	str += '<td class="button_name">' + info.appl_NO	+ '</td>' 
+						 	str += '<td class="appl_no">' + info.appl_NO	+ '</td>' 
 							+ '<td class="name_m">' + info.korn_FLNM + '</td>' 
 							+ '<td>' + info.age + '</td>'
 							+ '<td>' + info.user_BRDT + '</td>'
@@ -62,7 +60,6 @@ $(function(){
 							+ '<td>' + info.rel_TELNO + '</td>'
 							+ '<td>' + info.avg + '</td>'
 							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
-							+'<td> <input type="button" class="button_save" value="저장하기"></td></tr>';
 							$('.table_body').append(str);
 							$('#'+selectid).val(info.pass_INFO).attr("selected", "selected");
 						});
@@ -71,8 +68,9 @@ $(function(){
 				});
 			});
 	
-
+		//예비번호 문자보내기버튼
 	$('.permit1').click(function() {
+		if(confirm("예약번호문자를 보내시겠습니까?")){
 	    var checkBoxArr = new Array(); 
 		var num=0;
 	  $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
@@ -83,15 +81,18 @@ $(function(){
 		num=num+1;
 	  	checkBoxArr[i] = {"no" : i, "name_m" : name_m, "telno_m":telno_m,"passrank":passrank}
 	});
-	alert(checkBoxArr);
 	  $.ajax({
 			url : "/permit1",
 			type : "post",
 			cache : false,
-	      	data: { "checkBoxArr" : checkBoxArr ,"num" : num }      // folder seq 값을 가지고 있음.
+	      	data: { "checkBoxArr" : checkBoxArr ,"num" : num }     
 	   });
+	}
 	});
+	
+	//계좌번호 문자보내기 버튼
 	$('.permit2').click(function() {
+		if(confirm("계좌번호문자를 보내시겠습니까?")){		
 	    var checkBoxArr = new Array(); 
 		var num=0;
 	  $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
@@ -100,78 +101,54 @@ $(function(){
 		num=num+1;
 	  	checkBoxArr[i] = {"no" : i, "name_m" : name_m, "telno_m":telno_m}
 	});
-	alert(checkBoxArr);
 	  $.ajax({
 			url : "/permit1",
 			type : "post",
 			cache : false,
-	      	data: { "checkBoxArr" : checkBoxArr ,"num" : num }      // folder seq 값을 가지고 있음.
+	      	data: { "checkBoxArr" : checkBoxArr ,"num" : num }     
 	   });
+		}
 	});
-		$(document)	.on("click",".button_save",	function() {
-							var find = $(this).parent().prevAll(".find_Select")
-									.children(".creditSelect").val();
-							var state = $(this).parent()
-									.prevAll(".button_name").text();
-							var creditSelect = $(this).parent().prevAll(
-									".creditSelect");
-							$.ajax({
-								url : '/passUpdate',
-								type : 'POST',
-								data : {
-									"appl_NO" : state,
-									"PASS_INFO" : find
-								},
-								dataType : "html",
-								success : function(active) {
-									active
-									if (active == "0") {
-										alert("문자대기로 변경");
-									} else if (active == "1") {
-										alert("예치금 대기로변경");
-
-									} else if (active == "2") {
-										alert("합격으로 변경");
-
-									} else if (active == "3") {
-										alert("합격의지없음으로 변경");
-
-									} else if (active == "4") {
-										alert("예치금반환(환불)로 변경");
-									}
-								}
-							});
-						});
-
-		$('.table_body').on('click', 'tr', function() {
-			// 클릭된 행의 각 셀 값을 가져옵니다.
-			var appl_NO = $(this).find('td:eq(2)').text();
-			var korn_FLNM = $(this).find('td:eq(3)').text();
-			var age = $(this).find('td:eq(4)').text();
-			var user_BRDT = $(this).find('td:eq(5)').text();
-			var gender_CD = $(this).find('td:eq(6)').text();
-			var eml_ADDR = $(this).find('td:eq(7)').text();
-			var telno = $(this).find('td:eq(8)').text();
-			var rel_TELNO = $(this).find('td:eq(9))').text();
-			var avg = $(this).find('td:eq(10)').text();
-			var PASS_INFO = $(this).find('td:eq(11)').text();
-
-			// 입력란에 값을 채웁니다.
-
-			$('#no').val(appl_NO);
-			$('#name2').val(korn_FLNM);
-			$('#age').val(age);
-			$('#brdt').val(user_BRDT);
-			$('#gender').val(gender_CD);
-			$('#email').val(eml_ADDR);
-			$('#tel').val(telno);
-			$('#retel').val(rel_TELNO);
-			$('#avg').val(avg);
-			$('#PASS_INFO').val(PASS_INFO);
-			// 나머지 입력란에도 마찬가지로 값을 채워줍니다.
-			// ...
-
+	//       저장버튼
+	$('.save_button1').click(function() {
+		if(confirm("저장을 하시겠습니까?")){
+	    var checkBoxArr = new Array(); 
+		var num=0;
+	  $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
+	 		 var  find= $(this).closest('tr').find('.find_Select').children(".creditSelect").val();
+	 		 var  state= $(this).closest('tr').find('.appl_no').text();
+			num=num+1;
+		  	checkBoxArr[i] = {"no" : i, "appl_NO" : state,"PASS_INFO" : find}
 		});
+	$.ajax({
+			url : "/passUpdate1",
+			type : "post",
+			cache : false,
+      		data: { "checkBoxArr" : checkBoxArr ,"num" : num }
+		});
+		}
+		
+		
+	});
+	//       입학확정버튼
+	$('.admission').click(function() {
+		if(confirm("저장을 하시겠습니까?")){
+	    var checkBoxArr = new Array(); 
+		var num=0;
+	  $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
+	 		 var  state= $(this).closest('tr').find('.appl_no').text();
+			num=num+1;
+		  	checkBoxArr[i] = {"no" : i, "appl_NO" : state}
+		});
+	$.ajax({
+			url : "/admission",
+			type : "post",
+			cache : false,
+      		data: { "checkBoxArr" : checkBoxArr ,"num" : num }
+		});
+		}
+	});
+	//체크박스 전체 체크및해제
 		$(document).on('click','#check_all',function(){
 			  if($('#check_all').is(':checked')){
 			       $('.checkbox_a').prop('checked',true);
@@ -250,13 +227,15 @@ text-align: right;
 				<th scope="col">비상연락처</th>
 				<th scope="col">평균점수</th>
 				<th scope="col">합격여부</th>
-				<th scope="col">저장하기</th>
 			</tr>
 		</thead>
 		<tbody class="table_body">
 		</tbody>
-		<input type="button" class="permit1" value="예비번호 문자보내기"> <br>
-		<input type="button" class="permit2" value="계좌번호 문자보내기"> 
+		<input type="button" class="permit1" value="예비번호 문자보내기">  &nbsp;
+		<input type="button" class="permit2" value="계좌번호 문자보내기">  &nbsp;
+		<input type="button" class="save_button1" value="저장하기">  &nbsp;
+		<input type="button" class="admission" value="입학확정">  &nbsp;
+		<input type="number" id="inputField" value="" readonly >
 	</table>
 </div>
 
