@@ -3,16 +3,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 
-<head>
+<style>
+.app_no{ width:10%; text-align: center;}
+.crclm_code{ width:10%; text-align: center;}
+.year{width:10%; text-align: center;}
+.app_name{width:10%; text-align: center;}
+.app_gender{width: 10%; text-align: center;}
+.avg{width:10%; text-align: center;}
+.grade{width:10%; text-align: center;}
+.interview{width:10%; text-align: center;}
+.department{width:10%; text-align: center;}
 
+
+</style>
+
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CAU - 평가항목권한  </title>
-
+    <title>CAU - 평가단계  </title>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -21,9 +34,13 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+	<!--  jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </head>
-
+	<!-- grid -->
+	<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+	<!-- jquery CDN -->
+	<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -141,7 +158,7 @@
                         <h6 class="collapse-header">교직관리</h6>
                         <a class="collapse-item" href="pr_standard">기준정보관리</a>
                         <a class="collapse-item" href="pr_info">교수정보</a>
-                        <a class="collapse-item" href="pr_authority">평가항목권한</a>
+                        <a class="collapse-item" href="pr_authority">면접평가</a>
                     </div>
                 </div>
             </li>
@@ -227,9 +244,26 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">평가항목권한</h1>
-                        
-                    </div>
+                        <h1 class="h3 mb-0 text-gray-800">면접평가</h1>
+                   	</div>
+                        <table id="datalist" class="display" style="width:100%">
+                        	<thead>
+                        		<tr>
+                        			<th class="app_no">접수번호</th>
+                        			<th class="crclm_code">학과코드</th>
+                        			<th class="year">연도</th>
+                        			<th class="app_name">이름</th>
+                        			<th class="app_gender">성별</th>
+                        			<th class="avg">평균점수</th>
+                        			<th class="grade">환산점수(학생부)</th>
+                        			<th class="interview">환산점수(면접)</th>
+                        			<th class="department">학과명</th>
+                        		</tr>
+                        	</thead>
+                        </table>
+                        <tbody>
+                        </tbody>
+                    
 
                 </div>
                 <!-- /.container-fluid -->
@@ -277,6 +311,7 @@
             </div>
         </div>
     </div>
+	
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -296,5 +331,21 @@
     <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
-
+<script type="text/javascript">
+$("#datalist").DataTable({
+	ajax: {url: "data.json", dataSrc: ''},
+	columns: [
+		{data:"appl_NO"}
+		{data:"CRCLM"}
+		{data:"CRCLM_CYCL"}
+		{data:"KORN_FLNM"}
+		{data:"GENDER_CD"}
+		{data:"avg"}
+		{data:"grade"}
+		{data:"interview"}
+		{data:"department"}
+		
+	]
+});
+</script>
 </html>
