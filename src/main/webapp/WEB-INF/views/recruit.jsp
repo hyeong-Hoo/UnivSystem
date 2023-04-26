@@ -54,7 +54,13 @@ $(function(){
 			type : "GET",
 			datatype : "json",
 			data : {year : year, depart : depart},
-			success :
+			success : function(){
+				$(".tablebody").empty();
+				each : function(){
+					
+					
+				}
+			}
 		});
 	});
 });
@@ -87,7 +93,7 @@ $(function(){
 					<th>예비인원</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="tablebody">
 				<tr>
 					<td></td>
 					<td></td>
