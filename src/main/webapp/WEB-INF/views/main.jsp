@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -293,18 +294,21 @@ $(function(){
             <span class="logo_bottom-text2">Choogang University</span>
             <span class="logo_bottom-text3">Choogang Login</span>
             <button type="button" class="Admission_btn" id="Admission">입학지원</button>
+            <form action="/auth" method="post">
             <table class="login">
             <tr>
             <td>학생<input type="radio" name="chu">교수<input type="radio" name="chu"></td>
             </tr>
             <tr>
-            <td><input type="text" placeholder="아이디"></td>
-            <td rowspan="2"><button type="button" class="login-btn">로그인</button></td>
+<%--         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
+            <td><input type="text" name="USER_ID" placeholder="아이디"></td>
+            <td rowspan="2"><button type="submit" class="login-btn">로그인</button></td>
             </tr>
             <tr>
-            <td><input type="password" placeholder="비밀번호"></td>
+            <td><input type="password"  name="PSWD" placeholder="비밀번호"></td>
             </tr>
             </table>
+            </form>
             <span class="logo_bottom-text4">개인정보처리방침</span>
         </div>
     </div>
