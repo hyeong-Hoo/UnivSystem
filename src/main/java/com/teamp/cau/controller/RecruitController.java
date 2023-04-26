@@ -26,4 +26,6 @@ public class RecruitController {
 		return mv;
 		
 	}
+	@GetMapping("/check")
+	public List<E> 
 }
