@@ -56,10 +56,10 @@ $(function(){
 			data : {year : year, depart : depart},
 			success : function(){
 				$(".tablebody").empty();
-				each : function(){
+				each(a,function(i,list){
+					var tr = "<tr><td></td></tr>"
 					
-					
-				}
+				});
 			}
 		});
 	});
