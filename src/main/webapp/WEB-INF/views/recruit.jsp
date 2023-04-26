@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,10 +11,6 @@
    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
    crossorigin="anonymous">
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-<script type="text/javascript">
-
-
-</script>
 <title>모집인원관리</title>
 <style type="text/css">
 body{
@@ -26,52 +23,58 @@ background-color: white;
 width: 100%;
 height: 100vh;
 }
-.btn_box{
-width: inherit;
-height: 40px;
-background-color: green;
-text-align: center;
-}
 .select_box{
 width: inherit;
 height: 40px;
-background-color: skyblue;
+line-height: 40px;
+text-align: center;
 }
 .btn{
 margin: 5px 10px 0 0;
 float: right;
 width:60px;
 height:30px;
-background-color: black;
+background-color:silver;
 text-align: center;
 line-height: 20px;
 font-size: 15px;
 }
 .select{
 float:left;
-}
-.a{
-margin-right: 5px;
+margin: 6px 0 0 5px;
 }
 </style>
 <script type="text/javascript">
 $(function(){
 	$("#check").click(function(){
-		
+		var year = $("#year").val();
+		var depart = $("#depart").val();
+		$.ajax({
+			url : "/check",
+			type : "GET",
+			datatype : "json",
+			data : {year : year, depart : depart},
+			success :
+		});
 	});
 });
 </script>
 </head>
 <body>
 <div class="box">
-	<div class="btn_box">
-		<select class="select a" id="year"></select>
-		<select class="select" id="depart"></select>
+	<div class="select_box">
+		<select class="select" id="year">
+		<c:forEach items="${year }" var="y">
+			<option>${y.YEAR}</option>
+		</c:forEach>
+		</select>
+		<select class="select" id="depart">
+			<option value="all">학과 선택</option>
+		<c:forEach items="${depart }" var="d">
+			<option>${d.DEPARTMENT}</option>
+		</c:forEach></select>
 		<button type="button" class="btn" id="check">조회</button>
 		<button type="button" class="btn" id="save">저장</button>
-	</div>
-	<div class="select_box">
-		
 	</div>
 	<div>
 		<table id="mytable">
@@ -108,6 +111,7 @@ $(function(){
 $(document).ready(function(){
 	$('#mytable').DataTable({
 		paging:false,
+		info:false,
 		
 	});
 });

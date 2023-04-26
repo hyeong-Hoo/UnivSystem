@@ -11,6 +11,8 @@ import com.teamp.cau.dto.RecruitDTO;
 @Mapper
 public interface RecruitDAO {
 
-	List<RecruitDTO> selectList();
+	List<RecruitDTO> year();
+
+	List<RecruitDTO> depart();
 
 }

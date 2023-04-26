@@ -13,10 +13,15 @@ public class RecruitService {
 	
 	@Autowired
 	private RecruitDAO recruitDAO;
-	
-	public List<RecruitDTO> selectList() {
+
+	public List<RecruitDTO> year() {
 		
-		return recruitDAO.selectList();
+		return recruitDAO.year();
+	}
+
+	public List<RecruitDTO> depart() {
+		
+		return recruitDAO.depart();
 	}
 
 }

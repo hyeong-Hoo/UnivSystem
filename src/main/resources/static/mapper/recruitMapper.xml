@@ -2,7 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.teamp.cau.dao.RecruitDAO">
-	<select id="list" resultType="RecruitDTO">
-		SELECT 
+	<select id="year" resultType="com.teamp.cau.dto.RecruitDTO">
+		SELECT YEAR
+		FROM RECRUIT
+		ORDER BY YEAR DESC
+	</select>
+	<select id="depart" resultType="com.teamp.cau.dto.RecruitDTO">
+		SELECT DEPARTMENT
+		FROM CRCLM_INFO
+		
 	</select>
 </mapper>
