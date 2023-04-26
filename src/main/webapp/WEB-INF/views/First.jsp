@@ -19,7 +19,7 @@
     <!-- 로그아웃 버튼 -->
     <form action="/logout" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-        <button type="submit">로그아웃</button>
+        <button type="submit" class="logout-btn">로그아웃</button>
     </form>
 <% } %>
 

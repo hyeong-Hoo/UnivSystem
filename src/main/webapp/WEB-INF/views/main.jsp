@@ -276,6 +276,35 @@ $(function(){
       'GRAD' 200,
       'opsz' 48
     }
+    .logout-btn{
+   	 	width:200px;
+    	height:30px;
+        font-size: 20px;
+        font-weight: 900;
+        color:#FFC314;
+        letter-spacing:10px;
+        background-color: darkblue;
+        border-style: none;
+        border-radius: 10px;
+    }
+    .logout-btn:hover{
+    	color:white;
+    	cursor: pointer;
+    }
+    .goManagement{
+    	margin:0 auto;
+    	margin-top:20px;
+    	width:200px;
+    	height:30px;
+        font-size: 20px;
+        font-weight: 900;
+        color:darkblue;
+        letter-spacing:5px;
+    }
+    .goManagement:hover{
+    	color:white;
+    	cursor : pointer;
+    }
 </style>
 </head>
 <body>
@@ -294,13 +323,15 @@ $(function(){
             <span class="logo_bottom-text2">Choogang University</span>
             <span class="logo_bottom-text3">Choogang Login</span>
             <button type="button" class="Admission_btn" id="Admission">입학지원</button>
+            <% if (request.getUserPrincipal() == null) { %>
             <form action="/auth" method="post">
             <table class="login">
             <tr>
             <td>학생<input type="radio" name="chu">교수<input type="radio" name="chu"></td>
+            <td><div id="findIdFw">아이디찾기 / 비밀번호찾기</div></td>
             </tr>
             <tr>
-<%--         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
+        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             <td><input type="text" name="USER_ID" placeholder="아이디"></td>
             <td rowspan="2"><button type="submit" class="login-btn">로그인</button></td>
             </tr>
@@ -309,6 +340,18 @@ $(function(){
             </tr>
             </table>
             </form>
+            <% } else { %>
+            	<table class="login">
+            <tr>
+            <td><form action="/logout" method="post">
+            <div class="goManagement"> 학사관리로 이동 </div><br>
+        	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+       		 <button type="submit" class="logout-btn">로그아웃</button>
+   			 </form>
+   			</td>
+            </tr>
+            </table>
+            <% } %>
             <span class="logo_bottom-text4">개인정보처리방침</span>
         </div>
     </div>

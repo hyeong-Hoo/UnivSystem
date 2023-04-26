@@ -84,7 +84,7 @@ public class SecurityConfig {
                 .loginProcessingUrl("/auth")    // POST 요청 (login 창에 입력한 데이터를 처리)
                 .usernameParameter("USER_ID")	// login에 필요한 id 값을 USER_ID로 설정 (default는 username)
                 .passwordParameter("PSWD")	// login에 필요한 password 값을 PSWD(default)로 설정
-                .defaultSuccessUrl("/First" , true)	// login에 성공하면 /First(메인홈페이지)로 redirect
+                .defaultSuccessUrl("/main" , true)	// login에 성공하면 /First(메인홈페이지)로 redirect
                 .successHandler((request, response, authentication) -> {
                     logAuthorities(authentication);
                     response.sendRedirect("/main");
@@ -97,12 +97,12 @@ public class SecurityConfig {
                 .logoutUrl("/logout")
 				.invalidateHttpSession(true) // 로그아웃 시 세션 종료
 				.clearAuthentication(true) // 로그아웃 시 권한 제거
-                .logoutSuccessUrl("/First");	// logout에 성공하면 /로 redirect
+                .logoutSuccessUrl("/main");	// logout에 성공하면 /로 redirect
         http
         .sessionManagement()
-            .invalidSessionUrl("/First") // 세션이 만료된 경우 이동할 페이지 지정
+            .invalidSessionUrl("/main") // 세션이 만료된 경우 이동할 페이지 지정
             .maximumSessions(1) // 최대 세션 수 지정
-            .expiredUrl("/First"); // 세션이 만료된 경우 이동할 페이지 지정
+            .expiredUrl("/main"); // 세션이 만료된 경우 이동할 페이지 지정
         http
         .headers().cacheControl().disable() // 캐시 컨트롤 비활성화
         .addHeaderWriter(new CacheControlHeadersWriter());

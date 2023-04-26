@@ -2,12 +2,16 @@ package com.teamp.cau.controller;
 
 import com.teamp.cau.dto.Stud_infoDTO;
 import com.teamp.cau.service.AdmissionService;
+import com.teamp.cau.service.UserService;
 import com.teamp.cau.util.ConvertBinary;
 import com.teamp.cau.util.RandomScore;
+import com.teamp.cau.vo.UserVo;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,14 +22,17 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @Controller
+
 public class AdmissionController {
 	//파일이 저장되는 경로 설정
 	private final String uploadDir = "/Users/jnews/Downloads/Cau1/src/main/resources/static/images";
 	@Autowired
 	private AdmissionService admissionService;
+	private UserService userService;
 	@Autowired
 	private SqlSession sqlSession;
 
