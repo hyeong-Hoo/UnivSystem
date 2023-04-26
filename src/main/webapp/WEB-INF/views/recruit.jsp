@@ -57,7 +57,9 @@ $(function(){
 			success : function(){
 				$(".tablebody").empty();
 				each(a,function(i,list){
-					var tr = "<tr><td></td></tr>"
+					var tr = "<tr>
+					+"<td>"++"</td>"
+					+"</tr>"
 					
 				});
 			}
