@@ -74,9 +74,8 @@ $(document).ready(function () {
       	    data: "passed",
       	  render: function (data, type, row) {
       	      var options = '<option value="지원자">지원자</option>' +
-      	                    '<option value="합격">합격</option>' +
-      	                    '<option value="불합격">불합격</option>' +
-      	                    '<option value="예비합격">예비합격</option>';
+      	                    '<option value="서류합격">서류합격</option>' +
+      	                    '<option value="불합격">불합격</option>';
 
       	      var selected = data || 'applicant'; // passed 값이 null 이면 'applicant'로 설정
 

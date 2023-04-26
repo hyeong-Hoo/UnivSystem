@@ -72,12 +72,20 @@ $(document).ready(function () {
       	  { data: "english" },
       	  { data: "avg" },
       	  {
+      	    data: "pdf",
+      	  render: function (data, type, row) {
+      		  var decodedPdf = atob(row.pdf);
+              return '<button id="pdf-' + row.appl_NO + '" class="btn btn-sm btn-outline-primary" onclick="openPdf(\'' + decodedPdf + '\')">PDF</button>';
+          }
+      	  
+      	    },      	    
+      	  {
       	    data: "passed",
       	  render: function (data, type, row) {
       	      var options = '<option value="지원자">지원자</option>' +
       	                    '<option value="합격">합격</option>' +
-      	                    '<option value="불합격">불합격</option>' +
-      	                    '<option value="예비합격">예비합격</option>';
+      	                    '<option value="합격">불합격</option>' ;
+
 
       	      var selected = data || 'applicant'; // passed 값이 null 이면 'applicant'로 설정
 
@@ -133,7 +141,7 @@ $(document).ready(function () {
 
 
        });
-
+   
 
 
 
@@ -164,17 +172,22 @@ $(document).ready(function () {
             }
         });
     });
-});
+
     
     $('#resetBtn').click(function() {
         $('#dept_input').val('');
         $('#name_input').val('');
         table.columns().search('').draw();
     });
+});
+function openPdf(pdfData) {
+    var iframe = '<iframe src="data:application/pdf;base64,' + pdfData + '" width="100%" height="100%"></iframe>';
+    var x = window.open();
+    x.document.open();
+    x.document.write(iframe);
+    x.document.close();
+}
     
-
-
-
 	
 
 </script>
@@ -192,6 +205,7 @@ $(document).ready(function () {
                 <th>수학</th>
                 <th>영어</th>
                 <th>평균</th>
+                <th>제출서류</th>
                 <th>구분</th>
                 
                 

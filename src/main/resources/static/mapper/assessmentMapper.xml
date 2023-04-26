@@ -8,16 +8,19 @@
 		  SELECT *
   		  FROM APPL_INFO
   		  WHERE category='정시'
-  		 
-	   
 
 	</select>
 	
 	<update id="updateAssessment">
+	
 		UPDATE APPL_INFO SET
 		passed = #{passed}
 		WHERE appl_NO = #{appl_NO}
 	</update>
+	
+	<select id="selectPdf" resultType="java.util.Map">
+    SELECT pdf FROM APPL_INFO WHERE appl_NO = #{appl_No}
+  </select>
 
 
 

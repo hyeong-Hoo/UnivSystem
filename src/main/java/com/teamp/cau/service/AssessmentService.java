@@ -1,6 +1,7 @@
 package com.teamp.cau.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,12 @@ public class AssessmentService {
 	    for (StudentDTO assessment : assessments) {
 	        assessmentDAO.updateAssessment(assessment);
 	    }
+	}
+
+
+	public Map<String, Object> selectPdf() {
+
+		return assessmentDAO.selectPdf();
 	}
 
 
