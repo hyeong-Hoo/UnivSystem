@@ -1,6 +1,8 @@
 package com.teamp.cau.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +20,12 @@ public class RecruitController {
 	@Autowired
 	private RecruitService recruitService;
 	
+	
 	@GetMapping("/recruit")
 	public ModelAndView recruit() {
 		ModelAndView mv = new ModelAndView("recruit");
-		List<RecruitDTO> year = recruitService.year();
+		List<Map<String, Object>> year = recruitService.year();
+		System.out.println(year);
 		List<RecruitDTO> depart = recruitService.depart();
 		mv.addObject("year",year);
 		mv.addObject("depart",depart);
