@@ -40,9 +40,8 @@ public class PassDAO {
 
 	public void studentValue(PassDTO passDTO) {
 		
-		System.out.println(passDTO.toString());
 		PassDTO resultDTO = sqlSession.selectOne("list.studentValue",passDTO);
-		sqlSession.selectList("list.studentSubmit", resultDTO);
+		sqlSession.selectList("list.studentSubmit1", resultDTO);
 		
 	}
 

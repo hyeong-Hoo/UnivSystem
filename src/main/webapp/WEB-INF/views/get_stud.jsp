@@ -21,7 +21,7 @@ $(function(){
 	$('#searchStudent').click(function() {
 				  $("input:checkbox[id='check_all']").prop("checked", false);
 				$.ajax({
-					url : '/passInfo',
+					url : '/create_id',
 					type : 'GET',
 					data : {
 						"KORN_FLNM" : $('#name').val(),"department" : $('#department').val(), "category":$('#category').val()},
@@ -41,7 +41,6 @@ $(function(){
 						  $('#adr').val('');
 						  $('#detailadr').val('');
 						  $('#PDF').val('');
-						  $('#PASS_INFO').val('');
 					
 
 						$.each(data, function(i, info) {
@@ -59,7 +58,6 @@ $(function(){
 							+ '<td class="telno_m">' + info.telno + '</td>'
 							+ '<td>' + info.rel_TELNO + '</td>'
 							+ '<td>' + info.avg + '</td>'
-							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
 							$('.table_body').append(str);
 							$('#'+selectid).val(info.pass_INFO).attr("selected", "selected");
 						});
@@ -67,72 +65,11 @@ $(function(){
 
 				});
 			});
-	
-		//예비번호 문자보내기버튼
-	$('.permit1').click(function() {
-		if(confirm("예약번호문자를 보내시겠습니까?")){
-	    var checkBoxArr = new Array(); 
-		var num=0;
-	  $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
-	 	 var name_m = $(this).closest('tr').find('.name_m').text();
-	 	 var telno_m = $(this).closest('tr').find('.telno_m').text();
-	 	 var passrank = $(this).closest('tr').find('.passrank').text();
 
-		num=num+1;
-	  	checkBoxArr[i] = {"no" : i, "name_m" : name_m, "telno_m":telno_m,"passrank":passrank}
-	});
-	  $.ajax({
-			url : "/permit1",
-			type : "post",
-			cache : false,
-	      	data: { "checkBoxArr" : checkBoxArr ,"num" : num }     
-	   });
-	}
-	});
-	
-	//계좌번호 문자보내기 버튼
-	$('.permit2').click(function() {
-		if(confirm("계좌번호문자를 보내시겠습니까?")){		
-	    var checkBoxArr = new Array(); 
-		var num=0;
-	  $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
-	 	 var name_m = $(this).closest('tr').find('.name_m').text();
-	 	 var telno_m = $(this).closest('tr').find('.telno_m').text();
-		num=num+1;
-	  	checkBoxArr[i] = {"no" : i, "name_m" : name_m, "telno_m":telno_m}
-	});
-	  $.ajax({
-			url : "/permit1",
-			type : "post",
-			cache : false,
-	      	data: { "checkBoxArr" : checkBoxArr ,"num" : num }     
-	   });
-		}
-	});
-	//       저장버튼
-	$('.save_button1').click(function() {
-		if(confirm("저장을 하시겠습니까?")){
-	    var checkBoxArr = new Array(); 
-		var num=0;
-	  $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
-	 		 var  find= $(this).closest('tr').find('.find_Select').children(".creditSelect").val();
-	 		 var  state= $(this).closest('tr').find('.appl_no').text();
-			num=num+1;
-		  	checkBoxArr[i] = {"no" : i, "appl_NO" : state,"PASS_INFO" : find}
-		});
-	$.ajax({
-			url : "/passUpdate1",
-			type : "post",
-			cache : false,
-      		data: { "checkBoxArr" : checkBoxArr ,"num" : num }
-		});
-		}
-		
-		
-	});
-	//       입학확정버튼
-	$('.admission').click(function() {
-		if(confirm("체크된 인원들을 입학 확정시키겠습니까?")){
+
+	//       아이디생성버튼
+	$('.id_save').click(function() {
+		if(confirm("체크된 인원들을 아이디를 만드시겠습니까??")){
 	    var checkBoxArr = new Array(); 
 		var num=0;
 	  $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
@@ -141,7 +78,7 @@ $(function(){
 		  	checkBoxArr[i] = {"no" : i, "appl_NO" : state}
 		});
 	$.ajax({	
-			url : "/admission",
+			url : "/id_save",
 			type : "post",
 			cache : false,
       		data: { "checkBoxArr" : checkBoxArr ,"num" : num }
@@ -231,10 +168,7 @@ text-align: right;
 		</thead>
 		<tbody class="table_body">
 		</tbody>
-		<input type="button" class="permit1" value="예비번호 문자보내기">  &nbsp;
-		<input type="button" class="permit2" value="계좌번호 문자보내기">  &nbsp;
-		<input type="button" class="save_button1" value="저장하기">  &nbsp;
-		<input type="button" class="admission" value="입학확정">  &nbsp;
+		<input type="button" class="id_save" value="아이디생성">  &nbsp;
 		<input type="number" id="inputField" value="" readonly >
 	</table>
 </div>
