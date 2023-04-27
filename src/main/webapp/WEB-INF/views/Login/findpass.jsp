@@ -46,7 +46,7 @@
        <div><input type="radio" id="sms" name="sms" value="true" class="">SMS발송</div>
        <div><input type="radio" id="none" name="none" value="false" class="">발송은 돈이들어요</div>
       <div><input type="submit" class="button" value="찾기" class="aim"></div>
-      <a href="/findid" class="discrete" >아이디찾기</a>
+      <a href="/Login/findid" class="discrete" >아이디찾기</a>
     </form>
   </div>
 

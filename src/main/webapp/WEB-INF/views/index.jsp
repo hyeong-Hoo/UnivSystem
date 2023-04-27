@@ -33,10 +33,11 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">CAU </div>
+<!--                 <div class="sidebar-brand-icon rotate-n-15"> -->
+<!--                     <i class="fas fa-laugh-wink"></i> -->
+						<img src="/images/Logo.png" style="width:90px;height:90px">
+<!--                 </div> -->
+                <div class="sidebar-brand-text mx-3"> </div>
             </a>
 
             <!-- Divider -->

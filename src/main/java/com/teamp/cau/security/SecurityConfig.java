@@ -70,6 +70,7 @@ public class SecurityConfig {
     	http.csrf().disable();
         http
             .authorizeRequests()
+            	.antMatchers("/**").permitAll()
                 .antMatchers("/main","/login","/loginpage", "/findid" , "/findpass", "/resultid" ,"/resultpass" ,"/admission","/admission2").permitAll()
                 .antMatchers("/First","/First3","/signup" , "userListPage").permitAll()
                 .antMatchers("/css/**","/js/**","/vendor/**" ,"/img/**" , "/images/**").permitAll()
@@ -82,7 +83,7 @@ public class SecurityConfig {
 		// login 설정
         http
             .formLogin()
-                .loginPage("/login")    // GET 요청 (login form을 보여줌)
+                .loginPage("/Login/login")    // GET 요청 (login form을 보여줌)
                 .loginProcessingUrl("/auth")    // POST 요청 (login 창에 입력한 데이터를 처리)
                 .usernameParameter("USER_ID")	// login에 필요한 id 값을 USER_ID로 설정 (default는 username)
                 .passwordParameter("PSWD")	// login에 필요한 password 값을 PSWD(default)로 설정

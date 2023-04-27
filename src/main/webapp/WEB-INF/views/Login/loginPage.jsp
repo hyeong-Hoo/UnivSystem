@@ -24,8 +24,8 @@
 
             <button type="submit">로그인</button>
 <!--             <button type="button" onclick="location.href='signup'">회원가입</button> -->
-			 <button type="button" onclick="location.href='findid'">아이디 찾기</button>
-			 <button type="button" onclick="location.href='findpass'">비밀번호 찾기</button>
+			 <button type="button" onclick="location.href='Login/findid'">아이디 찾기</button>
+			 <button type="button" onclick="location.href='Login/findpass'">비밀번호 찾기</button>
     </form>
 </body>
 </html>

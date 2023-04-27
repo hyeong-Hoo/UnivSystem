@@ -45,22 +45,22 @@ public class UserController {
         userVo.setPSWD(null); // password는 보이지 않도록 null로 설정
         model.addAttribute("user", userVo);
 
-        return "home";
+        return "Login/userInfo";
     }
     
    
-    @GetMapping("/userList")
+    @GetMapping("/Login/userList")
     public String getUserList(Model model) { // User 테이블의 전체 정보를 보여줌
         List<UserVo> userList = userService.getUserList();
         model.addAttribute("list", userList);
-        return "userListPage";
+        return "Login/userListPage";
     }
 
-    @GetMapping("/login")
-    public String loginPage() { // 로그인되지 않은 상태이면 로그인 페이지를, 로그인된 상태이면 First 페이지를 보여줌
+    @GetMapping("/Login/login")
+    public String loginPage() { // 로그인되지 않은 상태이면 로그인 페이지를, 로그인된 상태이면 main 페이지를 보여줌
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication instanceof AnonymousAuthenticationToken)
-            return "loginPage";
+            return "Login/loginPage";
         return "redirect:/";
     }
 
@@ -69,7 +69,7 @@ public class UserController {
         Long USER_NO = (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserVo userVo = userService.getUserByNo(USER_NO);
         model.addAttribute("user", userVo);
-        return "editPage";
+        return "Login/update";
     }
 
     @PostMapping("/update")
@@ -80,13 +80,13 @@ public class UserController {
         return "redirect:/";
     }
     
-    @GetMapping("/findid")
+    @GetMapping("/Login/findid")
     public String findid() {   //아이디 찾기 페이지
-        return "findid";
+        return "Login/findid";
     }
     
     
-    @PostMapping("/findid")	//아이디 찾기
+    @PostMapping("/Login/findid")	//아이디 찾기
     public String findIdByNameAndTel(@RequestParam String KORN_FLNM, @RequestParam String TELNO, Model model) {
         String USER_ID = userService.findIdByNameAndTel(KORN_FLNM, TELNO);
         if (USER_ID == null) {
@@ -94,12 +94,12 @@ public class UserController {
             return "error";
         }
         model.addAttribute("USER_ID", USER_ID);
-        return "resultid";
+        return "Login/resultid";
     }
     
     @GetMapping("/findpass")	// 비밀번호 찾기 페이지
     public String findpass() {  
-        return "findpass";
+        return "Login/findpass";
     }
 
     @PostMapping("/findpass")	// 비밀번호 찾기
@@ -120,7 +120,7 @@ public class UserController {
         }
         
         model.addAttribute("tempPassword", tempPassword);
-        return "resultpass";
+        return "Login/resultpass";
     }
     /*
     @GetMapping("/signup")

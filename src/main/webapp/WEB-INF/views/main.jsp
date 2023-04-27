@@ -337,14 +337,14 @@ $(function(){
             <tr>
             <td><input type="password"  name="PSWD" placeholder="비밀번호"></td>
             </tr>
-            <td><div id="findIdFw"></div><a href="/findid" onclick="location.href='findid.jsp'">아이디찾기 / 비밀번호찾기</a></div></td>
+            <td><div id="findIdFw"></div><a href="/Login/findid" onclick="location.href='Login/findid.jsp'">아이디찾기 / 비밀번호찾기</a></div></td>
             </table>
             </form>
             <% } else { %>
             	<table class="login">
             <tr>
             <td><form action="/logout" method="post">
-            <div class="goManagement"> 학사관리로 이동 </div><br>
+            <div class="goManagement"><a href="/index" onclick="location.href='index.jsp'"> 학사관리로 이동 </a></div><br>
         	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
        		 <button type="submit" class="logout-btn">로그아웃</button>
    			 </form>

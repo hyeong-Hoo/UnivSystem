@@ -90,7 +90,7 @@
         <label for="password">핸드폰번호</label>
       </div>
       <div><input type="submit" class="button" value="찾기" class="aim" ></div>
-      <a href="/findpass" class="discrete" >비밀번호 찾기</a>
+      <a href="/Login/findpass" class="discrete" >비밀번호 찾기</a>
     </form>
   </div>
 </body>
