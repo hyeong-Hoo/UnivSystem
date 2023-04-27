@@ -70,7 +70,9 @@ public class SecurityConfig {
     	http.csrf().disable();
         http
             .authorizeRequests()
-                .antMatchers("/login", "/signup" , "/findid" , "/findpass", "/resultid" ,"/resultpass", "/send"  ,"/sms/send","/First",	"/First3","/main","/admission","/admission2","/images/**").permitAll()
+                .antMatchers("/main","/login", "/findid" , "/findpass", "/resultid" ,"/resultpass" ,"/admission","/admission2").permitAll()
+                .antMatchers("/First","/First3","/signup" , "userListPage").permitAll()
+                .antMatchers("/css/**","/js/**","/vendor/**" ,"/img/**" , "/images/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/professor/**").hasRole("PROFESSOR")
                 .antMatchers("/student/**").hasRole("STUDENT")
@@ -84,7 +86,7 @@ public class SecurityConfig {
                 .loginProcessingUrl("/auth")    // POST 요청 (login 창에 입력한 데이터를 처리)
                 .usernameParameter("USER_ID")	// login에 필요한 id 값을 USER_ID로 설정 (default는 username)
                 .passwordParameter("PSWD")	// login에 필요한 password 값을 PSWD(default)로 설정
-                .defaultSuccessUrl("/main" , true)	// login에 성공하면 /First(메인홈페이지)로 redirect
+                .defaultSuccessUrl("/main" , true)	// login에 성공하면 /main(메인홈페이지)로 redirect
                 .successHandler((request, response, authentication) -> {
                     logAuthorities(authentication);
                     response.sendRedirect("/main");
