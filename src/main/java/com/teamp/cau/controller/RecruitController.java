@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.teamp.cau.dto.RecruitDTO;
@@ -27,5 +29,13 @@ public class RecruitController {
 		
 	}
 	@GetMapping("/check")
-	public List<E> 
+	@ResponseBody
+	public List<RecruitDTO> check(@RequestParam("year") String year,@RequestParam("depart") String depart){
+		RecruitDTO dto = new RecruitDTO();
+		dto.setYEAR(year);
+		dto.setDEPARTMENT(depart);
+		List<RecruitDTO> checkList = recruitService.check(dto); 
+		System.out.println(checkList);
+		return checkList;
+	}
 }

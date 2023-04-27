@@ -10,6 +10,16 @@
 	<select id="depart" resultType="com.teamp.cau.dto.RecruitDTO">
 		SELECT DEPARTMENT
 		FROM CRCLM_INFO
-		
+	</select>
+	<select id="check" resultType="com.teamp.cau.dto.RecruitDTO" parameterType="com.teamp.cau.dto.RecruitDTO">
+		<if test="DEPARTMENT == 'all'">
+			SELECT DEPARTMENT, APPL_NUM
+			FROM CRCLM_INFO	
+		</if>
+		<if test="DEPARTMENT != 'all'">
+			SELECT DEPARTMENT, APPL_NUM
+			FROM CRCLM_INFO
+			WHERE DEPARTMENT = #{DEPARTMENT }
+		</if>
 	</select>
 </mapper>

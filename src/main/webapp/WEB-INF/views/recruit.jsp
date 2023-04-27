@@ -43,30 +43,11 @@ font-size: 15px;
 float:left;
 margin: 6px 0 0 5px;
 }
+.num{
+width:100px;
+}
 </style>
-<script type="text/javascript">
-$(function(){
-	$("#check").click(function(){
-		var year = $("#year").val();
-		var depart = $("#depart").val();
-		$.ajax({
-			url : "/check",
-			type : "GET",
-			datatype : "json",
-			data : {year : year, depart : depart},
-			success : function(){
-				$(".tablebody").empty();
-				each(a,function(i,list){
-					var tr = "<tr>
-					+"<td>"++"</td>"
-					+"</tr>"
-					
-				});
-			}
-		});
-	});
-});
-</script>
+
 </head>
 <body>
 <div class="box">
@@ -96,13 +77,6 @@ $(function(){
 				</tr>
 			</thead>
 			<tbody class="tablebody">
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
 			</tbody>
 		</table>
 	</div>
@@ -120,7 +94,29 @@ $(document).ready(function(){
 	$('#mytable').DataTable({
 		paging:false,
 		info:false,
-		
+	});
+	$("#check").click(function(){
+		var year = $("#year").val();
+		var depart = $("#depart").val();
+		$.ajax({
+			url : "/check",
+			type : "GET",
+			datatype : "json",
+			data : {year : year, depart : depart},
+			success : function(json){
+				$(".tablebody").empty();
+				$.each(json,function(i,list){
+					var tr = "<tr>"
+					+"<td>"+list.department+"</td>"
+					+"<td><input class='num' type='number' value="+list.appl_NUM+"></td>"
+					+"<td></td>"
+					+"<td></td>"
+					+"<td></td>"
+					+"</tr>"
+					$(".tablebody").append(tr);
+				});
+			}
+		});
 	});
 });
 </script>

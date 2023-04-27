@@ -15,4 +15,6 @@ public interface RecruitDAO {
 
 	List<RecruitDTO> depart();
 
+	List<RecruitDTO> check(RecruitDTO dto);
+
 }
