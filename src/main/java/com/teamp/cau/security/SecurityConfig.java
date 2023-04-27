@@ -70,7 +70,7 @@ public class SecurityConfig {
     	http.csrf().disable();
         http
             .authorizeRequests()
-                .antMatchers("/main","/login", "/findid" , "/findpass", "/resultid" ,"/resultpass" ,"/admission","/admission2").permitAll()
+                .antMatchers("/main","/login","/loginpage", "/findid" , "/findpass", "/resultid" ,"/resultpass" ,"/admission","/admission2").permitAll()
                 .antMatchers("/First","/First3","/signup" , "userListPage").permitAll()
                 .antMatchers("/css/**","/js/**","/vendor/**" ,"/img/**" , "/images/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")

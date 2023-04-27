@@ -327,8 +327,7 @@ $(function(){
             <form action="/auth" method="post">
             <table class="login">
             <tr>
-            <td>학생<input type="radio" name="chu">교수<input type="radio" name="chu"></td>
-            <td><div id="findIdFw">아이디찾기 / 비밀번호찾기</div></td>
+<!--             <td>학생<input type="radio" name="chu">교수<input type="radio" name="chu"></td> -->
             </tr>
             <tr>
         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -338,6 +337,7 @@ $(function(){
             <tr>
             <td><input type="password"  name="PSWD" placeholder="비밀번호"></td>
             </tr>
+            <td><div id="findIdFw"></div><a href="/findid" onclick="location.href='findid.jsp'">아이디찾기 / 비밀번호찾기</a></div></td>
             </table>
             </form>
             <% } else { %>
