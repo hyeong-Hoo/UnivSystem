@@ -20,13 +20,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.teamp.cau.dto.PassDTO;
 import com.teamp.cau.service.PassService;
+
 @Controller
 public class PassController {
-	
+
 	@Autowired
 	private PassService passService;
-	
-	
+
 	@GetMapping("/pass")
 	public ModelAndView Passed() {
 		List<PassDTO> list_d = passService.departmentList();
@@ -39,70 +39,76 @@ public class PassController {
 //        System.out.println("현재 년도: " + year);
 		return mv;
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/passInfo")
-	public List<PassDTO> Pass(@RequestParam(value = "KORN_FLNM", required = false) String KORN_FLNM ,@RequestParam(value = "department", required = false) String department,@RequestParam(value = "category", required = false) String category) {
+	public List<PassDTO> Pass(@RequestParam(value = "KORN_FLNM", required = false) String KORN_FLNM,
+			@RequestParam(value = "department", required = false) String department,
+			@RequestParam(value = "category", required = false) String category) {
 		PassDTO passDTO = new PassDTO();
 		passDTO.setDepartment(department);
 		passDTO.setCategory(category);
 		passDTO.setKORN_FLNM(KORN_FLNM);
 		List<PassDTO> list = passService.studentList(passDTO);
 		return list;
-	}   
+	}
+
 	@ResponseBody
 	@PostMapping("/passUpdate1")
-	public String passUpdate1(@RequestParam HashMap<String, Object> param,@RequestParam("num") int num) {
+	public String passUpdate1(@RequestParam HashMap<String, Object> param, @RequestParam("num") int num) {
 		PassDTO passDTO = new PassDTO();
-		for(int i=0;i<num;i++) {
-		int PASS_INFO=Integer.parseInt((String) param.get("checkBoxArr["+i+"][PASS_INFO]"));
-		int appl_NO=Integer.parseInt((String) param.get("checkBoxArr["+i+"][appl_NO]"));
-		System.out.println(PASS_INFO);
-		System.out.println(appl_NO);
-		passDTO.setAppl_NO(appl_NO);
-		passDTO.setPASS_INFO(PASS_INFO);
-		passService.passUpdate(passDTO);
+		for (int i = 0; i < num; i++) {
+			int PASS_INFO = Integer.parseInt((String) param.get("checkBoxArr[" + i + "][PASS_INFO]"));
+			int appl_NO = Integer.parseInt((String) param.get("checkBoxArr[" + i + "][appl_NO]"));
+			System.out.println(PASS_INFO);
+			System.out.println(appl_NO);
+			passDTO.setAppl_NO(appl_NO);
+			passDTO.setPASS_INFO(PASS_INFO);
+			passService.passUpdate(passDTO);
 		}
 		return "";
-	}     
-	//예비번호 문자보내기버튼
+	}
+	// 예비번호 문자보내기버튼
 
 	@PostMapping("/permit1")
 	@ResponseBody
-	public String permit1(@RequestParam HashMap<String, Object> param,@RequestParam("num") int num) {
+	public String permit1(@RequestParam HashMap<String, Object> param, @RequestParam("num") int num) {
 		message message = new message();
-		for(int i=0;i<num;i++) {			
-			String telno= (String) param.get("checkBoxArr["+i+"][telno_m]");
-			String content = param.get("checkBoxArr["+i+"][name_m]")+"님의 합격순번은  "+ param.get("checkBoxArr["+i+"][passrank]")+"입니다.";
+		for (int i = 0; i < num; i++) {
+			String telno = (String) param.get("checkBoxArr[" + i + "][telno_m]");
+			String content = param.get("checkBoxArr[" + i + "][name_m]") + "님의 합격순번은  "
+					+ param.get("checkBoxArr[" + i + "][passrank]") + "입니다.";
 			message.sendSMS(telno, content);
 		}
 		return "";
 	}
-	//계좌번호 문자보내기 버튼
-	
+	// 계좌번호 문자보내기 버튼
+
 	@PostMapping("/permit2")
 	@ResponseBody
-	public String permit2(@RequestParam HashMap<String, Object> param,@RequestParam("num") int num) {
+	public String permit2(@RequestParam HashMap<String, Object> param, @RequestParam("num") int num) {
 		message message = new message();
-		for(int i=0;i<num;i++) {			
-			String telno= (String) param.get("checkBoxArr["+i+"][telno_m]");
-			String content = param.get("checkBoxArr["+i+"][name_m]")+"님 국민은행 938002-00-123456 으로 입금해주시면 등록이 확정이됩니다..";
+		for (int i = 0; i < num; i++) {
+			String telno = (String) param.get("checkBoxArr[" + i + "][telno_m]");
+			String content = param.get("checkBoxArr[" + i + "][name_m]")
+					+ "님 국민은행 938002-00-123456 으로 입금해주시면 등록이 확정이됩니다..";
 			message.sendSMS(telno, content);
 		}
 		return "";
 	}
+
 	@ResponseBody
 	@PostMapping("/admission")
-	public String StudentID(@RequestParam HashMap<String, Object> param,@RequestParam("num") int num) {
+	public String StudentID(@RequestParam HashMap<String, Object> param, @RequestParam("num") int num) {
 		PassDTO passDTO = new PassDTO();
-		for(int i=0;i<num;i++) {
-		int appl_NO=Integer.parseInt((String) param.get("checkBoxArr["+i+"][appl_NO]"));
-		passDTO.setAppl_NO(appl_NO);
-		List<PassDTO> list_a = passService.studentValue(passDTO);
-		//		passDTO.setAppl_NO(appl_NO);
-		//		passService.passUpdate(passDTO);
+		for (int i = 0; i < num; i++) {
+			int appl_NO = Integer.parseInt((String) param.get("checkBoxArr[" + i + "][appl_NO]"));
+			passDTO.setAppl_NO(appl_NO);
+			passService.studentValue(passDTO);
+			// passDTO.setAppl_NO(appl_NO);
+			// passService.passUpdate(passDTO);
 		}
 		return "";
-	}     
-	
+	}
+
 }

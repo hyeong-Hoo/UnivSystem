@@ -10,13 +10,16 @@
 
 	<select id="studentList" parameterType="PassDTO"
 		resultType="PassDTO">
-		
+
 		SELECT *
 		FROM APPL_INFO
-		WHERE PASS_INFO  <![CDATA[<]]> 3  AND  department = #{department} AND  category =#{category}  AND  KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
+		WHERE PASS_INFO  <![CDATA[<]]>
+		3 AND department = #{department} AND category =#{category} AND
+		KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
 		ORDER BY avg DESC
-		LIMIT 30;
-		
+		LIMIT
+		30;
+
 	</select>
 	<update id="Passupdate" parameterType="PassDTO">
 		UPDATE APPL_INFO
@@ -39,12 +42,21 @@
 		SELECT DISTINCT category
 		FROM APPL_INFO
 	</select>
-	<select id="studentValue" parameterType="PassDTO"	resultType="PassDTO">
-		
-		SELECT *
-		FROM APPL_INFO
-		WHERE   appl_NO = #{appl_NO}
-		ORDER BY avg DESC
-		
+	
+	<select id="studentValue" parameterType="PassDTO" resultType="PassDTO">
+		SELECT * FROM APPL_INFO WHERE appl_NO = #{appl_NO}
 	</select>
+	
+	<insert id="studentSubmit" parameterType="PassDTO">
+		INSERT INTO STUD_INFO(
+		appl_NO, KORN_FLNM, Student_ID, USER_BRDT, GENDER_CD, AGE, TELNO,
+		REL_TELNO, REL_CD,EML_ADDR,	ZIP, ADDR, DADDR, USER_NO, CRCLM, CRCLM_CYCL, PASS_INFO,
+		category, avg, passed, department)
+		VALUES (
+		#{appl_NO}, #{KORN_FLNM}, #{Student_ID}, #{USER_BRDT}, #{GENDER_CD}, #{AGE},
+		#{TELNO},
+		#{REL_TELNO}, #{REL_CD},#{EML_ADDR}, #{ZIP}, #{ADDR}, #{DADDR}, #{USER_NO}, #{CRCLM},
+		#{CRCLM_CYCL},
+		#{PASS_INFO}, #{category}, #{avg}, #{passed}, #{department})
+	</insert>
 </mapper>

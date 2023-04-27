@@ -2,7 +2,6 @@ package com.teamp.cau.service;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +15,9 @@ public class PassService {
 
 	public PassDTO detail(String PDF) {
 		return passDAO.detail(PDF);
-}
+	}
 
-	public  List<PassDTO> studentList(PassDTO passDTO) {
+	public List<PassDTO> studentList(PassDTO passDTO) {
 		return passDAO.studentList(passDTO);
 	}
 
@@ -38,9 +37,8 @@ public class PassService {
 		return passDAO.categoryList();
 	}
 
-	public List<PassDTO> studentValue(PassDTO passDTO) {
-		return passDAO.studentValue(passDTO);
+	public void studentValue(PassDTO passDTO) {
+		passDAO.studentValue(passDTO);
 	}
-
 
 }
