@@ -54,14 +54,19 @@ width:100px;
 	<div class="select_box">
 		<select class="select" id="year">
 		<c:forEach items="${year }" var="y">
-			<option>${y.YEAR}</option>
+			<option>${y.RECRT_YEAR}</option>
 		</c:forEach>
 		</select>
 		<select class="select" id="depart">
 			<option value="all">학과 선택</option>
 		<c:forEach items="${depart }" var="d">
 			<option>${d.DEPARTMENT}</option>
-		</c:forEach></select>
+		</c:forEach>
+		</select>
+		<select class="select" id="category">
+			<option value="1">정시</option>
+			<option value="2">수시</option>
+		</select>
 		<button type="button" class="btn" id="check">조회</button>
 		<button type="button" class="btn" id="save">저장</button>
 	</div>
@@ -69,6 +74,7 @@ width:100px;
 		<table id="mytable">
 			<thead>
 				<tr>
+					<th>전형</th>
 					<th>학과</th>
 					<th>입학정원</th>
 					<th>최초인원</th> <!-- 지원자수 -->
@@ -99,14 +105,16 @@ $(document).ready(function(){
 		table.destroy();
 		var year = $("#year").val();
 		var depart = $("#depart").val();
+		var category = $("#category").val();
 		$.ajax({
 			url : '/check',
 			type : 'GET',
-			data : {year : year, depart : depart},
+			data : {year : year, depart : depart, category : category},
 			success:function(data){
 				table = $('#mytable').DataTable({
 					data: data,
 					columns:[
+						{data : 'SCHDL_NAME'},
 						{data : 'DEPARTMENT'},
 						{data : 'APPL_NUM'},
 						{data : 'APPL_NUM'},

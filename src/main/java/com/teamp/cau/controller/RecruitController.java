@@ -32,15 +32,19 @@ public class RecruitController {
 
 	@GetMapping("/check")
 	@ResponseBody
-	public List<Map<String, Object>> check(@RequestParam("year") String year, @RequestParam("depart") String depart) {
+	public List<Map<String, Object>> check(@RequestParam("year") int year, @RequestParam("depart") String depart, @RequestParam("category") int category) {
 		RecruitDTO dto = new RecruitDTO();
-		dto.setYEAR(year);
+		dto.setRECRT_YEAR(year);
 		dto.setDEPARTMENT(depart);
+		dto.setRECRT_SCHDL_CD(category);
+		
 		List<Map<String, Object>> data = recruitService.check(dto);
 //		for (int i = 0; i < data.size(); i++) {
 //			data.get(i).put("가나다라", 0);
 //		}
-		System.out.println(data);
+		System.out.println(year);
+		System.out.println(depart);
+		System.out.println(category);
 		return data;
 	}
 }
