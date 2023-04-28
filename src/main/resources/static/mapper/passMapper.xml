@@ -3,22 +3,25 @@
 
 <mapper namespace="list">
 
-	<select id="detail" resultType="PassDTO">
-		SELECT PDF
-		FROM APPL_INFO
-	</select>
 
+	<select id="studentLimit" parameterType="PassDTO"	resultType="PassDTO">
+
+		SELECT APPL_NUM
+		FROM CRCLM_INFO
+		WHERE CRCLM_CD = #{CRCLM_CD} AND RECRT_SCHDL_CD =#{RECRT_SCHDL_CD} AND RECRT_YEAR=#{RECRT_YEAR});
+
+	</select>
+	
 	<select id="studentList" parameterType="PassDTO"
 		resultType="PassDTO">
 
 		SELECT *
 		FROM APPL_INFO
-		WHERE PASS_INFO  <![CDATA[<]]>
-		3 AND department = #{department} AND category =#{category} AND
+		WHERE PASS_INFO  <![CDATA[<]]> 3 
+		AND CRCLM_CD = #{CRCLM_CD} AND RECRT_SCHDL_CD =#{RECRT_SCHDL_CD} AND
+		(passed="합격" or passed="서류합격" ) AND RECRT_YEAR=#{RECRT_YEAR} AND 
 		KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
 		ORDER BY avg DESC
-		LIMIT
-		30;
 
 	</select>
 	<update id="Passupdate" parameterType="PassDTO">
@@ -35,12 +38,14 @@
 		WHERE appl_NO=#{appl_NO};
 	</select>
 	<select id="department" resultType="PassDTO">
-		SELECT DISTINCT department
-		FROM APPL_INFO
+		SELECT DISTINCT DEPARTMENT,CRCLM_CD
+		FROM CRCLM_INFO
 	</select>
 	<select id="categoryList" resultType="PassDTO">
-		SELECT DISTINCT category
-		FROM APPL_INFO
+		SELECT RECRT_YEAR
+		FROM RECRT_SCHDL
+		GROUP BY RECRT_YEAR
+		ORDER BY RECRT_YEAR DESC
 	</select>
 	
 	<select id="studentValue" parameterType="PassDTO" resultType="PassDTO">

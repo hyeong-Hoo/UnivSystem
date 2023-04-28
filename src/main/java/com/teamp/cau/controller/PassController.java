@@ -1,16 +1,9 @@
 package com.teamp.cau.controller;
 
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.bouncycastle.jcajce.provider.digest.GOST3411.HashMac;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.RepositoryQuery;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +24,7 @@ public class PassController {
 	public ModelAndView Passed() {
 		List<PassDTO> list_d = passService.departmentList();
 		List<PassDTO> list_c = passService.categoryList();
+		
 		ModelAndView mv = new ModelAndView("pass");
 		mv.addObject("list_d", list_d);
 		mv.addObject("list_c", list_c);
@@ -42,15 +36,21 @@ public class PassController {
 
 	@ResponseBody
 	@GetMapping("/passInfo")
-	public List<PassDTO> Pass(@RequestParam(value = "KORN_FLNM", required = false) String KORN_FLNM,
-			@RequestParam(value = "department", required = false) String department,
-			@RequestParam(value = "category", required = false) String category) {
+	public ModelAndView Pass(@RequestParam(value = "KORN_FLNM", required = false) String KORN_FLNM,
+			@RequestParam(value = "CRCLM_CD", required = false) String CRCLM_CD,
+			@RequestParam(value = "RECRT_SCHDL_CD", required = false) String RECRT_SCHDL_CD,
+			@RequestParam(value = "RECRT_YEAR", required = false) String RECRT_YEAR) {
+		ModelAndView mv = new ModelAndView("pass");
 		PassDTO passDTO = new PassDTO();
-		passDTO.setDepartment(department);
-		passDTO.setCategory(category);
+		passDTO.setCRCLM_CD(CRCLM_CD);
+		passDTO.setRECRT_SCHDL_CD(RECRT_SCHDL_CD);
+		passDTO.setRECRT_YEAR(RECRT_YEAR);
 		passDTO.setKORN_FLNM(KORN_FLNM);
 		List<PassDTO> list = passService.studentList(passDTO);
-		return list;
+		List<PassDTO> list_L = passService.studentLimit(passDTO);
+		mv.addObject("list",list);
+		mv.addObject("list_L",list_L);
+		return mv;
 	}
 
 	@ResponseBody

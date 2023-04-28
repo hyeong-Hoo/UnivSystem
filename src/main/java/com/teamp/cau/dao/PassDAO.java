@@ -1,6 +1,5 @@
 package com.teamp.cau.dao;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,9 +13,6 @@ public class PassDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public  PassDTO detail(String PDF) {
-		return sqlSession.selectOne("list.detail", PDF);
-	}
 
 	public List<PassDTO> studentList(PassDTO passDTO) {
 		return sqlSession.selectList("list.studentList",passDTO);
@@ -45,5 +41,8 @@ public class PassDAO {
 		
 	}
 
+	public List<PassDTO> studentLimit(PassDTO passDTO) {
+		return sqlSession.selectList("list.studentLimit",passDTO);
+	}
 
 }

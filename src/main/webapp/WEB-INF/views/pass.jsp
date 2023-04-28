@@ -24,7 +24,7 @@ $(function(){
 					url : '/passInfo',
 					type : 'GET',
 					data : {
-						"KORN_FLNM" : $('#name').val(),"department" : $('#department').val(), "category":$('#category').val()},
+						"KORN_FLNM" : $('#name').val(),"CRCLM_CD" : $('#department').val(), "RECRT_SCHDL_CD":$('#category').val(),"RECRT_YEAR":$('#year').val()},
 					dataType : "json",
 					success : function(data) {
 						$('.table_body').empty(); // 기존 테이블 데이터를 지웁니다.
@@ -62,6 +62,9 @@ $(function(){
 							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
 							$('.table_body').append(str);
 							$('#'+selectid).val(info.pass_INFO).attr("selected", "selected");
+							if(i<=(${APPL_NUM}*2)){
+								return false;
+							}
 						});
 					}
 
@@ -183,16 +186,26 @@ text-align: right;
 	<div class="row">
 		<div class="col-sm-12 col-md-6">
 			<div class="dataTables_length" id="dataTable_length">
-				<label>지원 학과 
-				<select 	class="custom-select custom-select-sm form-control form-control-sm" id="department">
-						<c:forEach  items="${list_d}" var="d">
-						<option>${d.department }</option>
+				<label>입학년도 <select
+					class="custom-select custom-select-sm form-control form-control-sm"
+					id="year">
+						<c:forEach items="${list_c}" var="y">
+							<option>${y.RECRT_YEAR }</option>
 						</c:forEach>
 				</select>
+
 				</label> <label>지원 전형<select
-					class="custom-select custom-select-sm form-control form-control-sm" id="category">
-						<c:forEach  items="${list_c}" var="c">
-						<option>${c.category }</option>
+					class="custom-select custom-select-sm form-control form-control-sm"
+					id="category">
+							<option value="1">정시</option>
+							<option value="2">수시</option>
+				</select>
+
+				</label> <label>지원 학과 <select
+					class="custom-select custom-select-sm form-control form-control-sm"
+					id="department">
+						<c:forEach items="${list_d}" var="d">
+							<option value="${d.CRCLM_CD}">${d.department }</option>
 						</c:forEach>
 				</select>
 				</label>
@@ -235,7 +248,6 @@ text-align: right;
 		<input type="button" class="permit2" value="계좌번호 문자보내기">  &nbsp;
 		<input type="button" class="save_button1" value="저장하기">  &nbsp;
 		<input type="button" class="admission" value="입학확정">  &nbsp;
-		<input type="number" id="inputField" value="" readonly >
 	</table>
 </div>
 

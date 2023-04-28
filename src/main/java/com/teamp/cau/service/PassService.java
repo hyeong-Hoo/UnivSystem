@@ -13,9 +13,7 @@ public class PassService {
 	@Autowired
 	private PassDAO passDAO;
 
-	public PassDTO detail(String PDF) {
-		return passDAO.detail(PDF);
-	}
+
 
 	public List<PassDTO> studentList(PassDTO passDTO) {
 		return passDAO.studentList(passDTO);
@@ -41,4 +39,7 @@ public class PassService {
 		passDAO.studentValue(passDTO);
 	}
 
+	public List<PassDTO> studentLimit(PassDTO passDTO) {
+		return passDAO.studentLimit(passDTO);
+	}
 }
