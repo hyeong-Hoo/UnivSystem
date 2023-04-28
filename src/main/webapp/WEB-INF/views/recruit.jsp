@@ -91,32 +91,34 @@ width:100px;
 <script type="text/javascript">
 
 $(document).ready(function(){
-	$('#mytable').DataTable({
+	var table = $('#mytable').DataTable({
 		paging:false,
 		info:false,
 	});
 	$("#check").click(function(){
+		table.destroy();
 		var year = $("#year").val();
 		var depart = $("#depart").val();
 		$.ajax({
-			url : "/check",
-			type : "GET",
-			datatype : "json",
+			url : '/check',
+			type : 'GET',
 			data : {year : year, depart : depart},
-			success : function(json){
-				$(".tablebody").empty();
-				$.each(json,function(i,list){
-					var tr = "<tr>"
-					+"<td>"+list.department+"</td>"
-					+"<td><input class='num' type='number' value="+list.appl_NUM+"></td>"
-					+"<td></td>"
-					+"<td></td>"
-					+"<td></td>"
-					+"</tr>"
-					$(".tablebody").append(tr);
+			success:function(data){
+				table = $('#mytable').DataTable({
+					data: data,
+					columns:[
+						{data : 'DEPARTMENT'},
+						{data : 'APPL_NUM'},
+						{data : 'APPL_NUM'},
+						{data : 'APPL_NUM'},
+						{data : 'APPL_NUM'},
+					],
+					paging:false,
+					info:false,
 				});
 			}
 		});
+
 	});
 });
 </script>

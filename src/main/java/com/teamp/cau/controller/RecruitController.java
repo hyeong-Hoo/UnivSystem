@@ -16,30 +16,31 @@ import com.teamp.cau.service.RecruitService;
 
 @Controller
 public class RecruitController {
-	
+
 	@Autowired
 	private RecruitService recruitService;
-	
-	
+
 	@GetMapping("/recruit")
 	public ModelAndView recruit() {
 		ModelAndView mv = new ModelAndView("recruit");
 		List<Map<String, Object>> year = recruitService.year();
-		System.out.println(year);
 		List<RecruitDTO> depart = recruitService.depart();
-		mv.addObject("year",year);
-		mv.addObject("depart",depart);
+		mv.addObject("year", year);
+		mv.addObject("depart", depart);
 		return mv;
-		
 	}
+
 	@GetMapping("/check")
 	@ResponseBody
-	public List<RecruitDTO> check(@RequestParam("year") String year,@RequestParam("depart") String depart){
+	public List<Map<String, Object>> check(@RequestParam("year") String year, @RequestParam("depart") String depart) {
 		RecruitDTO dto = new RecruitDTO();
 		dto.setYEAR(year);
 		dto.setDEPARTMENT(depart);
-		List<RecruitDTO> checkList = recruitService.check(dto); 
-		System.out.println(checkList);
-		return checkList;
+		List<Map<String, Object>> data = recruitService.check(dto);
+//		for (int i = 0; i < data.size(); i++) {
+//			data.get(i).put("가나다라", 0);
+//		}
+		System.out.println(data);
+		return data;
 	}
 }

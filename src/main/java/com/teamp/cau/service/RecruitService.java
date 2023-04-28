@@ -25,7 +25,7 @@ public class RecruitService {
 		return recruitDAO.depart();
 	}
 
-	public List<RecruitDTO> check(RecruitDTO dto) {
+	public List<Map<String, Object>> check(RecruitDTO dto) {
 		
 		return recruitDAO.check(dto);
 	}
