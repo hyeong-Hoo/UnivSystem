@@ -121,6 +121,7 @@ $(document).ready(function(){
 						{data : 'APPL_NUM'},
 						{data : 'APPL_NUM'},
 					],
+					
 					paging:false,
 					info:false,
 				});
@@ -128,6 +129,7 @@ $(document).ready(function(){
 		});
 
 	});
+	
 });
 </script>
 </html>
