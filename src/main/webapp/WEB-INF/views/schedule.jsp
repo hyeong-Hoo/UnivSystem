@@ -14,11 +14,41 @@
 <title>모집 일정 관리</title>
 </head>
 <body>
-
+<table id="mytable">
+	<thead>
+		<tr>
+			<th>연도</th>
+			<th>전형</th>
+			<th>시작일</th>
+			<th>마감일</th>
+		</tr>
+	</thead>
+	<tbody class="tablebody">
+		
+	</tbody>
+</table>
 </body>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-      crossorigin="anonymous"></script>
+      crossorigin="anonymous">
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var table = $("#mytable").DataTable({
+		ajax: {
+			url: '/sch',
+            type: 'GET',
+            dataSrc: ''
+		},
+		columns: [
+			{data: "RECRT_YEAR" },
+			{data: "SCHDL_NAME" },
+			{data: "SCHDL_START" },
+			{data: "SCHDL_END_DT" }
+		],
+	});
+});
+</script>
 </html>
