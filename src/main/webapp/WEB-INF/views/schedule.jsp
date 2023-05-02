@@ -36,19 +36,14 @@
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
-	var table = $("#mytable").DataTable({
-		ajax: {
+		$.ajax({
 			url: '/sch',
             type: 'GET',
-            dataSrc: ''
-		},
-		columns: [
-			{data: "RECRT_YEAR" },
-			{data: "SCHDL_NAME" },
-			{data: "SCHDL_START" },
-			{data: "SCHDL_END_DT" }
-		],
-	});
+            data: {},
+            success: function(){
+            	
+            }
+		});
 });
 </script>
 </html>

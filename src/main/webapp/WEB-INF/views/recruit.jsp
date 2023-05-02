@@ -100,19 +100,15 @@ $(document).ready(function(){
 	var table = $('#mytable').DataTable({
 		paging:false,
 		info:false,
-	});
 	$("#check").click(function(){
-		table.destroy();
 		var year = $("#year").val();
 		var depart = $("#depart").val();
 		var category = $("#category").val();
-		$.ajax({
+		ajax: {
 			url : '/check',
 			type : 'GET',
-			data : {year : year, depart : depart, category : category},
-			success:function(data){
-				table = $('#mytable').DataTable({
-					data: data,
+			data : {year : year, depart : depart, category : category}
+		},		
 					columns:[
 						{data : 'SCHDL_NAME'},
 						{data : 'DEPARTMENT'},
@@ -121,11 +117,10 @@ $(document).ready(function(){
 						{data : 'APPL_NUM'},
 						{data : 'APPL_NUM'},
 					],
-					
-					paging:false,
-					info:false,
-				});
-			}
+					initComplete: function(){
+						table.draw();
+					}
+
 		});
 
 	});
