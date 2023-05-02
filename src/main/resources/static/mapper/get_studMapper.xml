@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="get_List">
+
+
+	<select id="studentList" parameterType="Get_studDTO"
+		resultType="Get_studDTO">
+
+		SELECT *
+		FROM STUD_INFO
+		WHERE department = #{department} AND category =#{category} AND
+		KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
+		ORDER BY avg DESC
+
+	</select>
+	
+	<select id="department" resultType="Get_studDTO">
+		SELECT DISTINCT department
+		FROM STUD_INFO
+	</select>
+	<select id="categoryList" resultType="Get_studDTO">
+		SELECT DISTINCT category
+		FROM STUD_INFO
+	</select>
+	<select id="studentValue" parameterType="Get_studDTO" resultType="Get_studDTO">
+		SELECT * FROM STUD_INFO WHERE appl_NO = #{appl_NO}
+	</select>
+	<insert id="studentSubmit2" parameterType="Get_studDTO">
+	INSERT INTO USER_INFO(
+	USER_ID,PSWD,KORN_FLNM,USER_BRDT,EML_ADDR,TELNO,STUD_NO,ROLE_CODE)
+	VALUES(
+	#{Student_ID},"123456789a",#{KORN_FLNM},#{USER_BRDT},#{EML_ADDR},#{TELNO},#{STUD_NO},"STUDENT"	)
+	</insert>
+</mapper>
