@@ -23,6 +23,8 @@ public class ResponController {
 			result="/recruit";
 		}else if(test2 == 11) {
 			result="/schedule";
+		}else if(test2 == 12) {
+			result="/pass";
 		}
 		return result;
 	}
