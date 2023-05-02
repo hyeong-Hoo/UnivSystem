@@ -251,7 +251,7 @@ $(function() {
                         <a class="collapse-item" href="login">고교정보관리 </a>
                         <a class="collapse-item" href="register">환산등급관리 </a>
                         <a class="collapse-item" id="10">모집요강</a>
-                        <a class="collapse-item" href="404">입학원서관리</a>
+                        <a class="collapse-item" id="11">모집일 관리</a>
                         <a class="collapse-item" href="blank">입학학생관리</a>
                         <a class="collapse-item" href="blank">지원자확인용</a>
                         <a class="collapse-item" href="blank">내신성적관리</a>

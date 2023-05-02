@@ -11,16 +11,53 @@ $(document).ready(function(){
 		$.ajax({
 			url: '/sch',
             type: 'GET',
+            dataType : 'json',
             data: {},
-            success: function(){
+            success: function(data){
+            	$.each(data, function(i, list){
+            		var tableList = '<tr>'
+            						+ '<td>'+list.RECRT_YEAR +'</td>'
+            						+ '<td>'+list.SCHDL_NAME +'</td>'
+            						+ '<td><input class="day" type="date" value='+list.SCHDL_START +'></td>'
+            						+ '<td><input class="day" type="date" value='+list.SCHDL_END_DT +'></td>'
+            						+ '</tr>';
+            						$("#tableBody").append(tableList);
+            	});
             	
             }
 		});
+		$("#save").click(function(){
+			$.ajax({
+				url: '/save',
+				type: 'POST',
+				dataType: 'json',
+			});
+		});
 });
 </script>
+<style type="text/css">
+th{
+text-align: center;
+width: 50px;
+}
+th:nth-child(3){
+width: 200px;
+}
+th:nth-child(4){
+width: 200px;
+}
+.day{
+width: 150px;
+text-align: center;
+}
+td{
+text-align: center;
+}
+</style>
 </head>
 <body>
-<table>
+<input type="button" value="저장" id="save">
+<table id="ScheduleTable">
 	<thead>
 		<tr>
 			<th>연도</th>
@@ -29,13 +66,8 @@ $(document).ready(function(){
 			<th>마감일</th>
 		</tr>
 	</thead>
-	<tbody>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
+	<tbody id="tableBody">
+			
 	</tbody>
 </table>
 </body>

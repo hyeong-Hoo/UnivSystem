@@ -21,6 +21,8 @@ public class ResponController {
 			result="/grid";
 		}else if(test2 == 10) {
 			result="/recruit";
+		}else if(test2 == 11) {
+			result="/schedule";
 		}
 		return result;
 	}
