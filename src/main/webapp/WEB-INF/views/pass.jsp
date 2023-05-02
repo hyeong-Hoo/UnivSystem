@@ -27,6 +27,7 @@ $(function(){
 						"KORN_FLNM" : $('#name').val(),"CRCLM_CD" : $('#department').val(), "RECRT_SCHDL_CD":$('#category').val(),"RECRT_YEAR":$('#year').val()},
 					dataType : "json",
 					success : function(data) {
+						var iii = data.list_L;
 						$('.table_body').empty(); // 기존 테이블 데이터를 지웁니다.
 						$('#no').val('');
 						  $('#name2').val('');
@@ -43,8 +44,7 @@ $(function(){
 						  $('#PDF').val('');
 						  $('#PASS_INFO').val('');
 					
-
-						$.each(data, function(i, info) {
+						$.each(data.list, function(i, info) {
 							var selectid="creditSelect"+info.pass_INFO;
 							var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
 							+ '<td scope="row" class="checkbox_i"> <input type="checkbox" class="checkbox_a" name="checkbox_c"></td>' 
@@ -62,7 +62,7 @@ $(function(){
 							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
 							$('.table_body').append(str);
 							$('#'+selectid).val(info.pass_INFO).attr("selected", "selected");
-							if(i<=(${APPL_NUM}*2)){
+							if(i<=(data.list_L)){
 								return false;
 							}
 						});

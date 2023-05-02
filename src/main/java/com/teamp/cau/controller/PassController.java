@@ -2,6 +2,7 @@ package com.teamp.cau.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,29 +29,27 @@ public class PassController {
 		ModelAndView mv = new ModelAndView("pass");
 		mv.addObject("list_d", list_d);
 		mv.addObject("list_c", list_c);
-//		Calendar cal = Calendar.getInstance();
-//        int year = cal.get(Calendar.YEAR);
-//        System.out.println("현재 년도: " + year);
+
 		return mv;
 	}
 
 	@ResponseBody
 	@GetMapping("/passInfo")
-	public ModelAndView Pass(@RequestParam(value = "KORN_FLNM", required = false) String KORN_FLNM,
+	public Map<String, Object> Pass(@RequestParam(value = "KORN_FLNM", required = false) String KORN_FLNM,
 			@RequestParam(value = "CRCLM_CD", required = false) String CRCLM_CD,
 			@RequestParam(value = "RECRT_SCHDL_CD", required = false) String RECRT_SCHDL_CD,
 			@RequestParam(value = "RECRT_YEAR", required = false) String RECRT_YEAR) {
-		ModelAndView mv = new ModelAndView("pass");
 		PassDTO passDTO = new PassDTO();
 		passDTO.setCRCLM_CD(CRCLM_CD);
 		passDTO.setRECRT_SCHDL_CD(RECRT_SCHDL_CD);
 		passDTO.setRECRT_YEAR(RECRT_YEAR);
 		passDTO.setKORN_FLNM(KORN_FLNM);
 		List<PassDTO> list = passService.studentList(passDTO);
-		List<PassDTO> list_L = passService.studentLimit(passDTO);
-		mv.addObject("list",list);
-		mv.addObject("list_L",list_L);
-		return mv;
+		int list_L = passService.studentLimit(passDTO);
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		result.put("list", list);
+		result.put("list_L", list_L);
+		return result;
 	}
 
 	@ResponseBody

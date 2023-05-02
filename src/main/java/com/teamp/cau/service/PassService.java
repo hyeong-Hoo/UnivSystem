@@ -39,7 +39,7 @@ public class PassService {
 		passDAO.studentValue(passDTO);
 	}
 
-	public List<PassDTO> studentLimit(PassDTO passDTO) {
+	public int studentLimit(PassDTO passDTO) {
 		return passDAO.studentLimit(passDTO);
 	}
 }

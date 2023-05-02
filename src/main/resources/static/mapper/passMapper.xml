@@ -4,11 +4,11 @@
 <mapper namespace="list">
 
 
-	<select id="studentLimit" parameterType="PassDTO"	resultType="PassDTO">
+	<select id="studentLimit" parameterType="PassDTO"	resultType="Integer">
 
 		SELECT APPL_NUM
 		FROM CRCLM_INFO
-		WHERE CRCLM_CD = #{CRCLM_CD} AND RECRT_SCHDL_CD =#{RECRT_SCHDL_CD} AND RECRT_YEAR=#{RECRT_YEAR});
+		WHERE CRCLM_CD = #{CRCLM_CD} AND RECRT_SCHDL_CD =#{RECRT_SCHDL_CD} AND RECRT_YEAR=#{RECRT_YEAR};
 
 	</select>
 	

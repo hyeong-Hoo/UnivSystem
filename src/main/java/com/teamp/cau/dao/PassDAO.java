@@ -41,8 +41,8 @@ public class PassDAO {
 		
 	}
 
-	public List<PassDTO> studentLimit(PassDTO passDTO) {
-		return sqlSession.selectList("list.studentLimit",passDTO);
+	public int studentLimit(PassDTO passDTO) {
+		return sqlSession.selectOne("list.studentLimit",passDTO);
 	}
 
 }
