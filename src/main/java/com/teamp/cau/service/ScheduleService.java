@@ -1,6 +1,7 @@
 package com.teamp.cau.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class ScheduleService {
 	@Autowired
 	private ScheduleDAO scheduleDAO;
 
-	public List<ScheduleDTO> tableList() {
+	public List<Map<String, Object>> tableList() {
 		
 		return scheduleDAO.tableList();
 	}

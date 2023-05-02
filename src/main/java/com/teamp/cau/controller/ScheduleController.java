@@ -1,6 +1,7 @@
 package com.teamp.cau.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,8 +22,8 @@ public class ScheduleController {
 	}
 	
 	@GetMapping("/sch")
-	public List<ScheduleDTO> schtable(){
-		List<ScheduleDTO> list = scheduleService.tableList();
+	public List<Map<String, Object>> schtable(){
+		List<Map<String, Object>> list = scheduleService.tableList();
 		
 		return list;
 	}
