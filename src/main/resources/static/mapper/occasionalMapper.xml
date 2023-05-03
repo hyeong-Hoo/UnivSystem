@@ -3,11 +3,11 @@
 
 <mapper namespace="com.teamp.cau.dao.OccasionalDAO">
 
-	<select id="data" resultType="StudentDTO">
+	<select id="data" resultType="com.teamp.cau.dto.StudentDTO">
 
 		  SELECT *
   		  FROM APPL_INFO
-  		  WHERE category='수시'
+  		  WHERE RECRT_SCHDL_CD='2'
 	   
 
 	</select>

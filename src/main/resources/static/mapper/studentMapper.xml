@@ -3,7 +3,7 @@
 
 <mapper namespace="com.teamp.cau.dao.StudentDAO">
 	
-	<select id="studentList" parameterType="StudentDTO" resultType="StudentDTO">
+	<select id="studentList" parameterType="com.teamp.cau.dto.StudentDTO" resultType="com.teamp.cau.dto.StudentDTO">
 	
 		SELECT APPL_NO, KORN_FLNM, USER_BRDT, GENDER_CD, EML_ADDR, TELNO, REL_TELNO,
 	        REL_CD, ZIP, ADDR, DADDR, AGE 
