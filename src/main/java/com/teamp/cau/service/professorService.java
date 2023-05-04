@@ -2,6 +2,7 @@ package com.teamp.cau.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,18 @@ public class professorService {
 
 	public List<professorDTO> selectList(HashMap<String, String> search) {
 		return prDAO.search(search);
+	}
+
+	public Integer insert(String string, Map<String, Object> infoEnter) {
+		return prDAO.insert(infoEnter);
+	}
+
+	public Object giveAuth(String string, Map<String, Object> give) {
+		return prDAO.update(give);
+	}
+
+	public List<HashMap<String, Object>> selectList() {
+		return prDAO.select();
 	}
 	
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="APPL_INFO">
+    
+    <!-- 지원자 정보 불러오기 -->
+   	<select id="callin" resultType="HashMap">
+   		select appl_NO, CRCLM_CD, RECRT_YEAR, KORN_FLNM, GENDER_CD, grade, interview, avg, department from APPL_INFO;
+   	</select>
+</mapper>

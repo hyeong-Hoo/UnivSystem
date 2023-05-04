@@ -2,6 +2,8 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
 .app_no{ width:10%; text-align: center;}
@@ -13,10 +15,42 @@
 .grade{width:10%; text-align: center;}
 .interview{width:10%; text-align: center;}
 .department{width:10%; text-align: center;}
+table{ color: black;}
+th{ text-align: center; background-color: #c6cdd4; border: solid 0.5px;}
+td{ text-align: center;}
+input{ width:100%;}
+.send_btn{background-color: #3E74C7; color: white; border-radius: 3px;  height: 30px; width: 60px;}
 
 
 </style>
-
+<script type="text/javascript">
+$(function(){
+	
+	$(".send_btn").click(function(){
+		var length = $("#auth_body").children().length; //tr
+		var app_no = $(this).closet('tr').find(appl_no).text(); // 지원번호
+		var app_grade = $(this).closet('tr').find(grade).text(); // 학생부 점수 
+		var app_interview = $(this).closet('tr').find(interview).value(); // 면접 점수
+	
+  		for(var i=0; i<length; i++){
+	  		$("#auth_body").children().eq(i).children(".appl_no").text();
+  			$("#auth_body").children().eq(i).children(".appl_grade").text();
+  			$("#auth_body").children().eq(i).children(".appl_interview").value();
+  			var score = new array[];
+  			
+  		}
+		$.post({
+			url : "/pr_score",
+			dataType : "json",
+			data : {
+				"appl_no" : appl_no
+				"appl_grade" : appl_grade
+				"appl_interview" : appl_interview
+				}
+ 		})
+	});
+});
+</script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -156,8 +190,8 @@
                 <div id="collapseClass" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">교직관리</h6>
-                        <a class="collapse-item" href="pr_standard">기준정보관리</a>
-                        <a class="collapse-item" href="pr_info">교수정보</a>
+                        <a class="collapse-item" href="professor">교수정보입력</a>
+                        <a class="collapse-item" href="pr_info">교수정보권한</a>
                         <a class="collapse-item" href="pr_authority">면접평가</a>
                     </div>
                 </div>
@@ -246,7 +280,8 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">면접평가</h1>
                    	</div>
-                        <table id="datalist" class="display" style="width:100%">
+                   	<form action="/pr_authority" method="post">
+                        <table id="datalist" class="display" border="1" style="width:100%">
                         	<thead>
                         		<tr>
                         			<th class="app_no">접수번호</th>
@@ -254,17 +289,32 @@
                         			<th class="year">연도</th>
                         			<th class="app_name">이름</th>
                         			<th class="app_gender">성별</th>
-                        			<th class="avg">평균점수</th>
+                        			<th class="department">학과명</th>
                         			<th class="grade">환산점수(학생부)</th>
                         			<th class="interview">환산점수(면접)</th>
-                        			<th class="department">학과명</th>
+                        			<th class="avg">총점수</th>
                         		</tr>
                         	</thead>
-                        </table>
-                        <tbody>
+                       
+                        <tbody id="auth_body">
+                        <c:forEach items="${appl_list }" var="appl">
+                        	<tr>
+                        		<td class="appl_no">${appl.appl_NO }</td>
+                        		<td class="appl_code">${appl.CRCLM_CD }</td>
+                        		<td class="appl_year">${appl.RECRT_YEAR }</td>
+                        		<td class="appl_name">${appl.KORN_FLNM }</td>
+                        		<td class="appl_gender">${appl.GENDER_CD }</td>
+                        		<td class="appl_department">${appl.department }</td>
+                        		<td class="appl_grade">${appl.grade }</td>
+                        		<td class="appl_interview"><input type="text" value="${appl.interview }"></td>
+                        		<td class="appl_avg">${appl.avg }</td>
+                        	</tr>
+ 						</c:forEach>                   
                         </tbody>
-                    
-
+					 </table>
+					 <br>
+					 <button type="button" class="send_btn">저장</button>
+                	</form>
                 </div>
                 <!-- /.container-fluid -->
 
@@ -331,21 +381,5 @@
     <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
-<script type="text/javascript">
-$("#datalist").DataTable({
-	ajax: {url: "data.json", dataSrc: ''},
-	columns: [
-		{data:"appl_NO"}
-		{data:"CRCLM"}
-		{data:"CRCLM_CYCL"}
-		{data:"KORN_FLNM"}
-		{data:"GENDER_CD"}
-		{data:"avg"}
-		{data:"grade"}
-		{data:"interview"}
-		{data:"department"}
-		
-	]
-});
-</script>
+
 </html>

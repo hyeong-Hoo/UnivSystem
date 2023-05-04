@@ -22,6 +22,8 @@ thead{background-color: #c6cdd4;}
 .detail_addr{width:14%; text-align: center;}
 .gender{width:4%; text-align: center;}
 .authority{width:6%; text-align: center;}
+container-fluid{height: 100%;}
+.auth_btn{background-color: #3E74C7; color: white; border-radius: 3px;  height: 30px; width: 80px;}
 
 
 </style>
@@ -159,9 +161,9 @@ thead{background-color: #c6cdd4;}
                 <div id="collapseClass" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">교직관리</h6>
-                        <a class="collapse-item" href="pr_standard">기준정보관리</a>
-                        <a class="collapse-item" href="pr_info">교수정보</a>
-                        <a class="collapse-item" href="pr_authority">면접 평가</a>
+                        <a class="collapse-item" href="professor">교수정보입력</a>
+                        <a class="collapse-item" href="pr_info">교수정보권한</a>
+                        <a class="collapse-item" href="pr_authority">면접평가</a>
                     </div>
                 </div>
             </li>
@@ -257,19 +259,19 @@ thead{background-color: #c6cdd4;}
 						<!-- searchbox -->
 						<ul class="box">
 							<li class="t1">교수이름 &nbsp; <input type="text" name="name_search" id="name_search" value=${name_search }></li>
-							<li class="t2">학과명 &nbsp; <input type="text" name="code_search" id="code_search" value=${code_search }></li>
+							<li class="t2">학과코드 &nbsp; <input type="text" name="code_search" id="code_search" value=${code_search }></li>
 							<li class="t3"><button class="search_btn" type="button"><img alt="icon" src="img/search_icon.png" width="20" height="20"></button></li>
 						</ul>
 						</form>
                     </div>
                     <br>
-                        
+                   
 					<!-- 페이지 리스트  -->
 					<table border="1">
 						<thead>
 							<tr>
 								<th class="pr_no">교수번호</th>
-								<th class="major">학과명</th>
+								<th class="major">학과코드</th>
 								<th class="name">한글성명</th>
 								<th class="birth">생년월일</th>
 								<th class="email">이메일</th>
@@ -280,11 +282,11 @@ thead{background-color: #c6cdd4;}
 								<th class="authority">평가권한</th>
 							</tr>
 						</thead>
-						<c:forEach items="${list }" var="pr">
 						<tbody>
+						<c:forEach items="${list }" var="pr">
 							<tr>
 								<td class="pr_no">${pr.INSTR_NO }</td>
-								<td class="major">${pr.CRCLM }</td>
+								<td class="major">${pr.CRCLM_CD }</td>
 								<td class="name">${pr.KORN_FLNM }</td>
 								<td class="birth">${pr.USER_BRDT }</td>
 								<td class="email">${pr.EML_ADDR }</td>
@@ -292,11 +294,20 @@ thead{background-color: #c6cdd4;}
 								<td class="addr">${pr.ADDR }</td>
 								<td class="detail_addr">${pr.DADDR }</td>
 								<td class="gender">${pr.GENDER }</td>
-								<td class="authority">${pr.ENDST_NO }</td>
+								<td class="authority">
+								<select name="auth" id="auth" onchange="save(this.value)">
+									<option value="" selected disabled>선택</option>
+									<option id="0" value="0">없음</option>
+									<option id="1" value="1">권한</option>
+								</select>
+								</td>
 							</tr>
-						</tbody>
 						</c:forEach>
+						</tbody>
 					</table>
+					<br>
+					<button type="button" class="auth_btn">권한주기</button>
+					
                 </div>
                 <!-- /.container-fluid -->
 
@@ -370,5 +381,23 @@ $(function(){
 		$("#alt").submit();
 	})
 })
+
+$(function(){
+	$(".auth_btn").click(function(){
+		$("#auth").val(0);
+		$("#auth").val(1);
+		
+		$("#send").submit();
+	})
+})
+
+function save(auth){
+	
+}
+
+
+
+
+
 </script>
 </html>

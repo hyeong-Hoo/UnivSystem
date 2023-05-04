@@ -136,9 +136,9 @@
                 <div id="collapseClass" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">교직관리</h6>
-                        <a class="collapse-item" href="pr_standard">기준정보관리</a>
-                        <a class="collapse-item" href="pr_info">교수정보</a>
-                        <a class="collapse-item" href="pr_authority">평가항목권한</a>
+                        <a class="collapse-item" href="professor">교수정보입력</a>
+                        <a class="collapse-item" href="pr_info">교수정보권한</a>
+                        <a class="collapse-item" href="pr_authority">면접평가</a>
                     </div>
                 </div>
             </li>

@@ -2,15 +2,72 @@ package com.teamp.cau.dto;
 
 public class professorDTO {
 
-	private String KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, ADDR, DADDR, GENDER, ENDST_NO, CRCLM;
-	private int INSTR_NO;
+	private String KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, ADDR, DADDR, GENDER, ENDST_NO, CRCLM_CD, 
+					GENDER_CD, department;
+	private int INSTR_NO, appl_NO, RECRT_YEAR, avg, grade, interview;
 
-	public String getCRCLM() {
-		return CRCLM;
+	public String getGENDER_CD() {
+		return GENDER_CD;
 	}
 
-	public void setCRCLM(String cRCLM) {
-		CRCLM = cRCLM;
+	public void setGENDER_CD(String gENDER_CD) {
+		GENDER_CD = gENDER_CD;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public int getAppl_NO() {
+		return appl_NO;
+	}
+
+	public void setAppl_NO(int appl_NO) {
+		this.appl_NO = appl_NO;
+	}
+
+	public int getRECRT_YEAR() {
+		return RECRT_YEAR;
+	}
+
+	public void setRECRT_YEAR(int rECRT_YEAR) {
+		RECRT_YEAR = rECRT_YEAR;
+	}
+
+	public int getAvg() {
+		return avg;
+	}
+
+	public void setAvg(int avg) {
+		this.avg = avg;
+	}
+
+	public int getGrade() {
+		return grade;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+
+	public int getInterview() {
+		return interview;
+	}
+
+	public void setInterview(int interview) {
+		this.interview = interview;
+	}
+
+	public String getCRCLM_CD() {
+		return CRCLM_CD;
+	}
+
+	public void setCRCLM_CD(String cRCLM) {
+		CRCLM_CD = cRCLM;
 	}
 
 	public int getINSTR_NO() {
