@@ -3,7 +3,6 @@ package com.teamp.cau.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +14,12 @@ public class Get_studService {
 	@Autowired
 	private Get_studDAO get_studDAO;
 	
-	@Autowired
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	 private PasswordEncoder passwordEncoder;
+	    
+	    @Autowired
+	    public Get_studService(PasswordEncoder passwordEncoder) {
+	        this.passwordEncoder = passwordEncoder;
+	    }
 	
 	public List<Get_studDTO> studentList(Get_studDTO Get_studDTO) {
 		return get_studDAO.studentList(Get_studDTO);

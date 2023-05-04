@@ -12,8 +12,7 @@
 
 	</select>
 	
-	<select id="studentList" parameterType="PassDTO"
-		resultType="PassDTO">
+	<select id="studentList" parameterType="PassDTO" resultType="PassDTO">
 
 		SELECT *
 		FROM APPL_INFO
