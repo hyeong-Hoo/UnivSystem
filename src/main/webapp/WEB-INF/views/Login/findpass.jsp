@@ -28,62 +28,54 @@
 </style>
 </svg>      
     </div>
+    
+    
+    
     <form action="/findpass" method="post" class="log-in" autocomplete="off" onsubmit="return fnSubmit();"> 
-      <h4>여기는<span>  Cau</span></h4>
-      <p>비밀번호를 잃어버리셧다면 지금 당장 찾으십쇼</p>
+      <h4><span>  Cau</span>비밀번호 찾는 공간입니다.</h4>
+      <p>ID , 본인성명 , 핸드폰 번호를   입력해주세요.</p>
        <div class="floating-label">
-        <input placeholder="사용자ID" type="text" name="USER_ID" id="USER_ID" autocomplete="off" class="aim">
+        <input placeholder="사용자ID" type="text" name="USER_ID" id="USER_ID_ps" autocomplete="off" class="aim">
         <label for="email">사용자ID</label>
       </div>
       <div class="floating-label">
-        <input placeholder="이름" type="text" name="KORN_FLNM" id="KORN_FLNM" autocomplete="off" class="aim">
+        <input placeholder="이름" type="text" name="KORN_FLNM" id="KORN_FLNM_ps" autocomplete="off" class="aim">
         <label for="email">이름</label>
       </div>
       <div class="floating-label">
-        <input placeholder="핸드폰번호" type="text" name="TELNO" id="TELNO" autocomplete="off" class="aim">
+        <input placeholder="핸드폰번호" type="text" name="TELNO" id="TELNO_ps" autocomplete="off" class="aim">
         <label for="password">핸드폰번호</label>
       </div>
        <div><input type="radio" id="sms" name="sms" value="true" class="">SMS발송</div>
-       <div><input type="radio" id="none" name="none" value="false" class="">발송은 돈이들어요</div>
+       <div><input type="radio" id="im" name="none" value="false" class="">발송은 돈이들어요</div>
       <div><input type="submit" class="button" value="찾기" class="aim"></div>
-      <a href="/Login/findid" class="discrete" >아이디찾기</a>
+<!--       <a href="/findid" class="discrete" >아이디찾기</a> -->
+      	          <a onclick="openModal()" class="discrete" >아이디 찾기</a>
+      
     </form>
   </div>
 
 
 <script>
-    function validateForm() {
-        var smsChecked = document.getElementById("sms").checked;
-        var noneChecked = document.getElementById("none").checked;
-        
-        if (!smsChecked && !noneChecked) {
-            alert("발송 방법을 선택해주세요.");
-            return false;
-        }
-        
-        return true;
+document.querySelector('form').addEventListener('submit', function(event) {
+    var smsChecked = document.getElementById("sms").checked;
+    var imChecked = document.getElementById("im").checked;
+
+    if (!smsChecked && !imChecked) {
+        alert("발송 방법을 선택해주세요.");
+        return false;
+    } else if (smsChecked) {
+        imChecked = false;
+    } else if (imChecked) {
+        smsChecked = false;
     }
     
-    $(document).ready(function() {
-        $("form").submit(function(event) {
-            return validateForm();
-        });
-    });
+    return true;
+});
+
     
-    $(document).ready(function() {
-        $("input[name='sms']").click(function() {
-            $("input[name='none']").prop("checked", false);
-        });
-        
-        $("input[name='none']").click(function() {
-            $("input[name='sms']").prop("checked", false);
-        });
-    });
 
 </script>
-
-
-
 
 
 </body>

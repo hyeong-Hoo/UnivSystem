@@ -80,13 +80,13 @@ public class UserController {
         return "redirect:/";
     }
     
-    @GetMapping("/Login/findid")
+    @GetMapping("/findid")
     public String findid() {   //아이디 찾기 페이지
         return "Login/findid";
     }
     
     
-    @PostMapping("/Login/findid")	//아이디 찾기
+    @PostMapping("/findid")	//아이디 찾기
     public String findIdByNameAndTel(@RequestParam String KORN_FLNM, @RequestParam String TELNO, Model model) {
         String USER_ID = userService.findIdByNameAndTel(KORN_FLNM, TELNO);
         if (USER_ID == null) {
@@ -102,15 +102,13 @@ public class UserController {
         return "Login/findpass";
     }
 
-    @PostMapping("/findpass")	// 비밀번호 찾기
+    @PostMapping("/findpass")
     public String findPass(@RequestParam String USER_ID, @RequestParam String KORN_FLNM, @RequestParam String TELNO, @RequestParam(required = false) boolean sms, Model model) throws JsonProcessingException, RestClientException, URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
         String tempPassword = userService.resetPassword(USER_ID, KORN_FLNM, TELNO);
         if (tempPassword == null) {
-            model.addAttribute("error", "User not found");
-            return "error";
+            model.addAttribute("error", "입력한 정보에 해당하는 계정을 찾을 수 없습니다.");
+            return "Login/findpass";
         }
-        
-        // SMS 발송을 선택한 경우
         if (sms) {
             MessageDTO messageDto = new MessageDTO();
             messageDto.setTo(TELNO);
@@ -118,10 +116,13 @@ public class UserController {
             SmsResponseDTO response = smsService.sendSms(messageDto);
             model.addAttribute("response", response);
         }
-        
         model.addAttribute("tempPassword", tempPassword);
         return "Login/resultpass";
     }
+
+    
+    
+    
     /*
     @GetMapping("/signup")
     public String signupPage() {  // 회원 가입 페이지

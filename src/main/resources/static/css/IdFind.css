@@ -71,6 +71,7 @@ a.discrete {
 }
 a.discrete:hover {
   border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 .button {
@@ -84,12 +85,13 @@ a.discrete:hover {
   background-color: #6b91c8;
   color: #fff;
   font-size: 14px;
-  margin-left: auto;
+  margin-left: 80px;
   font-weight: 500;
   box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
   border: none;
   transition: all 0.3s ease;
   outline: 0;
+  
 }
 .button:hover {
   transform: translateY(-3px);
@@ -122,6 +124,7 @@ a.discrete:hover {
 .floating-label {
   position: relative;
   margin-bottom: 10px;
+  
 }
 .floating-label label {
   position: absolute;
@@ -159,8 +162,8 @@ a.discrete:hover {
   height: auto;
   margin: auto auto;
   background: #ffffff;
-  border-radius: 4px;
-  box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.12);
+/*   border-radius: 4px; 
+   box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.12); */
 }
 
 .left {

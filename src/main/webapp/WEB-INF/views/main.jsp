@@ -7,14 +7,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<head>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<head>
 <script>
 $(function(){
     $("#Admission").click(function(){
         location.href = 'Admission';
     });
 });
+
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -138,13 +141,41 @@ $(function(){
         text-align:center;
         margin: 0 auto;
         margin-top:60px;
-        border-radius:2px;
         width:400px;
         height:100px;
         font-weight:600;
         color:darkblue;
         background-color:#e3c102;
     }
+    .modalbox{
+            color:darkblue;
+            width:400px;
+            height:30px;
+            margin: 0 auto;
+     		text-align:center;
+            background-color:#e3c102;
+    		
+    }
+    .modalbox a{
+            color:darkblue;
+    }
+    .modalbox a:hover {
+cursor: pointer;
+}
+
+.mymodal{
+	display:none; 
+	position:fixed; 
+	z-index:1;
+	padding-top:100px;
+	left:0; 
+	top:0; 
+	width:100%;
+	height:100%; 
+	overflow:auto;
+	background-color:rgba(0,0,0,0.4);
+}
+
     input[type=text]{
     border-style:none;
     border-radius:3px;
@@ -305,6 +336,12 @@ $(function(){
     	color:white;
     	cursor : pointer;
     }
+    .clsbt:hover{
+    color:gray;
+    	cursor : pointer;
+    }
+    
+  
 </style>
 </head>
 <body>
@@ -324,12 +361,12 @@ $(function(){
             <span class="logo_bottom-text3">Choogang Login</span>
             <button type="button" class="Admission_btn" id="Admission">입학지원</button>
             <% if (request.getUserPrincipal() == null) { %>
-            <form action="/auth" method="post">
             <table class="login">
             <tr>
 <!--             <td>학생<input type="radio" name="chu">교수<input type="radio" name="chu"></td> -->
             </tr>
             <tr>
+            <form action="/auth" method="post">
         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             <td><input type="text" name="USER_ID" placeholder="아이디"></td>
             <td rowspan="2"><button type="submit" class="login-btn">로그인</button></td>
@@ -337,9 +374,84 @@ $(function(){
             <tr>
             <td><input type="password"  name="PSWD" placeholder="비밀번호"></td>
             </tr>
-            <td><div id="findIdFw"></div><a href="/Login/findid" onclick="location.href='Login/findid.jsp'">아이디찾기 / 비밀번호찾기</a></div></td>
-            </table>
             </form>
+            </table>
+
+<div class="modalbox"><a onclick="openModal()">아이디찾기 / 비밀번호찾기</a></div>
+
+<div id="myModal" class="mymodal">
+  <div style="background-color:#fefefe; margin:auto;  border:1px solid #888; width:40%;">
+    <span onclick="closeModal()" class="clsbt" style="float:right; font-size:28px; font-weight:bold; margin-right: 20px;
+    clear:both; z-index: 99999;">&times;</span>
+    <div>
+      <%@ include file="/WEB-INF/views/Login/findid.jsp" %>
+    </div>
+  </div>
+</div>
+
+<div id="findPassModal" class="mymodal">
+  <div style="background-color:#fefefe; margin:auto;  border:1px solid #888; width:40%;">
+    <span onclick="closepassModal()" class="clsbt" style="float:right; font-size:28px; font-weight:bold; margin-right: 20px;
+    clear:both; z-index: 99999; ">&times;</span>
+    <div>
+      <%@ include file="/WEB-INF/views/Login/findpass.jsp" %>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal() {
+	  var findIdModal = document.getElementById("myModal");
+	  var findPassModal = document.getElementById("findPassModal");
+
+	  if (findPassModal) {
+	    findPassModal.style.display = 'none';
+	  }
+	  if (findIdModal) {
+	    findIdModal.style.display = "block";
+	  }
+	
+	}
+
+
+function closeModal() {
+  var modal = document.getElementById("myModal");
+  var findPassModal = document.getElementById("findPassModal");
+
+  modal.style.display = 'none';
+  document.getElementById('KORN_FLNM_ID').value = '';
+  document.getElementById('TELNO_ID').value = '';
+  var warningMsg = modal.querySelector(".warning");
+  if (warningMsg) {
+    warningMsg.remove();
+  }
+}
+
+function openFindPassModal() {
+	  var findIdModal = document.getElementById("myModal");
+	  var findPassModal = document.getElementById("findPassModal");
+
+	  if (findIdModal) {
+	    findIdModal.style.display = 'none';
+	  }
+	  if (findPassModal) {
+	    findPassModal.style.display = "block";
+	  }
+	  closeModal(); // findId 모달을 닫는 함수 호출
+
+	}
+
+
+function closepassModal() {
+  var findPassModal = document.getElementById("findPassModal");
+  findPassModal.style.display = 'none';
+  
+  document.getElementById('USER_ID_ps').value = '';
+  document.getElementById('KORN_FLNM_ps').value = '';
+  document.getElementById('TELNO_ps').value = '';
+  
+}
+</script>
             <% } else { %>
             	<table class="login">
             <tr>
@@ -348,8 +460,11 @@ $(function(){
         	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
        		 <button type="submit" class="logout-btn">로그아웃</button>
    			 </form>
+   			 
    			</td>
             </tr>
+            
+            
             </table>
             <% } %>
             <span class="logo_bottom-text4">개인정보처리방침</span>
