@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.teamp.cau.dto.Get_studDTO;
 import com.teamp.cau.dto.PassDTO;
 @Repository
 public class PassDAO {
@@ -38,6 +39,10 @@ public class PassDAO {
 		
 		PassDTO resultDTO = sqlSession.selectOne("list.studentValue",passDTO);
 		sqlSession.selectList("list.studentSubmit1", resultDTO);
+		System.out.println(resultDTO);
+		PassDTO resultDTO1 = sqlSession.selectOne("list.studentValue1",passDTO);
+		sqlSession.selectList("list.studentSubmit2", resultDTO1);
+		System.out.println(resultDTO1);
 		
 	}
 
