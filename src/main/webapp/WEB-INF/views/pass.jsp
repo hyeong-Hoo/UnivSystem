@@ -59,6 +59,7 @@ $(function(){
 							+ '<td class="telno_m">' + info.telno + '</td>'
 							+ '<td>' + info.rel_TELNO + '</td>'
 							+ '<td>' + info.avg + '</td>'
+							+'<input class="CRCLMCD" type="hidden" value='+info.crclm_CD + '>'
 							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
 							$('.table_body').append(str);
 							$('#'+selectid).val(info.pass_INFO).attr("selected", "selected");
@@ -138,10 +139,18 @@ $(function(){
 		if(confirm("체크된 인원들을 입학 확정시키겠습니까?")){
 	    var checkBoxArr = new Array(); 
 		var num=0;
+		var date = new Date();
+        var nowYear = date.getFullYear();
+        
+        
 	  $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
 	 		 var  state= $(this).closest('tr').find('.appl_no').text();
+	 		 var  crclm= $(this).closest('tr').find('.CRCLMCD').val();
+	 		 
 			num=num+1;
-		  	checkBoxArr[i] = {"no" : i, "appl_NO" : state}
+			 var Student_id=nowYear+crclm+num;
+				alert(Student_id);
+		  	checkBoxArr[i] = {"no" : i, "appl_NO" : state,"Student_id" : Student_id}
 		});
 	$.ajax({	
 			url : "/admission",

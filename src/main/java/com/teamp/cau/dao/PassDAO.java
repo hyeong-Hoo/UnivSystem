@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.teamp.cau.dto.Get_studDTO;
@@ -13,6 +15,7 @@ public class PassDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
 	public List<PassDTO> studentList(PassDTO passDTO) {
@@ -38,11 +41,11 @@ public class PassDAO {
 	public void studentValue(PassDTO passDTO) {
 		
 		PassDTO resultDTO = sqlSession.selectOne("list.studentValue",passDTO);
+		resultDTO.setStudent_ID(passDTO.getStudent_ID());
 		sqlSession.selectList("list.studentSubmit1", resultDTO);
-		System.out.println(resultDTO);
+
 		PassDTO resultDTO1 = sqlSession.selectOne("list.studentValue1",passDTO);
 		sqlSession.selectList("list.studentSubmit2", resultDTO1);
-		System.out.println(resultDTO1);
 		
 	}
 
