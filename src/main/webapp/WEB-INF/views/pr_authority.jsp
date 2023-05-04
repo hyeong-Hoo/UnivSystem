@@ -1,186 +1,46 @@
-<<<<<<< HEAD
-=======
-
 <!DOCTYPE html>
 
->>>>>>> refs/heads/refs/heads/loginhab
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
-<head>
 
+<style>
+.app_no{ width:10%; text-align: center;}
+.crclm_code{ width:10%; text-align: center;}
+.year{width:10%; text-align: center;}
+.app_name{width:10%; text-align: center;}
+.app_gender{width: 10%; text-align: center;}
+.avg{width:10%; text-align: center;}
+.grade{width:10%; text-align: center;}
+.interview{width:10%; text-align: center;}
+.department{width:10%; text-align: center;}
+
+
+</style>
+
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-<<<<<<< HEAD
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-<link
-   href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-   rel="stylesheet"
-   integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-   crossorigin="anonymous">
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-    <title>SB Admin 2 - Dashboard</title>
-=======
 
-    <title>CAU - 메인페이지</title>
-
->>>>>>> refs/heads/refs/heads/loginhab
+    <title>CAU - 평가단계  </title>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-<style type="text/css">
-
-span{
-display: block;
-}
-.box{
-width: calc(100% - 225px;);
-height: auto;
-}
-.menubar{
-width: auto;
-height: 30px;
-padding-left:20px;
-text-align:center;
-line-height: 30px;
-background-color: #4D72DF;
-font-size: 12px;
-}
-.barmenu {
-	display: block;
-   float: left;
-   color: white;
-}
-.closebtn {
-   float: left;
-   background-color: #4D72DF;
-   border: none;
-   color: white;
-   height: 30px;
-   text-align: center;
-   line-height: 30px;
-   border-top-right-radius: 5px;
-}
-
-.contentbox{
-width: 100%;
-height: auto;
-position: relative;
-}
-.testcontent{
-width: inherit;
-height: inherit;
-position: absolute;
-background-color: white;
-}
-.on1{
-border-top-left-radius: 5px;
-background-color: white;
-color: black;
-}
-.on2{
-background-color: white;
-color: black;
-}
-
-
-</style>    
-<script type="text/javascript">
-$(function() {
-
-    $(".collapse-item").click(function() {
-                   var divid = $(this).attr('id');
-                   var btnid = "btn" + divid;
-                   var menuid = "menu" + divid;
-                   var contentid = "content" + divid;
-                   var btn = "<div class='tap'><span class='barmenu'"+"id="+menuid+"></span><input class='closebtn' type='button' value='x'"+"id="+btnid+"></div>";
-                   var content = "<div class='testcontent'"+"id="+contentid+"></div>"
-                         $.ajax({
-                            url : "/tester",
-                            type : "post",
-                            cache : false,
-                            dataType : "html",
-                            data : {id : divid},
-                            success : function(good) {
-                            	$(document).ready(function(){
-                                    $("#" + contentid).load(good);                            		
-                                 	});
-                            }
-                         });
-                   if ($("#"+contentid).length) {
-                      $("#contentbox").empty();
-                      $("#contentbox").append(content);
-                   } else {
-                      $("#contentbox").append(content);
-                   }
-                      if ($("#" + menuid).length) {
-                    	  $("#"+menuid).attr('class','barmenu on1');
-                          $("#"+menuid).next().attr('class','closebtn on2');
-                          $("#"+menuid).parent().prevAll().children('span').attr('class','barmenu');
-                          $("#"+menuid).parent().prevAll().children('input').attr('class','closebtn');
-                          $("#"+menuid).parent().nextAll().children('span').attr('class','barmenu');
-                          $("#"+menuid).parent().nextAll().children('input').attr('class','closebtn');
-                      } else {
-                         $("#menubar").append(btn);
-                         $("#" + menuid).text($(this).text());
-                        	 $("#"+menuid).attr('class','barmenu on1');
-                             $("#"+menuid).next().attr('class','closebtn on2');
-                             $("#"+menuid).parent().prevAll().children('span').attr('class','barmenu');
-                             $("#"+menuid).parent().prevAll().children('input').attr('class','closebtn');
-                     }
-                      $("#"+menuid).click(function() {
-                    	  $("#"+menuid).attr('class','barmenu on1');
-                          $("#"+menuid).next().attr('class','closebtn on2');
-                          $(this).parent().prevAll().children('span').attr('class','barmenu');
-                          $(this).parent().prevAll().children('input').attr('class','closebtn');
-                          $(this).parent().nextAll().children('span').attr('class','barmenu');
-                          $(this).parent().nextAll().children('input').attr('class','closebtn');
-                         $.ajax({
-                            url : "/tester",
-                            type : "post",
-                            cache : false,
-                            dataType : "html",
-                            data : {id : divid},
-                            success : function(good) {
-                            	$(document).ready(function(){
-                               $("#" + contentid).load(good);                            		
-                            	});
-                            }
-                         });
-                         if ($("#"+contentid).length) {
-                        	 $("#contentbox").empty();
-                             $("#contentbox").append(content);
-                         } else {
-                            $("#contentbox").append(content);
-                         }
-                         
-                      });
-                      $(document).on("click", "#"+btnid,
-                            function() {
-                               $(this).parent().remove();
-                               $("#" + contentid).remove();
-                            });
-                      $(document).on("click", ".on2", function(){
-                    	  if($(this).parent().prev().val() == "undefined"){
-              	  			$(this).parent().next().children('span').trigger('click');
-              	  		}else if($(this).parent().prev().val() == ""){
-              	  			$(this).parent().prev().children('span').trigger('click');
-              	  		}else{
-              	  			
-              	  		} 
-                      });
-                });
-
- });
-</script>
-
+	<!--  jquery -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </head>
-
+	<!-- grid -->
+	<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+	<!-- jquery CDN -->
+	<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -191,16 +51,16 @@ $(function() {
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index">
-<!--                 <div class="sidebar-brand-icon rotate-n-15"> -->
-<!--                     <i class="fas fa-laugh-wink"></i> -->
-						<img src="/images/Logo.png" style="width:90px;height:90px">
-<!--                 </div> -->
-                <div class="sidebar-brand-text mx-3"> </div>
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">CAU </div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
+          
 
             <!-- Nav Item - 공통관리  Collapse Menu -->
             <li class="nav-item">
@@ -223,30 +83,19 @@ $(function() {
 
             <!-- Nav Item - 학생관리  Collapse Menu -->
             <li class="nav-item">
-<<<<<<< HEAD
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-=======
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-folder"></i>
->>>>>>> refs/heads/refs/heads/loginhab
                     <span>학생관리</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">학생관리</h6>
-<<<<<<< HEAD
-                        <span class="collapse-item" id="1">기준정보관리</span>
-                        <span class="collapse-item" id="2">학적부여관리</span>
-                        <span class="collapse-item" id="3">입학정원관리</span>
-                        <span class="collapse-item" id="4">개인신상조회</span>
-=======
                         <a class="collapse-item" href="stud_standard">기준정보관리</a>
                         <a class="collapse-item" href="stud_record">학적부여관리</a>
                         <a class="collapse-item" href="stud_admission">입학정원관리</a>
                         <a class="collapse-item" href="stud_personal">개인신상조회</a>
->>>>>>> refs/heads/refs/heads/loginhab
                     </div>
                 </div>
             </li>
@@ -260,22 +109,6 @@ $(function() {
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">입시관리</h6>
-<<<<<<< HEAD
-                        <a class="collapse-item" href="blank">기준정보관리</a>
-                        <a class="collapse-item" href="login">고교정보관리 </a>
-                        <a class="collapse-item" href="register">환산등급관리 </a>
-                        <a class="collapse-item" id="10">모집요강</a>
-                        <a class="collapse-item" id="11">모집일 관리</a>
-                        <a class="collapse-item" id="12">입학학생관리</a>
-                        <a class="collapse-item" href="blank">지원자확인용</a>
-                        <a class="collapse-item" href="blank">내신성적관리</a>
-                        <a class="collapse-item" href="blank">수능성적관리</a>
-                        <a class="collapse-item" href="blank">입상성적관리</a>
-                        <a class="collapse-item" href="blank">입학사정관리</a>
-                        <a class="collapse-item" href="blank">총원합격관리</a>
-                        <a class="collapse-item" href="blank">합격확정관리</a>
-                        <a class="collapse-item" href="blank">신입생관리</a>
-=======
                         <a class="collapse-item" href="ent_standard">기준정보관리</a>
                         <a class="collapse-item" href="ent_highschool">고교정보관리 </a>
                         <a class="collapse-item" href="ent_grade">환산등급관리 </a>
@@ -291,7 +124,6 @@ $(function() {
                         <a class="collapse-item" href="ent_memberspassed">총원합격관리</a>
                         <a class="collapse-item" href="ent_acceptance">합격확정관리</a>
                         <a class="collapse-item" href="ent_freshman">신입생관리</a>
->>>>>>> refs/heads/refs/heads/loginhab
                         
                     </div>
                 </div>
@@ -315,7 +147,7 @@ $(function() {
             </li>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClass"
                     aria-expanded="true" aria-controls="collapseClass">
                     <i class="fas fa-fw fa-folder"></i>
@@ -326,7 +158,7 @@ $(function() {
                         <h6 class="collapse-header">교직관리</h6>
                         <a class="collapse-item" href="pr_standard">기준정보관리</a>
                         <a class="collapse-item" href="pr_info">교수정보</a>
-                        <a class="collapse-item" href="pr_authority">평가항목권한</a>
+                        <a class="collapse-item" href="pr_authority">면접평가</a>
                     </div>
                 </div>
             </li>
@@ -408,20 +240,32 @@ $(function() {
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
+                <div class="container-fluid">
 
-<<<<<<< HEAD
-                    <div class="box">
-                    	<div class="menubar" id="menubar"></div>
-                    	<div class="contentbox" id="contentbox"></div>
-=======
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">메인페이지</h1>
-                        
->>>>>>> refs/heads/refs/heads/loginhab
-                    </div>
+                        <h1 class="h3 mb-0 text-gray-800">면접평가</h1>
+                   	</div>
+                        <table id="datalist" class="display" style="width:100%">
+                        	<thead>
+                        		<tr>
+                        			<th class="app_no">접수번호</th>
+                        			<th class="crclm_code">학과코드</th>
+                        			<th class="year">연도</th>
+                        			<th class="app_name">이름</th>
+                        			<th class="app_gender">성별</th>
+                        			<th class="avg">평균점수</th>
+                        			<th class="grade">환산점수(학생부)</th>
+                        			<th class="interview">환산점수(면접)</th>
+                        			<th class="department">학과명</th>
+                        		</tr>
+                        	</thead>
+                        </table>
+                        <tbody>
+                        </tbody>
+                    
 
-                
+                </div>
                 <!-- /.container-fluid -->
 
             </div>
@@ -467,6 +311,7 @@ $(function() {
             </div>
         </div>
     </div>
+	
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -485,10 +330,22 @@ $(function() {
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
 
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
-<script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-      crossorigin="anonymous"></script>
 </body>
+<script type="text/javascript">
+$("#datalist").DataTable({
+	ajax: {url: "data.json", dataSrc: ''},
+	columns: [
+		{data:"appl_NO"}
+		{data:"CRCLM"}
+		{data:"CRCLM_CYCL"}
+		{data:"KORN_FLNM"}
+		{data:"GENDER_CD"}
+		{data:"avg"}
+		{data:"grade"}
+		{data:"interview"}
+		{data:"department"}
+		
+	]
+});
+</script>
 </html>
