@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.teamp.cau.dto.professorDTO;
@@ -111,11 +113,13 @@ public class professorController {
 	}
 	
 	// 면접평가 점수 저장 
+	@ResponseBody
 	@PostMapping("/pr_score")
-	public ModelAndView grade(HttpServletRequest req) {
-		ModelAndView mv = new ModelAndView("pr_authority");
-		
-		return mv;
+	public String score(@RequestParam("appl_no")int appl_no, @RequestParam("appl_grade") int appl_grade, @RequestParam("appl_interview") int appl_interview) {
+
+		System.out.println(appl_no);
+		System.out.println(appl_grade);
+		return "pr_authority";
 	}
 	
 }

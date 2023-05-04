@@ -28,26 +28,36 @@ $(function(){
 	
 	$(".send_btn").click(function(){
 		var length = $("#auth_body").children().length; //tr
-		var app_no = $(this).closet('tr').find(appl_no).text(); // 지원번호
+ 		var app_no = $("datalist").closet('tr').find(appl_no).text(); // 지원번호
+ 		alert(app_no);
 		var app_grade = $(this).closet('tr').find(grade).text(); // 학생부 점수 
 		var app_interview = $(this).closet('tr').find(interview).value(); // 면접 점수
 	
   		for(var i=0; i<length; i++){
-	  		$("#auth_body").children().eq(i).children(".appl_no").text();
-  			$("#auth_body").children().eq(i).children(".appl_grade").text();
-  			$("#auth_body").children().eq(i).children(".appl_interview").value();
-  			var score = new array[];
+ 	  		alert($("#auth_body").children().eq(i).children(".appl_no").text());
+	   		$("#auth_body").children().eq(i).children(".appl_grade").text();
+	   		$("#auth_body").children().eq(i).children(".appl_interview").value();
   			
+//   			var score = new array[];
+//   			array[i] = {"length" = i, "appl_no" : appl_no, "appl_grade" : appl_grade, "appl_interview" : appl_interview};
+
   		}
-		$.post({
-			url : "/pr_score",
-			dataType : "json",
-			data : {
-				"appl_no" : appl_no
-				"appl_grade" : appl_grade
-				"appl_interview" : appl_interview
-				}
- 		})
+// 		$.ajax({
+// 			url : "/pr_score",
+// 			type : "post",
+// 			dataType : "json",
+// 			data : {
+// 				"appl_no" : appl_no,
+// 				"appl_grade" : appl_grade,
+// 				"appl_interview" : appl_interview
+// 				},
+// 				success:function(data){
+// 				},
+// 				error:function(){
+// 					alert("error");
+// 				}
+			
+//  		})
 	});
 });
 </script>

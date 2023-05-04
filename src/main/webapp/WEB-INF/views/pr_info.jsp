@@ -379,21 +379,20 @@ $(function(){
 		$("#code_search").val();
 		$("#name_search").val();
 		$("#alt").submit();
-	})
-})
-
-$(function(){
+	});
+	
 	$(".auth_btn").click(function(){
 		$("#auth").val(0);
 		$("#auth").val(1);
 		
 		$("#send").submit();
-	})
-})
+	});
+});
 
-function save(auth){
-	
-}
+
+
+
+
 
 
 
