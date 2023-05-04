@@ -4,8 +4,21 @@
 <mapper namespace="com.teamp.cau.dao.ScheduleDAO">
 	
 	<select id="tableList" resultType="HashMap">
-		SELECT RECRT_YEAR, SCHDL_NAME, SCHDL_START, SCHDL_END_DT
+		SELECT RECRT_YEAR, SCHDL_NAME, SCHDL_START, SCHDL_END_DT, RECRT_SCHDL_CD
 		FROM RECRT_SCHDL
+		ORDER BY RECRT_YEAR DESC
+	</select>
+	<select id="scheduleCheck" resultType="HashMap" parameterType="com.teamp.cau.dto.ScheduleDTO">
+	<if test="RECRT_YEAR != 'all'">
+		SELECT RECRT_YEAR, SCHDL_NAME, SCHDL_START, SCHDL_END_DT, RECRT_SCHDL_CD
+		FROM RECRT_SCHDL
+		WHERE RECRT_YEAR = #{RECRT_YEAR }
+	</if>	
+	<if test="RECRT_YEAR == 'all'">
+		SELECT RECRT_YEAR, SCHDL_NAME, SCHDL_START, SCHDL_END_DT, RECRT_SCHDL_CD
+		FROM RECRT_SCHDL
+		ORDER BY RECRT_YEAR DESC
+	</if>
 	</select>
 	
 </mapper>
