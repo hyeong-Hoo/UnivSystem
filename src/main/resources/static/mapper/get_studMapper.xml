@@ -10,7 +10,7 @@
 		SELECT *
 		FROM STUD_INFO
 		WHERE department = #{department} AND category =#{category} AND
-		KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
+		payment="1" AND		KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
 		ORDER BY avg DESC
 
 	</select>

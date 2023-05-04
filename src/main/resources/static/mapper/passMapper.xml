@@ -19,7 +19,8 @@
 		FROM APPL_INFO
 		WHERE PASS_INFO  <![CDATA[<]]> 3 
 		AND CRCLM_CD = #{CRCLM_CD} AND RECRT_SCHDL_CD =#{RECRT_SCHDL_CD} AND
-		(passed="합격" or passed="서류합격" ) AND RECRT_YEAR=#{RECRT_YEAR} AND 
+		passed="합격" AND RECRT_YEAR=#{RECRT_YEAR} AND 
+		payment="1" AND
 		KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
 		ORDER BY avg DESC
 
