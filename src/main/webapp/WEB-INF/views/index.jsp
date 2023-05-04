@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-=======
-
-<!DOCTYPE html>
-
->>>>>>> refs/heads/refs/heads/loginhab
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
@@ -13,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-<<<<<<< HEAD
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
 <link
    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -22,15 +15,12 @@
    crossorigin="anonymous">
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
     <title>SB Admin 2 - Dashboard</title>
-=======
-
-    <title>CAU - 메인페이지</title>
-
->>>>>>> refs/heads/refs/heads/loginhab
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 <style type="text/css">
@@ -191,66 +181,63 @@ $(function() {
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index">
-<!--                 <div class="sidebar-brand-icon rotate-n-15"> -->
-<!--                     <i class="fas fa-laugh-wink"></i> -->
-						<img src="/images/Logo.png" style="width:90px;height:90px">
-<!--                 </div> -->
-                <div class="sidebar-brand-text mx-3"> </div>
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">CAU </div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="index">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>목록</span></a>
+            </li>
 
-            <!-- Nav Item - 공통관리  Collapse Menu -->
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-folder"></i>
+                    <i class="fas fa-fw fa-cog"></i>
                     <span>공통관리</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">공통관리</h6>
-                        <a class="collapse-item" href="com_department">부서정보관리</a>
-                        <a class="collapse-item" href="com_userinfo">사용자정보관리</a>
-                        <a class="collapse-item" href="com_right">권한관리</a>
-                        <a class="collapse-item" href="com_notice">공통게시판관리</a>
-                        <a class="collapse-item" href="com_pw">비밀번호변경</a>
+                        <a class="collapse-item" href="buttons">코드관리</a>
+                        <a class="collapse-item" href="cards">사용자정보 관리</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Nav Item - 학생관리  Collapse Menu -->
+            <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-<<<<<<< HEAD
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-=======
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-folder"></i>
->>>>>>> refs/heads/refs/heads/loginhab
                     <span>학생관리</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">학생관리</h6>
-<<<<<<< HEAD
                         <span class="collapse-item" id="1">기준정보관리</span>
                         <span class="collapse-item" id="2">학적부여관리</span>
                         <span class="collapse-item" id="3">입학정원관리</span>
                         <span class="collapse-item" id="4">개인신상조회</span>
-=======
-                        <a class="collapse-item" href="stud_standard">기준정보관리</a>
-                        <a class="collapse-item" href="stud_record">학적부여관리</a>
-                        <a class="collapse-item" href="stud_admission">입학정원관리</a>
-                        <a class="collapse-item" href="stud_personal">개인신상조회</a>
->>>>>>> refs/heads/refs/heads/loginhab
                     </div>
                 </div>
             </li>
-            <!-- Nav Item - 입시관리  Collapse Menu -->
+            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
@@ -260,7 +247,6 @@ $(function() {
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">입시관리</h6>
-<<<<<<< HEAD
                         <a class="collapse-item" href="blank">기준정보관리</a>
                         <a class="collapse-item" href="login">고교정보관리 </a>
                         <a class="collapse-item" href="register">환산등급관리 </a>
@@ -275,60 +261,23 @@ $(function() {
                         <a class="collapse-item" href="blank">총원합격관리</a>
                         <a class="collapse-item" href="blank">합격확정관리</a>
                         <a class="collapse-item" href="blank">신입생관리</a>
-=======
-                        <a class="collapse-item" href="ent_standard">기준정보관리</a>
-                        <a class="collapse-item" href="ent_highschool">고교정보관리 </a>
-                        <a class="collapse-item" href="ent_grade">환산등급관리 </a>
-                        <a class="collapse-item" href="ent_guideline">모집요강관리</a>
-                        <a class="collapse-item" href="ent_selection">선발전형배점 </a>
-                        <a class="collapse-item" href="ent_application">입학원서관리</a>
-                        <a class="collapse-item" href="ent_student">입학학생관리</a>
-                        <a class="collapse-item" href="ent_volunteer">지원자확인용</a>
-                        <a class="collapse-item" href="ent_schoolgrade">내신성적관리</a>
-                        <a class="collapse-item" href="ent_SATscore">수능성적관리</a>
-                        <a class="collapse-item" href="ent_prize">입상성적관리</a>
-                        <a class="collapse-item" href="ent_admission">입학사정관리</a>
-                        <a class="collapse-item" href="ent_memberspassed">총원합격관리</a>
-                        <a class="collapse-item" href="ent_acceptance">합격확정관리</a>
-                        <a class="collapse-item" href="ent_freshman">신입생관리</a>
->>>>>>> refs/heads/refs/heads/loginhab
                         
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
-             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRegister"
-                    aria-expanded="true" aria-controls="collapseRegister">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>등록관리</span>
-                </a>
-                <div id="collapseRegister" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">등록관리</h6>
-                        <a class="collapse-item" href="regi_standard">기준정보관리</a>
-                        <a class="collapse-item" href="regi_cost">등록금액관리</a>
-                        <a class="collapse-item" href="regi_costall">등록금관련 전부</a>
-                    </div>
-                </div>
+            <li class="nav-item">
+                <a class="nav-link" href="charts">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>등록관리</span></a>
             </li>
 
-            <!-- Nav Item - Charts -->
+            <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClass"
-                    aria-expanded="true" aria-controls="collapseClass">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>교직관리</span>
-                </a>
-                <div id="collapseClass" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">교직관리</h6>
-                        <a class="collapse-item" href="pr_standard">기준정보관리</a>
-                        <a class="collapse-item" href="pr_info">교수정보</a>
-                        <a class="collapse-item" href="pr_authority">평가항목권한</a>
-                    </div>
-                </div>
+                <a class="nav-link" href="tables">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>교직관리</span></a>
             </li>
 
             <!-- Divider -->
@@ -409,16 +358,9 @@ $(function() {
 
                 <!-- Begin Page Content -->
 
-<<<<<<< HEAD
                     <div class="box">
                     	<div class="menubar" id="menubar"></div>
                     	<div class="contentbox" id="contentbox"></div>
-=======
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">메인페이지</h1>
-                        
->>>>>>> refs/heads/refs/heads/loginhab
                     </div>
 
                 
