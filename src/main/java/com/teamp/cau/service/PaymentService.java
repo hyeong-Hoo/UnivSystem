@@ -14,15 +14,17 @@ public class PaymentService {
 	@Autowired
 	private PaymentDAO paymentDAO;
 
-	public List<StudentDTO> paymentList(String KORN_FLNM, String USER_BRDT) {
-		
-		return paymentDAO.paymentList(KORN_FLNM, USER_BRDT);
-	}
-
+	
 	public void updatePayment(String KORN_FLNM, String USER_BRDT) {
 		paymentDAO.updatePayment(KORN_FLNM, USER_BRDT);
 		
 	}
+
+	 public boolean checkPayment(String KORN_FLNM, String USER_BRDT) {
+	        List<StudentDTO> paymentList = paymentDAO.paymentList(KORN_FLNM, USER_BRDT);
+	        return !paymentList.isEmpty();
+	    }
+
 
 	
 

@@ -20,16 +20,5 @@ public class OccasionalService {
 	}
 
 
-	public void updateAssessment(List<StudentDTO> assessments) {
-	    for (StudentDTO assessment : assessments) {
-	    	occasionalDAO.updateAssessment(assessment);
-	    }
-	}
-
-
-	
-
-
-		
 
 }

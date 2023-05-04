@@ -35,13 +35,7 @@ public class OccasionalController {
 		
 	}
 	
-	@ResponseBody
-	@PostMapping("/saves")	
-	public String saveAssessment(@RequestBody List<StudentDTO> assessments) {
-		occasionalService.updateAssessment(assessments);
-	    System.out.println(assessments);
-	    return "success";
-	}
+	
 
 	
 	

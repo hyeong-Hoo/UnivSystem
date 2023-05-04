@@ -15,40 +15,6 @@
 	crossorigin="anonymous">
 <!-- jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
- <!-- iamport.payment.js -->
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-    <script>
-        var IMP = window.IMP; 
-        IMP.init("imp75220550"); 
-    
-        function requestPay() {
-        	IMP.request_pay({
-        	pg: 'html5_inicis',
-        	pay_method: 'card',
-        	merchant_uid: "57008833-33008",
-        	name: '대한항공 후쿠오카 퍼스트클래스 1인석',
-        	amount: 100,
-        	buyer_email: 'Iamport@chai.finance',
-        	buyer_name: '포트원 기술지원팀',
-        	buyer_tel: '010-1234-5678',
-        	buyer_addr: '서울특별시 강남구 삼성동',
-        	buyer_postcode: '123-456'
-        	}, function(rsp) {
-        	console.log(rsp);
-        	if (rsp.success) {
-        	var msg = '결제가 완료되었습니다.';
-        	alert(msg);
-        	location.href = "http://localhost/assessment";
-        	} else {
-        	var msg = '결제에 실패하였습니다.';
-        	msg += '에러내용 : ' + rsp.error_msg;
-        	alert(msg);
-        	}
-        	});
-        	}
-        
-       
-    </script>	
 </head>
 
 <!-- jquery CDN -->
@@ -70,6 +36,14 @@ $(document).ready(function () {
       	  { data: "grade" },
       	  { data: "interview" },
       	  { data: "avg" },
+        {
+        	    data: "pdf",
+        	  render: function (data, type, row) {
+        		  var decodedPdf = atob(row.pdf);
+                return '<button id="pdf-' + row.appl_NO + '" class="btn btn-sm btn-outline-primary" onclick="openPdf(\'' + decodedPdf + '\')">PDF</button>';
+            }
+        	  
+        	    },
       	  {
       	    data: "passed",
       	  render: function (data, type, row) {
@@ -150,7 +124,7 @@ $(document).ready(function () {
         
         $.ajax({
             type: 'POST',
-            url: '/saves',
+            url: '/save',
             data: JSON.stringify(updatedData),
             contentType: 'application/json; charset=utf-8',
             success: function(result) {
@@ -161,14 +135,23 @@ $(document).ready(function () {
             }
         });
     });
-});
+
     
     $('#resetBtn').click(function() {
         $('#dept_input').val('');
         $('#name_input').val('');
         table.columns().search('').draw();
     });
-    
+
+});
+
+function openPdf(pdfData) {
+    var iframe = '<iframe src="data:application/pdf;base64,' + pdfData + '" width="100%" height="100%"></iframe>';
+    var x = window.open();
+    x.document.open();
+    x.document.write(iframe);
+    x.document.close();
+}
 
 
 
@@ -188,6 +171,7 @@ $(document).ready(function () {
                 <th>내신등급점수</th>        
                 <th>면접점수</th>
                 <th>평균</th>
+                <th>제출서류</th>
                 <th>구분</th>
                 
                 
@@ -201,8 +185,6 @@ $(document).ready(function () {
     
 <button id="saveBtn">저장</button>	
 <button id="resetBtn">초기화</button>
-    <button onclick="requestPay()">결제하기</button> <!-- 결제하기 버튼 생성 -->
-
 
 <!-- grid  -->
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
