@@ -48,8 +48,8 @@ $(function(){
 							var selectid="creditSelect"+info.pass_INFO;
 							var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
 							+ '<td scope="row" class="checkbox_i"> <input type="checkbox" class="checkbox_a" name="checkbox_c"></td>' 
-							if(i<=30){str += '<td class="passrank">' + (i+1)	+ '번</td>' ;}
-							else{str += '<td class="passrank">예비' + i-29	+ '번</td>' ;}
+							if(i<=data.list_L){str += '<td class="passrank">' + (i+1)	+ '번</td>' ;}
+							else{str += '<td class="passrank">예비' + i-(data.list_L)	+ '번</td>' ;}
 						 	str += '<td class="appl_no">' + info.appl_NO	+ '</td>' 
 							+ '<td class="name_m">' + info.korn_FLNM + '</td>' 
 							+ '<td>' + info.age + '</td>'
@@ -62,7 +62,7 @@ $(function(){
 							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
 							$('.table_body').append(str);
 							$('#'+selectid).val(info.pass_INFO).attr("selected", "selected");
-							if(i<=(data.list_L)){
+							if(i==(data.list_L)){
 								return false;
 							}
 						});
