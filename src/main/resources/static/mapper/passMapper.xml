@@ -73,7 +73,7 @@ VALUES (
         USER_ID, PSWD, KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, STUD_NO, ROLE_CODE
     )
     VALUES (
-        #{Student_ID}, '123456789a', #{KORN_FLNM}, #{USER_BRDT}, #{EML_ADDR}, #{TELNO}, #{STUD_NO}, "STUDENT"
+        #{Student_ID}, #{PSWD}, #{KORN_FLNM}, #{USER_BRDT}, #{EML_ADDR}, #{TELNO}, #{STUD_NO}, "STUDENT"
     )
 </insert>
 </mapper>

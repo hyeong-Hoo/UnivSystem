@@ -43,8 +43,9 @@ public class PassDAO {
 		PassDTO resultDTO = sqlSession.selectOne("list.studentValue",passDTO);
 		resultDTO.setStudent_ID(passDTO.getStudent_ID());
 		sqlSession.selectList("list.studentSubmit1", resultDTO);
-
+		
 		PassDTO resultDTO1 = sqlSession.selectOne("list.studentValue1",passDTO);
+		resultDTO1.setPSWD(passwordEncoder.encode("123456789a"));
 		sqlSession.selectList("list.studentSubmit2", resultDTO1);
 		
 	}

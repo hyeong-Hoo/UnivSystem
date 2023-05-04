@@ -149,7 +149,6 @@ $(function(){
 	 		 
 			num=num+1;
 			 var Student_id=nowYear+crclm+num;
-				alert(Student_id);
 		  	checkBoxArr[i] = {"no" : i, "appl_NO" : state,"Student_id" : Student_id}
 		});
 	$.ajax({	
