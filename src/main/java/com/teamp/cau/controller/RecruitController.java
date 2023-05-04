@@ -42,6 +42,7 @@ public class RecruitController {
 //		for (int i = 0; i < data.size(); i++) {
 //			data.get(i).put("가나다라", 0);
 //		}
+		System.out.println(data);
 		System.out.println(year);
 		System.out.println(depart);
 		System.out.println(category);

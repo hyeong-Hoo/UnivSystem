@@ -15,8 +15,9 @@
 <script type="text/javascript">
 $(function(){
 	$("#recruitCheck").click(function(){
-		
-		var year = $("#recuitYear").val();
+		var date = new Date();
+		var nowyear = date.getFullYear();
+		var year = $("#recruitYear").val();
 		var depart = $("#depart").val();
 		var category = $("#category").val();
 		$.ajax({
@@ -29,13 +30,17 @@ $(function(){
 					$("#recruitBody").empty();
 				}
 				$.each(data,function(i, list){
+					var check = year != nowyear ? 'disabled' : '';
+ 					var num = list.APPL_NUM;
+					var testnum = nowyear.toString()+num.toString()+i.toString();
+ 					var spare = num * 2 - num;
 				var tableList = '<tr>'
 								+ '<td>'+list.SCHDL_NAME+'</td>'
 								+ '<td>'+list.DEPARTMENT+'</td>'
-								+ '<td><input class="applNum" type="Number" value='+list.APPL_NUM+'></td>'
-								+ '<td></td>'
-								+ '<td></td>'
-								+ '<td></td>';
+								+ '<td><input class="applNum" type="Number" '+ check +' value='+list.APPL_NUM+'></td>'
+								+ '<td>'+list.APPL_COUNT+'</td>'
+								+ '<td>'+list.STUD_COUNT+'</td>'
+								+ '<td>'+spare+'</td>';
 								$("#recruitBody").append(tableList);
 					
 				});
@@ -45,9 +50,23 @@ $(function(){
 
 });
 	$("#recruitSave").click(function(){
-		
+		var date = new Date();
+		var nowyear = date.getFullYear();
+		var year = $("#recruitYear").val();
+		if($("#recruitBody").children().length){
+			if(nowyear == year){
+				alert("같아");
+			}else{
+				alert("수정할 데이터가 없습니다.");
+				return false;
+			}
+		}else{
+			alert("없어");
+			return false;
+		}
 		
 	});
+	
 });
 </script>
 <style type="text/css">
@@ -119,7 +138,7 @@ border-right: 1px solid silver;
 <span>모집 인원 관리</span>
 <div class="box">
 	<div class="select_box">
-		<select class="select" id="recuitYear">
+		<select class="select" id="recruitYear">
 		<c:forEach items="${year }" var="y">
 			<option>${y.RECRT_YEAR}</option>
 		</c:forEach>
