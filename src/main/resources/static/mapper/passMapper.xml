@@ -54,7 +54,7 @@
 	
 	<insert id="studentSubmit1" parameterType="PassDTO">
 	INSERT INTO STUD_INFO (Student_ID,appl_NO,KORN_FLNM,USER_BRDT,GENDER_CD,
-    AGE,TELNO,REL_TELNO, REL_CD,  EML_ADDR,  ZIP, ADDR, DADDR, USER_NO,CRCLM,CRCLM_CYCL,
+    AGE,TELNO,REL_TELNO, REL_CD,  EML_ADDR,  ZIP, ADDR, DADDR, USER_NO,CRCLM_CD,CRCLM_CYCL,
     PASS_INFO, category, avg, passed, department
 )
 VALUES (

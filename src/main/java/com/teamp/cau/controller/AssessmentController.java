@@ -50,7 +50,7 @@ public class AssessmentController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/test")
+	@GetMapping("/test1")
 	public ModelAndView getPdf() throws SQLException, java.io.IOException {
 	    Map<String,Object> resultMap = assessmentService.selectPdf();   
 	   
