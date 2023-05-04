@@ -27,7 +27,8 @@ $(function(){
             						+ '<td class="year">'+list.RECRT_YEAR +'</td>'
             						+ '<td>'+list.SCHDL_NAME +'</td>'
             						+ '<td><input class="day start" type="date" value='+list.SCHDL_START +' '+check + '></td>'
-            						+ '<td><input class="day end" type="date" value='+list.SCHDL_END_DT +' '+check + '></td>'
+            						+ '<td><input class="day end" type="date" value='+list.SCHDL_END_DT +' '+check + ' min='+list.SCHDL_START+'></td>'
+            						+ '<input class="recCD" type="hidden" value='+list.RECRT_SCHDL_CD + '>'
             						+ '</tr>';
              						$("#scheduleBody").append(tableList);
             						
@@ -51,7 +52,8 @@ $(function(){
 	            						+ '<td class="year">'+list.RECRT_YEAR +'</td>'
 	            						+ '<td>'+list.SCHDL_NAME +'</td>'
 	            						+ '<td><input class="day start" type="date" value='+list.SCHDL_START +' '+check + '></td>'
-	            						+ '<td><input class="day end" type="date" value='+list.SCHDL_END_DT +' '+check + '></td>'
+	            						+ '<td><input class="day end" type="date" value='+list.SCHDL_END_DT +' '+check + ' min='+list.SCHDL_START+ '></td>'
+	            						+ '<input class="recCD" type="hidden" value='+list.RECRT_SCHDL_CD + '>'
 	            						+ '</tr>';
 	             						$("#scheduleBody").append(tableList);
 					});
@@ -63,33 +65,36 @@ $(function(){
  			var date = new Date();
  			var year = date.getFullYear();
  			var length = $("#scheduleBody").children().length;
+ 			var schArray = new Array();
+					var num = 0;
  			if($("#scheduleBody").children().length){
-//  					alert($("#scheduleBody").children().eq(1).children().text());
-//  					alert($("#scheduleBody").children().eq(1).find(".start").val());
-//  					alert($("#scheduleBody").children().eq(1).find(".end").val());
-					
  				for(var i=0; i < length; i++){
  					if($("#scheduleBody").children().eq(i).children(".year").text() == year){
- 						alert($("#scheduleBody").children().eq(i).find(".end").val());
+ 						var recCD = $("#scheduleBody").children().eq(i).find(".recCD").val();
+ 						var start = $("#scheduleBody").children().eq(i).find(".start").val();
+ 						var end = $("#scheduleBody").children().eq(i).find(".end").val();
+ 						num = num+1;
+ 						schArray[i] = {"recCD" : recCD, "start" : start, "end" : end, "year" : year};
  					}else{
  						break;
  					}
  				}
- 				
+ 				$.ajax({
+ 					url: 'ScheduleSave',
+ 					type: 'POST',
+ 					cache: false,
+ 					data: {"schArray" : schArray, "num" : num}
+ 				});
  			}else{
  				
  			}
- 			
-// 			$.ajax({
-// 				url: '/save',
-// 				type: 'POST',
-// 				dataType: 'json',
-// 				data: {},
-// 				success: function(){
-					
-// 				}
-// 			});
  		});
+ 		$(document).on("change",".start",function(){
+ 			var start = $(this).val();
+ 			$(this).parent().parent().find('.end').val(start);
+ 			$(this).parent().parent().find('.end').attr('min',start);
+ 			
+ 		})
 });
 </script>
 <style type="text/css">
@@ -157,6 +162,7 @@ border: none;
 </style>
 </head>
 <body>
+
 <div class="schedule">
 <span class="text">모집 일시 관리</span>
 <div class="selectbox">

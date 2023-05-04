@@ -20,5 +20,10 @@
 		ORDER BY RECRT_YEAR DESC
 	</if>
 	</select>
+	<insert id="save" parameterType="com.teamp.cau.dto.ScheduleDTO">
+		UPDATE RECRT_SCHDL
+		SET SCHDL_START = #{SCHDL_START }, SCHDL_END_DT = #{SCHDL_END_DT }
+		WHERE RECRT_YEAR = #{RECRT_YEAR } AND RECRT_SCHDL_CD = #{RECRT_SCHDL_CD }
+	</insert>
 	
 </mapper>

@@ -1,11 +1,13 @@
 package com.teamp.cau.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,7 +45,23 @@ public class ScheduleController {
 		ScheduleDTO dto = new ScheduleDTO();
 		dto.setRECRT_YEAR(year);
 		List<Map<String, Object>> list = scheduleService.scheduleCheck(dto);
-		System.out.println(list);
 		return list;
+	}
+	@PostMapping("/ScheduleSave")
+	@ResponseBody
+	public String ScheduleSave(@RequestParam HashMap<String, Object> map, @RequestParam("num") int num) {
+		ScheduleDTO dto = new ScheduleDTO();
+		for(var i=0; i<num; i++) {
+			String recCD = (String)map.get("schArray[" + i + "][recCD]");
+			String year = (String) map.get("schArray[" + i + "][year]");
+			String start = (String) map.get("schArray[" + i + "][start]");
+			String end = (String) map.get("schArray[" + i + "][end]");
+			dto.setRECRT_YEAR(year);
+			dto.setRECRT_SCHDL_CD(recCD);
+			dto.setSCHDL_START(start);
+			dto.setSCHDL_END_DT(end);
+			scheduleService.save(dto);
+		}
+		return "";
 	}
 }

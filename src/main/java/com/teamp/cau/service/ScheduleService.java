@@ -25,6 +25,11 @@ public class ScheduleService {
 		return scheduleDAO.scheduleCheck(dto);
 	}
 
+	public void save(ScheduleDTO dto) {
+		scheduleDAO.save(dto);
+		
+	}
+
 	
 	
 }

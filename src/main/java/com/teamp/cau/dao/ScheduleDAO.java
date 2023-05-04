@@ -16,4 +16,6 @@ public interface ScheduleDAO {
 
 	List<Map<String, Object>> scheduleCheck(ScheduleDTO dto);
 
+	void save(ScheduleDTO dto);
+
 }
