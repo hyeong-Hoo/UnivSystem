@@ -24,7 +24,7 @@ $(function(){
             	$.each(data, function(i, list){
             		var check = list.RECRT_YEAR != year ? 'disabled' : '';
             		var tableList = '<tr>'
-            						+ '<td class="year">'+list.RECRT_YEAR +'</td>'
+            						+ '<td class="scheduleYear">'+list.RECRT_YEAR +'</td>'
             						+ '<td>'+list.SCHDL_NAME +'</td>'
             						+ '<td><input class="day start" type="date" value='+list.SCHDL_START +' '+check + '></td>'
             						+ '<td><input class="day end" type="date" value='+list.SCHDL_END_DT +' '+check + ' min='+list.SCHDL_START+'></td>'
@@ -49,7 +49,7 @@ $(function(){
 					$.each(data, function(i, list){
 						var check = list.RECRT_YEAR != nowYear ? 'disabled' : '';
 	            		var tableList = '<tr>'
-	            						+ '<td class="year">'+list.RECRT_YEAR +'</td>'
+	            						+ '<td class="scheduleYear">'+list.RECRT_YEAR +'</td>'
 	            						+ '<td>'+list.SCHDL_NAME +'</td>'
 	            						+ '<td><input class="day start" type="date" value='+list.SCHDL_START +' '+check + '></td>'
 	            						+ '<td><input class="day end" type="date" value='+list.SCHDL_END_DT +' '+check + ' min='+list.SCHDL_START+ '></td>'
@@ -66,10 +66,11 @@ $(function(){
  			var year = date.getFullYear();
  			var length = $("#scheduleBody").children().length;
  			var schArray = new Array();
-					var num = 0;
+			var num = 0;
+			if(confirm("저장하시겠습니까?")){
  			if($("#scheduleBody").children().length){
  				for(var i=0; i < length; i++){
- 					if($("#scheduleBody").children().eq(i).children(".year").text() == year){
+ 					if($("#scheduleBody").children().eq(i).children(".scheduleYear").text() == year){
  						var recCD = $("#scheduleBody").children().eq(i).find(".recCD").val();
  						var start = $("#scheduleBody").children().eq(i).find(".start").val();
  						var end = $("#scheduleBody").children().eq(i).find(".end").val();
@@ -83,12 +84,16 @@ $(function(){
  					url: 'ScheduleSave',
  					type: 'POST',
  					cache: false,
- 					data: {"schArray" : schArray, "num" : num}
+ 					data: {"schArray" : schArray, "num" : num},
+ 					success:function(){
+ 						alert("저장이 완료되었습니다.");
+ 					}
  				});
  			}else{
  				
  			}
- 		});
+ 		}
+ 	});
  		$(document).on("change",".start",function(){
  			var start = $(this).val();
  			$(this).parent().parent().find('.end').val(start);

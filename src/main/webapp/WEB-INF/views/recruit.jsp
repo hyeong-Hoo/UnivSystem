@@ -30,14 +30,18 @@ $(function(){
 					$("#recruitBody").empty();
 				}
 				$.each(data,function(i, list){
-					var check = year != nowyear ? 'disabled' : '';
+					var checkYear = year != nowyear ? '' : 'name="recruitYear"';
+					var checkName = year != nowyear ? '' : 'name="recruitName"';
+					var checkDepart = year != nowyear ? '' : 'name="recruitDepart"';
+					var checkNum = year != nowyear ? 'disabled' : 'name="recruitNum"';
  					var num = list.APPL_NUM;
 					var testnum = nowyear.toString()+num.toString()+i.toString();
  					var spare = num * 2 - num;
 				var tableList = '<tr>'
-								+ '<td>'+list.SCHDL_NAME+'</td>'
-								+ '<td>'+list.DEPARTMENT+'</td>'
-								+ '<td><input class="applNum" type="Number" '+ check +' value='+list.APPL_NUM+'></td>'
+								+ '<td class="recruitYear" '+ checkYear +'>'+list.RECRT_YEAR+'</td>'
+								+ '<td '+ checkName +'>'+list.SCHDL_NAME+'</td>'
+								+ '<td '+ checkDepart +'>'+list.DEPARTMENT+'</td>'
+								+ '<td><input class="applNum" type="Number" '+ checkNum +' value='+list.APPL_NUM+'></td>'
 								+ '<td>'+list.APPL_COUNT+'</td>'
 								+ '<td>'+list.STUD_COUNT+'</td>'
 								+ '<td>'+spare+'</td>';
@@ -45,17 +49,18 @@ $(function(){
 					
 				});
 		}
-
 	});
 
 });
 	$("#recruitSave").click(function(){
+		var year = $("td[name=recruitYear]").text();
+		var name = $("td[name=recruitName]").text();
+		var depart = $("td[name=recruitDepart]").text();
 		var date = new Date();
 		var nowyear = date.getFullYear();
-		var year = $("#recruitYear").val();
 		if($("#recruitBody").children().length){
-			if(nowyear == year){
-				alert("같아");
+			if($("td[name=recruitYear]").length){
+				$("#save").submit();
 			}else{
 				alert("수정할 데이터가 없습니다.");
 				return false;
@@ -70,6 +75,7 @@ $(function(){
 });
 </script>
 <style type="text/css">
+form { display : inline; }
 body{
 margin: 0;
 padding: 0;
@@ -160,6 +166,7 @@ border-right: 1px solid silver;
 		<table class="recruitTable">
 			<thead>
 				<tr>
+					<th>연도</th>
 					<th>전형</th>
 					<th>학과</th>
 					<th>입학정원</th>
@@ -168,8 +175,10 @@ border-right: 1px solid silver;
 					<th>예비인원</th>
 				</tr>
 			</thead>
+			
 			<tbody id="recruitBody">
 			</tbody>
+			
 		</table>
 	</div>
 </div>

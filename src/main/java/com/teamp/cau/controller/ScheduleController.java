@@ -27,7 +27,7 @@ public class ScheduleController {
 	@GetMapping("/schedule")
 	public ModelAndView Schedule() {
 		ModelAndView mv = new ModelAndView("schedule");
-		
+		mv.addObject("depart", recruitService.depart());
 		mv.addObject("year", recruitService.year());
 		return mv;
 	}
