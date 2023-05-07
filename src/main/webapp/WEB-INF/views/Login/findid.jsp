@@ -50,11 +50,12 @@ margin: auto;
 	        <input placeholder="핸드폰번호" type="text" name="TELNO" id="TELNO_ID" autocomplete="off" class="aim">
 	        <label for="password">핸드폰번호</label>
 	      </div>
-	      <div><input type="submit" class="button" value="찾기" class="aim" id="submitBtn"></div>
+	      <div><input type="submit" name="idfindbtn" class="button" value="찾기" class="aim" id="submitBtn" onclick="openFindResultModal('${USER_ID}')"></div>
 	          <a onclick="openFindPassModal()" class="discrete" >비밀번호 찾기</a>
 	      
 	    </form>
 	  </div>
+	  
 	<script>
 	document.getElementById("submitBtn").addEventListener("click", function() {
     var name = document.getElementById("KORN_FLNM_ID").value;
@@ -100,7 +101,36 @@ margin: auto;
     }
 
     return true;
-  }
+  })
+	
+	$(document).ready(function() {
+    $("#submitBtn").on("click", function() {
+        var KORN_FLNM = $("input[name='KORN_FLNM']").val();
+        var TELNO = $("input[name='TELNO']").val();
+        
+        $.ajax({
+            url: "/findid",
+            type: "POST",
+            data: {
+                KORN_FLNM: KORN_FLNM,
+                TELNO: TELNO
+            },
+            success: function(data) {
+                var findResultModal = document.getElementById("myFindResultModal");
+                if (findResultModal) {
+                    findResultModal.style.display = "block";
+                }
+                $("#myFindResultModal").find(".modal-body").html(data);
+            },
+            error: function(xhr, status, error) {
+                alert("에러가 발생하였습니다.");
+            }
+        });
+        return false;
+    });
+});
+
+
 </script>
 
 	

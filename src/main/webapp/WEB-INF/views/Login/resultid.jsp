@@ -10,6 +10,11 @@
 <link rel="stylesheet" type="text/css" href="/css/IdFind.css">
 <title>USER_ID</title>
 </head>
+<style>
+    .error-message {
+        color: red;
+    }
+</style>
 <body>
 <div class="session">
     <div class="left">
@@ -22,9 +27,17 @@
     </div>
     <form class="log-in" autocomplete="off"> 
       <h4>여기는<span>  Cau</span></h4>
-      <p>당신의 아이디는 ${USER_ID} 입니다.</p>
+      <%-- error 메시지 출력 --%>
+     <c:if test="${not empty error}">
+    <p class="error-message">${error}</p>
+</c:if>
+
+      <c:if test="${empty error}">
+          <p>당신의 아이디는 ${USER_ID} 입니다.</p>
+      </c:if>
     </form>
-  </div>
+</div>
+
 
 </body>
 </html>
