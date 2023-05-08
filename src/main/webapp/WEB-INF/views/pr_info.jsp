@@ -13,15 +13,16 @@ ul, li{display: block; list-style: none; float: left;}
 table{width: 100%; color: black;}
 thead{background-color: #c6cdd4;}
 .pr_no{width:7%; text-align: center;}
-.major{width:9%; text-align: center;}
+.major{width:6%; text-align: center;}
 .name{width:6%; text-align: center;}
 .birth{width:10%; text-align: center;}
 .email{width:14%; text-align: center;}
-.telno{width:14%; text-align: center;}
+.telno{width:12%; text-align: center;}
 .addr{width:16%; text-align: center;}
 .detail_addr{width:14%; text-align: center;}
 .gender{width:4%; text-align: center;}
 .authority{width:6%; text-align: center;}
+.result{width:5%; text-align: center;}
 container-fluid{height: 100%;}
 .auth_btn{background-color: #3E74C7; color: white; border-radius: 3px;  height: 30px; width: 80px;}
 
@@ -35,7 +36,7 @@ container-fluid{height: 100%;}
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CAU - 교수정보  </title>
+    <title>CAU - 교수정보권한  </title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -255,7 +256,7 @@ container-fluid{height: 100%;}
           			<hr class="sidebar-divider">
                     <!-- 페이지 헤더  -->
                     <div class="search">
-                        <form action="/pr_info" method="post" id="alt">
+                        <form action="/pr_info_search" method="post" id="alt">
 						<!-- searchbox -->
 						<ul class="box">
 							<li class="t1">교수이름 &nbsp; <input type="text" name="name_search" id="name_search" value=${name_search }></li>
@@ -267,6 +268,7 @@ container-fluid{height: 100%;}
                     <br>
                    
 					<!-- 페이지 리스트  -->
+					<form action="/pr_info_save" name="save" id="save" method="post">
 					<table border="1">
 						<thead>
 							<tr>
@@ -280,6 +282,7 @@ container-fluid{height: 100%;}
 								<th class="detail_addr">상세주소</th>
 								<th class="gender">성별</th>
 								<th class="authority">평가권한</th>
+								<th class="result">결과</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -295,19 +298,27 @@ container-fluid{height: 100%;}
 								<td class="detail_addr">${pr.DADDR }</td>
 								<td class="gender">${pr.GENDER }</td>
 								<td class="authority">
-								<select name="auth" id="auth" onchange="save(this.value)">
-									<option value="" selected disabled>선택</option>
-									<option id="0" value="0">없음</option>
-									<option id="1" value="1">권한</option>
-								</select>
+								<!-- 체크박스로  -->
+<!-- 								<input type="checkbox" id="authY" name="authY"><label for="authY">&nbsp;권한</label> -->
+								
+								<!--  라디오로  -->
+								<input type="radio" id="authR" value="권한"><label for="authR">&nbsp;권한</label>
+								
+								<!-- 옵션 선택으로 -->
+<!-- 								<select name="auth" id="auth" onchange="save(this.value)"> -->
+<!-- 									<option value="" selected disabled>선택</option> -->
+<!-- 									<option id="0" value="0">없음</option> -->
+<!-- 									<option id="1" value="1">권한</option> -->
+<!-- 								</select> -->
 								</td>
+								<td class="result">${pr.ENDST_NO }</td>
 							</tr>
 						</c:forEach>
 						</tbody>
 					</table>
 					<br>
 					<button type="button" class="auth_btn">권한주기</button>
-					
+					</form>
                 </div>
                 <!-- /.container-fluid -->
 
@@ -384,11 +395,19 @@ $(function(){
 	$(".auth_btn").click(function(){
 		$("#auth").val(0);
 		$("#auth").val(1);
-		
 		$("#send").submit();
 	});
+	
+	
 });
-
+// function YNcheck(obj){
+// 	var checked = obj.checked;
+// 	if(checked){
+// 		obj.value="권한";
+// 	}else{
+// 		obj.value="없음"
+// 	}
+// };
 
 
 

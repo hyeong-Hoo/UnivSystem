@@ -4,7 +4,7 @@ public class professorDTO {
 
 	private String KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, ADDR, DADDR, GENDER, ENDST_NO, CRCLM_CD, 
 					GENDER_CD, department;
-	private int INSTR_NO, appl_NO, RECRT_YEAR, avg, grade, interview;
+	private int INSTR_NO, appl_NO, RECRT_YEAR, total, grade, interview;
 
 	public String getGENDER_CD() {
 		return GENDER_CD;
@@ -38,12 +38,12 @@ public class professorDTO {
 		RECRT_YEAR = rECRT_YEAR;
 	}
 
-	public int getAvg() {
-		return avg;
+	public int gettotal() {
+		return total;
 	}
 
-	public void setAvg(int avg) {
-		this.avg = avg;
+	public void settotal(int avg) {
+		this.total = avg;
 	}
 
 	public int getGrade() {

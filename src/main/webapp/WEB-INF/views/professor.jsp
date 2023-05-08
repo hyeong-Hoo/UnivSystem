@@ -251,6 +251,12 @@ input{ height: 40px; width:100%;}
                     				<th>이름</th>
                     				<td><input type="text" id="pr_name" name="pr_name"></td>
                     			</tr>
+                    			<tr>
+        		            		<th>ID</th>
+            		        		<td><input type="text" id="pr_id" name="pr_id"></td>
+                    				<th>비밀번호</th>
+                    				<td><input type="text" id="pr_pw" name="pr_pw"></td>
+                    			</tr>
 	                    		<tr>
     	                			<th>학과코드</th>
         	            			<td><input type="text" id="pr_dep" name="pr_dep"></td>
@@ -276,11 +282,11 @@ input{ height: 40px; width:100%;}
                     			<tr>
                     				<th>상세주소</th>
                     				<td>
-                    					<input type="text" id="addrDetail" name="addrDetail" style="width:100%" value="" placeholder="상세주소 입력">
+                    					<input type="text" id="addrDetail" name="addrDetail" style="width:100%" value="" placeholder="상세주소 입력하세요">
                     				</td>
                     				<th>성별</th>
                     				<td>
-                    					<input type="text" id="pr_gender" name="pr_gender" placeholder="예) 남 또는 여로 입력" >
+                    					<input type="text" id="pr_gender" name="pr_gender" placeholder="예) 남 또는 여로 입력하세요" >
                     				</td>
                     			</tr>                   		
                     		</tbody>

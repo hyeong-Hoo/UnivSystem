@@ -74,7 +74,7 @@ public class professorController {
 	}
 	
 	//교수정보 검색 
-	@PostMapping("/pr_info")
+	@PostMapping("/pr_info_search")
 	public ModelAndView search(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("pr_info");
 		HashMap<String, Object> search = new HashMap<>();
@@ -91,7 +91,7 @@ public class professorController {
 	}
 	
 	//교수정보 권한주기
-	@PostMapping("/info_auth")
+	@PostMapping("/pr_info_save")
 	public String give_auth(HttpServletRequest req) {
 		String auth = req.getParameter("auth");
 		System.out.println("auth");
@@ -112,13 +112,15 @@ public class professorController {
 		return mv;
 	}
 	
-	// 면접평가 점수 저장 
-	@ResponseBody
+	// 면접평가 및 총 점수 저장 
 	@PostMapping("/pr_score")
-	public String score(@RequestParam("appl_no")int appl_no, @RequestParam("appl_grade") int appl_grade, @RequestParam("appl_interview") int appl_interview) {
-
-		System.out.println(appl_no);
-		System.out.println(appl_grade);
+	public String score(HttpServletRequest req) {
+		String interview = req.getParameter("inter_score");
+		String total = req.getParameter("total_score");
+		Map<String, Object> scoreSave = new HashMap<>();
+		scoreSave.put("inter_score", interview);
+		scoreSave.put("total_score", total);
+		Integer save = prService.score("resultScore", scoreSave);
 		return "pr_authority";
 	}
 	

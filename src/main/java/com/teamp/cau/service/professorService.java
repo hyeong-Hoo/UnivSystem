@@ -35,5 +35,9 @@ public class professorService {
 	public List<HashMap<String, Object>> selectList() {
 		return prDAO.select();
 	}
+
+	public Integer score(String string, Map<String, Object> scoreSave) {
+		return prDAO.insert(scoreSave);
+	}
 	
 }

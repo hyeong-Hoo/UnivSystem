@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
-
 <head>
 
     <meta charset="UTF-8">
@@ -10,15 +7,167 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>CAU - 메인페이지</title>
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+<link
+   href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+   rel="stylesheet"
+   integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+   crossorigin="anonymous">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <title>CAU 메인 페이지</title>
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<style type="text/css">
+
+span{
+display: block;
+}
+.box{
+width: calc(100% - 225px;);
+height: auto;
+}
+.menubar{
+width: auto;
+height: 30px;
+padding-left:20px;
+text-align:center;
+line-height: 30px;
+background-color: #4D72DF;
+font-size: 12px;
+}
+.barmenu {
+	display: block;
+   float: left;
+   color: white;
+}
+.closebtn {
+   float: left;
+   background-color: #4D72DF;
+   border: none;
+   color: white;
+   height: 30px;
+   text-align: center;
+   line-height: 30px;
+   border-top-right-radius: 5px;
+}
+
+.contentbox{
+width: 100%;
+height: auto;
+position: relative;
+}
+.testcontent{
+width: inherit;
+height: inherit;
+position: absolute;
+background-color: white;
+}
+.on1{
+border-top-left-radius: 5px;
+background-color: white;
+color: black;
+}
+.on2{
+background-color: white;
+color: black;
+}
+
+
+</style>    
+<script type="text/javascript">
+$(function() {
+
+    $(".collapse-item").click(function() {
+                   var divid = $(this).attr('id');
+                   var btnid = "btn" + divid;
+                   var menuid = "menu" + divid;
+                   var contentid = "content" + divid;
+                   var btn = "<div class='tap'><span class='barmenu'"+"id="+menuid+"></span><input class='closebtn' type='button' value='x'"+"id="+btnid+"></div>";
+                   var content = "<div class='testcontent'"+"id="+contentid+"></div>"
+                         $.ajax({
+                            url : "/tester",
+                            type : "post",
+                            cache : false,
+                            dataType : "html",
+                            data : {id : divid},
+                            success : function(good) {
+                            	$(document).ready(function(){
+                                    $("#" + contentid).load(good);                            		
+                                 	});
+                            }
+                         });
+                   if ($("#"+contentid).length) {
+                      $("#contentbox").empty();
+                      $("#contentbox").append(content);
+                   } else {
+                      $("#contentbox").append(content);
+                   }
+                      if ($("#" + menuid).length) {
+                    	  $("#"+menuid).attr('class','barmenu on1');
+                          $("#"+menuid).next().attr('class','closebtn on2');
+                          $("#"+menuid).parent().prevAll().children('span').attr('class','barmenu');
+                          $("#"+menuid).parent().prevAll().children('input').attr('class','closebtn');
+                          $("#"+menuid).parent().nextAll().children('span').attr('class','barmenu');
+                          $("#"+menuid).parent().nextAll().children('input').attr('class','closebtn');
+                      } else {
+                         $("#menubar").append(btn);
+                         $("#" + menuid).text($(this).text());
+                        	 $("#"+menuid).attr('class','barmenu on1');
+                             $("#"+menuid).next().attr('class','closebtn on2');
+                             $("#"+menuid).parent().prevAll().children('span').attr('class','barmenu');
+                             $("#"+menuid).parent().prevAll().children('input').attr('class','closebtn');
+                     }
+                      $("#"+menuid).click(function() {
+                    	  $("#"+menuid).attr('class','barmenu on1');
+                          $("#"+menuid).next().attr('class','closebtn on2');
+                          $(this).parent().prevAll().children('span').attr('class','barmenu');
+                          $(this).parent().prevAll().children('input').attr('class','closebtn');
+                          $(this).parent().nextAll().children('span').attr('class','barmenu');
+                          $(this).parent().nextAll().children('input').attr('class','closebtn');
+                         $.ajax({
+                            url : "/tester",
+                            type : "post",
+                            cache : false,
+                            dataType : "html",
+                            data : {id : divid},
+                            success : function(good) {
+                            	$(document).ready(function(){
+                               $("#" + contentid).load(good);                            		
+                            	});
+                            }
+                         });
+                         if ($("#"+contentid).length) {
+                        	 $("#contentbox").empty();
+                             $("#contentbox").append(content);
+                         } else {
+                            $("#contentbox").append(content);
+                         }
+                         
+                      });
+                      $(document).on("click", "#"+btnid,
+                            function() {
+                               $(this).parent().remove();
+                               $("#" + contentid).remove();
+                            });
+                      $(document).on("click", ".on2", function(){
+                    	  if($(this).parent().prev().val() == "undefined"){
+              	  			$(this).parent().next().children('span').trigger('click');
+              	  		}else if($(this).parent().prev().val() == ""){
+              	  			$(this).parent().prev().children('span').trigger('click');
+              	  		}else{
+              	  			
+              	  		} 
+                      });
+                });
+
+ });
+</script>
 
 </head>
 
@@ -42,7 +191,7 @@
             <hr class="sidebar-divider my-0">
 
 
-            <!-- Nav Item - 공통관리  Collapse Menu -->
+            <!-- Nav Item - 공통관리 Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -52,16 +201,13 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">공통관리</h6>
-                        <a class="collapse-item" href="com_department">부서정보관리</a>
-                        <a class="collapse-item" href="com_userinfo">사용자정보관리</a>
-                        <a class="collapse-item" href="com_right">권한관리</a>
-                        <a class="collapse-item" href="com_notice">공통게시판관리</a>
-                        <a class="collapse-item" href="com_pw">비밀번호변경</a>
+                        <a class="collapse-item" href="buttons">코드관리</a>
+                        <a class="collapse-item" href="cards">사용자정보 관리</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Nav Item - 학생관리  Collapse Menu -->
+            <!-- Nav Item - 학생관리  Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
@@ -79,7 +225,7 @@
                     </div>
                 </div>
             </li>
-            <!-- Nav Item - 입시관리  Collapse Menu -->
+            <!-- Nav Item - 입시관리  Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
@@ -89,27 +235,26 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">입시관리</h6>
-                        <a class="collapse-item" href="ent_standard">기준정보관리</a>
-                        <a class="collapse-item" href="ent_highschool">고교정보관리 </a>
-                        <a class="collapse-item" href="ent_grade">환산등급관리 </a>
-                        <a class="collapse-item" href="ent_guideline">모집요강관리</a>
-                        <a class="collapse-item" href="ent_selection">선발전형배점 </a>
-                        <a class="collapse-item" href="ent_application">입학원서관리</a>
-                        <a class="collapse-item" href="ent_student">입학학생관리</a>
-                        <a class="collapse-item" href="ent_volunteer">지원자확인용</a>
-                        <a class="collapse-item" href="ent_schoolgrade">내신성적관리</a>
-                        <a class="collapse-item" href="ent_SATscore">수능성적관리</a>
-                        <a class="collapse-item" href="ent_prize">입상성적관리</a>
-                        <a class="collapse-item" href="ent_admission">입학사정관리</a>
-                        <a class="collapse-item" href="ent_memberspassed">총원합격관리</a>
-                        <a class="collapse-item" href="ent_acceptance">합격확정관리</a>
-                        <a class="collapse-item" href="ent_freshman">신입생관리</a>
+                        <a class="collapse-item" href="blank">기준정보관리</a>
+                        <a class="collapse-item" href="login">고교정보관리 </a>
+                        <a class="collapse-item" href="register">환산등급관리 </a>
+                        <a class="collapse-item" id="10">모집요강</a>
+                        <a class="collapse-item" id="11">모집일 관리</a>
+                        <a class="collapse-item" id="12">입학학생관리</a>
+                        <a class="collapse-item" href="blank">지원자확인용</a>
+                        <a class="collapse-item" href="blank">내신성적관리</a>
+                        <a class="collapse-item" href="blank">수능성적관리</a>
+                        <a class="collapse-item" href="blank">입상성적관리</a>
+                        <a class="collapse-item" href="blank">입학사정관리</a>
+                        <a class="collapse-item" href="blank">총원합격관리</a>
+                        <a class="collapse-item" href="blank">합격확정관리</a>
+                        <a class="collapse-item" href="blank">신입생관리</a>
                         
                     </div>
                 </div>
             </li>
 
-            <!-- Nav Item - Charts -->
+            <!-- Nav Item - 등록관리 Menu -->
              <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRegister"
                     aria-expanded="true" aria-controls="collapseRegister">
@@ -126,7 +271,7 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Charts -->
+            <!-- Nav Item - 교직관리 Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClass"
                     aria-expanded="true" aria-controls="collapseClass">
@@ -291,6 +436,12 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+    
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"></script>
 
 </body>
 

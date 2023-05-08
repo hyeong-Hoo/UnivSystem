@@ -11,7 +11,7 @@
 .year{width:10%; text-align: center;}
 .app_name{width:10%; text-align: center;}
 .app_gender{width: 10%; text-align: center;}
-.avg{width:10%; text-align: center;}
+.total{width:10%; text-align: center;}
 .grade{width:10%; text-align: center;}
 .interview{width:10%; text-align: center;}
 .department{width:10%; text-align: center;}
@@ -24,42 +24,19 @@ input{ width:100%;}
 
 </style>
 <script type="text/javascript">
-$(function(){
-	
-	$(".send_btn").click(function(){
-		var length = $("#auth_body").children().length; //tr
- 		var app_no = $("datalist").closet('tr').find(appl_no).text(); // 지원번호
- 		alert(app_no);
-		var app_grade = $(this).closet('tr').find(grade).text(); // 학생부 점수 
-		var app_interview = $(this).closet('tr').find(interview).value(); // 면접 점수
-	
-  		for(var i=0; i<length; i++){
- 	  		alert($("#auth_body").children().eq(i).children(".appl_no").text());
-	   		$("#auth_body").children().eq(i).children(".appl_grade").text();
-	   		$("#auth_body").children().eq(i).children(".appl_interview").value();
-  			
-//   			var score = new array[];
-//   			array[i] = {"length" = i, "appl_no" : appl_no, "appl_grade" : appl_grade, "appl_interview" : appl_interview};
 
-  		}
-// 		$.ajax({
-// 			url : "/pr_score",
-// 			type : "post",
-// 			dataType : "json",
-// 			data : {
-// 				"appl_no" : appl_no,
-// 				"appl_grade" : appl_grade,
-// 				"appl_interview" : appl_interview
-// 				},
-// 				success:function(data){
-// 				},
-// 				error:function(){
-// 					alert("error");
-// 				}
-			
-//  		})
-	});
-});
+function score(obj){
+	
+	
+	var gradeScore = parseFloat($(obj).parent().prev().text()); //학생부 점수 
+	var interviewScore = parseFloat($(obj).val()); // 면접 점수 
+	var totalScore = gradeScore + interviewScore; // 총 점수 
+	
+	$(obj).parent().next().html(totalScore);  //위치에 totalScore값을 넣어주는 식 
+	
+	
+};
+
 </script>
 <head>
     <meta charset="UTF-8">
@@ -68,7 +45,7 @@ $(function(){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CAU - 평가단계  </title>
+    <title>CAU - 면접평가  </title>
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -290,7 +267,7 @@ $(function(){
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">면접평가</h1>
                    	</div>
-                   	<form action="/pr_authority" method="post">
+                   	<form action="/pr_score" method="post">
                         <table id="datalist" class="display" border="1" style="width:100%">
                         	<thead>
                         		<tr>
@@ -302,7 +279,7 @@ $(function(){
                         			<th class="department">학과명</th>
                         			<th class="grade">환산점수(학생부)</th>
                         			<th class="interview">환산점수(면접)</th>
-                        			<th class="avg">총점수</th>
+                        			<th class="total">총점수</th>
                         		</tr>
                         	</thead>
                        
@@ -315,15 +292,15 @@ $(function(){
                         		<td class="appl_name">${appl.KORN_FLNM }</td>
                         		<td class="appl_gender">${appl.GENDER_CD }</td>
                         		<td class="appl_department">${appl.department }</td>
-                        		<td class="appl_grade">${appl.grade }</td>
-                        		<td class="appl_interview"><input type="text" value="${appl.interview }"></td>
-                        		<td class="appl_avg">${appl.avg }</td>
+                        		<td class="appl_grade" id="grade_score">${appl.grade }</td>
+                        		<td class="appl_interview"><input type="text" value="${appl.interview }" name="inter_score" id="inter_score" onchange="score(this)"></td>
+                        		<td class="appl_total" name="total_score" id="total_score"> ${appl.total }</td>
                         	</tr>
  						</c:forEach>                   
                         </tbody>
 					 </table>
 					 <br>
-					 <button type="button" class="send_btn">저장</button>
+					 <button type="submit" class="send_btn">저장</button>
                 	</form>
                 </div>
                 <!-- /.container-fluid -->

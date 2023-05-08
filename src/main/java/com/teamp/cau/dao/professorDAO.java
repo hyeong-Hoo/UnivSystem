@@ -33,6 +33,9 @@ public class professorDAO {
 	public List<HashMap<String, Object>> select() {
 		return sqlsession.selectList("APPL_INFO.callin");
 	}
+	public Integer score(Map<String, Object> scoreSave) {
+		return sqlsession.insert("APPL_INFO.resultScore", scoreSave);
+	}
 	
 	
 }
