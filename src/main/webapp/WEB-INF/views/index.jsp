@@ -87,7 +87,7 @@ float: right;
 $(function() {
     if($("#menubar").children().length < 10){
     $(".collapse-item").click(function() {
-                   var divid = $(this).attr('id');
+                   var divid = $(this).attr('id');	
                    var btnid = "btn" + divid;
                    var menuid = "menu" + divid;
                    var contentid = "content" + divid;
@@ -107,22 +107,24 @@ $(function() {
                             	});
                             }
                          });
-                   if ($("#"+contentid).length) {
-                      $("#contentbox").empty();
-                      $("#contentbox").append(content);
+                   
+                   // Remove previous JSON data before loading new data
+                   $("#contentbox").empty();
+
+                   // Add content to content box
+                   $("#contentbox").append(content);
+
+                   // Add close button to menu bar if it doesn't exist
+                   if ($("#close").length) {
                    } else {
-                      $("#contentbox").append(content);
+                     $("#menubar").append(close);
                    }
-                   if($("#close").length){
-                	   
-            	   }else{
-            		   $("#menubar").append(close);
-            	   }
+                   
                    $(document).on('click', '#close',function(){
                 	   $("#menubar").empty();
                 	   $("#contentbox").empty();
                    });
-                   
+                                     
                       if ($("#" + menuid).length) {
                     	  $("#"+menuid).attr('class','barmenu on1');
                           $("#"+menuid).next().attr('class','closebtn on2');
@@ -155,13 +157,13 @@ $(function() {
                             	$(document).ready(function(){
                                $("#" + contentid).load(good);                            		
                             	});
-                            }
+                            }	
                          });
                          if ($("#"+contentid).length) {
                         	 $("#contentbox").empty();
                              $("#contentbox").append(content);
                          } else {
-                            $("#contentbox").append(content);
+                            $("#contentbox").append(content);	
                          }
                          
                       });
