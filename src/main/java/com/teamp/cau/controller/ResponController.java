@@ -14,9 +14,9 @@ public class ResponController {
 		if(test2 == 1) {
 			result="/student";
 		}else if(test2 == 2) {
-			result="/testfile";
+			result="/pass";
 		}else if(test2 == 3) {
-			result="/testfile2";
+			result="/get_stud";
 		}else if(test2 == 4) {
 			result="/grid";
 		}else if(test2 == 10) {

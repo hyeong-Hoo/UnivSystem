@@ -12,15 +12,10 @@ import com.teamp.cau.dto.Get_studDTO;
 import com.teamp.cau.dto.PassDTO;
 @Repository
 public class PassDAO {
-<<<<<<< HEAD
    
    @Autowired
    private SqlSession sqlSession;
-=======
 	
-	@Autowired
-	private SqlSession sqlSession;
->>>>>>> refs/heads/refs/heads/wookjji
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
