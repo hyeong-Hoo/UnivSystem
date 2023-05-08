@@ -6,8 +6,8 @@
 <mapper namespace="com.teamp.cau.dao.AdmissionDAO">
 
     <insert id="stud_info" parameterType="com.teamp.cau.dto.Stud_infoDTO">
-        INSERT INTO APPL_INFO (KORN_FLNM,USER_BRDT,GENDER_CD,AGE,EML_ADDR,telno,REL_TELNO,REL_CD,ZIP,ADDR,DADDR,category,department,korean,math,english,avg,pdf,PHOTO_FILE,SBMSN_DT,grade)
-        VALUES (#{korn_flnm},#{user_brdt},#{gender_cd},#{age},#{eml_addr},#{telno},#{rel_telno},#{rel_cd},#{zip},#{addr},#{daddr},#{category},#{Department},#{korean},#{math},#{english},#{avg},#{pdf},#{images},now(),#{grade})
+        INSERT INTO APPL_INFO (KORN_FLNM,USER_BRDT,GENDER_CD,AGE,EML_ADDR,telno,REL_TELNO,REL_CD,ZIP,ADDR,DADDR,RECRT_SCHDL_CD,CRCLM_CD,korean,math,english,avg,pdf,PHOTO_FILE,SBMSN_DT,grade,RECRT_YEAR)
+        VALUES (#{korn_flnm},#{user_brdt},#{gender_cd},#{age},#{eml_addr},#{telno},#{rel_telno},#{rel_cd},#{zip},#{addr},#{daddr},#{RECRT_SCHDL_CD},#{CRCLM_CD},#{korean},#{math},#{english},#{avg},#{pdf},#{images},now(),#{grade},#{nowYear})
     </insert>
 
     <insert id="test" parameterType="String">

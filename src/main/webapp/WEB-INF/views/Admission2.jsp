@@ -16,7 +16,7 @@ $(function(){
             alert($("#image"));
         }else if(($("#depart").val()) == ""){
             alert("모집계열및 학과를 선택해주세요");
-        }else if(!$('input[name="category"]').is(":checked")){
+        }else if(!$('input[name="RECRT_SCHDL_CD"]').is(":checked")){
             alert("지원구분을 선택해주세요");
         }else if(($("#ed").val()) == "" && $("#ed").attr("disabled")== undefined){
             alert("학교코드를 확인해주세요");
@@ -61,9 +61,9 @@ $(function(){
 
 
 
-    $('input[name="category"]').change(function() {
+    $('input[name="RECRT_SCHDL_CD"]').change(function() {
         var value = $(this).val();
-        if(value == "정시"){
+        if(value == 1){
             $("#sta").attr("disabled",false);
             $("#ed").attr("disabled",true);
          }else{
@@ -229,18 +229,22 @@ $(function(){
                 <tr class="tr1">
                     <th class="thee">모집계열및 학과</th>
                     <th class="t1" colspan="2">
-                        &emsp;<select id="depart" name="Department">
+                        &emsp;<select id="depart" name="CRCLM_CD">
+                        
                             <option value="">선택하세요</option>
-                            <option value="경영지원포장학과">경영지원포장학과</option>
-                            <option value="포장지원경영학과">포장지원경영학과</option>
+                            <option value=1>기계과</option>
+                            <option value=2>컴퓨터공학과</option>
+                            <option value=3>전기전자과</option>
+                            <option value=4>화학공학과</option>
+                            
                         </select>
                     </th>
                 </tr>
                     <tr class="tr1">
                         <th class="thee">지원 구분</th>
                         <th class="t1" colspan="2">
-                            &emsp;<input type="radio" name="category" value="수시" id="ED">수시
-                            &emsp;<input type="radio" name="category" value="정시" id="SAT">정시
+                            &emsp;<input type="radio" name="RECRT_SCHDL_CD" value="2" id="ED">수시
+                            &emsp;<input type="radio" name="RECRT_SCHDL_CD" value="1" id="SAT">정시
                     </th>
                 </tr>
                 <tr class="tr1">

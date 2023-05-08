@@ -56,20 +56,22 @@ public class AdmissionController {
 
 		double grade;
 		double avg;
-
+		
+		
 		int nowYear=now.getYear();
 		int b_date=Integer.parseInt(dto.getUser_brdt().substring(0,4));
 		int age=(nowYear+1)-b_date;
 		String eml_addr = dto.getEmail_1()+dto.getEmail_2();
+		dto.setNowYear(nowYear);
 		dto.setEml_addr(eml_addr);
 		dto.setAge(age);
-		if (dto.getCategory().equals("정시")) {
+		if (dto.getRECRT_SCHDL_CD() == 1) {
 			dto.setKorean(ran.random());
 			dto.setEnglish(ran.random());
 			dto.setMath(ran.random());
 			avg = (dto.getMath() + dto.getKorean() + dto.getEnglish()) / 3;
 			dto.setAvg(avg);
-		} else if (dto.getCategory().equals("수시")) {
+		} else if (dto.getRECRT_SCHDL_CD() == 2) {
 			grade = ran.edScore();
 			dto.setGrade(grade);
 		}
