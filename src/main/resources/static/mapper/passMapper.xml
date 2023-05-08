@@ -63,5 +63,12 @@ VALUES (
     #{REL_CD},  #{EML_ADDR},  #{ZIP},  #{ADDR},  #{DADDR},  #{USER_NO},  #{CRCLM},
     #{CRCLM_CYCL},  #{PASS_INFO},  #{category},  #{avg},  #{passed},  #{department}
 )
+<!-- USER_INFO 테이블에 값 넣기 -->
+	INSERT INTO USER_INFO (USER_ID, PSWD, KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, STUD_NO, ROLE_CODE)
+	VALUES (
+	    CONCAT('STU', RIGHT(YEAR(CURRENT_DATE()), 2), '000000', LAST_INSERT_ID() + 1),
+	    #{passwordEncoder.encode(USER_BRDT)}, #{KORN_FLNM}, #{USER_BRDT}, #{EML_ADDR}, #{TELNO},
+	    LAST_INSERT_ID(), 'STUDENT'
+	);
 	</insert> 
 </mapper>

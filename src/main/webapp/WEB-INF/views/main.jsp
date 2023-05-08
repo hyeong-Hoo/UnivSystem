@@ -380,7 +380,7 @@ cursor: pointer;
 <div class="modalbox"><a onclick="openModal()">아이디찾기 / 비밀번호찾기</a></div>
 
 <div id="myModal" class="mymodal">
-  <div style="background-color:#fefefe; margin:auto;  border:1px solid #888; width:40%;">
+  <div style="background-color:#fefefe; margin:auto;  border:1px solid #888; width:40%; ">
     <span onclick="closeModal()" class="clsbt" style="float:right; font-size:28px; font-weight:bold; margin-right: 20px;
     clear:both; z-index: 99999;">&times;</span>
     <div>
@@ -415,7 +415,7 @@ cursor: pointer;
   <div style="background-color:#fefefe; margin:auto;  border:1px solid #888; width:40%;">
     <span onclick="closeresultPassModal()" class="clsbt" style="float:right; font-size:28px; font-weight:bold; margin-right: 20px;
     clear:both; z-index: 99999; ">&times;</span>
-    <div class="modal-body">
+    <div class="modal-body2">
       <%@ include file="/WEB-INF/views/Login/resultpass.jsp" %>
     </div>
   </div>
@@ -465,18 +465,25 @@ function openFindPassModal() {
 
 
 function closepassModal() {
-  var findPassModal = document.getElementById("findPassModal");
-  findPassModal.style.display = 'none';
+	 var modal = document.getElementById("myModal");
+	 var findPassModal = document.getElementById("findPassModal");
   
+	findPassModal.style.display = 'none';
   document.getElementById('USER_ID_ps').value = '';
   document.getElementById('KORN_FLNM_ps').value = '';
   document.getElementById('TELNO_ps').value = '';
+  var warningMsg = modal.querySelector(".warning");
+  if (warningMsg) {
+    warningMsg.remove();
+  }
   
 }
 
 
 
 function openFindResultModal(result) {
+	
+	
 	  var findIdModal = document.getElementById("myModal");
 	  var findResultModal = document.getElementById("myFindResultModal");
 
@@ -505,27 +512,24 @@ function closeresultModal() {
 function openFindResultPassModal(result) {
 	  var findPassModal = document.getElementById("findPassModal");
 	  var findResultPassModal = document.getElementById("myFindResultPassModal");
-
+	 
 	  if (findPassModal) {
 		  findPassModal.style.display = 'none';
 	  }
 	  if (findResultPassModal) {
 		  findResultPassModal.style.display = "block";
 	  }
-	  
+	
 	}
 	
 function closeresultPassModal() {
-	  var modal = document.getElementById("myFindResultPassModal");
+	  var modalpass = document.getElementById("myFindResultPassModal");
 
-	  modal.style.display = 'none';
+	  modalpass.style.display = 'none';
 	  document.getElementById('USER_ID_ps').value = '';
 	  document.getElementById('KORN_FLNM_ps').value = '';
 	  document.getElementById('TELNO_ps').value = '';
-	  var warningMsg = modal.querySelector(".warning");
-	  if (warningMsg) {
-	    warningMsg.remove();
-	  }
+	
 	}
 	
 //모달 바깥쪽을 클릭하면 모달이 닫히도록 이벤트를 추가합니다.

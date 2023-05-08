@@ -31,10 +31,10 @@
 
       <c:if test="${empty error}">
       <p>당신의 비밀번호는 ${tempPassword} 입니다.</p>
+			<p>임시 비밀번호가 입력하신 핸드폰으로 메세지가 전송되었습니다.</p>
       </c:if>
     </form>
       
-   <button type="button" onclick="location.href='/main'">돌아가기</button>
   </div>
     
 </body>

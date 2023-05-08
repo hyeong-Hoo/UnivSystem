@@ -57,56 +57,14 @@ margin: auto;
 	  </div>
 	  
 	<script>
-	document.getElementById("submitBtn").addEventListener("click", function() {
-    var name = document.getElementById("KORN_FLNM_ID").value;
-    var phone = document.getElementById("TELNO_ID").value;
-    var parentNodeName = document.getElementById("KORN_FLNM_ID").parentNode;
-    var parentNodePhone = document.getElementById("TELNO_ID").parentNode;
-
-    // 이전에 출력된 경고 메시지가 있다면 삭제
-    var nameWarning = parentNodeName.querySelector(".warning");
-    if (nameWarning) {
-      parentNodeName.removeChild(nameWarning);
-    }
-    var phoneWarning = parentNodePhone.querySelector(".warning");
-    if (phoneWarning) {
-      parentNodePhone.removeChild(phoneWarning);
-    }
-
-    if (name.trim() === "") {
-      // 이름이 비어있는 경우
-      var warningMsg = document.createElement("p");
-      warningMsg.innerHTML = "이름을 입력해주세요.";
-      warningMsg.className = "warning";
-      parentNodeName.appendChild(warningMsg);
-      return false;
-    }
-
-    if (phone.trim() === "") {
-      // 핸드폰 번호가 비어있는 경우
-      var warningMsg = document.createElement("p");
-      warningMsg.innerHTML = "핸드폰 번호를 입력해주세요.";
-      warningMsg.className = "warning";
-      parentNodePhone.appendChild(warningMsg);
-      return false;
-    }
-
-    if (!/^\d{1,11}$/.test(phone)) {
-      // 핸드폰 번호가 11자 이하의 숫자로만 구성되어 있지 않은 경우
-      var warningMsg = document.createElement("p");
-      warningMsg.innerHTML = "핸드폰 번호를 올바른 양식으로 입력해주세요.";
-      warningMsg.className = "warning";
-      parentNodePhone.appendChild(warningMsg);
-      return false;
-    }
-
-    return true;
-  })
 	
 	$(document).ready(function() {
+		
     $("#submitBtn").on("click", function() {
         var KORN_FLNM = $("input[name='KORN_FLNM']").val();
         var TELNO = $("input[name='TELNO']").val();
+        
+      
         
         $.ajax({
             url: "/findid",
@@ -132,9 +90,6 @@ margin: auto;
 
 
 </script>
-
-	
-
 	  
 	</body>
 	
