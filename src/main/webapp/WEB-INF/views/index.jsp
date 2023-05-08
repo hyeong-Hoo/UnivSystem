@@ -288,12 +288,24 @@ $(function() {
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                   <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">등록관리</h6>
-                    <a class="collapse-item" id="20">등록금 결제</a>
-                   </div>
+            	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCharts"
+                    aria-expanded="true" aria-controls="collapseCharts">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>등록관리</span>
+                </a>
+                	<div id="collapseCharts" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">등록관리</h6>
+                        <a class="collapse-item" id="20">등록금 결제</a>
+                        
+                    </div>
+                </div>
+<!--                 <a class="nav-link" href="charts"> -->
+<!--                     <i class="fas fa-fw fa-chart-area"></i> -->
+<!--                    <div class="bg-white py-2 collapse-inner rounded"> -->
+<!--                     <h6 class="collapse-header">등록관리</h6> -->
+<!--                     <a class="collapse-item" id="20">등록금 결제</a> -->
+<!--                    </div> -->
             </li>
 
             <!-- Nav Item - Tables -->
