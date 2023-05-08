@@ -231,11 +231,11 @@ $(function() {
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>공통관리</span>
+                    <span>관리자관리</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">공통관리</h6>
+                        <h6 class="collapse-header">관리자관리</h6>
                         <a class="collapse-item" href="buttons">코드관리</a>
                         <a class="collapse-item" href="cards">사용자정보 관리</a>
                     </div>
@@ -251,10 +251,42 @@ $(function() {
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">학생관리</h6>
-                        <span class="collapse-item" id="1">합격자 조회</span>
-                        <span class="collapse-item" id="2">학적부여관리</span>
-                        <span class="collapse-item" id="3">입학정원관리</span>
-                        <span class="collapse-item" id="4">개인신상조회</span>
+                        <span class="collapse-item" id="2-1">합격자 조회</span>
+                        <span class="collapse-item" id="2-2">학적부여관리</span>
+                        <span class="collapse-item" id="2-3">입학정원관리</span>
+                        <span class="collapse-item" id="2-4">개인신상조회</span>
+                    </div>
+                </div>
+            </li>
+              <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStudents" aria-expanded="true" aria-controls="collapseStudents">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>학생메뉴</span>
+                </a>
+                <div id="collapseStudents" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">학생메뉴</h6>
+                        <span class="collapse-item" id="3-1">개인정보 조회 및 수정</span>
+                        <span class="collapse-item" id="3-2">수강신청</span>
+                        <span class="collapse-item" id="3-3">수강 강좌 조회</span>
+                        <span class="collapse-item" id="3-4">비밀번호변경</span>
+                    </div>
+                </div>
+            </li>
+              <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProfessor" aria-expanded="true" aria-controls="collapseProfessor">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>교수메뉴</span>
+                </a>
+                <div id="collapseProfessor" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">교수메뉴</h6>
+                        <span class="collapse-item" id="4-1">개인정보 조회 및 수정</span>
+                        <span class="collapse-item" id="4-2">면접평가</span>
+                        <span class="collapse-item" id="4-3">강좌 개설</span>
+                        <span class="collapse-item" id="4-4">학과 관리</span>
                     </div>
                 </div>
             </li>
@@ -268,16 +300,12 @@ $(function() {
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">입시관리</h6>
-                        <a class="collapse-item" id="10">수시 지원자 관리</a>
-                        <a class="collapse-item" id="11">정시 지원자 관리</a>
-                        <a class="collapse-item" id="12">모집요강</a>
-                        <a class="collapse-item" id="13">모집일 관리</a>
-                        <a class="collapse-item" id="14">입학학생관리</a>
-                        <a class="collapse-item" href="blank">지원자확인용</a>
+                        <a class="collapse-item" id="5-1">수시 지원자 관리</a>
+                        <a class="collapse-item" id="5-2">정시 지원자 관리</a>
+                        <a class="collapse-item" id="5-3">모집요강</a>
+                        <a class="collapse-item" id="5-4">모집일 관리</a>
+                        <a class="collapse-item" id="5-5">입학학생관리</a>
                         <a class="collapse-item" href="blank">내신성적관리</a>
-                        <a class="collapse-item" href="blank">수능성적관리</a>
-                        <a class="collapse-item" href="blank">입상성적관리</a>
-                        <a class="collapse-item" href="blank">입학사정관리</a>
                         <a class="collapse-item" href="blank">총원합격관리</a>
                         <a class="collapse-item" href="blank">합격확정관리</a>
                         <a class="collapse-item" href="blank">신입생관리</a>

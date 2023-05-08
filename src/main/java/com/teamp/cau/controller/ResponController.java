@@ -27,6 +27,8 @@ public class ResponController {
 			result="/pass";
 		}else if(test2 == 20) {
 			result="/payment";
+		}else if(test2 == 5) {
+			result="/passchange";
 		}
 		return result;
 	}
