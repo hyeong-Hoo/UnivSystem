@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Base64;
+import java.util.Base64.Encoder;
 import java.util.List;
 
 @Slf4j
@@ -75,19 +77,17 @@ public class AdmissionController {
 			grade = ran.edScore();
 			dto.setGrade(grade);
 		}
-
-		MultipartFile file=dto.getFile();
-		if (!file.isEmpty()) {
-			String filename = file.getOriginalFilename();
-			log.info("file.getOriginalFilename = {}", filename);
-			String fullPath = uploadDir + filename;
-			dto.setPdf(fullPath);
-			file.transferTo(new File(fullPath));
-		}
+		
 		String images;
 		MultipartFile image = dto.getImage();
 		images = convert.convertBinary(image);
 		dto.setImages(images);
+		
+		MultipartFile fileInput = dto.getFileInput();
+		  Encoder encoder = Base64.getEncoder();
+			byte[] bytes = fileInput.getBytes();
+			byte[] te = encoder.encode(bytes);
+			dto.setPdf(te);
 
 		int result2 = admissionService.stud_info(dto);
 		return "redirect:/main";
