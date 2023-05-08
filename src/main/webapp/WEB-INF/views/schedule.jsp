@@ -104,10 +104,12 @@ $(function(){
 </script>
 <style type="text/css">
 .schedule{
+width: 450px;
 float: left;
 margin: 0 25px 0 15px; 
 }
 .recruit{
+width: 750px;
 float:left;
 }
 .selectbox{
@@ -161,13 +163,13 @@ width: 130px;
 border: none;
 }
 
-.text{
-
+.recbox{
+width: 100%;
 }
 </style>
 </head>
 <body>
-
+<div class="recbox">
 <div class="schedule">
 <span class="text">모집 일시 관리</span>
 <div class="selectbox">
@@ -180,7 +182,7 @@ border: none;
 <input type="button" value="저장" class="btn" id="scheduleSave">
 <input type="button" value="조회" class="btn save" id="scheduleCheck">
 </div>
-<table class="scheduleTable" id="dataTable">
+<table class="table" id="dataTable">
 	<thead>
 		<tr>
 			<th>연도</th>
@@ -196,6 +198,7 @@ border: none;
 </div>
 <div class="recruit">
 <%@ include file="recruit.jsp" %>
+</div>
 </div>
 </body>
 	<script

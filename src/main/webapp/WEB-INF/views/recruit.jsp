@@ -30,21 +30,19 @@ $(function(){
 					$("#recruitBody").empty();
 				}
 				$.each(data,function(i, list){
-					var checkYear = year != nowyear ? '' : 'name="recruitYear"';
-					var checkName = year != nowyear ? '' : 'name="recruitName"';
-					var checkDepart = year != nowyear ? '' : 'name="recruitDepart"';
-					var checkNum = year != nowyear ? 'disabled' : 'name="recruitNum"';
+					var checkNum = year != nowyear ? 'disabled' : '';
  					var num = list.APPL_NUM;
 					var testnum = nowyear.toString()+num.toString()+i.toString();
  					var spare = num * 2 - num;
 				var tableList = '<tr>'
-								+ '<td class="recruitYear" '+ checkYear +'>'+list.RECRT_YEAR+'</td>'
-								+ '<td '+ checkName +'>'+list.SCHDL_NAME+'</td>'
-								+ '<td '+ checkDepart +'>'+list.DEPARTMENT+'</td>'
+								+ '<td class="recruitYear">'+list.RECRT_YEAR+'</td>'
+								+ '<input class="recruitCD" type="hidden" value='+list.RECRT_SCHDL_CD + '>'
+								+ '<td class="recruitName">'+list.SCHDL_NAME+'</td>'
+								+ '<td class="recruitDepart">'+list.DEPARTMENT+'</td>'
 								+ '<td><input class="applNum" type="Number" '+ checkNum +' value='+list.APPL_NUM+'></td>'
 								+ '<td>'+list.APPL_COUNT+'</td>'
 								+ '<td>'+list.STUD_COUNT+'</td>'
-								+ '<td>'+spare+'</td>';
+								+ '<td class="spare">'+spare+'</td>';
 								$("#recruitBody").append(tableList);
 					
 				});
@@ -52,21 +50,41 @@ $(function(){
 	});
 
 });
+	$(document).on("change", ".applNum", function(){
+		var num = $(this).val();
+		var spare = num *2;
+		$(this).parent().siblings('.spare').text(spare);
+
+	});
 	$("#recruitSave").click(function(){
-		var year = $("td[name=recruitYear]").text();
-		var name = $("td[name=recruitName]").text();
-		var depart = $("td[name=recruitDepart]").text();
+		var length = $("#recruitBody").children().length;
 		var date = new Date();
 		var nowyear = date.getFullYear();
-		if($("#recruitBody").children().length){
-			if($("td[name=recruitYear]").length){
-				$("#save").submit();
+		var recArray = new Array();
+		var ea = 0;
+		if($("#recruitBody").children().length && confirm("저장하시겠습니까?")){
+			for(var i=0; i < length; i++){
+			if($("#recruitBody").children().eq(i).children(".recruitYear").text() == nowyear){
+				var year = $("#recruitBody").children().eq(i).find(".recruitYear").text();
+				var name = $("#recruitBody").children().eq(i).find(".recruitCD").val();
+				var depart = $("#recruitBody").children().eq(i).find(".recruitDepart").text();
+				var num = $("#recruitBody").children().eq(i).find(".applNum").val();
+				ea = ea+1;
+				recArray[i] = {"year" : year, "name" : name, "depart" : depart, "num" : num};
 			}else{
 				alert("수정할 데이터가 없습니다.");
 				return false;
 			}
+		}
+			$.ajax({
+				url: '/recruitSave',
+				type: 'POST',
+				data: {recArray : recArray, ea : ea},
+				success: function(){
+					alert("저장이 완료되었습니다.");
+				}
+			});
 		}else{
-			alert("없어");
 			return false;
 		}
 		
@@ -163,7 +181,7 @@ border-right: 1px solid silver;
 		<button type="button" class="btn" id="recruitCheck">조회</button>
 	</div>
 	<div>
-		<table class="recruitTable">
+		<table class="table">
 			<thead>
 				<tr>
 					<th>연도</th>
