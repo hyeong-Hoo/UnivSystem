@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
-
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -250,7 +250,7 @@ $(function() {
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">학생관리</h6>
-                        <span class="collapse-item" id="1">기준정보관리</span>
+                        <span class="collapse-item" id="1">합격자 조회</span>
                         <span class="collapse-item" id="2">학적부여관리</span>
                         <span class="collapse-item" id="3">입학정원관리</span>
                         <span class="collapse-item" id="4">개인신상조회</span>
@@ -267,12 +267,11 @@ $(function() {
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">입시관리</h6>
-                        <a class="collapse-item" href="blank">기준정보관리</a>
-                        <a class="collapse-item" href="login">고교정보관리 </a>
-                        <a class="collapse-item" href="register">환산등급관리 </a>
-                        <a class="collapse-item" id="10">모집요강</a>
-                        <a class="collapse-item" id="11">모집일 관리</a>
-                        <a class="collapse-item" id="12">입학학생관리</a>
+                        <a class="collapse-item" id="10">수시 지원자 관리</a>
+                        <a class="collapse-item" id="11">정시 지원자 관리</a>
+                        <a class="collapse-item" id="12">모집요강</a>
+                        <a class="collapse-item" id="13">모집일 관리</a>
+                        <a class="collapse-item" id="14">입학학생관리</a>
                         <a class="collapse-item" href="blank">지원자확인용</a>
                         <a class="collapse-item" href="blank">내신성적관리</a>
                         <a class="collapse-item" href="blank">수능성적관리</a>
@@ -290,7 +289,10 @@ $(function() {
             <li class="nav-item">
                 <a class="nav-link" href="charts">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>등록관리</span></a>
+                   <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">등록관리</h6>
+                    <a class="collapse-item" id="20">등록금 결제</a>
+                   </div>
             </li>
 
             <!-- Nav Item - Tables -->
@@ -452,5 +454,6 @@ $(function() {
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"></script>
+
 </body>
 </html>

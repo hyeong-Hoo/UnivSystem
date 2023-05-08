@@ -21,6 +21,43 @@
 <!-- jquery CDN -->
 <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
   
+
+<body>
+
+<table id="mytable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>유형</th>   
+                <th>이름</th>  
+                <th>지원학과</th>   
+                <th>언어</th>        
+                <th>수학</th>
+                <th>영어</th>
+                <th>평균</th>
+                <th>제출서류</th>
+                <th>구분</th>
+                
+                
+               
+            </tr>
+        </thead>
+        <tbody>           
+        </tbody>
+        
+    </table>
+    
+<button id="saveBtn">저장</button>	
+<button id="resetBtn">초기화</button>
+
+
+<!-- grid  -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
+</body>
 <script>
 $(document).ready(function () {
     var table = $('#mytable').DataTable({
@@ -161,40 +198,4 @@ function openPdf(pdfData) {
 
 </script>
 
-<body>
-
-<table id="mytable" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th>번호</th>
-                <th>유형</th>   
-                <th>이름</th>  
-                <th>지원학과</th>   
-                <th>언어</th>        
-                <th>수학</th>
-                <th>영어</th>
-                <th>평균</th>
-                <th>제출서류</th>
-                <th>구분</th>
-                
-                
-               
-            </tr>
-        </thead>
-        <tbody>           
-        </tbody>
-        
-    </table>
-    
-<button id="saveBtn">저장</button>	
-<button id="resetBtn">초기화</button>
-
-
-<!-- grid  -->
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
-<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-		crossorigin="anonymous"></script>
-</body>
 </html>
