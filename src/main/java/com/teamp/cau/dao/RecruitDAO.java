@@ -18,4 +18,6 @@ public interface RecruitDAO {
 
 	List<Map<String, Object>> check(RecruitDTO dto);
 
+	void saveNum(RecruitDTO dto);
+
 }

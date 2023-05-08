@@ -6,8 +6,5 @@ import lombok.Data;
 
 @Data
 public class ScheduleDTO {
-
-	private int RECRT_YEAR;
-	private String SCHDL_NAME;
-	private Date SCHDL_START, SCHDL_END_DT;
+	private String SCHDL_NAME, RECRT_SCHDL_CD, RECRT_YEAR, SCHDL_START, SCHDL_END_DT;
 }

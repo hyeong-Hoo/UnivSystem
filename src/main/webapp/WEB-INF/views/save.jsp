@@ -9,9 +9,10 @@
   
 <script>
 
-	function toBase64(event) {
+	function toBase64() {
 		var reader = new FileReader();
-		reader.readAsDataURL(event.target.files[0]);
+		var file = document.querySelector('input[type=file]').files[0];
+		reader.readAsDataURL(file);
 		reader.onload = function(event) {
 			var base64 = event.target.result.split(',')[1]; // data URI 스키마 제거
 			
@@ -32,6 +33,7 @@
 
 </head>
 <body>
-	<input type="file" onchange="toBase64(event);" >
+	<input type="file" id="fileInput">
+	<button type="button" onclick="toBase64()">저장</button>
 </body>
 </html>

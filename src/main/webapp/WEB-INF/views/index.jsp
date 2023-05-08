@@ -78,11 +78,14 @@ background-color: white;
 color: black;
 }
 
+#close{
+float: right;
+}
 
 </style>    
 <script type="text/javascript">
 $(function() {
-
+    if($("#menubar").children().length < 10){
     $(".collapse-item").click(function() {
                    var divid = $(this).attr('id');
                    var btnid = "btn" + divid;
@@ -90,6 +93,7 @@ $(function() {
                    var contentid = "content" + divid;
                    var btn = "<div class='tap'><span class='barmenu'"+"id="+menuid+"></span><input class='closebtn' type='button' value='x'"+"id="+btnid+"></div>";
                    var content = "<div class='testcontent'"+"id="+contentid+"></div>"
+                   var close = '<input type="button" value="x" id="close">'
                          $.ajax({
                             url : "/tester",
                             type : "post",
@@ -108,6 +112,16 @@ $(function() {
                    } else {
                       $("#contentbox").append(content);
                    }
+                   if($("#close").length){
+                	   
+            	   }else{
+            		   $("#menubar").append(close);
+            	   }
+                   $(document).on('click', '#close',function(){
+                	   $("#menubar").empty();
+                	   $("#contentbox").empty();
+                   });
+                   
                       if ($("#" + menuid).length) {
                     	  $("#"+menuid).attr('class','barmenu on1');
                           $("#"+menuid).next().attr('class','closebtn on2');
@@ -154,6 +168,10 @@ $(function() {
                             function() {
                                $(this).parent().remove();
                                $("#" + contentid).remove();
+                               
+                               if($("#menubar").children().length <= 1){
+                            	   $("#menubar").empty();
+                               }
                             });
                       $(document).on("click", ".on2", function(){
                     	  if($(this).parent().prev().val() == "undefined"){
@@ -165,7 +183,9 @@ $(function() {
               	  		} 
                       });
                 });
-
+    }else{
+    	alert("메뉴를 더 이상 추가할 수 없습니다.");
+    }
  });
 </script>
 

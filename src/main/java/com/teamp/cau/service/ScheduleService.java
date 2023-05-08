@@ -20,6 +20,16 @@ public class ScheduleService {
 		return scheduleDAO.tableList();
 	}
 
+	public List<Map<String, Object>> scheduleCheck(ScheduleDTO dto) {
+		
+		return scheduleDAO.scheduleCheck(dto);
+	}
+
+	public void save(ScheduleDTO dto) {
+		scheduleDAO.save(dto);
+		
+	}
+
 	
 	
 }

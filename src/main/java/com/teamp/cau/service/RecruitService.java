@@ -30,4 +30,9 @@ public class RecruitService {
 		return recruitDAO.check(dto);
 	}
 
+	public void saveNum(RecruitDTO dto) {
+		recruitDAO.saveNum(dto);
+		
+	}
+
 }

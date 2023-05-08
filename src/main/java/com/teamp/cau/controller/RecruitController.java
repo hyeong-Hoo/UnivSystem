@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,19 +33,32 @@ public class RecruitController {
 
 	@GetMapping("/check")
 	@ResponseBody
-	public List<Map<String, Object>> check(@RequestParam("year") int year, @RequestParam("depart") String depart, @RequestParam("category") int category) {
+	public List<Map<String, Object>> check(@RequestParam("year") String year, @RequestParam("depart") String depart, @RequestParam("category") int category) {
 		RecruitDTO dto = new RecruitDTO();
 		dto.setRECRT_YEAR(year);
 		dto.setDEPARTMENT(depart);
 		dto.setRECRT_SCHDL_CD(category);
 		
 		List<Map<String, Object>> data = recruitService.check(dto);
-//		for (int i = 0; i < data.size(); i++) {
-//			data.get(i).put("가나다라", 0);
-//		}
-		System.out.println(year);
-		System.out.println(depart);
-		System.out.println(category);
+
 		return data;
+	}
+	@PostMapping("/recruitSave")
+	@ResponseBody
+	public String recruitSave(@RequestParam HashMap<String, Object> map, @RequestParam("ea") int ea) {
+		RecruitDTO dto = new RecruitDTO();
+		for(var i=0; i < ea; i++) {
+			String year = (String) map.get("recArray[" + i + "][year]");
+			int cd = Integer.parseInt((String) map.get("recArray[" + i + "][name]")); 
+			String depart = (String) map.get("recArray[" + i + "][depart]");
+			int num = Integer.parseInt((String) map.get("recArray[" + i + "][num]"));
+			dto.setRECRT_YEAR(year);
+			dto.setRECRT_SCHDL_CD(cd);
+			dto.setDEPARTMENT(depart);
+			dto.setAPPL_NUM(num);
+			recruitService.saveNum(dto);
+		}
+		
+		return "";
 	}
 }
