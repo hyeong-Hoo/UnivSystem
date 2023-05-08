@@ -23,9 +23,18 @@
     </div>
     <form class="log-in" autocomplete="off"> 
       <h4>여기는<span>  Cau</span></h4>
+
+      <%-- error 메시지 출력 --%>
+     <c:if test="${not empty error}">
+    <p class="error-message">${error}</p>
+</c:if>
+
+      <c:if test="${empty error}">
       <p>당신의 비밀번호는 ${tempPassword} 입니다.</p>
-   <button type="button" onclick="location.href='/'">돌아가기</button>
+			<p>임시 비밀번호가 입력하신 핸드폰으로 메세지가 전송되었습니다.</p>
+      </c:if>
     </form>
+      
   </div>
     
 </body>

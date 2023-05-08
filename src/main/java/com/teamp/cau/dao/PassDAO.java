@@ -12,9 +12,15 @@ import com.teamp.cau.dto.Get_studDTO;
 import com.teamp.cau.dto.PassDTO;
 @Repository
 public class PassDAO {
+<<<<<<< HEAD
    
    @Autowired
    private SqlSession sqlSession;
+=======
+	
+	@Autowired
+	private SqlSession sqlSession;
+>>>>>>> refs/heads/refs/heads/wookjji
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
@@ -38,16 +44,19 @@ public class PassDAO {
       return sqlSession.selectList("list.categoryList");
    }
 
-   public void studentValue(PassDTO passDTO) {
-      
-      PassDTO resultDTO = sqlSession.selectOne("list.studentValue",passDTO);
-      resultDTO.setStudent_ID(passDTO.getStudent_ID());
-      sqlSession.selectList("list.studentSubmit1", resultDTO);
 
-      PassDTO resultDTO1 = sqlSession.selectOne("list.studentValue1",passDTO);
-      sqlSession.selectList("list.studentSubmit2", resultDTO1);
-      
-   }
+	public void studentValue(PassDTO passDTO) {
+		
+		PassDTO resultDTO = sqlSession.selectOne("list.studentValue",passDTO);
+		resultDTO.setStudent_ID(passDTO.getStudent_ID());
+		sqlSession.selectList("list.studentSubmit1", resultDTO);
+		
+		PassDTO resultDTO1 = sqlSession.selectOne("list.studentValue1",passDTO);
+		resultDTO1.setPSWD(passwordEncoder.encode("123456789a"));
+		sqlSession.selectList("list.studentSubmit2", resultDTO1);
+		
+	}
+
 
    public int studentLimit(PassDTO passDTO) {
       return sqlSession.selectOne("list.studentLimit",passDTO);

@@ -30,50 +30,57 @@
       PASS_INFO=#{PASS_INFO}
       WHERE appl_NO=#{appl_NO}
 
-   </update>
-   <select id="result" resultType="int" parameterType="PassDTO">
-      SELECT
-      PASS_INFO
-      FROM APPL_INFO
-      WHERE appl_NO=#{appl_NO};
-   </select>
-   <select id="department" resultType="PassDTO">
-      SELECT DISTINCT DEPARTMENT,CRCLM_CD
-      FROM CRCLM_INFO
-   </select>
-   <select id="categoryList" resultType="PassDTO">
-      SELECT RECRT_YEAR
-      FROM RECRT_SCHDL
-      GROUP BY RECRT_YEAR
-      ORDER BY RECRT_YEAR DESC
-   </select>
-   
-   <select id="studentValue" parameterType="PassDTO" resultType="PassDTO">
-      SELECT * FROM APPL_INFO 
-      WHERE appl_NO = #{appl_NO}
-   </select>
-   
-   <insert id="studentSubmit1" parameterType="PassDTO">
-   INSERT INTO STUD_INFO (Student_ID,appl_NO,KORN_FLNM,USER_BRDT,GENDER_CD,
+	</update>
+	<select id="result" resultType="int" parameterType="PassDTO">
+		SELECT
+		PASS_INFO
+		FROM APPL_INFO
+		WHERE appl_NO=#{appl_NO};
+	</select>
+	<select id="department" resultType="PassDTO">
+		SELECT DISTINCT DEPARTMENT,CRCLM_CD
+		FROM CRCLM_INFO
+	</select>
+	<select id="categoryList" resultType="PassDTO">
+		SELECT RECRT_YEAR
+		FROM RECRT_SCHDL
+		GROUP BY RECRT_YEAR
+		ORDER BY RECRT_YEAR DESC
+	</select>
+	
+	<select id="studentValue" parameterType="PassDTO" resultType="PassDTO">
+		SELECT * FROM APPL_INFO 
+		WHERE appl_NO = #{appl_NO}
+	</select>
+	
+	<insert id="studentSubmit1" parameterType="PassDTO">
+	INSERT INTO STUD_INFO (Student_ID,appl_NO,KORN_FLNM,USER_BRDT,GENDER_CD,
     AGE,TELNO,REL_TELNO, REL_CD,  EML_ADDR,  ZIP, ADDR, DADDR, USER_NO,CRCLM_CD,CRCLM_CYCL,
     PASS_INFO, category, avg, passed, department
 )
 VALUES (
-   #{Student_ID}, #{appl_NO}, #{KORN_FLNM}, #{USER_BRDT},  #{GENDER_CD},  #{AGE},  #{TELNO},  #{REL_TELNO},
+	#{Student_ID}, #{appl_NO}, #{KORN_FLNM}, #{USER_BRDT},  #{GENDER_CD},  #{AGE},  #{TELNO},  #{REL_TELNO},
     #{REL_CD},  #{EML_ADDR},  #{ZIP},  #{ADDR},  #{DADDR},  #{USER_NO},  #{CRCLM_CD},
     #{CRCLM_CYCL},  #{PASS_INFO},  #{category},  #{avg},  #{passed},  #{department}
 )
-   </insert> 
-<!--    <select id="studentValue1" parameterType="PassDTO" resultType="PassDTO"> -->
-<!--       SELECT * FROM STUD_INFO -->
-<!--       WHERE appl_NO = #{appl_NO} -->
-<!--    </select> -->
-<!--    <insert id="studentSubmit2" parameterType="PassDTO"> -->
-<!--     INSERT INTO USER_INFO ( -->
-<!--         USER_ID, PSWD, KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, STUD_NO, ROLE_CODE -->
-<!--     ) -->
-<!--     VALUES ( -->
-<!--         #{Student_ID}, '123456789a', #{KORN_FLNM}, #{USER_BRDT}, #{EML_ADDR}, #{TELNO}, #{STUD_NO}, "STUDENT" -->
-<!--     ) -->
-<!-- </insert> -->
+<!-- USER_INFO 테이블에 값 넣기 -->
+	INSERT INTO USER_INFO (USER_ID, PSWD, KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, STUD_NO, ROLE_CODE)
+	VALUES (
+	    CONCAT('STU', RIGHT(YEAR(CURRENT_DATE()), 2), '000000', LAST_INSERT_ID() + 1),
+	    #{passwordEncoder.encode(USER_BRDT)}, #{KORN_FLNM}, #{USER_BRDT}, #{EML_ADDR}, #{TELNO},
+	    LAST_INSERT_ID(), 'STUDENT'
+	);
+	</insert> 
+	<select id="studentValue1" parameterType="PassDTO" resultType="PassDTO">
+		SELECT * FROM STUD_INFO
+		WHERE appl_NO = #{appl_NO}
+	</select>
+	<insert id="studentSubmit2" parameterType="PassDTO">
+    INSERT INTO USER_INFO (
+        USER_ID, PSWD, KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, STUD_NO, ROLE_CODE
+    )
+    VALUES (
+        #{Student_ID}, #{PSWD}, #{KORN_FLNM}, #{USER_BRDT}, #{EML_ADDR}, #{TELNO}, #{STUD_NO}, "STUDENT"
+    )
+</insert>
 </mapper>

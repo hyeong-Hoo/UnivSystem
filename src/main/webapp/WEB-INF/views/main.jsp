@@ -380,7 +380,7 @@ cursor: pointer;
 <div class="modalbox"><a onclick="openModal()">아이디찾기 / 비밀번호찾기</a></div>
 
 <div id="myModal" class="mymodal">
-  <div style="background-color:#fefefe; margin:auto;  border:1px solid #888; width:40%;">
+  <div style="background-color:#fefefe; margin:auto;  border:1px solid #888; width:40%; ">
     <span onclick="closeModal()" class="clsbt" style="float:right; font-size:28px; font-weight:bold; margin-right: 20px;
     clear:both; z-index: 99999;">&times;</span>
     <div>
@@ -393,12 +393,33 @@ cursor: pointer;
   <div style="background-color:#fefefe; margin:auto;  border:1px solid #888; width:40%;">
     <span onclick="closepassModal()" class="clsbt" style="float:right; font-size:28px; font-weight:bold; margin-right: 20px;
     clear:both; z-index: 99999; ">&times;</span>
-    <div>
+     <div>
       <%@ include file="/WEB-INF/views/Login/findpass.jsp" %>
     </div>
   </div>
 </div>
 
+
+<div id="myFindResultModal" class="mymodal">
+  <div style="background-color:#fefefe; margin:auto;  border:1px solid #888; width:40%;">
+    <span onclick="closeresultModal()" class="clsbt" style="float:right; font-size:28px; font-weight:bold; margin-right: 20px;
+    clear:both; z-index: 99999; ">&times;</span>
+    <div class="modal-body">
+      <%@ include file="/WEB-INF/views/Login/resultid.jsp" %>
+    </div>
+  </div>
+</div>
+
+
+<div id="myFindResultPassModal" class="mymodal">
+  <div style="background-color:#fefefe; margin:auto;  border:1px solid #888; width:40%;">
+    <span onclick="closeresultPassModal()" class="clsbt" style="float:right; font-size:28px; font-weight:bold; margin-right: 20px;
+    clear:both; z-index: 99999; ">&times;</span>
+    <div class="modal-body2">
+      <%@ include file="/WEB-INF/views/Login/resultpass.jsp" %>
+    </div>
+  </div>
+</div>
 <script>
 function openModal() {
 	  var findIdModal = document.getElementById("myModal");
@@ -425,6 +446,7 @@ function closeModal() {
   if (warningMsg) {
     warningMsg.remove();
   }
+  
 }
 
 function openFindPassModal() {
@@ -443,14 +465,90 @@ function openFindPassModal() {
 
 
 function closepassModal() {
-  var findPassModal = document.getElementById("findPassModal");
-  findPassModal.style.display = 'none';
+	 var modal = document.getElementById("myModal");
+	 var findPassModal = document.getElementById("findPassModal");
   
+	findPassModal.style.display = 'none';
   document.getElementById('USER_ID_ps').value = '';
   document.getElementById('KORN_FLNM_ps').value = '';
   document.getElementById('TELNO_ps').value = '';
+  var warningMsg = modal.querySelector(".warning");
+  if (warningMsg) {
+    warningMsg.remove();
+  }
   
 }
+
+
+
+function openFindResultModal(result) {
+	
+	
+	  var findIdModal = document.getElementById("myModal");
+	  var findResultModal = document.getElementById("myFindResultModal");
+
+	  if (findIdModal) {
+	    findIdModal.style.display = 'none';
+	  }
+	  if (findResultModal) {
+	    findResultModal.style.display = "block";
+	  }
+	  
+	}
+	
+function closeresultModal() {
+	  var modal = document.getElementById("myFindResultModal");
+
+	  modal.style.display = 'none';
+	  document.getElementById('KORN_FLNM_ID').value = '';
+	  document.getElementById('TELNO_ID').value = '';
+	  var warningMsg = modal.querySelector(".warning");
+	  if (warningMsg) {
+	    warningMsg.remove();
+	  }
+	}
+	
+
+function openFindResultPassModal(result) {
+	  var findPassModal = document.getElementById("findPassModal");
+	  var findResultPassModal = document.getElementById("myFindResultPassModal");
+	 
+	  if (findPassModal) {
+		  findPassModal.style.display = 'none';
+	  }
+	  if (findResultPassModal) {
+		  findResultPassModal.style.display = "block";
+	  }
+	
+	}
+	
+function closeresultPassModal() {
+	  var modalpass = document.getElementById("myFindResultPassModal");
+
+	  modalpass.style.display = 'none';
+	  document.getElementById('USER_ID_ps').value = '';
+	  document.getElementById('KORN_FLNM_ps').value = '';
+	  document.getElementById('TELNO_ps').value = '';
+	
+	}
+	
+//모달 바깥쪽을 클릭하면 모달이 닫히도록 이벤트를 추가합니다.
+window.onclick = function(event) {
+  var modal = document.getElementById("myModal");
+  var findPassModal = document.getElementById("findPassModal");
+  var findResultModal = document.getElementById("myFindResultModal");
+  
+  if (event.target == modal) {
+    closeModal();
+  }
+  if (event.target == findPassModal) {
+    closepassModal();
+  }
+  if (event.target == findResultModal) {
+    closeresultModal();
+  }
+}
+
 </script>
             <% } else { %>
             	<table class="login">

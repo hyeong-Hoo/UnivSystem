@@ -90,8 +90,8 @@ public class UserController {
     public String findIdByNameAndTel(@RequestParam String KORN_FLNM, @RequestParam String TELNO, Model model) {
         String USER_ID = userService.findIdByNameAndTel(KORN_FLNM, TELNO);
         if (USER_ID == null) {
-            model.addAttribute("error", "User not found");
-            return "error";
+            model.addAttribute("error", "입력한 정보에 해당하는 계정을 찾을 수 없습니다");
+            return "Login/resultid";
         }
         model.addAttribute("USER_ID", USER_ID);
         return "Login/resultid";
@@ -107,7 +107,7 @@ public class UserController {
         String tempPassword = userService.resetPassword(USER_ID, KORN_FLNM, TELNO);
         if (tempPassword == null) {
             model.addAttribute("error", "입력한 정보에 해당하는 계정을 찾을 수 없습니다.");
-            return "Login/findpass";
+            return "Login/resultpass";
         }
         if (sms) {
             MessageDTO messageDto = new MessageDTO();

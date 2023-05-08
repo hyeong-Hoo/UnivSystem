@@ -51,6 +51,7 @@ public class AssessmentController {
 	
 	@ResponseBody
 	@GetMapping("/pdfs")
+
 	public ModelAndView getPdf() throws SQLException, java.io.IOException {
 	    Map<String,Object> resultMap = assessmentService.selectPdf();   
 	   
