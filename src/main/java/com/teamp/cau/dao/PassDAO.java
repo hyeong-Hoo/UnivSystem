@@ -12,33 +12,31 @@ import com.teamp.cau.dto.Get_studDTO;
 import com.teamp.cau.dto.PassDTO;
 @Repository
 public class PassDAO {
-   
-   @Autowired
-   private SqlSession sqlSession;
 	
+	@Autowired
+	private SqlSession sqlSession;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
-   public List<PassDTO> studentList(PassDTO passDTO) {
-      return sqlSession.selectList("list.studentList",passDTO);
-   }
+	public List<PassDTO> studentList(PassDTO passDTO) {
+		return sqlSession.selectList("list.studentList",passDTO);
+	}
 
-   public Object passUpdate(PassDTO passDTO) {
-      return sqlSession.update("list.Passupdate",passDTO);
-   }
+	public Object passUpdate(PassDTO passDTO) {
+		return sqlSession.update("list.Passupdate",passDTO);
+	}
 
-   public int result(PassDTO passDTO) {
-      return sqlSession.selectOne("list.result",passDTO);
-   }
+	public int result(PassDTO passDTO) {
+		return sqlSession.selectOne("list.result",passDTO);
+	}
 
-   public List<PassDTO> departmentList() {
-      return sqlSession.selectList("list.department");
-   }
+	public List<PassDTO> departmentList() {
+		return sqlSession.selectList("list.department");
+	}
 
-   public List<PassDTO> categoryList() {
-      return sqlSession.selectList("list.categoryList");
-   }
-
+	public List<PassDTO> categoryList() {
+		return sqlSession.selectList("list.categoryList");
+	}
 
 	public void studentValue(PassDTO passDTO) {
 		
@@ -52,9 +50,11 @@ public class PassDAO {
 		
 	}
 
-
-   public int studentLimit(PassDTO passDTO) {
-      return sqlSession.selectOne("list.studentLimit",passDTO);
-   }
+	public int studentLimit(PassDTO passDTO) {
+		return sqlSession.selectOne("list.studentLimit",passDTO);
+	}
 
 }
+
+
+

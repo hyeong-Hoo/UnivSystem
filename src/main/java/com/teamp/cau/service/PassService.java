@@ -10,36 +10,36 @@ import com.teamp.cau.dto.PassDTO;
 
 @Service
 public class PassService {
-   @Autowired
-   private PassDAO passDAO;
+	@Autowired
+	private PassDAO passDAO;
 
 
 
-   public List<PassDTO> studentList(PassDTO passDTO) {
-      return passDAO.studentList(passDTO);
-   }
+	public List<PassDTO> studentList(PassDTO passDTO) {
+		return passDAO.studentList(passDTO);
+	}
 
-   public void passUpdate(PassDTO passDTO) {
-      passDAO.passUpdate(passDTO);
-   }
+	public void passUpdate(PassDTO passDTO) {
+		passDAO.passUpdate(passDTO);
+	}
 
-   public int result(PassDTO passDTO) {
-      return passDAO.result(passDTO);
-   }
+	public int result(PassDTO passDTO) {
+		return passDAO.result(passDTO);
+	}
 
-   public List<PassDTO> departmentList() {
-      return passDAO.departmentList();
-   }
+	public List<PassDTO> departmentList() {
+		return passDAO.departmentList();
+	}
 
-   public List<PassDTO> categoryList() {
-      return passDAO.categoryList();
-   }
+	public List<PassDTO> categoryList() {
+		return passDAO.categoryList();
+	}
 
-   public void studentValue(PassDTO passDTO) {
-      passDAO.studentValue(passDTO);
-   }
+	public void studentValue(PassDTO passDTO) {
+		passDAO.studentValue(passDTO);
+	}
 
-   public int studentLimit(PassDTO passDTO) {
-      return passDAO.studentLimit(passDTO);
-   }
+	public int studentLimit(PassDTO passDTO) {
+		return passDAO.studentLimit(passDTO);
+	}
 }
