@@ -11,19 +11,19 @@ public class ResponController {
 	@PostMapping("/tester")
 	public String tester(@RequestParam("id") int test2 ) {
 		String result = null;
-		if(test2 == 1) {
+		if(test2 == 2-1) {
 			result="/student";
-		}else if(test2 == 2) {
+		}else if(test2 == 2-2) {
 			result="/pass";
-		}else if(test2 == 3) {
+		}else if(test2 == 2-3) {
 			result="/get_stud";
-		}else if(test2 == 4) {
+		}else if(test2 == 2-4) {
 			result="/grid";
-		}else if(test2 == 10) {
+		}else if(test2 == 5-1) {
 			result="/occasional";
-		}else if(test2 == 11) {
+		}else if(test2 == 5-2) {
 			result="/assessment";
-		}else if(test2 == 12) {
+		}else if(test2 == 5-3) {
 			result="/pass";
 		}else if(test2 == 20) {
 			result="/payment";
