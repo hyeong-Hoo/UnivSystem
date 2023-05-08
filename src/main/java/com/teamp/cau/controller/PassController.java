@@ -52,6 +52,7 @@ public class PassController {
       return result;
    }
 
+<<<<<<< HEAD
    @ResponseBody
    @PostMapping("/passUpdate1")
    public String passUpdate1(@RequestParam HashMap<String, Object> param, @RequestParam("num") int num) {
@@ -66,6 +67,22 @@ public class PassController {
       return "";
    }
    // 예비번호 문자보내기버튼
+=======
+	@ResponseBody
+	@PostMapping("/passUpdate1")
+	public String passUpdate1(@RequestParam HashMap<String, Object> param, @RequestParam("num") int num) {
+		PassDTO passDTO = new PassDTO();
+		for (int i = 0; i < num; i++) {
+			int PASS_INFO = Integer.parseInt((String) param.get("checkBoxArr[" + i + "][PASS_INFO]"));
+			int appl_NO = Integer.parseInt((String) param.get("checkBoxArr[" + i + "][appl_NO]"));
+			passDTO.setAppl_NO(appl_NO);
+			passDTO.setPASS_INFO(PASS_INFO);
+			passService.passUpdate(passDTO);
+		}
+		return "";
+	}
+	// 예비번호 문자보내기버튼
+>>>>>>> refs/heads/refs/heads/wookjji
 
    @PostMapping("/permit1")
    @ResponseBody
@@ -94,6 +111,7 @@ public class PassController {
       return "";
    }
 
+<<<<<<< HEAD
    @ResponseBody
    @PostMapping("/admission")
    public String StudentID(@RequestParam HashMap<String, Object> param, @RequestParam("num") int num) {
@@ -109,5 +127,20 @@ public class PassController {
       }
       return "";
    }
+=======
+	@ResponseBody
+	@PostMapping("/admission")
+	public String StudentID(@RequestParam HashMap<String, Object> param, @RequestParam("num") int num) {
+		PassDTO passDTO = new PassDTO();
+		for (int i = 0; i < num; i++) {
+			int appl_NO = Integer.parseInt((String) param.get("checkBoxArr[" + i + "][appl_NO]"));
+			String ID = (String) param.get("checkBoxArr[" + i + "][Student_id]");
+			passDTO.setAppl_NO(appl_NO);
+			passDTO.setStudent_ID(ID);
+			passService.studentValue(passDTO);
+		}
+		return "";
+	}
+>>>>>>> refs/heads/refs/heads/wookjji
 
 }
