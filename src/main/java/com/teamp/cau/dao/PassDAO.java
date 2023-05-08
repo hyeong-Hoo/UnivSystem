@@ -44,13 +44,7 @@ public class PassDAO {
       return sqlSession.selectList("list.categoryList");
    }
 
-<<<<<<< HEAD
-   public void studentValue(PassDTO passDTO) {
-      
-      PassDTO resultDTO = sqlSession.selectOne("list.studentValue",passDTO);
-      resultDTO.setStudent_ID(passDTO.getStudent_ID());
-      sqlSession.selectList("list.studentSubmit1", resultDTO);
-=======
+
 	public void studentValue(PassDTO passDTO) {
 		
 		PassDTO resultDTO = sqlSession.selectOne("list.studentValue",passDTO);
@@ -62,12 +56,7 @@ public class PassDAO {
 		sqlSession.selectList("list.studentSubmit2", resultDTO1);
 		
 	}
->>>>>>> refs/heads/refs/heads/wookjji
 
-      PassDTO resultDTO1 = sqlSession.selectOne("list.studentValue1",passDTO);
-      sqlSession.selectList("list.studentSubmit2", resultDTO1);
-      
-   }
 
    public int studentLimit(PassDTO passDTO) {
       return sqlSession.selectOne("list.studentLimit",passDTO);
