@@ -103,7 +103,8 @@ $(function() {
                             success : function(good) {
                             	$(document).ready(function(){
                                     $("#" + contentid).load(good);                            		
-                                 	});
+                                 	
+                            	});
                             }
                          });
                    if ($("#"+contentid).length) {
