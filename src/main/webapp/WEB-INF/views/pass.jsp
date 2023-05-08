@@ -18,58 +18,6 @@
 <script type="text/javascript">
 
 $(function(){
-<<<<<<< HEAD
-   $('#searchStudent').click(function() {
-              $("input:checkbox[id='check_all']").prop("checked", false);
-            $.ajax({
-               url : '/passInfo',
-               type : 'GET',
-               data : {
-                  "KORN_FLNM" : $('#name').val(),"CRCLM_CD" : $('#department').val(), "RECRT_SCHDL_CD":$('#category').val(),"RECRT_YEAR":$('#year').val()},
-               dataType : "json",
-               success : function(data) {
-                  var iii = data.list_L;
-                  $('.table_body').empty(); // 기존 테이블 데이터를 지웁니다.
-                  $('#no').val('');
-                    $('#name2').val('');
-                    $('#age').val('');
-                    $('#brdt').val('');
-                    $('#gender').val('');
-                    $('#email').val('');
-                    $('#tel').val('');
-                    $('#retel').val('');
-                    $('#avg').val('');
-                    $('#zipnum').val('');
-                    $('#adr').val('');
-                    $('#detailadr').val('');
-                    $('#PDF').val('');
-                    $('#PASS_INFO').val('');
-               
-                  $.each(data.list, function(i, info) {
-                     var selectid="creditSelect"+info.pass_INFO;
-                     var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
-                     + '<td scope="row" class="checkbox_i"> <input type="checkbox" class="checkbox_a" name="checkbox_c"></td>' 
-                     if(i<=data.list_L){str += '<td class="passrank">' + (i+1)   + '번</td>' ;}
-                     else{str += '<td class="passrank">예비' + i-(data.list_L)   + '번</td>' ;}
-                      str += '<td class="appl_no">' + info.appl_NO   + '</td>' 
-                     + '<td class="name_m">' + info.korn_FLNM + '</td>' 
-                     + '<td>' + info.age + '</td>'
-                     + '<td>' + info.user_BRDT + '</td>'
-                     + '<td>' + info.gender_CD + '</td>'
-                     + '<td>' + info.eml_ADDR + '</td>'
-                     + '<td class="telno_m">' + info.telno + '</td>'
-                     + '<td>' + info.rel_TELNO + '</td>'
-                     + '<td>' + info.avg + '</td>'
-                     +'<input class="CRCLMCD" type="hidden" value='+info.crclm_CD + '>'
-                     + '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
-                     $('.table_body').append(str);
-                     $('#'+selectid).val(info.pass_INFO).attr("selected", "selected");
-                     if(i==(data.list_L)){
-                        return false;
-                     }
-                  });
-               }
-=======
 	$('#searchStudent').click(function() {
 				  $("input:checkbox[id='check_all']").prop("checked", false);
 				$.ajax({
@@ -120,7 +68,7 @@ $(function(){
 							}
 						});
 					}
->>>>>>> refs/heads/refs/heads/wookjji
+
 
             });
          });
@@ -135,102 +83,6 @@ $(function(){
         var telno_m = $(this).closest('tr').find('.telno_m').text();
         var passrank = $(this).closest('tr').find('.passrank').text();
 
-<<<<<<< HEAD
-      num=num+1;
-        checkBoxArr[i] = {"no" : i, "name_m" : name_m, "telno_m":telno_m,"passrank":passrank}
-   });
-     $.ajax({
-         url : "/permit1",
-         type : "post",
-         cache : false,
-            data: { "checkBoxArr" : checkBoxArr ,"num" : num }     
-      });
-   }
-   });
-   
-   //계좌번호 문자보내기 버튼
-   $('.permit2').click(function() {
-      if(confirm("계좌번호문자를 보내시겠습니까?")){      
-       var checkBoxArr = new Array(); 
-      var num=0;
-     $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
-        var name_m = $(this).closest('tr').find('.name_m').text();
-        var telno_m = $(this).closest('tr').find('.telno_m').text();
-      num=num+1;
-        checkBoxArr[i] = {"no" : i, "name_m" : name_m, "telno_m":telno_m}
-   });
-     $.ajax({
-         url : "/permit1",
-         type : "post",
-         cache : false,
-            data: { "checkBoxArr" : checkBoxArr ,"num" : num }     
-      });
-      }
-   });
-   //       저장버튼
-   $('.save_button1').click(function() {
-      if(confirm("저장을 하시겠습니까?")){
-       var checkBoxArr = new Array(); 
-      var num=0;
-     $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
-           var  find= $(this).closest('tr').find('.find_Select').children(".creditSelect").val();
-           var  state= $(this).closest('tr').find('.appl_no').text();
-         num=num+1;
-           checkBoxArr[i] = {"no" : i, "appl_NO" : state,"PASS_INFO" : find}
-      });
-   $.ajax({
-         url : "/passUpdate1",
-         type : "post",
-         cache : false,
-            data: { "checkBoxArr" : checkBoxArr ,"num" : num }
-      });
-      }
-      
-      
-   });
-   //       입학확정버튼
-   $('.admission').click(function() {
-      if(confirm("체크된 인원들을 입학 확정시키겠습니까?")){
-       var checkBoxArr = new Array(); 
-      var num=0;
-      var date = new Date();
-        var nowYear = date.getFullYear();
-        
-        
-     $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
-           var  state= $(this).closest('tr').find('.appl_no').text();
-           var  crclm= $(this).closest('tr').find('.CRCLMCD').val();
-           
-         num=num+1;
-          var Student_id=nowYear+crclm+num;
-            alert(Student_id);
-           checkBoxArr[i] = {"no" : i, "appl_NO" : state,"Student_id" : Student_id}
-      });
-   $.ajax({   
-         url : "/admission",
-         type : "post",
-         cache : false,
-            data: { "checkBoxArr" : checkBoxArr ,"num" : num }
-      });
-      }
-   });
-   //체크박스 전체 체크및해제
-      $(document).on('click','#check_all',function(){
-           if($('#check_all').is(':checked')){
-                $('.checkbox_a').prop('checked',true);
-             }else{
-                $('.checkbox_a').prop('checked',false);
-             }
-      });
-      $(document).on('click','.checkbox_a',function(){
-          if($('input[class=checkbox_a]:checked').length==$('.checkbox_a').length){
-              $('#check_all').prop('checked',true);
-          }else{
-             $('#check_all').prop('checked',false);
-          }
-      });
-   });
-=======
 		num=num+1;
 	  	checkBoxArr[i] = {"no" : i, "name_m" : name_m, "telno_m":telno_m,"passrank":passrank}
 	});
@@ -324,7 +176,6 @@ $(function(){
 		    }
 		});
 	});
->>>>>>> refs/heads/refs/heads/wookjji
 </script>
 </head>
 <style>
