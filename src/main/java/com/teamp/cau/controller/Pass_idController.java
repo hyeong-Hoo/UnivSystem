@@ -26,7 +26,7 @@ public class Pass_idController {
 		List<PassDTO> list_d = passService.departmentList();
 		List<PassDTO> list_c = passService.categoryList();
 		
-		ModelAndView mv = new ModelAndView("pass");
+		ModelAndView mv = new ModelAndView("pass_id");
 		mv.addObject("list_d", list_d);
 		mv.addObject("list_c", list_c);
 
