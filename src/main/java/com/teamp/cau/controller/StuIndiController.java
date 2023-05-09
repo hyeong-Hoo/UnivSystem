@@ -6,16 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class StuIndiController {
 
-	@GetMapping("/stuinfo")
+	@GetMapping("/student/stuinfo")
 	public String stuinfo() {
-		return "stuinfo";
+		return "/student/stuinfo";
 	}
 
 	
 	
-	
-	@GetMapping("/stupasschange")
-	public String stupasschange() {
-		return "stupasschange";
-	}
 }

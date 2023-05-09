@@ -77,8 +77,9 @@ public class UserController {
         Long USER_NO = (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         userVo.setUSER_NO(USER_NO);
         userService.edit(userVo);
-        return "redirect:/";
-    }
+        
+        return "redirect:/index";
+        		}
     
     @GetMapping("/findid")
     public String findid() {   //아이디 찾기 페이지

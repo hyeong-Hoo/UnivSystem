@@ -77,7 +77,7 @@ public class SecurityConfig {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/professor/**").hasRole("PROFESSOR")
                 .antMatchers("/student/**").hasRole("STUDENT")
-                .antMatchers("/First2").hasRole("STUDENT") // STUDENT 권한을 가진 사용자만 First2에 접근 가능
+                .antMatchers("/occasional").hasRole("STUDENT") // STUDENT 권한을 가진 사용자만 First2에 접근 가능
                 .antMatchers("/First3").hasAnyRole("STUDENT","PROFESSOR")
                 .anyRequest().authenticated();
 		// login 설정

@@ -19,9 +19,9 @@ public class ResponController {
 	@PostMapping("/tester")
 	public String tester(@RequestParam("id") String test2 ) {
 		String result = null;
-		if(test2.equals("2-1")) { //합격자 조회
+		if(test2.equals("2-1")) { //1차필터
 		    result="/student";
-		} else if(test2.equals("2-2")) { //학적부여관리
+		} else if(test2.equals("2-2")) { //합격관리
 		    result="/pass";
 		} else if(test2.equals("2-3")) { //입학정원관리
 		    result="/get_stud";
@@ -30,7 +30,7 @@ public class ResponController {
 		} else if(test2.equals("3-1")) { //학생 - 개인정보 조회 및 수정
 		    result="/stuinfo";
 		}  else if(test2.equals("3-4")) { //학생 - 비밀번호변경
-		    result="/stupasschange";
+		    result="/update";
 		} else if(test2.equals("5-1")) { //수시 지원자 관리
 		    result="/occasional";
 		} else if(test2.equals("5-2")) { //정시 지원자 관리

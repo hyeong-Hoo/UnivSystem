@@ -6,7 +6,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Modify Information</title>
 </head>
+<style>
+    .updateframe{
+        padding-left: 50px;
+        padding-top: 50px;
+    }
+</style>
 <body>
+    <div class="updateframe">
     <h2>회원 정보 수정</h2>
     <form action="/update" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -35,7 +42,7 @@
          <p style="color:red" id="pswd-error"></p>
     <button type="submit" onclick="return validate()">저장하기</button>
 </form>
-
+</div>
 <script type="text/javascript">
 function validate() {
     var newPassword = document.getElementsByName("PSWD")[0].value;
@@ -52,6 +59,7 @@ function validate() {
 
     // 새 비밀번호만 서버로 전송
     document.getElementsByName("PSWD_CONFIRM")[0].disabled = true;
+    alert("비밀번호가 정상적으로 변경되었습니다."); // 메시지 출력
     return true;
 }
 </script>
