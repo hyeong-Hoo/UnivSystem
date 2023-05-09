@@ -4,15 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>패스워드변경</title>
+<title>Insert title here</title>
 </head>
 <body>
-ㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-ㅇㅇㅇ
-ㅇ
-ㅇ
-ㅇ
-ㅇ
-ㅇ
+
 </body>
 </html>

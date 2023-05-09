@@ -236,8 +236,8 @@ $(function() {
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">관리자관리</h6>
-                        <a class="collapse-item" href="buttons">코드관리</a>
-                        <a class="collapse-item" href="cards">사용자정보 관리</a>
+                        <a class="collapse-item" href="buttons" id="1-1">코드관리</a>
+                        <a class="collapse-item" href="cards" id="1-2">사용자정보 관리</a>
                     </div>
                 </div>
             </li>
@@ -305,10 +305,8 @@ $(function() {
                         <a class="collapse-item" id="5-3">모집요강</a>
                         <a class="collapse-item" id="5-4">모집일 관리</a>
                         <a class="collapse-item" id="5-5">입학학생관리</a>
-                        <a class="collapse-item" href="blank">내신성적관리</a>
                         <a class="collapse-item" href="blank">총원합격관리</a>
                         <a class="collapse-item" href="blank">합격확정관리</a>
-                        <a class="collapse-item" href="blank">신입생관리</a>
                         
                     </div>
                 </div>
@@ -336,11 +334,19 @@ $(function() {
 <!--                    </div> -->
             </li>
 
-            <!-- Nav Item - Tables -->
+             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="tables">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>교직관리</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProfessor" aria-expanded="true" aria-controls="collapseProfessor">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>교직관리</span>
+                </a>
+                <div id="collapseProfessor" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">교직관리</h6>
+                        <span class="collapse-item" id="6-1">교수 관리</span>
+                        <span class="collapse-item" id="6-2">교수 권한</span>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->
@@ -477,18 +483,11 @@ $(function() {
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
 
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script
