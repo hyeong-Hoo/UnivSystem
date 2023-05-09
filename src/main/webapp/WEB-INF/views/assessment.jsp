@@ -24,7 +24,7 @@
 
 <body>
 
-<table id="mytable" class="display" style="width:100%">
+<table id="asstable" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>번호</th>
@@ -47,8 +47,8 @@
         
     </table>
     
-<button id="saveBtn">저장</button>	
-<button id="resetBtn">초기화</button>
+<button id="saveBtn1">저장</button>	
+<button id="resetBtn1">초기화</button>
 
 
 <!-- grid  -->
@@ -59,7 +59,7 @@
 		crossorigin="anonymous"></script>
 <script>
 $(document).ready(function () {
-    var table = $('#mytable').DataTable({
+    var table = $('#asstable').DataTable({
         ajax: {
             url: '/asm',
             type: 'GET',
@@ -118,7 +118,7 @@ $(document).ready(function () {
       	               var filterHtml = dropdowns + inputs;
 
       	             // Add the input fields and search button to the DataTables' search filter
-      	             $('#mytable_filter').html(filterHtml);
+      	             $('#asstable_filter').html(filterHtml);
       	    // Handle the search button's click event
       	    $('#search_button').on('click', function () {
       	        var name = $('#name_input').val();
@@ -150,7 +150,7 @@ $(document).ready(function () {
 
     
     $('#saveBtn').click(function() {
-        var tableData = $('#mytable').DataTable().data().toArray();
+        var tableData = $('#asstable').DataTable().data().toArray();
         var updatedData = [];
         for (var i = 0; i < tableData.length; i++) {
             var row = tableData[i];
