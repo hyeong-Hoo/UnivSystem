@@ -16,7 +16,7 @@
 .interview{width:10%; text-align: center;}
 .department{width:10%; text-align: center;}
 table{ color: black;}
-th{ text-align: center; background-color: #c6cdd4; border: solid 0.5px;}
+th{ text-align: center; background-color: #a2bfdd; border: solid 0.5px;}
 td{ text-align: center;}
 input{ width:100%;}
 .send_btn{background-color: #3E74C7; color: white; border-radius: 3px;  height: 30px; width: 60px;}
@@ -32,7 +32,7 @@ function score(obj){
 	var interviewScore = parseFloat($(obj).val()); // 면접 점수 
 	var totalScore = gradeScore + interviewScore; // 총 점수 
 	
-	$(obj).parent().next().html(totalScore);  //위치에 totalScore값을 넣어주는 식 
+	$(obj).parent().next().html(totalScore);  //총점수에 totalScore값을 넣어주는 식 
 	
 	
 };
@@ -178,6 +178,7 @@ function score(obj){
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">교직관리</h6>
                         <a class="collapse-item" href="professor">교수정보입력</a>
+                        <a class="collapse-item" href="self_modify">교수본인정보 수정 </a>
                         <a class="collapse-item" href="pr_info">교수정보권한</a>
                         <a class="collapse-item" href="pr_authority">면접평가</a>
                     </div>
@@ -292,7 +293,7 @@ function score(obj){
                         		<td class="appl_name">${appl.KORN_FLNM }</td>
                         		<td class="appl_gender">${appl.GENDER_CD }</td>
                         		<td class="appl_department">${appl.department }</td>
-                        		<td class="appl_grade" id="grade_score">${appl.grade }</td>
+                        		<td class="appl_grade" id="grade_score" name="grade_score">${appl.grade }</td>
                         		<td class="appl_interview"><input type="text" value="${appl.interview }" name="inter_score" id="inter_score" onchange="score(this)"></td>
                         		<td class="appl_total" name="total_score" id="total_score"> ${appl.total }</td>
                         	</tr>
@@ -354,18 +355,11 @@ function score(obj){
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
 

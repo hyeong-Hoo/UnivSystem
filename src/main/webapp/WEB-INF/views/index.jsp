@@ -282,6 +282,7 @@ $(function() {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">교직관리</h6>
                         <a class="collapse-item" href="professor">교수정보입력</a>
+                        <a class="collapse-item" href="self_Modify">교수본인정보 수정 </a>
                         <a class="collapse-item" href="pr_info">교수정보권한</a>
                         <a class="collapse-item" href="pr_authority">면접평가</a>
                     </div>

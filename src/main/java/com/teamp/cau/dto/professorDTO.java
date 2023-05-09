@@ -1,10 +1,46 @@
 package com.teamp.cau.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class professorDTO {
 
 	private String KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, ADDR, DADDR, GENDER, ENDST_NO, CRCLM_CD, 
-					GENDER_CD, department;
+					GENDER_CD, department, INSTR_ID, INSTR_PW;
 	private int INSTR_NO, appl_NO, RECRT_YEAR, total, grade, interview;
+	private String MultipartFile;
+	
+	public String getMultipartFile() {
+		return MultipartFile;
+	}
+
+	public void setMultipartFile(String multipartFile) {
+		MultipartFile = multipartFile;
+	}
+
+	public String getINSTR_ID() {
+		return INSTR_ID;
+	}
+
+	public void setINSTR_ID(String iNSTR_ID) {
+		INSTR_ID = iNSTR_ID;
+	}
+
+	public String getINSTR_PW() {
+		return INSTR_PW;
+	}
+
+	public void setINSTR_PW(String iNSTR_PW) {
+		INSTR_PW = iNSTR_PW;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
 
 	public String getGENDER_CD() {
 		return GENDER_CD;
@@ -135,8 +171,6 @@ public class professorDTO {
 	public void setGENDER(String gENDER) {
 		GENDER = gENDER;
 	}
-
-
 
 	public String getENDST_NO() {
 		return ENDST_NO;

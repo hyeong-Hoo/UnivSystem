@@ -2,48 +2,47 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<style>
-ul, li{display: block; list-style: none; float: left;}
-.box{width: 100%; height: 40px; text-align: center; color: black; border-radius: 3px; background-color: #a2bfdd; }
-.t1{width: 40%; position: relative; top: 5px;}
-.t2{width: 40%; position: relative; top: 7px;}
-.t3{width: 20%; position: relative; top: 5px;}
-table{width: 100%; color: black;}
-thead{background-color: #a2bfdd;}
-.pr_no{width:7%; text-align: center;}
-.major{width:6%; text-align: center;}
-.name{width:6%; text-align: center;}
-.birth{width:10%; text-align: center;}
-.email{width:14%; text-align: center;}
-.telno{width:12%; text-align: center;}
-.addr{width:16%; text-align: center;}
-.detail_addr{width:14%; text-align: center;}
-.gender{width:4%; text-align: center;}
-.authority{width:6%; text-align: center;}
-#result{width:5%; text-align: center;}
-container-fluid{height: 100%;}
-.auth_btn{background-color: #3E74C7; color: white; border-radius: 3px;  height: 30px; width: 80px;}
-.authresult{ width: 100%;}
-
-</style>
 <head>
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CAU - 교수정보권한  </title>
+    <title>CAU - 본인정보수정   </title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+<style>
+ul{list-style: none; color: black;}
+li{float: left; color: black; padding-left:0;}
+.top_box{ width: 100%; height: 40px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
+.middle_box{ width: 100%; height:110px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
+.bottom_box{ width: 100%; height: 215px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd;}
+.Title1{ width: 15%; height: 30px; text-align: left; line-height: 30px; }
+.Answer1{ width: 85%; height: 30px;}
+.Title2{ width: 15%; height: 30px;}
+.Answer2{ width: 85%; height: 30px;}
+.Title3{ width: 15%; height: 30px;}
+.Answer3{ width: 33.5%; height: 30px;}
+.Answer4{ width: 70%; height: 30px;}
+.text1{ width: 95%; margin: auto;}
+.divide{ width: 100%; height: 5px;}
+.addr_btn{ width: 10%; height: 30px; border-radius: 3px; background-color: #ccc;}
+.imgfile{ width: 100%; height: 40px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd;}
+.container-fluid{height: 80%;} 
+.save_btn{background-color: #3E74C7; color: white; border-radius: 3px;  height: 30px; width: 60px;}
+</style>
 
 </head>
 
@@ -185,8 +184,8 @@ container-fluid{height: 100%;}
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+           <!-- Main Content -->
+            <div id="content" >
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -249,88 +248,115 @@ container-fluid{height: 100%;}
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- 페이지 제목  -->
+                    <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">교수정보권한</h1>
+                        <h1 class="h3 mb-0 text-gray-800">본인정보수정</h1>
                     </div>
                     <!-- Divider -->
           			<hr class="sidebar-divider">
-                    <!-- 페이지 헤더  -->
-                    <div class="search">
-                        <form action="/pr_info_search" method="post" id="alt">
-						<!-- searchbox -->
-						<ul class="box">
-							<li class="t1">교수이름 &nbsp; <input type="text" name="name_search" id="name_search" value=${name_search }></li>
-							<li class="t2">학과코드 &nbsp; <input type="text" name="code_search" id="code_search" value=${code_search }></li>
-							<li class="t3"><button class="search_btn" type="button"><img alt="icon" src="img/search_icon.png" width="20" height="20"></button></li>
-						</ul>
-						</form>
+          			
+                    <div class="info_table">
+                    <form action="/pr_self" name="form" id="form" method="post">
+                   
+                    <div class="top_box">
+                    	<ul>
+                    		<li class="divide"></li>
+                    		<li class="Title1">교수번호</li>
+                    		<li class="Answer1"><input class="text1" type="text" id="pr_no" name="pr_no"></li>
+                    		<li class="divide"></li>
+                  		</ul>
                     </div>
                     <br>
-                   
-					<!-- 페이지 리스트  -->
-					<form action="/pr_info_save" name="save" id="save" method="post">
-					<table border="1">
-						<thead>
-							<tr>
-								<th class="pr_no">교수번호</th>
-								<th class="major">학과코드</th>
-								<th class="name">한글성명</th>
-								<th class="birth">생년월일</th>
-								<th class="email">이메일</th>
-								<th class="telno">연락처</th>
-								<th class="addr">주소</th>
-								<th class="detail_addr">상세주소</th>
-								<th class="gender">성별</th>
-								<th class="authority">평가권한</th>
-								<th class="result">결과</th>
-							</tr>
-						</thead>
-						<tbody>
-						<c:forEach items="${list }" var="pr">
-							<tr>
-								<td class="pr_no">${pr.INSTR_NO }</td>
-								<td class="major">${pr.CRCLM_CD }</td>
-								<td class="name">${pr.KORN_FLNM }</td>
-								<td class="birth">${pr.USER_BRDT }</td>
-								<td class="email">${pr.EML_ADDR }</td>
-								<td class="telno">${pr.TELNO }</td>
-								<td class="addr">${pr.ADDR }</td>
-								<td class="detail_addr">${pr.DADDR }</td>
-								<td class="gender">${pr.GENDER }</td>
-								<td class="authority">
-								<!-- 체크박스로  -->
-<!-- 								<input type="checkbox" id="auth" name="auth" onchange="checkBox(this)" value="권한"> -->
-
-<!-- 								<input type="checkbox" id="auth" name="auth" onchange="getCheckboxValue(event)" value="권한"> -->
-<!-- 								<label for="auth">&nbsp;권한</label> -->
-							
-								
-								<!--  라디오로  -->
-								<input type="radio" id="authR" value="권한"><label for="authR">&nbsp;권한</label>
-								
-								<!-- 옵션 선택으로 -->
-<!-- 								<select name="auth" id="auth" onchange="save(this.value)"> -->
-<!-- 									<option value="" selected disabled>선택</option> -->
-<!-- 									<option id="0" value="0">없음</option> -->
-<!-- 									<option id="1" value="1">권한</option> -->
-<!-- 								</select> -->
-								</td>
-<%-- 								${pr.ENDST_NO } --%>
-								<td class="result" >
-								<input type="text" class="authresult" name="checkResult" id="checkResult" readonly></td>
-							</tr>
-						</c:forEach>
-						</tbody>
-					</table>
-					<br>
-					<button type="button" class="auth_btn">권한주기</button>
-					
-					
-					
-					</form>
-                </div>
-                <!-- /.container-fluid -->
+                    
+                    <div class="middle_box">
+                    	<ul>
+                    		<li class="divide"></li>
+  	       	           		<li class="Title1">이름 [한글]</li>
+    	        	        <li class="Answer1"><input class="text1" type="text" id="name_kr" name="name_kr"></li>
+    	        	        <li class="divide"></li>
+        	        	   	<li class="Title1">이름 [한자]</li>
+            	        	<li class="Answer1"><input class="text1" type="text" id="name_ch" name="name_ch"></li>
+                	   		<li class="divide"></li>
+                	   		<li class="Title1">이름 [영어]</li>
+           	        	 	<li class="Answer1"><input class="text1" type="text" id="name_en" name="name_en"></li>
+            	        </ul>
+                   </div>
+                   <br>
+                   <div class="imgfile">
+                   		<ul>
+                   			<li class="divide"></li>
+                   			<li class="Title1">* 이미지</li>
+           					<li><input type="file" id="image"name="image" accept="image/*" onchange="setThumbnail(event);"/></li>
+           					<li class="divide"></li>
+           				</ul>
+           			</div>
+           			
+                    <br>
+                    
+                    <div class="bottom_box">
+                    	<ul>
+                    		<li class="divide"></li>
+  	       	           		<li class="Title2">* 우편번호 </li>
+    	        	        <li class="Answer4"><input type="hidden" id="confmKey" name="confmKey" value=""  >
+    	        	        <input class="text1" type="text" readonly id="zipNo" name="zipNo"></li>
+    	        	        <input type="button" value="주소검색" class="addr_btn" onclick="goPopup();">
+    	        	        <li class="divide"></li>
+        	        	   	<li class="Title2">* 주소</li>
+            	        	<li class="Answer2"><input class="text1" type="text" id="roadAddrPart1" name="roadAddrPart1" readonly></li>
+            	        	<li class="divide"></li>
+                	   		<li class="Title2">* 상세주소</li>
+           	        	 	<li class="Answer2"><input class="text1" type="text" id="addrDetail" name="addrDetail" placeholder=" 상세주소를 입력하세요"></li>
+           	        	 	<li class="divide"></li>
+           	        	 	<li class="Title2">* 연락처  </li>
+    	        	        <li class="Answer2"><input class="text1" type="text" id="pr_telno" name="pr_telno" placeholder=" - 없이 입력하세요"></li>
+            	        	<li class="divide"></li>
+                	   		<li class="Title2">* 이메일</li>
+           	        	 	<li class="Answer2"><input class="text1" type="text" id="pr_email" name="pr_email"></li>
+           	        	 	<li class="divide"></li>
+           	        	 	<li class="Title3">* 생년월일</li>
+            	        	<li class="Answer3"><input class="text1" type="text" id="pr_birth" name="pr_birth" placeholder=" 예) 890909식으로 입력하세요 "></li>
+                	   		<li class="Title3">* 성별</li>
+           	        	 	<li class="Answer3"><input class="text1" type="text" id="pr_gender" name="pr_gender" placeholder=" 예) 남성 또는 여성으로 입력하세요 "></li>
+           	        	 	<li class="divide"></li>
+            	        </ul>
+                    </div>
+                    <br>
+                    
+                    <p> * 필수로 입력해야합니다. </p>
+                    <div class="save">
+                 		<button type="submit" class="save_btn">저장</button>
+                   	</div> 
+                   	</form>
+<!--  	                   
+<!--             	        		<tr> -->
+<!--                 	    			<th>우편번호</th> -->
+<!--                     				<td> -->
+<!--                     					<input type="hidden" id="confmKey" name="confmKey" value=""  > -->
+<!-- 										<input type="text" id="zipNo" name="zipNo" readonly style="width:68%"> -->
+<!-- 										<input type="button" value="주소검색" class="addr_btn" onclick="goPopup();"> -->
+<!--                     				</td> -->
+<!--          	           				<th>주소</th> -->
+<!--             	        			<td><input type="text" id="roadAddrPart1" name="roadAddrPart1" style="width:100%" readonly></td> -->
+<!--                 	    		</tr> -->
+<!--                     			<tr> -->
+<!--                     				<th>상세주소</th> -->
+<!--                     				<td> -->
+<!--                     					<input type="text" id="addrDetail" name="addrDetail" style="width:100%" value="" placeholder="상세주소 입력하세요"> -->
+<!--                     				</td> -->
+<!--                     				<th>성별</th> -->
+<!--                     				<td> -->
+<!--                     					<input type="text" id="pr_gender" name="pr_gender" placeholder="예) 남성 또는 여성로 입력하세요" > -->
+<!--                     				</td> -->
+<!--                     			</tr>                   		 -->
+<!--                     		</tbody> -->
+<!--                    		</table> -->
+<!--                     <br> -->
+<!--                     <div class="save"> -->
+<!--                    		<button type="submit" class="save_btn">저장</button> -->
+<!--                    	</div> -->
+<!--                     </form> -->
+					<!-- info table 끝 -->
+                    </div>
 
             </div>
             <!-- End of Main Content -->
@@ -387,40 +413,56 @@ container-fluid{height: 100%;}
 
 
 </body>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-$(function(){
-	$(".search_btn").click(function(){
-		$("#code_search").val();
-		$("#name_search").val();
-		$("#alt").submit();
-	});
-	
-// 	$(".auth_btn").click(function(){
-// 		$("#auth").val(0);
-// 		$("#auth").val(1);
-// 		$("#send").submit();
-// 	});
-	
-});
+    function goPopup() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
 
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
 
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                }
 
-function getCheckboxValue(event){
-	let result = '';
-	if(event.target.checked){
-		result = event.target.value;
-	}else{
-		result= '';
-	}
-	document.getElementById('result').innerText = result;
-}
-// result가 id일때만 반응이 있다. id는 다중으로 받아들일수가 없어서 안됨 
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('zipNo').value = data.zonecode;
+                document.getElementById("roadAddrPart1").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("addrDetail").focus();
+            }
+        }).open();
+    }
+    function setThumbnail(event) {
+        var reader = new FileReader();
 
+        reader.onload = function(event) {
+          var img = document.createElement("img");
+          img.setAttribute("src", event.target.result);
+          document.querySelector("div#image_container").appendChild(img);
+        };
 
-
-
-
-
+        reader.readAsDataURL(event.target.files[0]);
+      }    
 </script>
 </html>

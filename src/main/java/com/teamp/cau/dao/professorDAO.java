@@ -16,26 +16,32 @@ public class professorDAO {
 	@Autowired
 	private SqlSession sqlsession;
 
-	
+	// 교수정보 검색 
 	public List<professorDTO> search(HashMap<String,String> map){
 		return sqlsession.selectList("INSTR_INFO.search",map);
 	}
+	
+	//교수정보 입력 저장
 	public Integer insert(Map<String, Object> infoEnter) {
 		return sqlsession.insert("INSTR_INFO.prinfo_save", infoEnter);
 	}
-	public Object update(Map<String, Object> give) {
-		return sqlsession.update("INSTR_INFO.give_auth",give);
-	}
+	
+	// 교수정보 불러오기 
 	public List<professorDTO> prinfo() {
 		return sqlsession.selectList("INSTR_INFO.prlist");
 	}
-	
+
+	// 지원자 정보 불러오기 
 	public List<HashMap<String, Object>> select() {
 		return sqlsession.selectList("APPL_INFO.callin");
 	}
-	public Integer score(Map<String, Object> scoreSave) {
-		return sqlsession.insert("APPL_INFO.resultScore", scoreSave);
+	
+	// 면접점수 저장 
+	public Integer result(Map<String, Object> scoreSave) {
+			return sqlsession.insert("APPL_INFO.resultScore", scoreSave);
 	}
+
+	
 	
 	
 }

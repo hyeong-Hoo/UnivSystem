@@ -7,7 +7,7 @@
     
     <!-- 교수정보  가져오기 -->
     <select id="prlist" resultType="com.teamp.cau.dto.professorDTO">
-    	select * from INSTR_INFO 
+    	select * from INSTR_INFO;
     	
     </select>
     
@@ -34,9 +34,6 @@
     	insert into INSTR_INFO(INSTR_NO, KORN_FLNM, CRCLM_CD, USER_BRDT, EML_ADDR, ADDR, DADDR, GENDER, TELNO)
     	values (#{pr_no}, #{pr_name}, #{pr_dep}, #{pr_birth}, #{pr_email}, #{roadAddrPart1}, #{addrDetail}, #{pr_gender}, #{pr_telno});
     </insert>
-   
-   	<!-- 권한 주기 -->
-  
    	
    	<!-- 평가 점수 저장 -->
    	<insert id="resultScore" parameterType="HashMap">
@@ -44,5 +41,11 @@
    		values (#{inter_score}, #{total_score});
    	</insert>
    	
+   	
+   	<!-- 본인정보수정 수정 및 저장  -->
+   	<insert id="selfSave" parameterType="HashMap">
+   		insert into APPL_INFO ()
+   	
+   	</insert>
    	
     </mapper>

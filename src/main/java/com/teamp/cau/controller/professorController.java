@@ -44,24 +44,55 @@ public class professorController {
 		String pr_no = req.getParameter("pr_no");
 		String pr_name = req.getParameter("pr_name");
 		String pr_telno = req.getParameter("pr_telno");
-		String pr_dep = req.getParameter("pr_dep");
+		String pr_birth = req.getParameter("pr_birth");
+		String pr_email = req.getParameter("pr_email");
+		String pr_id = req.getParameter("pr_id");
+		String pr_pw = req.getParameter("pr_pw");
+		Map<String, Object> infoEnter = new HashMap<>();
+		infoEnter.put("pr_no", pr_no);
+		infoEnter.put("pr_name", pr_name);
+		infoEnter.put("pr_telno", pr_telno);
+		infoEnter.put("pr_birth", pr_birth);
+		infoEnter.put("pr_email", pr_email);
+		infoEnter.put("pr_id", pr_id);
+		infoEnter.put("pr_pw", pr_pw);
+		Integer enter = prService.insert("prinfo_save", infoEnter);
+		return "professor";
+	}
+	
+	//교수본인정보입력 저장 
+	@PostMapping("/pr_self")
+	public String self_save(HttpServletRequest req) {
+		String pr_no = req.getParameter("pr_no");
+		String name_kr = req.getParameter("name_kr");
+		String name_ch = req.getParameter("name_ch");
+		String name_en = req.getParameter("name_en");
+		String pr_telno = req.getParameter("pr_telno");
 		String pr_birth = req.getParameter("pr_birth");
 		String pr_email = req.getParameter("pr_email");
 		String roadAddrPart1 = req.getParameter("roadAddrPart1");
 		String addrDetail = req.getParameter("addrDetail");
 		String pr_gender = req.getParameter("pr_gender");
-		Map<String, Object> infoEnter = new HashMap<>();
-		infoEnter.put("pr_no", pr_no);
-		infoEnter.put("pr_name", pr_name);
-		infoEnter.put("pr_telno", pr_telno);
-		infoEnter.put("pr_dep", pr_dep);
-		infoEnter.put("pr_birth", pr_birth);
-		infoEnter.put("pr_email", pr_email);
-		infoEnter.put("roadAddrPart1", roadAddrPart1);
-		infoEnter.put("addrDetail", addrDetail);
-		infoEnter.put("pr_gender", pr_gender);
-		Integer enter = prService.insert("prinfo_save", infoEnter);
+		Map<String, Object> selfmodi = new HashMap<>();
+		selfmodi.put("pr_no", pr_no);
+		selfmodi.put("name_kr", name_kr);
+		selfmodi.put("name_ch", name_ch);
+		selfmodi.put("name_en", name_en);
+		selfmodi.put("pr_telno", pr_telno);
+		selfmodi.put("pr_birth", pr_birth);
+		selfmodi.put("pr_email", pr_email);
+		selfmodi.put("roadAddrPart1", roadAddrPart1);
+		selfmodi.put("addrDetail", addrDetail);
+		selfmodi.put("pr_gender", pr_gender);
+		Integer enter = prService.insert("selfSave", selfmodi);
 		return "professor";
+	}
+	
+	//교수본인정보 수정 불러오기 
+	@GetMapping("/self_modify")
+	public String modify( ) {
+		
+		return "self_modify";
 	}
 	
 	//교수정보 불러오기 
@@ -90,17 +121,7 @@ public class professorController {
 		return mv;
 	}
 	
-	//교수정보 권한주기
-	@PostMapping("/pr_info_save")
-	public String give_auth(HttpServletRequest req) {
-		String auth = req.getParameter("auth");
-		System.out.println("auth");
-		Map<String, Object> give = new HashMap<>();
-		give.put("auth", auth);
-		System.out.println(give);
-		prService.giveAuth("give_auth", give);
-		return "pr_info";
-	}
+	
 	
 	// 면접평가 불러오기
 	@GetMapping("/pr_authority")
@@ -120,7 +141,7 @@ public class professorController {
 		Map<String, Object> scoreSave = new HashMap<>();
 		scoreSave.put("inter_score", interview);
 		scoreSave.put("total_score", total);
-		Integer save = prService.score("resultScore", scoreSave);
+			Integer interviewSave = prService.score("resultScore", scoreSave);
 		return "pr_authority";
 	}
 	

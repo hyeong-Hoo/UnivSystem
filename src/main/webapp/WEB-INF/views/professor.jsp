@@ -24,12 +24,16 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 <style>
-th{ width:20%; text-align: center; background-color: #c6cdd4; border: solid 0.5px; }
-td{ width:30%;}
-table{width:100%; color: black;}
-.addr_btn{ border-radius: 3px; background-color: #3E74C7; color: white; width:30%;}
-.addr_button{width: 7%; height: 40px; text-align: center; line-height: 35px; border: solid 0.5px;}
-input{ height: 40px; width:100%;}
+ul{list-style: none; color: black;}
+li{float: left; color: black; padding-left:0;}
+.top_box{ width: 100%; height: 85px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
+.middle_box{ width: 100%; height:85px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
+.bottom_box{ width: 100%; height: 165px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd;}
+.Title1{ width: 15%; height: 35px; text-align: left; line-height: 30px;}
+.Answer1{ width: 85%; height: 35px;}
+.divide{ width: 100%; height: 5px;}
+.text1{ width: 95%; margin: auto;}
+input{ height: 35px; width:100%;} 
 .save_btn{background-color: #3E74C7; color: white; border-radius: 3px;  height: 30px; width: 60px;}
 .container-fluid{height: 80%;}
 </style>
@@ -150,6 +154,7 @@ input{ height: 40px; width:100%;}
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">교직관리</h6>
                         <a class="collapse-item" href="professor">교수정보입력</a>
+                        <a class="collapse-item" href="self_modify">교수본인정보 수정 </a>
                         <a class="collapse-item" href="pr_info">교수정보권한</a>
                         <a class="collapse-item" href="pr_authority">면접평가</a>
                     </div>
@@ -241,56 +246,50 @@ input{ height: 40px; width:100%;}
                     </div>
                     <!-- Divider -->
           			<hr class="sidebar-divider">
+          			
                     <div class="info_table">
                     <form action="/professor_info" name="form" id="form" method="post">
- 	                   <table>
- 		                   <tbody>
-   	    	            		<tr>
-        		            		<th>교수번호</th>
-            		        		<td><input type="text" id="pr_no" name="pr_no"></td>
-                    				<th>이름</th>
-                    				<td><input type="text" id="pr_name" name="pr_name"></td>
-                    			</tr>
-                    			<tr>
-        		            		<th>ID</th>
-            		        		<td><input type="text" id="pr_id" name="pr_id"></td>
-                    				<th>비밀번호</th>
-                    				<td><input type="text" id="pr_pw" name="pr_pw"></td>
-                    			</tr>
-	                    		<tr>
-    	                			<th>학과코드</th>
-        	            			<td><input type="text" id="pr_dep" name="pr_dep"></td>
-            	        			<th>생년월일</th>
-                	    			<td><input type="text" id="pr_birth" name="pr_birth" placeholder=" 예) 030201로 입력하세요"></td>
-                    			</tr>
-                    			<tr>
-                    				<th>이메일</th>
-                    				<td><input type="text" id="pr_email" name="pr_email"></td>
-	                    			<th>연락처</th>
-    	                			<td><input type="text" id="pr_telno" name="pr_telno" placeholder=" - 없이 입력하세요"></td>
-        	            		</tr>
-            	        		<tr>
-                	    			<th>우편번호</th>
-                    				<td>
-                    					<input type="hidden" id="confmKey" name="confmKey" value=""  >
-										<input type="text" id="zipNo" name="zipNo" readonly style="width:68%">
-										<input type="button" value="주소검색" class="addr_btn" onclick="goPopup();">
-                    				</td>
-         	           				<th>주소</th>
-            	        			<td><input type="text" id="roadAddrPart1" name="roadAddrPart1" style="width:100%" readonly></td>
-                	    		</tr>
-                    			<tr>
-                    				<th>상세주소</th>
-                    				<td>
-                    					<input type="text" id="addrDetail" name="addrDetail" style="width:100%" value="" placeholder="상세주소 입력하세요">
-                    				</td>
-                    				<th>성별</th>
-                    				<td>
-                    					<input type="text" id="pr_gender" name="pr_gender" placeholder="예) 남 또는 여로 입력하세요" >
-                    				</td>
-                    			</tr>                   		
-                    		</tbody>
-                   		</table>
+                    <div class="top_box">
+                    	<ul>
+                    		<li class="divide"></li>
+                    		<li class="Title1">아이디 </li>
+                    		<li class="Answer1"><input type="text" class="text1" id="pr_id" name="pr_id"></li>
+                    		<li class="divide"></li>
+                    		<li class="Title1">비밀번호</li>
+                    		<li class="Answer1"><input type="password" class="text1" id="pr_pw" name="pr_pw"></li>
+                    		<li class="divide"></li>
+                    	</ul>
+                    </div>
+                    <br>
+                    <div class="middle_box">
+                    	<ul>
+                    		<li class="divide"></li>
+                    		<li class="Title1">교수번호 </li>
+                    		<li class="Answer1"><input type="text" class="text1" id="pr_no" name="pr_no"></li>
+                    		<li class="divide"></li>
+                    		<li class="Title1">학과코드</li>
+                    		<li class="Answer1"><input type="text" class="text1" id="pr_dep" name="pr_dep"></li>
+                    		<li class="divide"></li>
+                    	</ul>
+                    </div>
+                    <br>
+                    <div class="bottom_box">
+                    	<ul>
+                    		<li class="divide"></li>
+                    		<li class="Title1">이름</li>
+                    		<li class="Answer1"><input type="text" class="text1"></li>
+                    		<li class="divide"></li>
+                    		<li class="Title1">생년월일</li>
+                    		<li class="Answer1"><input type="text" class="text1" id="pr_birth" name="pr_birth" placeholder=" 예) 030201로 입력하세요"></li>
+                    		<li class="divide"></li>
+                    		<li class="Title1">이메일 </li>
+                    		<li class="Answer1"><input type="text" class="text1" id="pr_email" name="pr_email"></li>
+                    		<li class="divide"></li>
+                    		<li class="Title1">연락처 </li>
+                    		<li class="Answer1"><input type="text" class="text1" id="pr_telno" name="pr_telno" placeholder=" - 없이 입력하세요"></li>
+                    		<li class="divide"></li>
+                    	</ul>
+                    </div>
                     <br>
                     <div class="save">
                    		<button type="submit" class="save_btn">저장</button>
@@ -343,48 +342,7 @@ input{ height: 40px; width:100%;}
         </div>
     </div>
 
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-    function goPopup() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
-
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('zipNo').value = data.zonecode;
-                document.getElementById("roadAddrPart1").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("addrDetail").focus();
-            }
-        }).open();
-    }
-    
-</script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -392,15 +350,7 @@ input{ height: 40px; width:100%;}
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-	<!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-	
-	  <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
 

@@ -16,28 +16,31 @@ public class professorService {
 	@Autowired
 	private professorDAO prDAO;
 
+	// 교수정보 불러오기 
 	public List<professorDTO> prinfo() {
 		return prDAO.prinfo();
 	}
 
+	//교수정보 검색 
 	public List<professorDTO> selectList(HashMap<String, String> search) {
 		return prDAO.search(search);
 	}
 
+	//교수정보입력 저장 
 	public Integer insert(String string, Map<String, Object> infoEnter) {
 		return prDAO.insert(infoEnter);
-	}
-
-	public Object giveAuth(String string, Map<String, Object> give) {
-		return prDAO.update(give);
 	}
 
 	public List<HashMap<String, Object>> selectList() {
 		return prDAO.select();
 	}
 
+	// 면접점수 저장 
 	public Integer score(String string, Map<String, Object> scoreSave) {
-		return prDAO.insert(scoreSave);
+		return prDAO.result(scoreSave);
 	}
+
+	
+
 	
 }
