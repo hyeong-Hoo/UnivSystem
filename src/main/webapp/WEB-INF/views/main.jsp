@@ -16,9 +16,22 @@
 <script>
 $(function(){
     $("#Admission").click(function(){
-    	var date = new Date("YYYY-MM-DD");
-    	alert(date);
-        location.href = 'Admission';
+    	var date = new Date();
+    	var year = date.getFullYear();
+    	var month = date.getMonth()+1;
+    	var day = date.getDate();
+    	if(month < 10){
+    		month = '0'+month;
+    	}
+    	if(day < 10){
+    		day = '0'+day;
+    	}
+    	var today = year+"-"+month+"-"+day;
+    	if(("${list[0].SCHDL_START}" <= today || "${list[1].SCHDL_START}" <= today) && (today <= "${list[0].SCHDL_END_DT}" || today <= "${list[1].SCHDL_END_DT}")){
+    		location.href = 'Admission';
+    	}else{
+    		alert('접수기간이 아닙니다.');
+    	}     
     });
     
     $("#close_btn").click(function(){
