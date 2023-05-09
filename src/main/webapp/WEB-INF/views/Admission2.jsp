@@ -343,7 +343,7 @@ $(function(){
                     <ul>
                         <li>고등학교 졸업(예정)증명서 1부</li>
                         <li>검정고시 합격자는 검정고시 합격증명서 1부</li>
-                        <li>파일<input type="file" name="file"></li>
+                        <li>파일<input type="file" name="fileInput"></li>
                         </form>
                     </ul>
                 </th>

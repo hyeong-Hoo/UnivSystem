@@ -4,8 +4,8 @@
 <mapper namespace="get_List">
 
 
-	<select id="studentList" parameterType="Get_studDTO"
-		resultType="Get_studDTO">
+	<select id="studentList" parameterType="com.teamp.cau.dto.Get_studDTO"
+		resultType="com.teamp.cau.dto.Get_studDTO">
 
 		SELECT *
 		FROM STUD_INFO
@@ -15,18 +15,18 @@
 
 	</select>
 	
-	<select id="department" resultType="Get_studDTO">
+	<select id="department" resultType="com.teamp.cau.dto.Get_studDTO">
 		SELECT DISTINCT department
 		FROM STUD_INFO
 	</select>
-	<select id="categoryList" resultType="Get_studDTO">
+	<select id="categoryList" resultType="com.teamp.cau.dto.Get_studDTO">
 		SELECT DISTINCT category
 		FROM STUD_INFO
 	</select>
-	<select id="studentValue" parameterType="Get_studDTO" resultType="Get_studDTO">
+	<select id="studentValue" parameterType="com.teamp.cau.dto.Get_studDTO" resultType="com.teamp.cau.dto.Get_studDTO">
 		SELECT * FROM STUD_INFO WHERE appl_NO = #{appl_NO}
 	</select>
-	<insert id="studentSubmit2" parameterType="Get_studDTO">
+	<insert id="studentSubmit2" parameterType="com.teamp.cau.dto.Get_studDTO">
     INSERT INTO USER_INFO (
         USER_ID, PSWD, KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, STUD_NO, ROLE_CODE
     )
