@@ -45,6 +45,7 @@ font-size: 12px;
 	display: block;
    float: left;
    color: white;
+   
 }
 .closebtn {
    float: left;
@@ -54,12 +55,14 @@ font-size: 12px;
    height: 30px;
    text-align: center;
    line-height: 30px;
+   margin-right: 5px;
    border-top-right-radius: 5px;
 }
 
 .contentbox{
 width: 100%;
-height: auto;
+min-height: 500px;
+height:auto;
 position: relative;
 }
 .testcontent{
@@ -85,16 +88,21 @@ float: right;
 </style>    
 <script type="text/javascript">
 $(function() {
-    if($("#menubar").children().length < 10){
+	
+    if($("#menubar").children().length < 11){
     $(".collapse-item").click(function() {
                    var divid = $(this).attr('id');	
                    var btnid = "btn" + divid;
                    var menuid = "menu" + divid;
                    var contentid = "content" + divid;
                    var btn = "<div class='tap'><span class='barmenu'"+"id="+menuid+"></span><input class='closebtn' type='button' value='x'"+"id="+btnid+"></div>";
-                   var content = "<div class='testcontent'"+"id="+contentid+"></div>"
-                   var close = '<input type="button" value="x" id="close">'
-                	  	
+                   var content = "<div class='testcontent'"+"id="+contentid+"></div>";
+                   var close = '<input type="button" value="x" id="close">';
+    				alert($("#"+contentid).length);
+                   if($("#"+contentid).length){
+    					$("#"+contentid).css("z-index", "100");
+          			  $("#"+contentid).siblings().css("z-index", "10");
+    				}else{
                       $.ajax({
                             url : "/tester",
                             type : "post",
@@ -102,16 +110,18 @@ $(function() {
                             dataType : "html",
                             data : {id : divid},
                             success : function(good) {
-                            	
                             	$(document).ready(function(){
                                     $("#" + contentid).load(good);
+                                    $("#"+contentid).css("z-index", "100");
+                                    $("#"+contentid).prevAll().css("z-index", "10");
                                                                      	
                             	});
                             }
                          });
                    
-                   $("#contentbox").empty();
                    $("#contentbox").append(content);
+    }
+
 
                    if ($("#close").length) {
                    } else {
@@ -145,55 +155,35 @@ $(function() {
                           $(this).parent().prevAll().children('input').attr('class','closebtn');
                           $(this).parent().nextAll().children('span').attr('class','barmenu');
                           $(this).parent().nextAll().children('input').attr('class','closebtn');
-                                                 
-                        $.ajax({
-                            url : "/tester",
-                            type : "post",
-                            cache : false,
-                            dataType : "html",
-                            data : {id : divid},
-                            success : function(good) {
-                            	$(document).ready(function(){
-                               $("#" + contentid).load(good);    
-                              
-                            	});
-                            }	
-                         });
-                        
-                        $("#contentbox").empty();
-                        $("#contentbox").append(content);
-                        
-                                                                        
-                         if ($("#"+contentid).length) {
-                        	 $("#contentbox").empty();
-                             $("#contentbox").append(content);
-                         } else {
-                            $("#contentbox").append(content);	
-                         }
+                          $("#"+contentid).css("z-index", "100");
+                          $("#"+contentid).siblings().css("z-index", "10");
+                                       
                          
                       });
-                      $(document).on("click", "#"+btnid,
-                            function() {
+                      $(document).on("click", "#"+btnid, function() {
                                $(this).parent().remove();
-                               $("#" + contentid).remove();
+                                $("#" + contentid).remove();
                                
                                if($("#menubar").children().length <= 1){
                             	   $("#menubar").empty();
                                }
                             });
-                      $(document).on("click", ".on2", function(){
-                    	  if($(this).parent().prev().val() == "undefined"){
-              	  			$(this).parent().next().children('span').trigger('click');
-              	  		}else if($(this).parent().prev().val() == ""){
-              	  			$(this).parent().prev().children('span').trigger('click');
-              	  		}else{
-              	  			
-              	  		} 
-                      });
+                      
                 });
+    $(document).on("click", ".on2", function(){
+  	  if($(this).parent().prev().val() == "x"){
+  			$(this).parent().next().children('span').trigger('click');
+  		}else if($(this).parent().prev().val() == ""){
+  			$(this).parent().prev().children('span').trigger('click');
+  		}else{
+  			
+  		} 
+    });
+    
     }else{
     	alert("메뉴를 더 이상 추가할 수 없습니다.");
     }
+    
  });
 </script>
 
@@ -321,12 +311,12 @@ $(function() {
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-            	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCharts"
+               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCharts"
                     aria-expanded="true" aria-controls="collapseCharts">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>등록관리</span>
                 </a>
-                	<div id="collapseCharts" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                   <div id="collapseCharts" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">등록관리</h6>
                         <a class="collapse-item" id="20">등록금 결제</a>
@@ -435,8 +425,8 @@ $(function() {
                 <!-- Begin Page Content -->
 
                     <div class="box">
-                    	<div class="menubar" id="menubar"></div>
-                    	<div class="contentbox" id="contentbox"></div>
+                       <div class="menubar" id="menubar"></div>
+                       <div class="contentbox" id="contentbox"></div>
                     </div>
 
                 
