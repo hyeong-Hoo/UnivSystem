@@ -22,4 +22,8 @@ public class AdmissionService {
     public List<Stud_infoDTO> testList() {
         return admissiondao.testList();
     }
+
+	public String passcheck(Stud_infoDTO dto) {
+		return admissiondao.passcheck(dto);
+	}
 }

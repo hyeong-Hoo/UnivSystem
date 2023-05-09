@@ -17,4 +17,8 @@
     <select id="testList" resultType="com.teamp.cau.dto.Stud_infoDTO">
         select image as eml_addr from test
     </select>
+    <select id="passcheck" resultType="String">
+    SELECT passed from APPL_INFO WHERE KORN_FLNM = #{passName} and USER_BRDT = #{passBrd};
+    </select>
+    
 </mapper>

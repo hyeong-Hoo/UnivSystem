@@ -16,4 +16,6 @@ public interface AdmissionDAO {
     public int test(String imges);
 
     List<Stud_infoDTO> testList();
+
+	public String passcheck(Stud_infoDTO dto);
 }

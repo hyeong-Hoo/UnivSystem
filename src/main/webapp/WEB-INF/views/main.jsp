@@ -9,14 +9,45 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
+<script src="js/confetti_v2.js"></script>
 <head>
 <script>
 $(function(){
     $("#Admission").click(function(){
+    	var date = new Date("YYYY-MM-DD");
+    	alert(date);
         location.href = 'Admission';
     });
+    
+    $("#close_btn").click(function(){
+    	$(".popup_container").fadeOut();
+    });
+  	//합격자 조회
+  	
+    $("#pass_Btn").click(function(){
+    	$(".popup_wrap").css('display','flex').hide().fadeIn();
+    });
+    $("#close").click(function(){
+    	modalClose();
+    });
+    function modalClose(){
+    	$("#popup").fadeOut();
+    }
+ 
+    
+  	//지원서결제
+  	
+    $("#pay_btn").click(function(){
+    	$(".popup_paywrap").css('display','flex').hide().fadeIn();
+    });
+    $("#pay_close").click(function(){
+    	modalClose1();
+    });
+    function modalClose1(){
+    	$("#pay_popup").fadeOut();
+    }
 });
+
 
 </script>
 <meta charset="UTF-8">
@@ -114,7 +145,7 @@ $(function(){
         .logo_bottom-text4{
           text-align: center;
         font-size: 20px;
-        margin-top: 100px;
+        margin-top: 45px;
         font-weight: 200;
         letter-spacing:5px;
         color:aliceblue;
@@ -241,6 +272,7 @@ cursor: pointer;
     .tr1>td{
         border: 1px solid #E0EBFF;
         border-radius: 20px;
+        cursor: pointer;
     }
 
     .service-middle{
@@ -301,6 +333,7 @@ cursor: pointer;
     .material-symbols-outlined {
     font-size:50px;
     color:darkblue;
+    cursor:pointer;
       font-variation-settings:
       'FILL' 0,
       'wght' 200,
@@ -340,15 +373,242 @@ cursor: pointer;
     color:gray;
     	cursor : pointer;
     }
+/*     입시기간 팝업 */
+    .popup_container{
+    position: absolute;
+    top:50px;
+    left:50px;
+    width:500px;
+    height: 500px;
+    background-color:white;
+    border-radius:2px;
+    border:solid 5px black;
+    z-index: 10;
+    display:block;
+    }
     
-  
+    .popup_container>button{
+    position: absolute;
+    top:10px;
+    left:455px;
+    width:30px;
+    height:30px;
+    border-style:none;
+    border-radius:5px;
+    font-size:20px;
+    font-weight:5px;
+    line-height:10px;
+    z-index: 11;
+    }
+    .popup_container>button:hover{
+    background-color: darkblue;
+    color:white;
+    cursor: pointer;
+    }
+    
+/*    	합격자조회 */
+
+    .popup_wrap{
+     background-color: rgba(0,0,0,0.3);
+     justify-content: center;
+     align-items: center;
+     position:fixed;
+     top:0;
+     left:0;
+     right:0;
+     bottom:0;
+     display:none;
+     paddig:15px;
+     z-index: 15;
+     }
+     
+    .popup_pass{
+     width:100%;
+     max-width:800px;
+     border-radius: 10px;
+     overflow:hidden;
+     background-color: white;
+     box-shadow: 5px 10px 10px 1px rgba(0,0,0,3);
+     }
+    .popup_head{
+     width:100%;
+     height:50px;
+     display:flex;
+     background-color:darkblue;
+     font-weight:800;
+     font-size:30px;
+     color:white;
+     align-items: center;
+     justify-content: center;
+     }
+    .popup_body{
+     width:100%;
+     }
+ 	.body-content{  
+  	 width:100%;
+  	 padding:30px;           
+	 }
+	.body_titleBox{            
+  	 text-align:center;        
+  	 width:100%;
+  	 height:40px;
+ 	 margin-top:10px;
+ 	 font-size:15px;
+ 	        
+	 }
+	.body_contentbox{           
+ 	 word-break:break-word;  
+ 	 width:100%; 
+ 	 text-align:center; 
+ 	 overflow-y:auto;          
+ 	 min-height:100px;         
+  	 max-height:200px; 
+  	 float:left;    
+	}
+	.body_contentbox>span{
+	margin-top:10px;
+	}
+	.contenText{
+	background-color: #cecee0;
+	margin-top: 5px;
+	}
+	.popup-foot{                      
+ 	 width:100%;
+ 	 height:50px;
+	}
+	.pop-btn{ 
+  	 display:inline-flex;           
+ 	 width:49.8%;                      
+ 	 height:100%;                 
+ 	 justify-content:center;         
+ 	 align-items:center;            
+  	 float:left;   
+  	 font-weight:800;
+  	 font-size:20px;                  
+  	 color:darkblue;                  
+ 	 cursor:pointer;  
+ 	 background-color: #FFC314;               
+	}
+	.pop-btn.confirm{  
+	 float:left;              
+ 	 border-right:3px solid darkblue; 
+ 	 background-color: #FFC314;
+	}
+	.pop-btn:hover{
+	color:white;
+	}
+	
+/* 	지원서결제  */
+
+	.popup_paywrap{
+     background-color: rgba(0,0,0,0.3);
+     justify-content: center;
+     align-items: center;
+     position:fixed;
+     top:0;
+     left:0;
+     right:0;
+     bottom:0;
+     display:none;
+     paddig:15px;
+     z-index: 15;
+     }
+     
+/*  	폭죽 */
+	.canvas{
+	z-index:20;
+	pointer-events: none;
+	position: fixed;
+	top: 0;
+	transform: scale(1.1);
+	}
+
 </style>
 </head>
 <body>
 <div class="a">
+<canvas id="canvas" class="canvas"></canvas>
 <div class="container">
     <div class="main-first">
     <div class="logo_top">
+    
+<!--     기간알림팝업창 -->
+    <div class="popup_container">
+    <button type="button" id="close_btn">x</button>
+   입학기간
+   <c:forEach items="${list }" var="l">
+   	<div class="schName">
+   	${l.SCHDL_NAME }
+   	</div>
+   	<div class="datebox">
+   	<div>${l.SCHDL_START }</div>
+   	<div>${l.SCHDL_END_DT }</div>
+   	</div>
+   </c:forEach>
+    </div>
+<!--   	합격자조회 팝업 -->
+	
+	<div class="popup_passcon"><!-- 합격조회 컨테이너 -->
+		<div class="popup_wrap" id="popup"><!-- 팝업창 외부박스 -->
+		 	<div class="popup_pass"><!-- 실질적 팝업창 -->
+		 		<div class="popup_head"><!-- 헤드부분 -->
+		 			<span class="popup_title">합격자조회</span>
+		 		</div>
+		 		<div class="popup_body">
+		 		<div class="body_content">
+		 			<div class="body_titleBox">
+		 				지원자의 성함과 생년월일을 적어주세요
+		 			</div>
+		 			<div class="body_contentbox"><!-- 팝업내용 -->
+		 				<span>
+		 					
+		 					성함&emsp;&emsp;<input type="text" name="search_name" class="contenText" id="passName"><br>
+		 					생년월일 <input type="text" name="search_brd" class="contenText" id="passBrd" placeholder="ex)19981102">
+		 					
+		 				</span>
+		 			</div>
+		 		</div>
+		 		</div>
+		 		<div class="popup-foot"><!--하단 버튼 -->
+		 			<span class="pop-btn confirm" id="confirm">확인</span>
+        			<span class="pop-btn close" id="close">창 닫기</span>
+		 		</div>
+		 	</div>
+		</div>
+	</div><!-- 끝 -->
+    
+    
+    <!--   	지원서결제 팝업 -->
+	
+	<div class="popup_paycon"><!-- 합격조회 컨테이너 -->
+		<div class="popup_paywrap" id="pay_popup"><!-- 팝업창 외부박스 -->
+		 	<div class="popup_pass"><!-- 실질적 팝업창 -->
+		 		<div class="popup_head"><!-- 헤드부분 -->
+		 			<span class="popup_title">지원서결제조회</span>
+		 		</div>
+		 		<div class="popup_body">
+		 		<div class="body_content">
+		 			<div class="body_titleBox">
+		 				지원자의 아이디와 생년월일을 적어주세요
+		 			</div>
+		 			<div class="body_contentbox"><!-- 팝업내용 -->
+		 				<span>
+		 					
+		 					아이디&emsp;<input type="text" name="" class="contenText" id=""><br>
+		 					생년월일 <input type="text" name="" class="contenText" id="" placeholder="ex)19981102">
+		 					
+		 				</span>
+		 			</div>
+		 		</div>
+		 		</div>
+		 		<div class="popup-foot"><!--하단 버튼 -->
+		 			<span class="pop-btn confirm" id="pay_confirm">확인</span>
+        			<span class="pop-btn close" id="pay_close">창 닫기</span>
+		 		</div>
+		 	</div>
+		</div>
+	</div> <!--끝 -->
+    
         <span class="logo-top-text">중앙입학서비스</span>
         <span class="logo-top-text2">Choogang Service</span>
     </div>
@@ -573,10 +833,10 @@ window.onclick = function(event) {
             <div class="head-text">Choogang Service</div>
             <table class="service-top-table">
             <tr class="tr1">
-                <td><span class="material-symbols-outlined">
+                <td><span class="material-symbols-outlined" id="startButton">
                     browse_activity
                     </span><br>학사정보</td>
-                <td><span class="material-symbols-outlined">
+                <td><span class="material-symbols-outlined" id="stopButton">
                     view_compact_alt
                     </span><br>과목정보</td>
                 <td><span class="material-symbols-outlined">
@@ -584,13 +844,13 @@ window.onclick = function(event) {
                     </span><br>접수확인</td>
             </tr>
             <tr class="tr1">
-                <td><span class="material-symbols-outlined">
+                <td><span class="material-symbols-outlined" id="pay_btn">
                     manage_search
-                    </span><br>수강편람조회</td>
-                <td><span class="material-symbols-outlined">
+                    </span><br>지원서결제</td>
+                <td><span class="material-symbols-outlined" id="pass_Btn">
                     zoom_in
-                    </span><br>성적평가조회</td>
-                <td><span class="material-symbols-outlined">
+                    </span><br>합격자조회</td>
+                <td><span class="material-symbols-outlined" id="ee" >
                     transcribe
                     </span><br>온라인강의</td>
             </tr>
@@ -674,5 +934,56 @@ window.onclick = function(event) {
         </div>
     </div>
 </div>
+
 </body>
+<script type="text/javascript">
+
+$(function(){
+	 function reAction(){
+		  	$("#startButton").trigger("click");
+		  	setTimeout(function(){
+		  		$("#stopButton").trigger("click");
+		  	}, 6000);
+		  }
+		  
+		  $(".uoc-icon").on('click', function(){
+		      reAction();
+		  }); 
+	
+	$("#confirm").click(function(){
+		var passName = $("#passName").val();
+		var passBrd = $("#passBrd").val();
+				$.post( //post방식으로 
+							{
+							url:"/passinfo", //url
+							dataType : "json", //받아올 데이터타입 
+							data : {
+								"passName" : passName, // 보낼 데이터 == httparameter 과 같음
+								"passBrd"  : passBrd
+							}
+					}).done(function(data){//성공 data라는곳에 정보가있음
+						
+						if(data == 0){
+							alert("정보를 잘못 입력하셨습니다.");
+							alert("올바르게 다시 입력해주세요.");
+						}
+						else if(data == 1){
+							reAction();
+							alert("합격입니다.");
+							
+						}else{
+							alert("불합격입니다.");
+						}
+
+
+					}).fail(function(xhr){ //실패 xhr 에 정보가 있음
+						alert("fail");
+					})
+				});
+		});
+
+
+		
+	
+</script>
 </html>

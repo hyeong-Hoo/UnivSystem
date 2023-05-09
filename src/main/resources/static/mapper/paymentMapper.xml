@@ -12,8 +12,12 @@
 	<update id="updatePayment">
 		UPDATE APPL_INFO 
 		SET payment = 1 
-		WHERE KORN_FLNM=#{param1} AND USER_BRDT=#{param2}
+		WHERE KORN_FLNM=#{param1} AND USER_BRDT=#{param2} AND payment=0
 		
 	</update>
+	
+
+	
+	
 
 </mapper>

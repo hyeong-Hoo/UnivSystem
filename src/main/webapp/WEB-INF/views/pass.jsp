@@ -26,7 +26,7 @@
 <script type="text/javascript">
 
 $(function(){
-	$('#searchStudent').click(function() {
+	$('#searchStudent_pass').click(function() {
 				  $("input:checkbox[id='check_all']").prop("checked", false);
 				$.ajax({
 					url : '/passInfo',
@@ -36,7 +36,7 @@ $(function(){
 					dataType : "json",
 					success : function(data) {
 						var iii = data.list_L;
-						$('.table_body').empty(); // 기존 테이블 데이터를 지웁니다.
+						$('.table_body_pass').empty(); // 기존 테이블 데이터를 지웁니다.
 						$('#no').val('');
 						  $('#name2').val('');
 						  $('#age').val('');
@@ -53,7 +53,7 @@ $(function(){
 						  $('#PASS_INFO').val('');
 					
 						$.each(data.list, function(i, info) {
-							var selectid="creditSelect"+info.pass_INFO;
+							var selectid="creditSelect"+info.appl_NO;
 							var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
 							+ '<td scope="row" class="checkbox_i"> <input type="checkbox" class="checkbox_a" name="checkbox_c"></td>' 
 							if(i<=data.list_L){str += '<td class="passrank">' + (i+1)	+ '번</td>' ;}
@@ -69,7 +69,7 @@ $(function(){
 							+ '<td>' + info.avg + '</td>'
 							+'<input class="CRCLMCD" type="hidden" value='+info.crclm_CD + '>'
 							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
-							$('.table_body').append(str);
+							$('.table_body_pass').append(str);
 							$('#'+selectid).val(info.pass_INFO).attr("selected", "selected");
 							if(i==(data.list_L)){
 								return false;
@@ -230,7 +230,7 @@ text-align: right;
 		<div class="col-sm-12 col-md-6">
 			<div id="dataTable_filter" class="dataTables_filter text_right">
 				<label> 학생 이름: <input type="text" id="name">
-					<button type="button" id="searchStudent">검색</button>
+					<button type="button" id="searchStudent_pass">검색</button>
 				</label>
 			</div>
 		</div>
@@ -255,7 +255,7 @@ text-align: right;
 				<th scope="col">합격여부</th>
 			</tr>
 		</thead>
-		<tbody class="table_body">
+		<tbody class="table_body_pass">
 		</tbody>
 		<input type="button" class="permit1" value="예비번호 문자보내기">  &nbsp;
 		<input type="button" class="permit2" value="계좌번호 문자보내기">  &nbsp;

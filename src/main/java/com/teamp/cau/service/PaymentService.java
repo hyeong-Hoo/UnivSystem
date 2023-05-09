@@ -15,15 +15,21 @@ public class PaymentService {
 	private PaymentDAO paymentDAO;
 
 	
-	public void updatePayment(String KORN_FLNM, String USER_BRDT) {
-		paymentDAO.updatePayment(KORN_FLNM, USER_BRDT);
+	public void updatePayment(String KORN_FLNM, String USER_BRDT, int payment) {
+		paymentDAO.updatePayment(KORN_FLNM, USER_BRDT, payment);
 		
 	}
 
-	 public boolean checkPayment(String KORN_FLNM, String USER_BRDT) {
-	        List<StudentDTO> paymentList = paymentDAO.paymentList(KORN_FLNM, USER_BRDT);
+	 public boolean checkPayment(String KORN_FLNM, String USER_BRDT, int payment) {
+	        List<StudentDTO> paymentList = paymentDAO.paymentList(KORN_FLNM, USER_BRDT, payment);
 	        return !paymentList.isEmpty();
 	    }
+	
+
+	 public int paymentList(String KORN_FLNM, String USER_BRDT) {
+		    StudentDTO studentDTO = paymentDAO.paymentList(KORN_FLNM, USER_BRDT);
+		    return studentDTO.getPayment();
+		}
 
 
 	

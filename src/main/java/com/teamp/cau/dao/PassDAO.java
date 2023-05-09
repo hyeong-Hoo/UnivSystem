@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import com.teamp.cau.dto.Get_studDTO;
 import com.teamp.cau.dto.PassDTO;
 @Repository
 public class PassDAO {
@@ -22,7 +21,7 @@ public class PassDAO {
 		return sqlSession.selectList("list.studentList",passDTO);
 	}
 
-	public Object passUpdate(PassDTO passDTO) {
+	public int passUpdate(PassDTO passDTO) {
 		return sqlSession.update("list.Passupdate",passDTO);
 	}
 

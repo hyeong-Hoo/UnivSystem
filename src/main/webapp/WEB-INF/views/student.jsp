@@ -34,6 +34,7 @@
 							  $('#name2').val('');
 							  $('#age').val('');
 							  $('#brdt').val('');
+							  $('#pic').val('');
 							  $('#gender').val('');
 							  $('#email').val('');
 							  $('#tel').val('');
@@ -44,6 +45,8 @@
 							  $('#detailadr').val('');
 
 							$.each(data, function(i, info) {
+							    var base64str = btoa(String.fromCharCode.apply(null, new Uint8Array(info.photo_FILE)));
+
 								var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
 								+ '<th scope="row">' + info.appl_NO
 								+ '</th>' + '<td>' + info.korn_FLNM
@@ -54,9 +57,12 @@
 								+ '<td>' + info.telno + '</td>'
 								+ '<td>' + info.rel_TELNO + '</td>'
 								+ '<td>' + info.rel_CD + '</td>'
-								+ '<td>' + info.zip + '</td>' + '<td>'
-								+ info.addr + '</td>' + '<td>'
-								+ info.daddr + '</td>' + '</tr>';
+								+ '<td>' + info.zip + '</td>' 
+								+ '<td>' + info.addr + '</td>' 
+								+ '<td>' + info.daddr + '</td>' 
+								+ '<td>' +'<img src="data:image/jpeg;base64,'+ base64str +'">'+ '</td>'
+								
+								+ '</tr>';
 																			
 										
 
@@ -81,6 +87,7 @@
 			  var zip = $(this).find('td:eq(8)').text();
 			  var addr = $(this).find('td:eq(9)').text();
 			  var daddr = $(this).find('td:eq(10)').text();
+			  var pic = $(this).find('td:eq(11)').text();
 
 			  // 입력란에 값을 채웁니다.
 			  $('#no').val(appl_NO);
@@ -95,6 +102,7 @@
 			  $('#zipnum').val(zip);
 			  $('#adr').val(addr);
 			  $('#detailadr').val(daddr);
+			  $('#pic').val(photo_FILE);
 			  // 나머지 입력란에도 마찬가지로 값을 채워줍니다.
 			  // ...
 
@@ -173,6 +181,13 @@
       <div class="col-sm-4">
         <input type="text" class="form-control" id="detailadr" readonly>
       </div>
+    </div>
+    <div class="form-group row">
+      <label for="class" class="col-sm-2 col-form-label">사진</label>
+      <div class="col-sm-4">
+        <input type="image" class="form-control" id="pic" >
+        
+      </div>    
     </div>
   </form>
 </div>

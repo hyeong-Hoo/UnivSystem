@@ -12,9 +12,11 @@ import com.teamp.cau.dto.StudentDTO;
 
 public interface PaymentDAO {
 
-	List<StudentDTO> paymentList(String KORN_FLNM, String USER_BRDT);
+	List<StudentDTO> paymentList(String KORN_FLNM, String USER_BRDT, int payment);
 
-	void updatePayment(String KORN_FLNM, String USER_BRDT);
+	void updatePayment(String KORN_FLNM, String USER_BRDT, int payment);
+
+	StudentDTO paymentList(String KORN_FLNM, String USER_BRDT);
 
 
 }
