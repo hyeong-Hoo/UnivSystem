@@ -1,47 +1,47 @@
 package com.teamp.cau.controller;
 
-import com.teamp.cau.dto.Stud_infoDTO;
-import com.teamp.cau.service.AdmissionService;
-import com.teamp.cau.service.UserService;
-import com.teamp.cau.util.ConvertBinary;
-import com.teamp.cau.util.RandomScore;
-import com.teamp.cau.vo.UserVo;
-
-import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Base64.Encoder;
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.teamp.cau.dto.ScheduleDTO;
+import com.teamp.cau.dto.Stud_infoDTO;
+import com.teamp.cau.service.AdmissionService;
+import com.teamp.cau.service.ScheduleService;
+import com.teamp.cau.util.ConvertBinary;
+import com.teamp.cau.util.RandomScore;
 
 
 @Controller
-
 public class AdmissionController {
 	//파일이 저장되는 경로 설정
 	private final String uploadDir = "/Users/jnews/Downloads/Cau1/src/main/resources/static/images";
 	@Autowired
 	private AdmissionService admissionService;
-	private UserService userService;
+	
 	@Autowired
-	private SqlSession sqlSession;
+	private ScheduleService scheduleService;
 
 	@GetMapping("/main")
-	public String main(){
-		return "main";
+	public ModelAndView main(){
+		ModelAndView mv = new ModelAndView("main");
+		LocalDate now = LocalDate.now();
+		int year = now.getYear();
+		ScheduleDTO dto = new ScheduleDTO();
+		dto.setRECRT_YEAR(Integer.toString(year));
+		List<Map<String, Object>> list = scheduleService.scheduleCheck(dto);
+		mv.addObject("list",list);
+		return mv;
 	}
 	@GetMapping("/Admission")
 	public String Admission(){

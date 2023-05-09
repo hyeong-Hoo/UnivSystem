@@ -534,6 +534,15 @@ cursor: pointer;
     <div class="popup_container">
     <button type="button" id="close_btn">x</button>
    입학기간
+   <c:forEach items="${list }" var="l">
+   	<div class="schName">
+   	${l.SCHDL_NAME }
+   	</div>
+   	<div class="datebox">
+   	<div>${l.SCHDL_START }</div>
+   	<div>${l.SCHDL_END_DT }</div>
+   	</div>
+   </c:forEach>
     </div>
 <!--   	합격자조회 팝업 -->
 	
