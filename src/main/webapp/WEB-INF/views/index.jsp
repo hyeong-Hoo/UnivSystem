@@ -87,42 +87,42 @@ float: right;
 $(function() {
     if($("#menubar").children().length < 10){
     $(".collapse-item").click(function() {
-                   var divid = $(this).attr('id');
+                   var divid = $(this).attr('id');	
                    var btnid = "btn" + divid;
                    var menuid = "menu" + divid;
                    var contentid = "content" + divid;
                    var btn = "<div class='tap'><span class='barmenu'"+"id="+menuid+"></span><input class='closebtn' type='button' value='x'"+"id="+btnid+"></div>";
                    var content = "<div class='testcontent'"+"id="+contentid+"></div>"
                    var close = '<input type="button" value="x" id="close">'
-                         $.ajax({
+                	  	
+                      $.ajax({
                             url : "/tester",
                             type : "post",
                             cache : false,
                             dataType : "html",
                             data : {id : divid},
                             success : function(good) {
+                            	
                             	$(document).ready(function(){
-                                    $("#" + contentid).load(good);                            		
-                                 	
+                                    $("#" + contentid).load(good);
+                                                                     	
                             	});
                             }
                          });
-                   if ($("#"+contentid).length) {
-                      $("#contentbox").empty();
-                      $("#contentbox").append(content);
+                   
+                   $("#contentbox").empty();
+                   $("#contentbox").append(content);
+
+                   if ($("#close").length) {
                    } else {
-                      $("#contentbox").append(content);
+                     $("#menubar").append(close);
                    }
-                   if($("#close").length){
-                	   
-            	   }else{
-            		   $("#menubar").append(close);
-            	   }
+                   
                    $(document).on('click', '#close',function(){
                 	   $("#menubar").empty();
                 	   $("#contentbox").empty();
                    });
-                   
+                                     
                       if ($("#" + menuid).length) {
                     	  $("#"+menuid).attr('class','barmenu on1');
                           $("#"+menuid).next().attr('class','closebtn on2');
@@ -145,7 +145,8 @@ $(function() {
                           $(this).parent().prevAll().children('input').attr('class','closebtn');
                           $(this).parent().nextAll().children('span').attr('class','barmenu');
                           $(this).parent().nextAll().children('input').attr('class','closebtn');
-                         $.ajax({
+                                                 
+                        $.ajax({
                             url : "/tester",
                             type : "post",
                             cache : false,
@@ -153,15 +154,21 @@ $(function() {
                             data : {id : divid},
                             success : function(good) {
                             	$(document).ready(function(){
-                               $("#" + contentid).load(good);                            		
+                               $("#" + contentid).load(good);    
+                              
                             	});
-                            }
+                            }	
                          });
+                        
+                        $("#contentbox").empty();
+                        $("#contentbox").append(content);
+                        
+                                                                        
                          if ($("#"+contentid).length) {
                         	 $("#contentbox").empty();
                              $("#contentbox").append(content);
                          } else {
-                            $("#contentbox").append(content);
+                            $("#contentbox").append(content);	
                          }
                          
                       });
@@ -231,13 +238,13 @@ $(function() {
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>공통관리</span>
+                    <span>관리자관리</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">공통관리</h6>
-                        <a class="collapse-item" href="buttons">코드관리</a>
-                        <a class="collapse-item" href="cards">사용자정보 관리</a>
+                        <h6 class="collapse-header">관리자관리</h6>
+                        <a class="collapse-item" href="buttons" id="1-1">코드관리</a>
+                        <a class="collapse-item" href="cards" id="1-2">사용자정보 관리</a>
                     </div>
                 </div>
             </li>
@@ -251,10 +258,42 @@ $(function() {
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">학생관리</h6>
-                        <span class="collapse-item" id="1">합격자 조회</span>
-                        <span class="collapse-item" id="2">학적부여관리</span>
-                        <span class="collapse-item" id="3">입학정원관리</span>
-                        <span class="collapse-item" id="4">개인신상조회</span>
+                        <span class="collapse-item" id="2-1">합격자 조회</span>
+                        <span class="collapse-item" id="2-2">학적부여관리</span>
+                        <span class="collapse-item" id="2-3">입학정원관리</span>
+                        <span class="collapse-item" id="2-4">개인신상조회</span>
+                    </div>
+                </div>
+            </li>
+              <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStudents" aria-expanded="true" aria-controls="collapseStudents">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>학생메뉴</span>
+                </a>
+                <div id="collapseStudents" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">학생메뉴</h6>
+                        <span class="collapse-item" id="3-1">개인정보 조회 및 수정</span>
+                        <span class="collapse-item" id="3-2">수강신청</span>
+                        <span class="collapse-item" id="3-3">수강 강좌 조회</span>
+                        <span class="collapse-item" id="3-4">비밀번호변경</span>
+                    </div>
+                </div>
+            </li>
+              <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProfessor" aria-expanded="true" aria-controls="collapseProfessor">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>교수메뉴</span>
+                </a>
+                <div id="collapseProfessor" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">교수메뉴</h6>
+                        <span class="collapse-item" id="4-1">개인정보 조회 및 수정</span>
+                        <span class="collapse-item" id="4-2">면접평가</span>
+                        <span class="collapse-item" id="4-3">강좌 개설</span>
+                        <span class="collapse-item" id="4-4">학과 관리</span>
                     </div>
                 </div>
             </li>
@@ -268,19 +307,13 @@ $(function() {
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">입시관리</h6>
-                        <a class="collapse-item" id="10">수시 지원자 관리</a>
-                        <a class="collapse-item" id="11">정시 지원자 관리</a>
-                        <a class="collapse-item" id="12">모집요강</a>
-                        <a class="collapse-item" id="13">모집일 관리</a>
-                        <a class="collapse-item" id="14">입학학생관리</a>
-                        <a class="collapse-item" href="blank">지원자확인용</a>
-                        <a class="collapse-item" href="blank">내신성적관리</a>
-                        <a class="collapse-item" href="blank">수능성적관리</a>
-                        <a class="collapse-item" href="blank">입상성적관리</a>
-                        <a class="collapse-item" href="blank">입학사정관리</a>
+                        <a class="collapse-item" id="5-1">수시 지원자 관리</a>
+                        <a class="collapse-item" id="5-2">정시 지원자 관리</a>
+                        <a class="collapse-item" id="5-3">모집요강</a>
+                        <a class="collapse-item" id="5-4">모집일 관리</a>
+                        <a class="collapse-item" id="5-5">입학학생관리</a>
                         <a class="collapse-item" href="blank">총원합격관리</a>
                         <a class="collapse-item" href="blank">합격확정관리</a>
-                        <a class="collapse-item" href="blank">신입생관리</a>
                         
                     </div>
                 </div>
@@ -308,11 +341,19 @@ $(function() {
 <!--                    </div> -->
             </li>
 
-            <!-- Nav Item - Tables -->
+             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="tables">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>교직관리</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProfessor" aria-expanded="true" aria-controls="collapseProfessor">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>교직관리</span>
+                </a>
+                <div id="collapseProfessor" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">교직관리</h6>
+                        <span class="collapse-item" id="6-1">교수 관리</span>
+                        <span class="collapse-item" id="6-2">교수 권한</span>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->
@@ -449,18 +490,11 @@ $(function() {
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
 
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <script

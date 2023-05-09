@@ -4,7 +4,7 @@
 <mapper namespace="list">
 
 
-	<select id="studentLimit" parameterType="PassDTO"	resultType="Integer">
+	<select id="studentLimit" parameterType="com.teamp.cau.dto.PassDTO"	resultType="Integer">
 
 		SELECT APPL_NUM
 		FROM CRCLM_INFO
@@ -12,48 +12,47 @@
 
 	</select>
 	
-	<select id="studentList" parameterType="PassDTO" resultType="PassDTO">
+	<select id="studentList" parameterType="com.teamp.cau.dto.PassDTO" resultType="com.teamp.cau.dto.PassDTO">
 
 		SELECT *
 		FROM APPL_INFO
 		WHERE PASS_INFO  <![CDATA[<]]> 3 
 		AND CRCLM_CD = #{CRCLM_CD} AND RECRT_SCHDL_CD =#{RECRT_SCHDL_CD} AND
 		passed="합격" AND RECRT_YEAR=#{RECRT_YEAR} AND 
-		payment="1" AND
-		KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
+		payment="1" AND	KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
 		ORDER BY avg DESC
 
 	</select>
-	<update id="Passupdate" parameterType="PassDTO">
+	<update id="Passupdate" parameterType="com.teamp.cau.dto.PassDTO">
 		UPDATE APPL_INFO
 		SET
 		PASS_INFO=#{PASS_INFO}
 		WHERE appl_NO=#{appl_NO}
 
 	</update>
-	<select id="result" resultType="int" parameterType="PassDTO">
+	<select id="result" resultType="int" parameterType="com.teamp.cau.dto.PassDTO">
 		SELECT
 		PASS_INFO
 		FROM APPL_INFO
 		WHERE appl_NO=#{appl_NO};
 	</select>
-	<select id="department" resultType="PassDTO">
+	<select id="department" resultType="com.teamp.cau.dto.PassDTO">
 		SELECT DISTINCT DEPARTMENT,CRCLM_CD
 		FROM CRCLM_INFO
 	</select>
-	<select id="categoryList" resultType="PassDTO">
+	<select id="categoryList" resultType="com.teamp.cau.dto.PassDTO">
 		SELECT RECRT_YEAR
 		FROM RECRT_SCHDL
 		GROUP BY RECRT_YEAR
 		ORDER BY RECRT_YEAR DESC
 	</select>
 	
-	<select id="studentValue" parameterType="PassDTO" resultType="PassDTO">
+	<select id="studentValue" parameterType="com.teamp.cau.dto.PassDTO" resultType="com.teamp.cau.dto.PassDTO">
 		SELECT * FROM APPL_INFO 
 		WHERE appl_NO = #{appl_NO}
 	</select>
 	
-	<insert id="studentSubmit1" parameterType="PassDTO">
+	<insert id="studentSubmit1" parameterType="com.teamp.cau.dto.PassDTO">
 	INSERT INTO STUD_INFO (Student_ID,appl_NO,KORN_FLNM,USER_BRDT,GENDER_CD,
     AGE,TELNO,REL_TELNO, REL_CD,  EML_ADDR,  ZIP, ADDR, DADDR, USER_NO,CRCLM_CD,CRCLM_CYCL,
     PASS_INFO, category, avg, passed, department
@@ -64,11 +63,11 @@ VALUES (
     #{CRCLM_CYCL},  #{PASS_INFO},  #{category},  #{avg},  #{passed},  #{department}
 )
 	</insert> 
-	<select id="studentValue1" parameterType="PassDTO" resultType="PassDTO">
+	<select id="studentValue1" parameterType="com.teamp.cau.dto.PassDTO" resultType="com.teamp.cau.dto.PassDTO">
 		SELECT * FROM STUD_INFO
 		WHERE appl_NO = #{appl_NO}
 	</select>
-	<insert id="studentSubmit2" parameterType="PassDTO">
+	<insert id="studentSubmit2" parameterType="com.teamp.cau.dto.PassDTO">
     INSERT INTO USER_INFO (
         USER_ID, PSWD, KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, STUD_NO, ROLE_CODE
     )
