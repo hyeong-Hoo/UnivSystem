@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -92,6 +93,23 @@ public class AdmissionController {
 		int result2 = admissionService.stud_info(dto);
 		return "redirect:/main";
 	}
+	@PostMapping(value = "/passinfo",produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String passinfo(Stud_infoDTO dto) {
+		
+		String check = admissionService.passcheck(dto);
 
-
+		System.out.println(check);
+		if(check == null){
+			return "0";
+		}else if(check.equals("합격")){
+			return "1";
+		}else {
+			return "2";
+		}
+	}
+@GetMapping("testboom")
+public String boom() {
+	return"testboom";
+}
 }
