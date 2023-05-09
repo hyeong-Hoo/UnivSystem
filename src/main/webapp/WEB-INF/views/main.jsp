@@ -14,6 +14,8 @@
 <script>
 $(function(){
     $("#Admission").click(function(){
+    	var date = new Date("YYYY-MM-DD");
+    	alert(date);
         location.href = 'Admission';
     });
     

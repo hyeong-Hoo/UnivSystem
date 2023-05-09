@@ -98,7 +98,6 @@ $(function() {
                    var btn = "<div class='tap'><span class='barmenu'"+"id="+menuid+"></span><input class='closebtn' type='button' value='x'"+"id="+btnid+"></div>";
                    var content = "<div class='testcontent'"+"id="+contentid+"></div>";
                    var close = '<input type="button" value="x" id="close">';
-    				alert($("#"+contentid).length);
                    if($("#"+contentid).length){
     					$("#"+contentid).css("z-index", "100");
           			  $("#"+contentid).siblings().css("z-index", "10");
