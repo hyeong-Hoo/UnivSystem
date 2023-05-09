@@ -53,7 +53,7 @@ $(function(){
 						  $('#PASS_INFO').val('');
 					
 						$.each(data.list, function(i, info) {
-							var selectid="creditSelect"+info.pass_INFO;
+							var selectid="creditSelect"+info.appl_NO;
 							var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
 							+ '<td scope="row" class="checkbox_i"> <input type="checkbox" class="checkbox_a" name="checkbox_c"></td>' 
 							if(i<=data.list_L){str += '<td class="passrank">' + (i+1)	+ '번</td>' ;}
