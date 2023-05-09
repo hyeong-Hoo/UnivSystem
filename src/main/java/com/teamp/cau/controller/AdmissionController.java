@@ -27,7 +27,7 @@ import java.util.Base64;
 import java.util.Base64.Encoder;
 import java.util.List;
 
-@Slf4j
+
 @Controller
 
 public class AdmissionController {

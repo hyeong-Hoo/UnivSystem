@@ -16,9 +16,12 @@ $(function(){
     $("#Admission").click(function(){
         location.href = 'Admission';
     });
+    
     $("#close_btn").click(function(){
     	$(".popup_container").fadeOut();
     });
+  	//합격자 조회
+  	
     $("#pass_Btn").click(function(){
     	$(".popup_wrap").css('display','flex').hide().fadeIn();
     });
@@ -27,6 +30,19 @@ $(function(){
     });
     function modalClose(){
     	$("#popup").fadeOut();
+    }
+ 
+    
+  	//지원서결제
+  	
+    $("#pay_btn").click(function(){
+    	$(".popup_paywrap").css('display','flex').hide().fadeIn();
+    });
+    $("#pay_close").click(function(){
+    	modalClose1();
+    });
+    function modalClose1(){
+    	$("#pay_popup").fadeOut();
     }
 });
 
@@ -355,6 +371,7 @@ cursor: pointer;
     color:gray;
     	cursor : pointer;
     }
+/*     입시기간 팝업 */
     .popup_container{
     position: absolute;
     top:50px;
@@ -386,6 +403,9 @@ cursor: pointer;
     color:white;
     cursor: pointer;
     }
+    
+/*    	합격자조회 */
+
     .popup_wrap{
      background-color: rgba(0,0,0,0.3);
      justify-content: center;
@@ -399,6 +419,7 @@ cursor: pointer;
      paddig:15px;
      z-index: 15;
      }
+     
     .popup_pass{
      width:100%;
      max-width:800px;
@@ -474,6 +495,23 @@ cursor: pointer;
 	.pop-btn:hover{
 	color:white;
 	}
+	
+/* 	지원서결제  */
+
+	.popup_paywrap{
+     background-color: rgba(0,0,0,0.3);
+     justify-content: center;
+     align-items: center;
+     position:fixed;
+     top:0;
+     left:0;
+     right:0;
+     bottom:0;
+     display:none;
+     paddig:15px;
+     z-index: 15;
+     }
+     
 /*  	폭죽 */
 	.canvas{
 	z-index:20;
@@ -526,8 +564,39 @@ cursor: pointer;
 		 		</div>
 		 	</div>
 		</div>
-	</div>
+	</div><!-- 끝 -->
     
+    
+    <!--   	지원서결제 팝업 -->
+	
+	<div class="popup_paycon"><!-- 합격조회 컨테이너 -->
+		<div class="popup_paywrap" id="pay_popup"><!-- 팝업창 외부박스 -->
+		 	<div class="popup_pass"><!-- 실질적 팝업창 -->
+		 		<div class="popup_head"><!-- 헤드부분 -->
+		 			<span class="popup_title">지원서결제조회</span>
+		 		</div>
+		 		<div class="popup_body">
+		 		<div class="body_content">
+		 			<div class="body_titleBox">
+		 				지원자의 아이디와 생년월일을 적어주세요
+		 			</div>
+		 			<div class="body_contentbox"><!-- 팝업내용 -->
+		 				<span>
+		 					
+		 					아이디&emsp;<input type="text" name="" class="contenText" id=""><br>
+		 					생년월일 <input type="text" name="" class="contenText" id="" placeholder="ex)19981102">
+		 					
+		 				</span>
+		 			</div>
+		 		</div>
+		 		</div>
+		 		<div class="popup-foot"><!--하단 버튼 -->
+		 			<span class="pop-btn confirm" id="pay_confirm">확인</span>
+        			<span class="pop-btn close" id="pay_close">창 닫기</span>
+		 		</div>
+		 	</div>
+		</div>
+	</div> <!--끝 -->
     
         <span class="logo-top-text">중앙입학서비스</span>
         <span class="logo-top-text2">Choogang Service</span>
@@ -764,9 +833,9 @@ window.onclick = function(event) {
                     </span><br>접수확인</td>
             </tr>
             <tr class="tr1">
-                <td><span class="material-symbols-outlined">
+                <td><span class="material-symbols-outlined" id="pay_btn">
                     manage_search
-                    </span><br>수강편람조회</td>
+                    </span><br>지원서결제</td>
                 <td><span class="material-symbols-outlined" id="pass_Btn">
                     zoom_in
                     </span><br>합격자조회</td>
