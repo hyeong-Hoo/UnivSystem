@@ -143,7 +143,7 @@ $(document).ready(function () {
 
 
     
-    $('#saveBtn').click(function() {
+    $('#saveBtn2').click(function() {
         var tableData = $('#occtable').DataTable().data().toArray();
         var updatedData = [];
         for (var i = 0; i < tableData.length; i++) {
@@ -171,7 +171,7 @@ $(document).ready(function () {
     });
 
     
-    $('#resetBtn').click(function() {
+    $('#resetBtn2').click(function() {
         $('#dept_input').val('');
         $('#name_input').val('');
         table.columns().search('').draw();

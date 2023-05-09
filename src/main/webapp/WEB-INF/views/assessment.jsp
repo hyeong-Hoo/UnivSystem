@@ -149,7 +149,7 @@ $(document).ready(function () {
 
 
     
-    $('#saveBtn').click(function() {
+    $('#saveBtn1').click(function() {
         var tableData = $('#asstable').DataTable().data().toArray();
         var updatedData = [];
         for (var i = 0; i < tableData.length; i++) {
@@ -177,7 +177,7 @@ $(document).ready(function () {
     });
 
     
-    $('#resetBtn').click(function() {
+    $('#resetBtn1').click(function() {
         $('#dept_input').val('');
         $('#name_input').val('');
         table.columns().search('').draw();

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +13,7 @@
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     
     <script>
+  	
     function createOrderNum(){
         const date = new Date();
         const year = date.getFullYear();
@@ -31,6 +34,7 @@
         const name = $('#name').val();
         const birthdate = $('#birthdate').val();
         const orderNum = createOrderNum();
+             
 
         // 서버에 결제할 사용자 정보가 있는지 확인
         $.ajax({
@@ -54,21 +58,21 @@
                         if (rsp.success) {
                             var msg = '결제가 완료되었습니다.';
                             alert(msg);
-                            location.href = "http://localhost/assessment";
+                            location.href = "http://localhost/main";
                         } else {
                             var msg = '결제에 실패하였습니다.';
                             msg += '에러내용 : ' + rsp.error_msg;
                             alert(msg);
                         }
                     });
+                }  else if (data === "{\"status\":\"blocked\"}") {
+                    alert('이미 결제된 지원서입니다. 결제를 진행할 수 없습니다.');
                 } else {
-                    // 결제 불가능 메시지 출력
                     alert('입력하신 정보와 일치하는 사용자 정보가 없습니다. 결제를 진행할 수 없습니다.');
                 }
             }
         });
     }
-        
     </script>    
 
 </head>
