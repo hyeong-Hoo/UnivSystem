@@ -94,27 +94,25 @@ $(function() {
                    var btn = "<div class='tap'><span class='barmenu'"+"id="+menuid+"></span><input class='closebtn' type='button' value='x'"+"id="+btnid+"></div>";
                    var content = "<div class='testcontent'"+"id="+contentid+"></div>"
                    var close = '<input type="button" value="x" id="close">'
-                         $.ajax({
+                	  	
+                      $.ajax({
                             url : "/tester",
                             type : "post",
                             cache : false,
                             dataType : "html",
                             data : {id : divid},
                             success : function(good) {
+                            	
                             	$(document).ready(function(){
-                                    $("#" + contentid).load(good);                            		
-                                 	
+                                    $("#" + contentid).load(good);
+                                                                     	
                             	});
                             }
                          });
                    
-                   // Remove previous JSON data before loading new data
                    $("#contentbox").empty();
-
-                   // Add content to content box
                    $("#contentbox").append(content);
 
-                   // Add close button to menu bar if it doesn't exist
                    if ($("#close").length) {
                    } else {
                      $("#menubar").append(close);
@@ -147,7 +145,8 @@ $(function() {
                           $(this).parent().prevAll().children('input').attr('class','closebtn');
                           $(this).parent().nextAll().children('span').attr('class','barmenu');
                           $(this).parent().nextAll().children('input').attr('class','closebtn');
-                         $.ajax({
+                                                 
+                        $.ajax({
                             url : "/tester",
                             type : "post",
                             cache : false,
@@ -155,10 +154,16 @@ $(function() {
                             data : {id : divid},
                             success : function(good) {
                             	$(document).ready(function(){
-                               $("#" + contentid).load(good);                            		
+                               $("#" + contentid).load(good);    
+                              
                             	});
                             }	
                          });
+                        
+                        $("#contentbox").empty();
+                        $("#contentbox").append(content);
+                        
+                                                                        
                          if ($("#"+contentid).length) {
                         	 $("#contentbox").empty();
                              $("#contentbox").append(content);
