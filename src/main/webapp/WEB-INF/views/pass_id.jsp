@@ -68,7 +68,7 @@ $(function(){
 							+ '<td>' + info.rel_TELNO + '</td>'
 							+'<td> <input class="IDCREATE" type="text" holderplace="아이디를 지정해주세요"></td>'
 							+'<input class="CRCLMCD" type="hidden" value='+info.crclm_CD + '>'
-							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect" readonly><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
+							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect" ><option value=0 disabled>문자대기</option><option value=1 disabled>예치금 대기</option><option value=2 disabled>합격</option><option value=3 disabled>합격의지없음</option><option value=4 disabled>예치금반환(환불)</option></select></td>'
 							$('.table_body').append(str);
 							$('#'+selectid).val(info.pass_INFO).attr("selected", "selected");
 							if(i==(data.list_L)){
@@ -93,7 +93,6 @@ $(function(){
 	 		 var  state= $(this).closest('tr').find('.appl_no').text();
 	 		 var  crclm= $(this).closest('tr').find('.CRCLMCD').val();
 			 var Student_id=$(this).closest('tr').find('.IDCREATE').val();
-	 		 alert(Student_id);
 			num=num+1;
 		  	checkBoxArr[i] = {"no" : i, "appl_NO" : state,"Student_id" : Student_id}
 		});
