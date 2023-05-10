@@ -28,7 +28,6 @@
         <thead>
             <tr>
                 <th>번호</th>
-                <th>유형</th>   
                 <th>이름</th>  
                 <th>지원학과</th>   
                 <th>언어</th>        
@@ -67,7 +66,6 @@ $(document).ready(function () {
         },
         columns: [
       	  { data: "appl_NO" },
-      	  { data: "category" },
       	  { data: "korn_FLNM" },
       	  { data: "department" },
       	  { data: "korean" },
@@ -105,10 +103,13 @@ $(document).ready(function () {
       	    // Create two input fields and a search button
       	      var dropdowns = '<div><select id="dept_select" class="form-control">' +
 	                '<option value="">지원 학과</option>' +
-	                '<option value="기계공학과">기계공학과</option>' +
-	                '<option value="전자공학과">전자공학과</option>' +
+	                '<option value="기계과">기계과</option>' +
 	                '<option value="컴퓨터공학과">컴퓨터공학과</option>' +
+	                '<option value="전기전자과">전기전자과</option>' +
+	                '<option value="화학공학과">화학공학과</option>' +
 	                '</select></div>';
+	                
+	              
 	                
       	    var inputs = '<div class="d-flex">' +
       	                 '<div class="mx-2"><input id="name_input" type="text" placeholder="이름 검색" class="form-control"></div>' +
