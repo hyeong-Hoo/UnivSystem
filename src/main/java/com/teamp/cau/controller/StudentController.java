@@ -3,6 +3,7 @@
 
 package com.teamp.cau.controller;
 
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,18 @@ public class StudentController {
 		
 		
 		List<StudentDTO> studentList = studentService.studentList(KORN_FLNM);
-		
-		
-		return studentList;
-	}
+		// 이미지 파일을 Base64로 인코딩하여 photoFile 필드에 저장
+		// db에는 바이너리값이 정확하게 찍혀있지만 불러왔을때는 다른값이 찍혀서 디코딩 해주어야 합니다.
+	    for (StudentDTO student : studentList) {
+	        byte[] PHOTO_FILE = student.getPHOTO_FILE();
+	        if (PHOTO_FILE != null) {
+	            String encodedPhotoFile = new String(PHOTO_FILE);
+	            byte[] decodedPhotoFile = Base64.getDecoder().decode(encodedPhotoFile);
+	            student.setPHOTO_FILE(decodedPhotoFile);
+	        }
+	        
+  }
+	    return studentList;
+}
 
 }

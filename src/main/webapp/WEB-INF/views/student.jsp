@@ -29,8 +29,8 @@
 						dataType : "json",
 						success : function(data) {
 							
-							$('.table_body').empty(); // 기존 테이블 데이터를 지웁니다.
-							$('#no').val('');
+							  $('.table_body').empty(); // 기존 테이블 데이터를 지웁니다.
+							  $('#no').val('');
 							  $('#name2').val('');
 							  $('#age').val('');
 							  $('#brdt').val('');
@@ -47,26 +47,29 @@
 							$.each(data, function(i, info) {
 
 								var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
-								+ '<th scope="row">' + info.appl_NO
-								+ '</th>' + '<td>' + info.korn_FLNM
-								+ '</td>' + '<td>' + info.age + '</td>'
-								+ '<td>' + info.user_BRDT + '</td>'
-								+ '<td>' + info.gender_CD + '</td>'
-								+ '<td>' + info.eml_ADDR + '</td>'
-								+ '<td>' + info.telno + '</td>'
-								+ '<td>' + info.rel_TELNO + '</td>'
-								+ '<td>' + info.rel_CD + '</td>'
-								+ '<td>' + info.zip + '</td>' 
-								+ '<td>' + info.addr + '</td>' 
-								+ '<td>' + info.daddr + '</td>' 
-								+ '<td>' + info.photo_FILE + '</td>'
+								+ '<th scope="row" class="aplyno">' + info.appl_NO	+ '</th>' 
+								+ '<td class="korname">' + info.korn_FLNM + '</td>' 
+								+ '<td class="korage">' + info.age + '</td>'
+								+ '<td class="korbrdt">' + info.user_BRDT + '</td>'
+								+ '<td class="korgender">' + info.gender_CD + '</td>'
+								+ '<td class="koremail">' + info.eml_ADDR + '</td>'
+								+ '<td class="kortelno">' + info.telno + '</td>'
+								+ '<td class="korrelno">' + info.rel_TELNO + '</td>'
+								+ '<td class="korrelcd" style="display:none;">' + info.rel_CD + '</td>'
+								+ '<td class="korzip" style="display:none;">' + info.zip + '</td>' 
+								+ '<td class="koradr" style="display:none;">' + info.addr + '</td>' 
+								+ '<td class="kordar" style="display:none;">' + info.daddr + '</td>' 
+								+ '<td class="photofile" style="display:none;">' + info.photo_FILE + '</td>'
 								
 								+ '</tr>';
 																			
 										
 
 								$('.table_body').append(str);
+														
+							
 							});
+							
 						}
 
 					});
@@ -74,19 +77,19 @@
 		
 		$('.table_body').on('click', 'tr', function() {
 			  // 클릭된 행의 각 셀 값을 가져옵니다.
-			  var appl_NO = $(this).find('th').text();
-			  var korn_FLNM = $(this).find('td:eq(0)').text();
-			  var age = $(this).find('td:eq(1)').text();
-			  var user_BRDT = $(this).find('td:eq(2)').text();
-			  var gender_CD = $(this).find('td:eq(3)').text();
-			  var eml_ADDR = $(this).find('td:eq(4)').text();
-			  var telno = $(this).find('td:eq(5)').text();
-			  var rel_TELNO = $(this).find('td:eq(6)').text();
-			  var rel_CD = $(this).find('td:eq(7)').text();
-			  var zip = $(this).find('td:eq(8)').text();
-			  var addr = $(this).find('td:eq(9)').text();
-			  var daddr = $(this).find('td:eq(10)').text();
-			  var pic = $(this).find('td:eq(11)').text();
+			  var appl_NO = $(this).find('.aplyno').text();
+			  var korn_FLNM = $(this).find('.korname').text();
+			  var age = $(this).find('.korage').text();
+			  var user_BRDT = $(this).find('.korbrdt').text();
+			  var gender_CD = $(this).find('.korgender').text();
+			  var eml_ADDR = $(this).find('.koremail').text();
+			  var telno = $(this).find('.kortelno').text();
+			  var rel_TELNO = $(this).find('.korrelno').text();
+			  var rel_CD = $(this).find('.korrelcd').text();
+			  var zip = $(this).find('.korzip').text();
+			  var addr = $(this).find('.koradr').text();
+			  var daddr = $(this).find('.kordar').text();
+			  var pic = $(this).find('.photofile').text();
 			  var imgTag = '<img src="data:image/jpeg;base64,' + pic + '" />';
 			  $('#pic').html(imgTag);	
 
@@ -103,7 +106,7 @@
 			  $('#zipnum').val(zip);
 			  $('#adr').val(addr);
 			  $('#detailadr').val(daddr);
-			  $('#pic').val(photo_FILE);
+			  
 			  // 나머지 입력란에도 마찬가지로 값을 채워줍니다.
 			  // ...
 
@@ -115,98 +118,167 @@
  .col-sm-2{
  width: 10%;
  }
+ .pic {
+ width: 200px;
+ height: 200px;
+ border: solid black 1px;
+ }
+ .pic > img{
+ width: 200px;
+ height: 200px;
+ border: solid black 1px;
+ }
+ .allbox{
+
+ width:100%;
+ height: 500px;
+ margin: 0 auto;
+ border: solid black 1px;
+ padding: 10px;
+ 
+ 
+ }
+ .box1{
+ width:100%;
+ 
+ height: 220px;
+ }
+ .pic{
+ float:left;
+ width:200px;
+ height: 200px;
+ }
+ .box2{
+ width:100%;
+ 
+ height: 250px;
+ }
+ 
+.scroll{
+div:100%;
+height:300px;
+overflow: scroll;
+}
  </style>
 <body>
 	
 	
      
    <div class="container">
-  <h2>학생 정보</h2>
+<br>  
   <form>
-  
-  <div class="form-group">
-    <label for="pic">사진</label>
-    <div id="pic"><img src="data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAcklEQVR4Xu2OMQqAQAwE8xILX6P/ry3Uh2iEK2RFNgMWFjcw3e3kIjofMKRLeohrOt7eITRWtYwOq/4L/Z0TowEnRgNOjAacGA04MRpwYjTgxGjAidGAE6MBJ0YDTowGnJg9npE3t7ZBzFE7csWntulwTsrCx1gkIxrpAAAAAElFTkSuQmCC"/></div>
-</div>
+       
+     <div class="allbox">
+     <div class="box1">
+     <div id="pic" class="pic">
+    
+     </div>
  
+    <div class="row mb-3">
+  	<label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm ">번호</label>
+  	<div class="col-sm-9">
+    <input type="text" class="form-control" id="no" readonly>
+    </div>
+    </div>
+    
+    <div class="row mb-3">
+  	<label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm">이름</label>
+  	<div class="col-sm-9">
+    <input type="text" class="form-control" id="name2" readonly>
+    </div>
+    </div>
+    
+    <div class="row mb-3">
+  	<label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm">나이</label>
+  	<div class="col-sm-9">
+    <input type="text" class="form-control" id="age" readonly>
+    </div>
+    </div>
+    
+    <div class="row mb-3">
+  	<label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm ">생년월일</label>
+  	<div class="col-sm-9">
+    <input type="text" class="form-control" id="brdt" readonly>
+    </div>
+    </div>
+      
+    </div>
+    
+    <div class="box2">
+     
+ <div class="form-group row mb-3">
+  <label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm">성별</label>
+  <div class="col-sm-4">
+    <input type="text" class="form-control" id="gender" readonly>
+  </div>
+  <label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm">이메일</label>
+  <div class="col-sm-4">
+    <input type="text" class="form-control" id="email" readonly>
+  </div>
+</div>
+
+<div class="form-group row mb-3">
+  <label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm">생년월일</label>
+  <div class="col-sm-4">
+    <input type="text" class="form-control" id="brdt" readonly>
+  </div>
+  <label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm">전화번호</label>
+  <div class="col-sm-4">
+    <input type="text" class="form-control" id="tel" readonly>
+  </div>
+</div>
+
+<div class="form-group row mb-3">
+  <label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm">비상전화번호</label>
+  <div class="col-sm-4">
+    <input type="text" class="form-control" id="retel" readonly>
+  </div>
+  <label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm">관계</label>
+  <div class="col-sm-4">
+    <input type="text" class="form-control" id="who" readonly>
+  </div>
+</div>
+
+<div class="form-group row mb-3">
+  <label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm">우편번호</label>
+  <div class="col-sm-4">
+    <input type="text" class="form-control" id="zipnum" readonly>
+  </div>
+  <label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm">주소</label>
+  <div class="col-sm-4">
+    <input type="text" class="form-control" id="adr" readonly>
+  </div>
+</div>
+
+<div class="form-group row mb-3">
+  <label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm">상세주소</label>
+  <div class="col-sm-4">
+    <input type="text" class="form-control" id="detailadr" readonly>
+  </div>
+  <label for="colFormLabel" class="col-sm-2 col-form-label col-form-label-sm">학과</label>
+  <div class="col-sm-4">
+    <input type="text" class="form-control" id="adr" readonly>
+  </div>
+</div>
   
-    <div class="form-group row">
-      <label for="name" class="col-sm-2 col-form-label">번호</label>
-      <div class="col-sm-4">
-        <input class="form-control" id="no" readonly>
-      </div>
-      <label for="korean-name" class="col-sm-2 col-form-label">이름</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="name2" readonly>
-      </div>
+      
+    
     </div>
-    <div class="form-group row">
-      <label for="department" class="col-sm-2 col-form-label">나이</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="age" readonly>
-      </div>
-      <label for="entrance-date" class="col-sm-2 col-form-label">생년월일</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="brdt" readonly>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="english-name" class="col-sm-2 col-form-label">성별</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="gender" readonly>
-      </div>
-      <label for="social-number" class="col-sm-2 col-form-label">이메일</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="email" readonly>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="grade" class="col-sm-2 col-form-label">전화번호</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="tel" readonly>
-      </div>
-      <label for="status" class="col-sm-2 col-form-label">비상전화번호</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="retel" readonly>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="class" class="col-sm-2 col-form-label">관계</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="who" readonly>
-      </div>
-      <label for="cellphone" class="col-sm-2 col-form-label">우편번호</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="zipnum" readonly>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="class" class="col-sm-2 col-form-label">주소</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="adr" readonly>
-      </div>
-      <label for="cellphone" class="col-sm-2 col-form-label">상세주소</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="detailadr" readonly>
-      </div>
-    </div>
+    </div>        
     </form>
     </div>
-                
-   
+    
   
-
-            
+      
 	
-	<br>
-	<br>
+	
 	<br>
 	<br> 
 	
 	학생 이름:
 	<input type="text" id="name">
 	<button type="button" id="searchStudent">검색</button>
-
+	<div class="scroll">
 	<table class="table">
 		<thead>
 			<tr>
@@ -214,20 +286,20 @@
 				<th scope="col">이름</th>
 				<th scope="col">나이</th>
 				<th scope="col">생년월일</th>
-				<th scope="col">성별</th>
-				<th scope="col">이메일</th>
-				<th scope="col">전화번호</th>
-				<th scope="col">비상전번</th>
-				<th scope="col">비상누구</th>
-				<th scope="col">우편번호</th>
-				<th scope="col">주소</th>
-				<th scope="col">상세주소</th>
+				<th scope="col" >성별</th>
+				<th scope="col" style= display:none;>이메일</th>
+				<th scope="col" style= display:none;>전화번호</th>
+				<th scope="col" style= display:none;>비상전번</th>
+				<th scope="col" style= display:none;>비상누구</th>
+				<th scope="col" style= display:none;>우편번호</th>
+				<th scope="col" style= display:none;>주소</th>
+				<th scope="col" style= display:none;>상세주소</th>
 			</tr>
 		</thead>
 		<tbody class="table_body">
 		</tbody>
 	</table>
-	
+	</div>
 
 
 
