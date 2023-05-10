@@ -1,9 +1,7 @@
 package com.teamp.cau.security;
 
-import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,7 +21,6 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
         throw new UsernameNotFoundException("User not found");
     }
 
-    return new CustomUserDetails(userVo.getUSER_ID(), userVo.getPSWD(), 
-            Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + userVo.getROLE_CODE().name())));
+    return new CustomUserDetails(userVo);
 }
 }

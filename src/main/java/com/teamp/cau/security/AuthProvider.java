@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,23 +26,19 @@ public class AuthProvider implements AuthenticationProvider {
         String userId = (String) authentication.getPrincipal(); // 로그인 창에 입력한 userId 
         String password = (String) authentication.getCredentials(); // 로그인 창에 입력한 password
 
-        PasswordEncoder passwordEncoder = userService.passwordEncoder();    
-        UsernamePasswordAuthenticationToken token;
+        PasswordEncoder passwordEncoder = userService.passwordEncoder();
+        CustomAuthenticationToken token;
         UserVo userVo = userService.getUserById(userId);
 
-        if (userVo != null && passwordEncoder.matches(password, userVo.getPSWD())) { // 일치하는 user 정보가 있는지 확인
+        if (userVo != null && passwordEncoder.matches(password, userVo.getPSWD())) {
             List<GrantedAuthority> roles = new ArrayList<>();
-            roles.add(new SimpleGrantedAuthority("ROLE_"+userVo.getROLE_CODE().name())); // 권한 부여
+            roles.add(new SimpleGrantedAuthority("ROLE_" + userVo.getROLE_CODE().name()));
 
-            
-            token = new UsernamePasswordAuthenticationToken(userVo.getUSER_NO(), null, roles); 
-            // 인증된 user 정보를 담아 SecurityContextHolder에 저장되는 token
-
+            token = new CustomAuthenticationToken(userVo.getUSER_NO(), null, userVo, roles);
             return token;
         }
 
-        throw new BadCredentialsException("No such user or wrong password."); 
-        // Exception을 던지지 않고 다른 값을 반환하면 authenticate() 메서드는 정상적으로 실행된 것이므로 인증되지 않았다면 Exception을 throw 해야 한다.
+        throw new BadCredentialsException("아이디 혹은 비밀번호가 틀렸습니다.");
     }
 
     @Override

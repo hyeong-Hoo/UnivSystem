@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.teamp.cau.dto.ScheduleDTO;
 import com.teamp.cau.dto.Stud_infoDTO;
+import com.teamp.cau.security.CustomAuthenticationToken;
 import com.teamp.cau.service.AdmissionService;
 import com.teamp.cau.service.ScheduleService;
 import com.teamp.cau.util.ConvertBinary;
 import com.teamp.cau.util.RandomScore;
+import com.teamp.cau.vo.UserVo;
 
 
 @Controller
@@ -33,7 +36,7 @@ public class AdmissionController {
 	private ScheduleService scheduleService;
 
 	@GetMapping("/main")
-	public ModelAndView main(){
+	public ModelAndView main(Authentication authentication){
 		ModelAndView mv = new ModelAndView("main");
 		LocalDate now = LocalDate.now();
 		int year = now.getYear();
@@ -41,6 +44,13 @@ public class AdmissionController {
 		dto.setRECRT_YEAR(Integer.toString(year));
 		List<Map<String, Object>> list = scheduleService.scheduleCheck(dto);
 		mv.addObject("list",list);
+		 if (authentication != null && authentication.isAuthenticated()) {
+		 UserVo userVo = ((CustomAuthenticationToken) authentication).getUserVo();
+		    Integer studNo = userVo.getSTUD_NO();
+		    System.err.println(userVo);
+		    System.err.println(studNo);
+	        mv.addObject("studNo", studNo);
+			 }
 		return mv;
 	}
 	@GetMapping("/Admission")

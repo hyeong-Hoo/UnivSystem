@@ -4,11 +4,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +18,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestClientException;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.teamp.cau.dto.MessageDTO;
 import com.teamp.cau.dto.SmsResponseDTO;
+import com.teamp.cau.security.CustomUserDetails;
 import com.teamp.cau.service.SmsService;
 import com.teamp.cau.service.UserService;
 import com.teamp.cau.vo.UserVo;
@@ -55,14 +59,7 @@ public class UserController {
         model.addAttribute("list", userList);
         return "Login/userListPage";
     }
-
-    @GetMapping("/Login/login")
-    public String loginPage() { // 로그인되지 않은 상태이면 로그인 페이지를, 로그인된 상태이면 main 페이지를 보여줌
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof AnonymousAuthenticationToken)
-            return "Login/loginPage";
-        return "redirect:/";
-    }
+    
 
     @GetMapping("/update")
     public String editPage(Model model) { // 회원 정보 수정 페이지
@@ -156,5 +153,6 @@ public class UserController {
         return "redirect:/";
     }
 */
+   
     
 }

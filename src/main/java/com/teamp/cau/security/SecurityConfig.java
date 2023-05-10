@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.header.writers.CacheControlHeadersWriter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.Collection;
 
@@ -17,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 /*
  EnableGlobalMethodSecurity에 관한 설명들
  
@@ -53,16 +53,20 @@ jsr250Enabled 설정이 활성화되면, @RolesAllowed 애노테이션을 사용
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig {
 	 @Autowired
-	    private UserDetailsService userDetailsService; // UserDetailsServiceImp object
+	    private UserDetailsServiceImpl UserDetailsServiceImpl;
 
 	 // logger 객체 생성
     private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 	
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // Use the UserDetailsServiceImp to authenticate users
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(UserDetailsServiceImpl);
     }
-	
+   
+    
+    @Autowired
+    private CustomLogoutHandler customLogoutHandler;
+    
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {	
         // 권한에 따라 허용하는 url 설정
@@ -75,15 +79,12 @@ public class SecurityConfig {
                 .antMatchers("/First","/First3","/signup" , "userListPage").permitAll()
                 .antMatchers("/css/**","/js/**","/vendor/**" ,"/img/**" , "/images/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/professor/**").hasRole("PROFESSOR")
-                .antMatchers("/student/**").hasRole("STUDENT")
-                .antMatchers("/occasional").hasRole("STUDENT") // STUDENT 권한을 가진 사용자만 First2에 접근 가능
                 .antMatchers("/First3").hasAnyRole("STUDENT","PROFESSOR")
                 .anyRequest().authenticated();
 		// login 설정
         http
             .formLogin()
-                .loginPage("/Login/login")    // GET 요청 (login form을 보여줌)
+                .loginPage("/main")    // GET 요청 (login form을 보여줌)
                 .loginProcessingUrl("/auth")    // POST 요청 (login 창에 입력한 데이터를 처리)
                 .usernameParameter("USER_ID")	// login에 필요한 id 값을 USER_ID로 설정 (default는 username)
                 .passwordParameter("PSWD")	// login에 필요한 password 값을 PSWD(default)로 설정
@@ -92,6 +93,7 @@ public class SecurityConfig {
                     logAuthorities(authentication);
                     response.sendRedirect("/main");
                 });
+        
 	// 로그인 성공 후 권한 출력
         		
 		// logout 설정
@@ -100,12 +102,19 @@ public class SecurityConfig {
                 .logoutUrl("/logout")
 				.invalidateHttpSession(true) // 로그아웃 시 세션 종료
 				.clearAuthentication(true) // 로그아웃 시 권한 제거
-                .logoutSuccessUrl("/main");	// logout에 성공하면 /로 redirect
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST")) // POST 방식으로만 로그아웃 가능하도록 설정
+                .addLogoutHandler(customLogoutHandler) // 로그아웃 핸들러 등록
+                .logoutSuccessUrl("/main")	// logout에 성공하면 /로 redirect
+        		.deleteCookies("JSESSIONID"); // 쿠키 삭제
+
         http
         .sessionManagement()
             .invalidSessionUrl("/main") // 세션이 만료된 경우 이동할 페이지 지정
             .maximumSessions(1) // 최대 세션 수 지정
             .expiredUrl("/main"); // 세션이 만료된 경우 이동할 페이지 지정
+            
+     
+
         http
         .headers().cacheControl().disable() // 캐시 컨트롤 비활성화
         .addHeaderWriter(new CacheControlHeadersWriter());

@@ -14,8 +14,9 @@ public class UserVo {
     private String PSWD_CHG_YN;
     private String PSWD_CHG_DT;
     private int PSWD_ERR_NMTM;
-    private UserRoleEnum ROLE_CODE; // 추가된 필드
-
+    private UserRoleEnum ROLE_CODE; 
+    private Integer STUD_NO; 
+    private Integer INSTR_NO;
     public enum UserRoleEnum {
         STUDENT, PROFESSOR, ADMIN;
 

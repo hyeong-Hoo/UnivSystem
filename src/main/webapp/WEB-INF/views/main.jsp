@@ -634,6 +634,9 @@ cursor: pointer;
             <tr>
             <td><input type="password"  name="PSWD" placeholder="비밀번호"></td>
             </tr>
+         <c:if test="${param.error != null}">
+  <script>alert("아이디 혹은 비밀번호가 틀렸습니다.");</script>
+</c:if>
             </form>
             </table>
 
