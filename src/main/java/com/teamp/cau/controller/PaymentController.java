@@ -33,15 +33,15 @@ public class PaymentController {
 		        if (payment == 0) { // payment 값이 0일 경우에만 업데이트
 		            if (paymentService.checkPayment(KORN_FLNM, USER_BRDT, payment)) {
 		                paymentService.updatePayment(KORN_FLNM, USER_BRDT, payment);
-		                return "{\"status\":\"success\"}";
+		                return "success";
 		            } else {
-		                return "{\"status\":\"failed\"}";
+		                return "failed";
 		            }   
 		        } else { // payment 값이 1일 경우에는 결제를 막고 실패를 반환
-		            return "{\"status\":\"blocked\"}";
+		            return "blocked";
 		        }
 		    } catch (NullPointerException e) {
-		        return "{\"status\":\"failed\"}";
+		        return "failed";
 		    }
 		}
 

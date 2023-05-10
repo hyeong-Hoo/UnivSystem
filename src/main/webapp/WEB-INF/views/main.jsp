@@ -10,13 +10,28 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="js/confetti_v2.js"></script>
+<!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <head>
 <script>
 $(function(){
     $("#Admission").click(function(){
-    	var date = new Date("YYYY-MM-DD");
-    	alert(date);
-        location.href = 'Admission';
+    	var date = new Date();
+    	var year = date.getFullYear();
+    	var month = date.getMonth()+1;
+    	var day = date.getDate();
+    	if(month < 10){
+    		month = '0'+month;
+    	}
+    	if(day < 10){
+    		day = '0'+day;
+    	}
+    	var today = year+"-"+month+"-"+day;
+    	if(("${list[0].SCHDL_START}" <= today || "${list[1].SCHDL_START}" <= today) && (today <= "${list[0].SCHDL_END_DT}" || today <= "${list[1].SCHDL_END_DT}")){
+    		location.href = 'Admission';
+    	}else{
+    		alert('접수기간이 아닙니다.');
+    	}     
     });
     
     $("#close_btn").click(function(){
@@ -589,13 +604,14 @@ cursor: pointer;
 		 		<div class="popup_body">
 		 		<div class="body_content">
 		 			<div class="body_titleBox">
-		 				지원자의 아이디와 생년월일을 적어주세요
+		 				지원자의 이름과 생년월일을 적어주세요
 		 			</div>
 		 			<div class="body_contentbox"><!-- 팝업내용 -->
 		 				<span>
 		 					
-		 					아이디&emsp;<input type="text" name="" class="contenText" id=""><br>
-		 					생년월일 <input type="text" name="" class="contenText" id="" placeholder="ex)19981102">
+		 					이름&emsp;<input type="text" name="apyname" class="contenText" id="apyname"><br>
+		 					생년월일 <input type="text" name="apybirthdate" class="contenText" id="apybirthdate" placeholder="ex)19981102">
+		 					
 		 					
 		 				</span>
 		 			</div>
@@ -934,7 +950,70 @@ window.onclick = function(event) {
         </div>
     </div>
 </div>
+<!-- 지원자 결제 자바스크립트 -->
 
+<script>
+  	
+    function createOrderNum(){
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        
+        let orderNum = year + month + day;
+        for(let i=0;i<10;i++) {
+            orderNum += Math.floor(Math.random() * 8);    
+        }
+        return orderNum;
+    }
+
+    var IMP = window.IMP; 
+    IMP.init("imp75220550"); 
+    
+    function requestPay() {
+        const apyname = $('#apyname').val();
+        const apybirthdate = $('#apybirthdate').val();
+        const orderNum = createOrderNum();
+             
+
+        // 서버에 결제할 사용자 정보가 있는지 확인
+        $.ajax({
+            url: "/pms",
+            data: { KORN_FLNM: name, USER_BRDT: birthdate },
+            success: function(data) {
+            	if (data === "success") { // 수정된 부분                    // 결제 진행
+                    IMP.request_pay({
+                        pg: 'html5_inicis',
+                        pay_method: 'card',
+                        merchant_uid: orderNum,
+                        name: 'CAU대학교 지원서',
+                        amount: 100,
+                        buyer_email: 'Iamport@chai.finance',
+                        buyer_name: name,
+                        buyer_tel: '010-1234-5678',
+                        buyer_addr: '서울특별시 강남구 삼성동',
+                        buyer_postcode: '123-456'
+                    }, function(rsp) {
+                        console.log(rsp);
+                        if (rsp.success) {
+                            var msg = '결제가 완료되었습니다.';
+                            alert(msg);
+                            location.href = "http://localhost/main";
+                        } else {
+                            var msg = '결제에 실패하였습니다.';
+                            msg += '에러내용 : ' + rsp.error_msg;
+                            alert(msg);
+                        }
+                    });
+                }  else if (data === "blocked") {
+                    alert('이미 결제된 지원서입니다. 결제를 진행할 수 없습니다.');
+                } else {
+                    alert('입력하신 정보와 일치하는 사용자 정보가 없습니다. 결제를 진행할 수 없습니다.');
+                }
+            }
+        });
+    }
+    </script>   
 </body>
 <script type="text/javascript">
 

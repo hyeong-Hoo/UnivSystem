@@ -6,7 +6,7 @@
 	<select id="studentList" parameterType="com.teamp.cau.dto.StudentDTO" resultType="com.teamp.cau.dto.StudentDTO">
 	
 		SELECT APPL_NO, KORN_FLNM, USER_BRDT, GENDER_CD, EML_ADDR, TELNO, REL_TELNO,
-	        REL_CD, ZIP, ADDR, DADDR, AGE 
+	        REL_CD, ZIP, ADDR, DADDR, AGE, PHOTO_FILE
 	    FROM APPL_INFO
 		WHERE KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
 	

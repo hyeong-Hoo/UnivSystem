@@ -45,7 +45,6 @@
 							  $('#detailadr').val('');
 
 							$.each(data, function(i, info) {
-							    var base64str = btoa(String.fromCharCode.apply(null, new Uint8Array(info.photo_FILE)));
 
 								var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
 								+ '<th scope="row">' + info.appl_NO
@@ -60,7 +59,7 @@
 								+ '<td>' + info.zip + '</td>' 
 								+ '<td>' + info.addr + '</td>' 
 								+ '<td>' + info.daddr + '</td>' 
-								+ '<td>' +'<img src="data:image/jpeg;base64,'+ base64str +'">'+ '</td>'
+								+ '<td>' + info.photo_FILE + '</td>'
 								
 								+ '</tr>';
 																			
@@ -88,6 +87,8 @@
 			  var addr = $(this).find('td:eq(9)').text();
 			  var daddr = $(this).find('td:eq(10)').text();
 			  var pic = $(this).find('td:eq(11)').text();
+			  var imgTag = '<img src="data:image/jpeg;base64,' + pic + '" />';
+			  $('#pic').html(imgTag);	
 
 			  // 입력란에 값을 채웁니다.
 			  $('#no').val(appl_NO);
@@ -119,9 +120,16 @@
 	
 	
      
-    <div class="container">
+   <div class="container">
   <h2>학생 정보</h2>
   <form>
+  
+  <div class="form-group">
+    <label for="pic">사진</label>
+    <div id="pic"><img src="data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAcklEQVR4Xu2OMQqAQAwE8xILX6P/ry3Uh2iEK2RFNgMWFjcw3e3kIjofMKRLeohrOt7eITRWtYwOq/4L/Z0TowEnRgNOjAacGA04MRpwYjTgxGjAidGAE6MBJ0YDTowGnJg9npE3t7ZBzFE7csWntulwTsrCx1gkIxrpAAAAAElFTkSuQmCC"/></div>
+</div>
+ 
+  
     <div class="form-group row">
       <label for="name" class="col-sm-2 col-form-label">번호</label>
       <div class="col-sm-4">
@@ -182,15 +190,11 @@
         <input type="text" class="form-control" id="detailadr" readonly>
       </div>
     </div>
-    <div class="form-group row">
-      <label for="class" class="col-sm-2 col-form-label">사진</label>
-      <div class="col-sm-4">
-        <input type="image" class="form-control" id="pic" >
-        
-      </div>    
+    </form>
     </div>
-  </form>
-</div>
+                
+   
+  
 
             
 	
