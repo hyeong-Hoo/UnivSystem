@@ -400,6 +400,7 @@ cursor: pointer;
     border:solid 5px black;
     z-index: 10;
     display:block;
+    background-color: darkblue;
     }
     
     .popup_container>button{
@@ -420,7 +421,72 @@ cursor: pointer;
     color:white;
     cursor: pointer;
     }
-    
+    .popup_whitebox{
+    position: absolute;
+ 	top:60px;
+    left:15px;
+    width:470px;
+    height: 400px;
+    background-color:#EDF4FF;
+    border-radius:10px;
+    }
+    .popup_gigan{
+    width:470px;
+    height:70px;
+    font-size:45px;
+    font-weight:600;
+    line-height:70px;
+    text-align:center;
+    border-bottom: 2px solid black;
+    border-radius: 10px 10px 0 0;
+    background-color: #690010;
+    }
+    .schName{
+    width:470px;
+    height:70px;
+    font-size:30px;
+    font-weight:500;
+    line-height:70px;
+    text-align:center;
+    border-bottom : 2px solid black;
+    background-color: #E3C102;
+    }
+    .popup_start{
+    width:220px;
+    height:70px;
+    font-size:30px;
+    line-height:70px;
+    text-align:center;
+    float: left;
+    }
+    .popup_end{
+    width:220px;
+    height:70px;
+    font-size:30px;
+    line-height:70px;
+    text-align:center;
+    float: left;
+    }
+    .datebox{
+    width:470px;
+    height:70px;
+    font-size:30px;
+    line-height:70px;
+    text-align:center;
+    border-bottom : 2px solid black;
+    padding: 10px 0 10px 0;
+    }
+    .datebox:nth-child(2){
+    border-radius:0 0 10px 10px; 
+    }
+    .popupmi{
+    width:30px;
+    height:70px;
+    font-size: 30px;
+    line-height: 70px;
+    text-align: center;
+    float: left;
+    }
 /*    	합격자조회 */
 
     .popup_wrap{
@@ -550,16 +616,21 @@ cursor: pointer;
 <!--     기간알림팝업창 -->
     <div class="popup_container">
     <button type="button" id="close_btn">x</button>
+    <div class="popup_whitebox">
+    <div class="popup_gigan">
    입학기간
+   </div>
    <c:forEach items="${list }" var="l">
    	<div class="schName">
    	${l.SCHDL_NAME }
    	</div>
    	<div class="datebox">
-   	<div>${l.SCHDL_START }</div>
-   	<div>${l.SCHDL_END_DT }</div>
+   	<div class="popup_start">${l.SCHDL_START }</div>
+   	<div class="popupmi">~</div>
+   	<div class="popup_end">${l.SCHDL_END_DT }</div>
    	</div>
    </c:forEach>
+    </div>
     </div>
 <!--   	합격자조회 팝업 -->
 	
