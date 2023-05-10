@@ -92,7 +92,8 @@ VALUES (
 </update>
 <!-- 개인정보 불러오기 -->
 	<select id="updatestuin" parameterType="com.teamp.cau.dto.PassDTO" resultType="com.teamp.cau.dto.PassDTO">
-		SELECT * FROM STUD_INFO
+		SELECT *, PHOTO_FILE as pa
+		FROM STUD_INFO
 		WHERE STUD_NO = #{STUD_NO}
 	</select>
 </mapper>

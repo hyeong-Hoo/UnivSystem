@@ -13,5 +13,5 @@ public class PassDTO {
     private MultipartFile fileInput;
     private byte[] PHOTO_FILE;
 
-
+    private String pa;
 }

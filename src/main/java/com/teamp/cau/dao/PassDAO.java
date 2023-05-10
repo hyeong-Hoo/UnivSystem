@@ -59,12 +59,13 @@ public class PassDAO {
 		sqlSession.selectList("list.updatestuinfo", passDTO);
 	}
 
-	public List<PassDTO> studin(PassDTO passDTO) {
+	public PassDTO studin(PassDTO passDTO) {
 		PassDTO resultDTO = sqlSession.selectOne("list.studno",passDTO);
 		passDTO.setSTUD_NO(resultDTO.getSTUD_NO());
-		return sqlSession.selectList("list.updatestuin", passDTO);
-		
+		return sqlSession.selectOne("list.updatestuin", passDTO);
 	}
+
+
 
 
 

@@ -48,9 +48,10 @@ public class PassService {
 		
 	}
 
-	public List<PassDTO> studin(PassDTO passDTO) {
+	public PassDTO studin(PassDTO passDTO) {
 		return passDAO.studin(passDTO);
-
 	}
+
+
 
 }

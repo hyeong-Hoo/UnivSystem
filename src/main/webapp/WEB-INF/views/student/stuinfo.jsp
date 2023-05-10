@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -135,19 +134,19 @@
                             <tr class="photo">
                                 <th id="p_btn"><div class="imge_size" id="image_container" ></div></th>
                                 <td><div class="file_div">사진파일크기는<br><h1>3x4</h1><br>사이즈를 사용해주세요<br></div><input type="file" id="image"name="image" accept="image/*" onchange="setThumbnail(event);"/></td>
-                                <td class="t1" colspan="2">&emsp;<img src="./images/img3.png" alt="증명사진"></td>
+                                <td class="t1" colspan="2">&emsp;<img src="data:image/jpeg;base64,${dto.pa}"></td>
                             </tr>
                             <tr class="tr1">
                             <th class="thee">성명</th>
-                            <th class="t1" >&emsp;<input type="text" id="korn_flnm" name="korn_flnm" value="${list_info[0].KORN_FLNM}"></th>
+                            <th class="t1" >&emsp;<input type="text" id="korn_flnm" name="korn_flnm" value="${dto.KORN_FLNM}"></th>
                             <th class="thee">연락처</th>
-                            <th class="t1" colspan="3">&emsp;<input type="text" id="telno" name="telno" value="${list_info[0].TELNO}"></th>
+                            <th class="t1" colspan="3">&emsp;<input type="text" id="telno" name="telno" value="${dto.TELNO}"></th>
                             </tr>
                             <tr class="tr1">
                                  <th class="thee">이메일</th>
-                                <th class="t1">&emsp;<input type="text" id="rel_n" name="rel_n" value="${list_info[0].EML_ADDR}"></th>
+                                <th class="t1">&emsp;<input type="text" id="rel_n" name="rel_n" value="${dto.EML_ADDR}"></th>
                                 <th class="thee">비상연락처</th>
-                                <th class="t1">&emsp;<input type="text" id="rel_telno" name="rel_telno" value="${list_info[0].REL_TELNO}"></th>
+                                <th class="t1">&emsp;<input type="text" id="rel_telno" name="rel_telno" value="${dto.REL_TELNO}"></th>
                             </tr>
                             <tr class="tr1">
                             </tr>
@@ -157,13 +156,13 @@
                             </tr>
                             <tr class="tr1">
                                <th class="thee">주소</th>
-                               <th class="t1">&emsp;<input type="text"  id="addr" name="addr" readonly="readonly" style="width:auto;" value="${list_info[0].ADDR}"></th>
+                               <th class="t1">&emsp;<input type="text"  id="addr" name="addr" readonly style="width:auto;" value="${dto.ADDR}"></th>
                                <th class="thee">상세주소</th>
-                               <th class="t1">&emsp;<input type="text" id="daddr" name="daddr" placeholder="직접입력" style="width:auto;" value="${list_info[0].DADDR}"></th>
+                               <th class="t1">&emsp;<input type="text" id="daddr" name="daddr" placeholder="직접입력" style="width:auto;" value="${dto.DADDR}"></th>
                             </tr>
                             <tr class="tr1">
                                <th class="thee">생년월일</th>
-                               <th class="t1">&emsp;<input type="text" id="user_brdt" name="user_brdt" placeholder="ex)19901122" maxlength="8" value="${list_info[0].USER_BRDT}"></th>
+                               <th class="t1">&emsp;<input type="text" id="user_brdt" name="user_brdt" placeholder="ex)19901122" maxlength="8" value="${dto.USER_BRDT}"></th>
                                <th class="thee">성별</th>
                                <th class="t1">&emsp;
                                <input type="radio" name="gender_cd" value="남성" >&emsp;남성&emsp;
@@ -179,7 +178,7 @@
 <script>
 $(document).ready(function() {
 	  // 서버에서 전달받은 값을 변수에 저장합니다.
-	  var gender = '${list_info[0].GENDER_CD}'; // 예시로 Django 템플릿 언어를 사용한 변수 처리 방식을 보여줍니다.
+	  var gender = '${dto.GENDER_CD}'; // 예시로 Django 템플릿 언어를 사용한 변수 처리 방식을 보여줍니다.
 	  // 라디오 버튼 중 전달받은 값과 일치하는 항목을 선택 상태로 설정합니다.
 	  $('input[name="gender_cd"][value="'+gender+'"]').prop('checked', true);
 	});
