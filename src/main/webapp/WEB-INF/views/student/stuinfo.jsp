@@ -194,7 +194,20 @@ $('.add-btn').click(function() {
         var ADDR = $("#addr").val();
         var DADDR = $("#daddr").val();
         var USER_BRDT = $("#user_brdt").val();
-        var FileInput = $("#image")[0].files[0];
+        if($("#image")[0].files[0]){ var FileInput = $("#image")[0].files[0];}
+		else{
+			// 이미지 데이터를 가져와서 Blob 객체로 변환
+		var imageSrc = $("#image1").attr("src");
+		var byteCharacters = atob(imageSrc.split(',')[1]);
+		var byteNumbers = new Array(byteCharacters.length);
+		for (var i = 0; i < byteCharacters.length; i++) {
+  		byteNumbers[i] = byteCharacters.charCodeAt(i);
+		}
+		var byteArray = new Uint8Array(byteNumbers);
+		var imageBlob = new Blob([byteArray], { type: 'image/jpeg' });
+		// Blob 객체를 File 객체로 변환
+		var fileName = "default.jpg";
+		var FileInput = new File([imageBlob], fileName);}
         var GENDER_CD = $('input[name=gender_cd]:checked').val();
 
         var formData = new FormData();
