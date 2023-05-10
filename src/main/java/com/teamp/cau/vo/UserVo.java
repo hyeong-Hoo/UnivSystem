@@ -1,9 +1,11 @@
 package com.teamp.cau.vo;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class UserVo {
+public class UserVo implements Serializable{
     private Long USER_NO;
     private String USER_ID;
     private String PSWD;

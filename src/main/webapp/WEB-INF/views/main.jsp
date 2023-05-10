@@ -635,8 +635,8 @@ cursor: pointer;
             <span class="logo_bottom-text">정보와 지식을 끊임없이 탐구하는 중앙</span>
             <span class="logo_bottom-text2">Choogang University</span>
             <span class="logo_bottom-text3">Choogang Login</span>
-            <button type="button" class="Admission_btn" id="Admission">입학지원</button>
             <% if (request.getUserPrincipal() == null) { %>
+            <button type="button" class="Admission_btn" id="Admission">입학지원</button>
             <table class="login">
             <tr>
 <!--             <td>학생<input type="radio" name="chu">교수<input type="radio" name="chu"></td> -->

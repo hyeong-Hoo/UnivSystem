@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <meta charset="UTF-8">
@@ -64,12 +65,14 @@ width: 100%;
 min-height: 500px;
 height:auto;
 position: relative;
+background-color: white;
 }
 .testcontent{
 width: inherit;
 height: inherit;
 position: absolute;
 background-color: white;
+overflow: scroll;
 }
 .on1{
 border-top-left-radius: 5px;
@@ -198,21 +201,21 @@ $(function() {
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index">
+              <img src="img/WW.png" width="50px" height="50px">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">CAU </div>
+                <div class="sidebar-brand-text mx-3" style="margin-left:40px; margin-top: 10px; ">CAU</div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>목록</span></a>
-            </li>
+<!--             <li class="nav-item active"> -->
+<!--                 <a class="nav-link" href="index"> -->
+<!--                     <i class="fas fa-fw fa-tachometer-alt"></i> -->
+<!--                     <span>목록</span></a> -->
+<!--             </li> -->
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -255,7 +258,8 @@ $(function() {
                 </div>
             </li>
               <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+<c:if test="${not empty userRole and userRole == 'STUDENT'}">
+            <li class="nav-item" >
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStudents" aria-expanded="true" aria-controls="collapseStudents">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>학생메뉴</span>
@@ -270,7 +274,9 @@ $(function() {
                     </div>
                 </div>
             </li>
+</c:if>
               <!-- Nav Item - Utilities Collapse Menu -->
+              <c:if test="${not empty userRole and userRole == 'PROFESSOR'}">
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProfessor" aria-expanded="true" aria-controls="collapseProfessor">
                     <i class="fas fa-fw fa-wrench"></i>
@@ -286,6 +292,7 @@ $(function() {
                     </div>
                 </div>
             </li>
+            </c:if>
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -332,11 +339,11 @@ $(function() {
 
              <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProfessor" aria-expanded="true" aria-controls="collapseProfessor">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProfessoredit" aria-expanded="true" aria-controls="collapseProfessoredit">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>교직관리</span>
                 </a>
-                <div id="collapseProfessor" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div id="collapseProfessoredit" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">교직관리</h6>
                         <span class="collapse-item" id="6-1">교수 관리</span>
@@ -392,7 +399,7 @@ $(function() {
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">관리자 이름</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${kornFlnm}</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -408,10 +415,11 @@ $(function() {
                                     Settings
                                 </a>
                              
+                                    <form action="/logout" method="post">
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+       		 <a><button type="submit" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">Logout</button></a>
+        	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+   			 </form>
                                 </a>
                             </div>
                         </li>
