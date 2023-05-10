@@ -57,7 +57,4 @@
     UPDATE USER_INFO SET PSWD = #{PSWD} WHERE TELNO = #{TELNO}
 </update>
 
-
-
-
 </mapper>

@@ -139,15 +139,15 @@
                             </tr>
                             <tr class="tr1">
                             <th class="thee">성명</th>
-                            <th class="t1" >&emsp;<input type="text" id="korn_flnm" name="korn_flnm"></th>
+                            <th class="t1" >&emsp;<input type="text" id="korn_flnm" name="korn_flnm" value="${list_info[0].KORN_FLNM}"></th>
                             <th class="thee">연락처</th>
-                            <th class="t1" colspan="3">&emsp;<input type="text" id="telno" name="telno"></th>
+                            <th class="t1" colspan="3">&emsp;<input type="text" id="telno" name="telno" value="${list_info[0].TELNO}"></th>
                             </tr>
                             <tr class="tr1">
                                  <th class="thee">이메일</th>
-                                <th class="t1">&emsp;<input type="text" id="rel_n" name="rel_n"></th>
+                                <th class="t1">&emsp;<input type="text" id="rel_n" name="rel_n" value="${list_info[0].EML_ADDR}"></th>
                                 <th class="thee">비상연락처</th>
-                                <th class="t1">&emsp;<input type="text" id="rel_telno" name="rel_telno"></th>
+                                <th class="t1">&emsp;<input type="text" id="rel_telno" name="rel_telno" value="${list_info[0].REL_TELNO}"></th>
                             </tr>
                             <tr class="tr1">
                             </tr>
@@ -157,22 +157,68 @@
                             </tr>
                             <tr class="tr1">
                                <th class="thee">주소</th>
-                               <th class="t1">&emsp;<input type="text"  id="addr" name="addr" readonly="readonly" style="width:auto;"></th>
+                               <th class="t1">&emsp;<input type="text"  id="addr" name="addr" readonly="readonly" style="width:auto;" value="${list_info[0].ADDR}"></th>
                                <th class="thee">상세주소</th>
-                               <th class="t1">&emsp;<input type="text" id="daddr" name="daddr" placeholder="직접입력" style="width:auto;"></th>
+                               <th class="t1">&emsp;<input type="text" id="daddr" name="daddr" placeholder="직접입력" style="width:auto;" value="${list_info[0].DADDR}"></th>
                             </tr>
                             <tr class="tr1">
                                <th class="thee">생년월일</th>
-                               <th class="t1">&emsp;<input type="text" id="user_brdt" name="user_brdt" placeholder="ex)19901122" maxlength="8"></th>
+                               <th class="t1">&emsp;<input type="text" id="user_brdt" name="user_brdt" placeholder="ex)19901122" maxlength="8" value="${list_info[0].USER_BRDT}"></th>
                                <th class="thee">성별</th>
-                               <th class="t1">&emsp;<input type="radio" name="gender_cd" value="남성">&emsp;남성&emsp;<input type="radio" name="gender_cd" value="여성">&emsp;여성</th>
+                               <th class="t1">&emsp;
+                               <input type="radio" name="gender_cd" value="남성" >&emsp;남성&emsp;
+                               <input type="radio" name="gender_cd" value="여성" >&emsp;여성
+                               </th>
                             </tr>
 								
                         </table>
             <button type="button" id="add-btn" class="add-btn" name="done">수정완료</button>
 </body>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+$(document).ready(function() {
+	  // 서버에서 전달받은 값을 변수에 저장합니다.
+	  var gender = '${list_info[0].GENDER_CD}'; // 예시로 Django 템플릿 언어를 사용한 변수 처리 방식을 보여줍니다.
+	  // 라디오 버튼 중 전달받은 값과 일치하는 항목을 선택 상태로 설정합니다.
+	  $('input[name="gender_cd"][value="'+gender+'"]').prop('checked', true);
+	});
+$('.add-btn').click(function() {
+    if(confirm("수정하진 내용을 저장하시겠습니까?")) {
+        var KORN_FLNM = $("#korn_flnm").val();
+        var TELNO = $("#telno").val();
+        var EML_ADDR = $("#rel_n").val();
+        var REL_TELNO = $("#rel_telno").val();
+        var ZIP = $("#zip").val();
+        var ADDR = $("#addr").val();
+        var DADDR = $("#daddr").val();
+        var USER_BRDT = $("#user_brdt").val();
+        var FileInput = $("#image")[0].files[0];
+        var GENDER_CD = $('input[name=gender_cd]:checked').val();
+
+        var formData = new FormData();
+        formData.append('KORN_FLNM', KORN_FLNM);
+        formData.append('TELNO', TELNO);
+        formData.append('EML_ADDR', EML_ADDR);
+        formData.append('REL_TELNO', REL_TELNO);
+        formData.append('ZIP', ZIP);
+        formData.append('ADDR', ADDR);
+        formData.append('DADDR', DADDR);
+        formData.append('USER_BRDT', USER_BRDT);
+        formData.append('GENDER_CD', GENDER_CD);
+        formData.append('FileInput', FileInput);
+
+        $.ajax({
+            url : "/studinfoupdate",
+            type : "post",
+            cache : false,
+            processData: false,
+            contentType: false,
+            data: formData     
+        });
+    }
+});
+	
     function sample4_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
