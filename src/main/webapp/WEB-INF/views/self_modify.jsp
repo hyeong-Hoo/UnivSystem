@@ -26,21 +26,24 @@
 <style>
 ul{list-style: none; color: black;}
 li{float: left; color: black; padding-left:0;}
-.top_box{ width: 100%; height: 40px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
-.middle_box{ width: 100%; height:110px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
-.bottom_box{ width: 100%; height: 215px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd;}
-.Title1{ width: 15%; height: 30px; text-align: left; line-height: 30px; }
-.Answer1{ width: 85%; height: 30px;}
-.Title2{ width: 15%; height: 30px;}
-.Answer2{ width: 85%; height: 30px;}
-.Title3{ width: 15%; height: 30px;}
-.Answer3{ width: 33.5%; height: 30px;}
-.Answer4{ width: 70%; height: 30px;}
+input{ height: 35px;}
+.top_box{ width: 100%; height: 50px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
+.middle_box{ width: 100%; height:90px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
+.bottom_box{ width: 100%; height: 250px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd;}
+.Title1{ width: 15%; height: 35px; text-align: left; line-height: 35px; }
+.Answer1{ width: 85%; height: 35px;}
+.Title2{ width: 15%; height: 35px; line-height: 35px;}
+.Answer2{ width: 85%; height: 35px;}
+.Title3{ width: 15%; height: 35px; line-height: 35px;}
+.Answer3{ width: 33.5%; height: 35px;}
+.Answer4{ width: 70%; height: 35px;}
 .text1{ width: 95%; margin: auto;}
 .divide{ width: 100%; height: 5px;}
+.img_box{width: 32%; height: 200px; border: 1px solid; line-height: 200px; text-align: center; background-color: white;}
+.blank{ width: 30%; height: 200px;}
 .addr_btn{ width: 10%; height: 30px; border-radius: 3px; background-color: #ccc;}
-.imgfile{ width: 100%; height: 40px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd;}
-.container-fluid{height: 80%;} 
+.imgfile{ width: 50%; height: 250px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd;}
+.container-fluid{height: 90%;} 
 .save_btn{background-color: #3E74C7; color: white; border-radius: 3px;  height: 30px; width: 60px;}
 </style>
 
@@ -274,9 +277,6 @@ li{float: left; color: black; padding-left:0;}
   	       	           		<li class="Title1">이름 [한글]</li>
     	        	        <li class="Answer1"><input class="text1" type="text" id="name_kr" name="name_kr"></li>
     	        	        <li class="divide"></li>
-        	        	   	<li class="Title1">이름 [한자]</li>
-            	        	<li class="Answer1"><input class="text1" type="text" id="name_ch" name="name_ch"></li>
-                	   		<li class="divide"></li>
                 	   		<li class="Title1">이름 [영어]</li>
            	        	 	<li class="Answer1"><input class="text1" type="text" id="name_en" name="name_en"></li>
             	        </ul>
@@ -286,6 +286,10 @@ li{float: left; color: black; padding-left:0;}
                    		<ul>
                    			<li class="divide"></li>
                    			<li class="Title1">* 이미지</li>
+                   			<li class="img_box"> 3 X 4 사이즈</li>
+                   			<li class="blank"></li>
+                   			<li class="divide"></li>
+                   			<li class="Title1"></li>
            					<li><input type="file" id="image"name="image" accept="image/*" onchange="setThumbnail(event);"/></li>
            					<li class="divide"></li>
            				</ul>

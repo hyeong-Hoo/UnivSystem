@@ -28,8 +28,10 @@ public class professorService {
 
 	//교수정보입력 저장 
 	public Integer insert(String string, Map<String, Object> infoEnter) {
-		return prDAO.insert(infoEnter);
+		return prDAO.prSave(infoEnter);
 	}
+	
+	
 
 	public List<HashMap<String, Object>> selectList() {
 		return prDAO.select();
@@ -38,6 +40,11 @@ public class professorService {
 	// 면접점수 저장 
 	public Integer score(String string, Map<String, Object> scoreSave) {
 		return prDAO.result(scoreSave);
+	}
+
+	//본인정보수정 저장 
+	public Integer modify(String string, Map<String, Object> selfmodi) {
+		return prDAO.info_modify(selfmodi);
 	}
 
 	

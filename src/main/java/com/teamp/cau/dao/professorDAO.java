@@ -22,7 +22,7 @@ public class professorDAO {
 	}
 	
 	//교수정보 입력 저장
-	public Integer insert(Map<String, Object> infoEnter) {
+	public Integer prSave(Map<String, Object> infoEnter) {
 		return sqlsession.insert("INSTR_INFO.prinfo_save", infoEnter);
 	}
 	
@@ -39,6 +39,11 @@ public class professorDAO {
 	// 면접점수 저장 
 	public Integer result(Map<String, Object> scoreSave) {
 			return sqlsession.insert("APPL_INFO.resultScore", scoreSave);
+	}
+
+	// 본인정보 수정하기 
+	public Integer info_modify(Map<String, Object> selfmodi) {
+		return sqlsession.update("INSTR_INFO.self_modify", selfmodi);
 	}
 
 	

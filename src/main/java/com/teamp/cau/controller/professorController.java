@@ -41,52 +41,29 @@ public class professorController {
 	//교수정보입력 저장 
 	@PostMapping("/professor_info")
 	public String info_save(HttpServletRequest req) {
+		String pr_id = req.getParameter("pr_id");
+		String pr_pw = req.getParameter("pr_pw");
 		String pr_no = req.getParameter("pr_no");
+		String pr_dep = req.getParameter("pr_dep");
 		String pr_name = req.getParameter("pr_name");
 		String pr_telno = req.getParameter("pr_telno");
 		String pr_birth = req.getParameter("pr_birth");
 		String pr_email = req.getParameter("pr_email");
-		String pr_id = req.getParameter("pr_id");
-		String pr_pw = req.getParameter("pr_pw");
 		Map<String, Object> infoEnter = new HashMap<>();
+		infoEnter.put("pr_id", pr_id);
+		infoEnter.put("pr_pw", pr_pw);
 		infoEnter.put("pr_no", pr_no);
+		infoEnter.put("pr_dep", pr_dep);
 		infoEnter.put("pr_name", pr_name);
 		infoEnter.put("pr_telno", pr_telno);
 		infoEnter.put("pr_birth", pr_birth);
 		infoEnter.put("pr_email", pr_email);
-		infoEnter.put("pr_id", pr_id);
-		infoEnter.put("pr_pw", pr_pw);
+		System.out.println(infoEnter);
 		Integer enter = prService.insert("prinfo_save", infoEnter);
 		return "professor";
 	}
 	
-	//교수본인정보입력 저장 
-	@PostMapping("/pr_self")
-	public String self_save(HttpServletRequest req) {
-		String pr_no = req.getParameter("pr_no");
-		String name_kr = req.getParameter("name_kr");
-		String name_ch = req.getParameter("name_ch");
-		String name_en = req.getParameter("name_en");
-		String pr_telno = req.getParameter("pr_telno");
-		String pr_birth = req.getParameter("pr_birth");
-		String pr_email = req.getParameter("pr_email");
-		String roadAddrPart1 = req.getParameter("roadAddrPart1");
-		String addrDetail = req.getParameter("addrDetail");
-		String pr_gender = req.getParameter("pr_gender");
-		Map<String, Object> selfmodi = new HashMap<>();
-		selfmodi.put("pr_no", pr_no);
-		selfmodi.put("name_kr", name_kr);
-		selfmodi.put("name_ch", name_ch);
-		selfmodi.put("name_en", name_en);
-		selfmodi.put("pr_telno", pr_telno);
-		selfmodi.put("pr_birth", pr_birth);
-		selfmodi.put("pr_email", pr_email);
-		selfmodi.put("roadAddrPart1", roadAddrPart1);
-		selfmodi.put("addrDetail", addrDetail);
-		selfmodi.put("pr_gender", pr_gender);
-		Integer enter = prService.insert("selfSave", selfmodi);
-		return "professor";
-	}
+	
 	
 	//교수본인정보 수정 불러오기 
 	@GetMapping("/self_modify")
@@ -94,6 +71,35 @@ public class professorController {
 		
 		return "self_modify";
 	}
+	
+	//교수본인정보입력 저장 
+	@PostMapping("/pr_self")
+	public String self_save(HttpServletRequest req) {
+		String pr_no = req.getParameter("pr_no");
+		String name_kr = req.getParameter("name_kr");
+		String name_en = req.getParameter("name_en");
+		String roadAddrPart1 = req.getParameter("roadAddrPart1");
+		String addrDetail = req.getParameter("addrDetail");
+		String pr_telno = req.getParameter("pr_telno");
+		String pr_email = req.getParameter("pr_email");
+		String pr_birth = req.getParameter("pr_birth");
+		String pr_gender = req.getParameter("pr_gender");
+		Map<String, Object> selfmodi = new HashMap<>();
+		selfmodi.put("pr_no", pr_no);
+		selfmodi.put("name_kr", name_kr);
+		selfmodi.put("name_en", name_en);
+		selfmodi.put("roadAddrPart1", roadAddrPart1);
+		selfmodi.put("addrDetail", addrDetail);
+		selfmodi.put("pr_telno", pr_telno);
+		selfmodi.put("pr_email", pr_email);
+		selfmodi.put("pr_birth", pr_birth);
+		selfmodi.put("pr_gender", pr_gender);
+		System.out.println(selfmodi);
+		Integer enter = prService.modify("selfSave", selfmodi);
+		return "self_modify";
+	}
+	
+
 	
 	//교수정보 불러오기 
 	@GetMapping("/pr_info")
@@ -139,9 +145,10 @@ public class professorController {
 		String interview = req.getParameter("inter_score");
 		String total = req.getParameter("total_score");
 		Map<String, Object> scoreSave = new HashMap<>();
+		System.out.println(scoreSave);
 		scoreSave.put("inter_score", interview);
 		scoreSave.put("total_score", total);
-			Integer interviewSave = prService.score("resultScore", scoreSave);
+			Integer interviewScore = prService.score("resultScore", scoreSave);
 		return "pr_authority";
 	}
 	

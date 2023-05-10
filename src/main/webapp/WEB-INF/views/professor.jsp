@@ -26,16 +26,16 @@
 <style>
 ul{list-style: none; color: black;}
 li{float: left; color: black; padding-left:0;}
-.top_box{ width: 100%; height: 85px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
-.middle_box{ width: 100%; height:85px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
-.bottom_box{ width: 100%; height: 165px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd;}
-.Title1{ width: 15%; height: 35px; text-align: left; line-height: 30px;}
-.Answer1{ width: 85%; height: 35px;}
+.top_box{ width: 100%; height: 90px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
+.middle_box{ width: 100%; height:90px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
+.bottom_box{ width: 100%; height: 170px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd;}
+.Title1{ width: 15%; height: 35px; text-align: left; line-height: 35px;}
+.Answer1{ width: 80%; height: 35px;}
 .divide{ width: 100%; height: 5px;}
 .text1{ width: 95%; margin: auto;}
 input{ height: 35px; width:100%;} 
 .save_btn{background-color: #3E74C7; color: white; border-radius: 3px;  height: 30px; width: 60px;}
-.container-fluid{height: 80%;}
+.container-fluid{height: 90%;}
 </style>
 
 </head>
@@ -277,7 +277,7 @@ input{ height: 35px; width:100%;}
                     	<ul>
                     		<li class="divide"></li>
                     		<li class="Title1">이름</li>
-                    		<li class="Answer1"><input type="text" class="text1"></li>
+                    		<li class="Answer1"><input type="text" class="text1" id="pr_name" name="pr_name"></li>
                     		<li class="divide"></li>
                     		<li class="Title1">생년월일</li>
                     		<li class="Answer1"><input type="text" class="text1" id="pr_birth" name="pr_birth" placeholder=" 예) 030201로 입력하세요"></li>
