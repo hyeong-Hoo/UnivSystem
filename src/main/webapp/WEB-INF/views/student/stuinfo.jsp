@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -134,20 +133,20 @@
             <table class="table2">
                             <tr class="photo">
                                 <th id="p_btn"><div class="imge_size" id="image_container" ></div></th>
-                                <td><div class="file_div">사진파일크기는<br><h1>3x4</h1><br>사이즈를 사용해주세요<br></div><input type="file" id="image"name="image" accept="image/*" onchange="setThumbnail(event);"/></td>
-                                <td class="t1" colspan="2">&emsp;<img src="./images/img3.png" alt="증명사진"></td>
+                                <td><div class="file_div ">사진파일크기는<br><h1>3x4</h1><br>사이즈를 사용해주세요<br></div><input type="file" id="image"name="image" accept="image/*" onchange="setThumbnail(event);"/></td>
+                                <td class="t1" colspan="2">&emsp;<img style="width: 180px; height:215px; " id="image1" src="data:image/jpeg;base64,${dto.pa}"></td>
                             </tr>
                             <tr class="tr1">
                             <th class="thee">성명</th>
-                            <th class="t1" >&emsp;<input type="text" id="korn_flnm" name="korn_flnm"></th>
+                            <th class="t1" >&emsp;<input type="text" id="korn_flnm" name="korn_flnm" value="${dto.KORN_FLNM}"></th>
                             <th class="thee">연락처</th>
-                            <th class="t1" colspan="3">&emsp;<input type="text" id="telno" name="telno"></th>
+                            <th class="t1" colspan="3">&emsp;<input type="text" id="telno" name="telno" value="${dto.TELNO}"></th>
                             </tr>
                             <tr class="tr1">
                                  <th class="thee">이메일</th>
-                                <th class="t1">&emsp;<input type="text" id="rel_n" name="rel_n"></th>
+                                <th class="t1">&emsp;<input type="text" id="rel_n" name="rel_n" value="${dto.EML_ADDR}"></th>
                                 <th class="thee">비상연락처</th>
-                                <th class="t1">&emsp;<input type="text" id="rel_telno" name="rel_telno"></th>
+                                <th class="t1">&emsp;<input type="text" id="rel_telno" name="rel_telno" value="${dto.REL_TELNO}"></th>
                             </tr>
                             <tr class="tr1">
                             </tr>
@@ -157,22 +156,83 @@
                             </tr>
                             <tr class="tr1">
                                <th class="thee">주소</th>
-                               <th class="t1">&emsp;<input type="text"  id="addr" name="addr" readonly="readonly" style="width:auto;"></th>
+                               <th class="t1">&emsp;<input type="text"  id="addr" name="addr" readonly style="width:auto;" value="${dto.ADDR}"></th>
                                <th class="thee">상세주소</th>
-                               <th class="t1">&emsp;<input type="text" id="daddr" name="daddr" placeholder="직접입력" style="width:auto;"></th>
+                               <th class="t1">&emsp;<input type="text" id="daddr" name="daddr" placeholder="직접입력" style="width:auto;" value="${dto.DADDR}"></th>
                             </tr>
                             <tr class="tr1">
                                <th class="thee">생년월일</th>
-                               <th class="t1">&emsp;<input type="text" id="user_brdt" name="user_brdt" placeholder="ex)19901122" maxlength="8"></th>
+                               <th class="t1">&emsp;<input type="text" id="user_brdt" name="user_brdt" placeholder="ex)19901122" maxlength="8" value="${dto.USER_BRDT}"></th>
                                <th class="thee">성별</th>
-                               <th class="t1">&emsp;<input type="radio" name="gender_cd" value="남성">&emsp;남성&emsp;<input type="radio" name="gender_cd" value="여성">&emsp;여성</th>
+                               <th class="t1">&emsp;
+                               <input type="radio" name="gender_cd" value="남성" >&emsp;남성&emsp;
+                               <input type="radio" name="gender_cd" value="여성" >&emsp;여성
+                               </th>
                             </tr>
 								
                         </table>
             <button type="button" id="add-btn" class="add-btn" name="done">수정완료</button>
 </body>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+$(document).ready(function() {
+	  // 서버에서 전달받은 값을 변수에 저장합니다.
+	  var gender = '${dto.GENDER_CD}'; // 예시로 Django 템플릿 언어를 사용한 변수 처리 방식을 보여줍니다.
+	  // 라디오 버튼 중 전달받은 값과 일치하는 항목을 선택 상태로 설정합니다.
+	  $('input[name="gender_cd"][value="'+gender+'"]').prop('checked', true);
+	});
+
+
+$('.add-btn').click(function() {
+    if(confirm("수정하진 내용을 저장하시겠습니까?")) {
+        var KORN_FLNM = $("#korn_flnm").val();
+        var TELNO = $("#telno").val();
+        var EML_ADDR = $("#rel_n").val();
+        var REL_TELNO = $("#rel_telno").val();
+        var ZIP = $("#zip").val();
+        var ADDR = $("#addr").val();
+        var DADDR = $("#daddr").val();
+        var USER_BRDT = $("#user_brdt").val();
+        if($("#image")[0].files[0]){ var FileInput = $("#image")[0].files[0];}
+		else{
+			// 이미지 데이터를 가져와서 Blob 객체로 변환
+		var imageSrc = $("#image1").attr("src");
+		var byteCharacters = atob(imageSrc.split(',')[1]);
+		var byteNumbers = new Array(byteCharacters.length);
+		for (var i = 0; i < byteCharacters.length; i++) {
+  		byteNumbers[i] = byteCharacters.charCodeAt(i);
+		}
+		var byteArray = new Uint8Array(byteNumbers);
+		var imageBlob = new Blob([byteArray], { type: 'image/jpeg' });
+		// Blob 객체를 File 객체로 변환
+		var fileName = "default.jpg";
+		var FileInput = new File([imageBlob], fileName);}
+        var GENDER_CD = $('input[name=gender_cd]:checked').val();
+
+        var formData = new FormData();
+        formData.append('KORN_FLNM', KORN_FLNM);
+        formData.append('TELNO', TELNO);
+        formData.append('EML_ADDR', EML_ADDR);
+        formData.append('REL_TELNO', REL_TELNO);
+        formData.append('ZIP', ZIP);
+        formData.append('ADDR', ADDR);
+        formData.append('DADDR', DADDR);
+        formData.append('USER_BRDT', USER_BRDT);
+        formData.append('GENDER_CD', GENDER_CD);
+        formData.append('FileInput', FileInput);
+
+        $.ajax({
+            url : "/studinfoupdate",
+            type : "post",
+            cache : false,
+            processData: false,
+            contentType: false,
+            data: formData     
+        });
+    }
+});
+	
     function sample4_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {

@@ -75,4 +75,25 @@ VALUES (
         #{Student_ID}, #{PSWD}, #{KORN_FLNM}, #{USER_BRDT}, #{EML_ADDR}, #{TELNO}, #{STUD_NO}, "STUDENT"
     )
 </insert>
+
+<!-- 개인정보 이름값에서 stud_NO 불러오는부분 -->
+	<select id="studno" resultType="com.teamp.cau.dto.PassDTO">
+		SELECT STUD_NO
+		FROM USER_INFO
+		WHERE USER_NO=#{USER_NO};
+	</select>
+
+<!-- 개인정보 수정 부분 -->
+<update id="updatestuinfo" parameterType="com.teamp.cau.dto.PassDTO">
+	UPDATE STUD_INFO 
+	SET KORN_FLNM = #{KORN_FLNM},TELNO = #{TELNO} ,EML_ADDR= #{EML_ADDR},REL_TELNO= #{REL_TELNO},
+	ZIP= #{ZIP},ADDR= #{ADDR},DADDR= #{DADDR},USER_BRDT= #{USER_BRDT},GENDER_CD= #{GENDER_CD},PHOTO_FILE = #{PHOTO_FILE}
+	WHERE STUD_NO=#{STUD_NO}
+</update>
+<!-- 개인정보 불러오기 -->
+	<select id="updatestuin" parameterType="com.teamp.cau.dto.PassDTO" resultType="com.teamp.cau.dto.PassDTO">
+		SELECT *, PHOTO_FILE as pa
+		FROM STUD_INFO
+		WHERE STUD_NO = #{STUD_NO}
+	</select>
 </mapper>

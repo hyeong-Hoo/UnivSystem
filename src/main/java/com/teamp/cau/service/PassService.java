@@ -42,4 +42,16 @@ public class PassService {
 	public int studentLimit(PassDTO passDTO) {
 		return passDAO.studentLimit(passDTO);
 	}
+
+	public void studinfo(PassDTO passDTO) {
+		passDAO.studinfo(passDTO);
+		
+	}
+
+	public PassDTO studin(PassDTO passDTO) {
+		return passDAO.studin(passDTO);
+	}
+
+
+
 }

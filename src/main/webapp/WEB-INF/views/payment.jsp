@@ -41,7 +41,7 @@
             url: "/pms",
             data: { KORN_FLNM: name, USER_BRDT: birthdate },
             success: function(data) {
-            	if (data === "{\"status\":\"success\"}") { // 수정된 부분                    // 결제 진행
+            	if (data === "success") { // 수정된 부분                    // 결제 진행
                     IMP.request_pay({
                         pg: 'html5_inicis',
                         pay_method: 'card',
@@ -65,7 +65,7 @@
                             alert(msg);
                         }
                     });
-                }  else if (data === "{\"status\":\"blocked\"}") {
+                }  else if (data === "blocked") {
                     alert('이미 결제된 지원서입니다. 결제를 진행할 수 없습니다.');
                 } else {
                     alert('입력하신 정보와 일치하는 사용자 정보가 없습니다. 결제를 진행할 수 없습니다.');

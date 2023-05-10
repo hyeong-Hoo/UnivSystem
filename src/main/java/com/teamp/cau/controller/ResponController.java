@@ -36,7 +36,7 @@ public class ResponController {
 		} else if(test2.equals("5-2")) { //정시 지원자 관리
 		    result="/assessment";
 		} else if(test2.equals("5-3")) { //모집요강
-		    result="/pass";
+		    result="/schedule";
 		} else if(test2.equals("20")) { //결제시스템
 		    result="/payment";
 		}

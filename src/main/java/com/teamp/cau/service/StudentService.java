@@ -16,6 +16,7 @@ public class StudentService {
 
 	public List<StudentDTO> studentList(String KORN_FLNM) {
 	 return studentDAO.studentList(KORN_FLNM);
+	 
 	}
 
 	

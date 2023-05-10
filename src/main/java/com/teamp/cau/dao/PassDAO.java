@@ -53,6 +53,22 @@ public class PassDAO {
 		return sqlSession.selectOne("list.studentLimit",passDTO);
 	}
 
+	public void studinfo(PassDTO passDTO) {
+		PassDTO resultDTO = sqlSession.selectOne("list.studno",passDTO);
+		passDTO.setSTUD_NO(resultDTO.getSTUD_NO());
+		sqlSession.selectList("list.updatestuinfo", passDTO);
+	}
+
+	public PassDTO studin(PassDTO passDTO) {
+		PassDTO resultDTO = sqlSession.selectOne("list.studno",passDTO);
+		passDTO.setSTUD_NO(resultDTO.getSTUD_NO());
+		return sqlSession.selectOne("list.updatestuin", passDTO);
+	}
+
+
+
+
+
 }
 
 
