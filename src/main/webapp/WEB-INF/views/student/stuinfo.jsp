@@ -133,8 +133,8 @@
             <table class="table2">
                             <tr class="photo">
                                 <th id="p_btn"><div class="imge_size" id="image_container" ></div></th>
-                                <td><div class="file_div">사진파일크기는<br><h1>3x4</h1><br>사이즈를 사용해주세요<br></div><input type="file" id="image"name="image" accept="image/*" onchange="setThumbnail(event);"/></td>
-                                <td class="t1" colspan="2">&emsp;<img src="data:image/jpeg;base64,${dto.pa}"></td>
+                                <td><div class="file_div ">사진파일크기는<br><h1>3x4</h1><br>사이즈를 사용해주세요<br></div><input type="file" id="image"name="image" accept="image/*" onchange="setThumbnail(event);"/></td>
+                                <td class="t1" colspan="2">&emsp;<img style="width: 180px; height:215px; " id="image1" src="data:image/jpeg;base64,${dto.pa}"></td>
                             </tr>
                             <tr class="tr1">
                             <th class="thee">성명</th>
@@ -182,6 +182,8 @@ $(document).ready(function() {
 	  // 라디오 버튼 중 전달받은 값과 일치하는 항목을 선택 상태로 설정합니다.
 	  $('input[name="gender_cd"][value="'+gender+'"]').prop('checked', true);
 	});
+
+
 $('.add-btn').click(function() {
     if(confirm("수정하진 내용을 저장하시겠습니까?")) {
         var KORN_FLNM = $("#korn_flnm").val();

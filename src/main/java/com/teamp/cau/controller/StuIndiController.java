@@ -54,29 +54,23 @@ public class StuIndiController {
 
 	@ResponseBody
 	@PostMapping("/studinfoupdate")
-	public String studinfoupdate(@RequestParam("KORN_FLNM") String KORN_FLNM, @RequestParam("TELNO") String TELNO,
-			@RequestParam("EML_ADDR") String EML_ADDR, @RequestParam("REL_TELNO") String REL_TELNO,
-			@RequestParam("ZIP") String ZIP, @RequestParam("ADDR") String ADDR, @RequestParam("DADDR") String DADDR,
-			@RequestParam("USER_BRDT") String USER_BRDT, @RequestParam("GENDER_CD") String GENDER_CD,
+	public String studinfoupdate( @RequestParam("KORN_FLNM") String KORN_FLNM ,
+			@RequestParam("TELNO") String TELNO,@RequestParam("EML_ADDR") String EML_ADDR,
+			@RequestParam("REL_TELNO") String REL_TELNO,@RequestParam("ZIP") String ZIP,
+			@RequestParam("ADDR") String ADDR,@RequestParam("DADDR") String DADDR,
+			@RequestParam("USER_BRDT") String USER_BRDT,@RequestParam("GENDER_CD") String GENDER_CD,
 			@RequestParam("FileInput") MultipartFile FileInput) throws IOException {
 		PassDTO passDTO = new PassDTO();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String USER_NO = authentication.getName(); // "user_NO" 컬럼에서 사용자 이름을 가져옴
-		passDTO.setREL_TELNO(REL_TELNO);
-		passDTO.setTELNO(TELNO);
-		passDTO.setKORN_FLNM(KORN_FLNM);
-		passDTO.setEML_ADDR(EML_ADDR);
-		passDTO.setZIP(ZIP);
-		passDTO.setADDR(ADDR);
-		passDTO.setUSER_BRDT(USER_BRDT);
-		passDTO.setGENDER_CD(GENDER_CD);
-		passDTO.setDADDR(DADDR);
-		passDTO.setUSER_NO(USER_NO);
-
-		Encoder encoder = Base64.getEncoder();
-		byte[] bytes = FileInput.getBytes();
-		byte[] te = encoder.encode(bytes);
-		passDTO.setPHOTO_FILE(te);
+		passDTO.setREL_TELNO(REL_TELNO);passDTO.setTELNO(TELNO);passDTO.setKORN_FLNM(KORN_FLNM);passDTO.setEML_ADDR(EML_ADDR);
+		passDTO.setZIP(ZIP);passDTO.setADDR(ADDR);passDTO.setUSER_BRDT(USER_BRDT);passDTO.setGENDER_CD(GENDER_CD);
+		passDTO.setDADDR(DADDR);passDTO.setUSER_NO(USER_NO);
+		
+		  Encoder encoder = Base64.getEncoder();
+			byte[] bytes = FileInput.getBytes();
+			byte[] te = encoder.encode(bytes);
+			passDTO.setPHOTO_FILE(te);
 		passService.studinfo(passDTO);
 
 		return "";
