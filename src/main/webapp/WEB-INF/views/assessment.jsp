@@ -36,6 +36,7 @@
 				<th>수학</th>
 				<th>영어</th>
 				<th>평균</th>
+				<th>지원자</th>
 				<th>제출서류</th>
 				<th>구분</th>
 
@@ -65,9 +66,7 @@
 	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 	crossorigin="anonymous"></script>
 	<script>
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
 						var table = $('#asstable').DataTable({
 							"language": {
 						        "emptyTable": "데이터가 없어요.",
@@ -84,186 +83,166 @@
 						            "previous": "이전"}
 							},
 			
-
-
-	
 							lengthChange: false,
 							//표시 기능 숨기기
 							info:true,
+							paging: false,
+						        //페이징 기능 끄기
+						        scrollY: '400px',
+						        //스크롤을 사용할 공간 지정
+						        scrollCollapse: true,
+						        //스크롤이 작동할 때, 테이블 크기를 조정할지 여부 설정
 							//정보 표시 기능 숨기기
+							
 						            
-											ajax : {
-												url : '/asm',
-												type : 'GET',
-												dataSrc : ''
-											},
-											columns : [
-													{
-														data : "appl_NO"
-													},
-													{
-														data : "korn_FLNM"
-													},
-													{
-														data : "department"
-													},
-													{
-														data : "korean"
-													},
-													{
-														data : "math"
-													},
-													{
-														data : "english"
-													},
-													{
-														data : "avg"
-													},
-													{
-														data : "pdf",
-														render : function(data,
-																type, row) {
-															var decodedPdf = atob(row.pdf);
-															return '<button id="pdf-'
-																	+ row.appl_NO
-																	+ '" class="btn btn-sm btn-outline-primary" onclick="openPdf(\''
-																	+ decodedPdf
-																	+ '\')">PDF</button>';
-														}
+        ajax: {
+            url: '/asm',
+            type: 'GET',
+            dataSrc: ''
+        },
+        columns: [
+            { data: "appl_NO" },
+            { data: "korn_FLNM" },
+            { data: "department" },
+            { data: "korean" },
+            { data: "math" },
+            { data: "english" },
+            { data: "avg" },
+            { data: "passed" },
+								{
+									data : "pdf",
+									render : function(data,
+											type, row) {
+										var decodedPdf = atob(row.pdf);
+										return '<button id="pdf-'
+												+ row.appl_NO
+												+ '" class="btn btn-sm btn-outline-primary" onclick="openPdf(\''
+												+ decodedPdf
+												+ '\')">PDF</button>';
+									}
 
-													},
-													{
-														data : "passed",
-														render : function(data,
-																type, row) {
-															var options = '<option value="지원자">지원자</option>'
-																	+ '<option value="합격">합격</option>'
-																	+ '<option value="합격">불합격</option>';
+								},
+								{
+									data : "passed",
+									render : function(data,
+											type, row) {
+										var options = '<option value="지원자">지원자</option>'
+												+ '<option value="합격">합격</option>'
+												+ '<option value="불합격">불합격</option>';
 
-															var selected = data
-																	|| 'applicant'; // passed 값이 null 이면 'applicant'로 설정
+										var selected = data
+												|| 'applicant'; // passed 값이 null 이면 'applicant'로 설정
 
-															return '<select id="passed-' + row.appl_NO + '" name="classification" class="form-control">'
-																	+ options
-																			.replace(
-																					'value="'
-																							+ selected
-																							+ '"',
-																					'value="'
-																							+ selected
-																							+ '" selected')
-																	+ '</select>';
-														}
+										return '<select id="passed-' + row.appl_NO + '" name="classification" class="form-control">'
+												+ options
+														.replace(
+																'value="'
+																		+ selected
+																		+ '"',
+																'value="'
+																		+ selected
+																		+ '" selected')
+												+ '</select>';
+									}
 
-													} ],
+								} ],
 
-											initComplete : function() {
-												// Create two input fields and a search button
-												var filterHtml = '<div class="d-flex">'
-														+ '<div class="mx-2">'
-														+ '<select id="dept_select" class="form-control">'
-														+ '<option value="">지원 학과</option>'
-														+ '<option value="기계과">기계과</option>'
-														+ '<option value="컴퓨터공학과">컴퓨터공학과</option>'
-														+ '<option value="전기전자과">전기전자과</option>'
-														+ '<option value="화학공학과">화학공학과</option>'
-														+ '</select>'
-														+ '</div>'
-														+ '<div class="mx-2">'
-														+ '<input id="name_input" type="text" placeholder="이름 검색" class="form-control">'
-														+ '</div>'
-														+ '<button id="search_button" type="button" class="btn btn-primary">검색</button>'
-														+ '</div>';
+						initComplete : function() {
+							
+							var filterHtml = '<div class="d-flex">'
+									+ '<div class="mx-2">'
+									+ '<select id="dept_select" class="form-control">'
+									+ '<option value="">지원 학과</option>'
+									+ '<option value="기계과">기계과</option>'
+									+ '<option value="컴퓨터공학과">컴퓨터공학과</option>'
+									+ '<option value="전기전자과">전기전자과</option>'
+									+ '<option value="화학공학과">화학공학과</option>'
+									+ '</select>'
+									+ '</div>'
+									+ '<div class="mx-2">'
+									+ '<select id="status_select" class="form-control">'
+									+ '<option value="">구분</option>'
+									+ '<option value="지원자">지원자</option>'
+									+ '<option value="합격">합격</option>'
+									+ '<option value="불합격">불합격</option>'
+									+ '</select>'
+									+ '</div>'
+									+ '<div class="mx-2">'
+									+ '<input id="name_input" type="text" placeholder="이름 검색" class="form-control">'
+									+ '</div>'
+									+ '<button id="search_button" type="button" class="btn btn-primary">검색</button>'
+									+ '</div>';
 
-												$('#asstable_filter').html(
-														filterHtml);
+									$('#asstable_filter').html(filterHtml);
 
-												$('#search_button')
-														.on(
-																'click',
-																function() {
-																	var name = $(
-																			'#name_input')
-																			.val();
+									$('#search_button').on('click', function() {
+									    var name = $('#name_input').val();
+									    table.column(1).search(name);
 
-																	table
-																			.column(
-																					1)
-																			.search(
-																					name);
+									    table.draw();
+									});
 
-																	// Redraw the table with the new search filter
-																	table
-																			.draw();
-																});
+									$('#dept_select').on('change', function() {
+									    var dept = $('#dept_select').val();
+									    table.column(2).search(dept);
 
-										$('#dept_select').on('change', function() {
+									    table.draw();
+									});	
+									
+									$('#status_select').on('change', function() {
+									    var status = $('#status_select').val();
+									    table.column(7).search(status); 
 
-																	var dept = $(
-																			'#dept_select')
-																			.val();
-
-																	table
-																			.column(
-																					2)
-																			.search(
-																					dept);
-
-																	// Redraw the table with the new search filter
-																	table
-																			.draw();
-																});
-											}
-											
+									    table.draw();
+									});								
 										
+							}
+						});
+						
+		
 
-										});
 						
 
-						$('#saveBtn1')
-								.click(
-										function() {
-											var tableData = $('#asstable')
-													.DataTable().data()
-													.toArray();
-											var updatedData = [];
-											for (var i = 0; i < tableData.length; i++) {
-												var row = tableData[i];
-												var passed = $(
-														'#passed-'
-																+ row.appl_NO)
-														.val(); // 각 행에 대한 id 값을 이용하여 선택자를 지정
-												updatedData.push({
-													appl_NO : row.appl_NO,
-													passed : passed
+						$('#saveBtn1').click(function() {
+						    var tableData = $('#asstable').DataTable().data().toArray();
+						    var updatedData = [];
+						    for (var i = 0; i < tableData.length; i++) {
+						        var row = tableData[i];
+						        var passed = $('#passed-' + row.appl_NO).val()
+						        updatedData.push({
+						            appl_NO : row.appl_NO,
+						            passed : passed
 												});
 											}
-											console.log(updatedData); // 예시 출력
-
-											$
-													.ajax({
-														type : 'POST',
-														url : '/save',
-														data : JSON
-																.stringify(updatedData),
-														contentType : 'application/json; charset=utf-8',
-														success : function(
-																result) {
-															alert('저장되었습니다.');
-														},
-														error : function() {
-															alert('저장 중 오류가 발생하였습니다.');
-														}
+						    // 서버에 변경된 데이터를 저장하고, 페이지를 다시 로드하여 변경된 데이터를 불러옴
+						    $.ajax({
+						        type : 'POST',
+						        url : '/save',
+						        data : JSON.stringify(updatedData),
+						        contentType : 'application/json; charset=utf-8',
+						        success : function(result) {
+						            alert('저장되었습니다.');
+						        },
+						        error : function() {
+						            alert('저장 중 오류가 발생하였습니다.');
+						        }
 													});
 										});
+
+						
+
 
 						$('#resetBtn1').click(function() {
 							$('#dept_input').val('');
 							$('#name_input').val('');
 							table.columns().search('').draw();
 						});
+						
+						
+										
 
 					});
+		
 
 	function openPdf(pdfData) {
 		var iframe = '<iframe src="data:application/pdf;base64,' + pdfData

@@ -21,11 +21,11 @@ public class AssessmentService {
 	}
 
 
-	public void updateAssessment(List<StudentDTO> assessments) {
-	    for (StudentDTO assessment : assessments) {
-	        assessmentDAO.updateAssessment(assessment);
-	    }
-	}
+		public void updateAssessment(List<StudentDTO> assessments) {
+		    for (StudentDTO assessment : assessments) {
+		        assessmentDAO.updateAssessment(assessment);
+		    }
+		}
 
 
 	public Map<String, Object> selectPdf() {
