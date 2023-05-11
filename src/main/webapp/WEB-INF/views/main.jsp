@@ -7,12 +7,83 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="js/confetti_v2.js"></script>
-<!-- iamport.payment.js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+
+<!-- 결제 js -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <head>
+<!-- 	결제 스크립트 -->
+
+<script>
+	
+function createOrderNum(){
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    
+    let orderNum = year + month + day;
+    for(let i=0;i<10;i++) {
+        orderNum += Math.floor(Math.random() * 8);    
+    }
+    return orderNum;
+}
+
+var IMP = window.IMP; 
+IMP.init("imp75220550"); 
+
+function requestPay() {
+    const name = $('#apyname').val();
+    const birthdate = $('#apybirthdate').val();
+    const orderNum = createOrderNum();
+         
+
+    var payment = 0; // payment 변수 선언 및 초기화
+
+    $.ajax({
+      url: "/pmss",
+      data: { KORN_FLNM: name, USER_BRDT: birthdate },
+      success: function(data) {
+        if (data === "success") { // 수정된 부분                    // 결제 진행
+          IMP.request_pay({
+            pg: 'html5_inicis',
+            pay_method: 'card',
+            merchant_uid: orderNum,
+            name: 'CAU대학교 지원서',
+            amount: 100,
+            buyer_email: 'Iamport@chai.finance',
+            buyer_name: name,
+            buyer_tel: '010-1234-5678',
+            buyer_addr: '서울특별시 강남구 삼성동',
+            buyer_postcode: '123-456'
+          }, function(rsp) {
+            console.log(rsp);
+            if (rsp.success) {
+              var msg = '결제가 완료되었습니다.';
+              alert(msg);
+              location.href = "http://localhost/main";
+            } else {
+              var msg = '결제에 실패하였습니다.';
+              msg += '에러내용 : ' + rsp.error_msg;
+              alert(msg);
+            }
+          });
+        } else if (data === "blocked") {
+          alert('이미 결제된 지원서입니다. 결제를 진행할 수 없습니다.');
+        } else if (data === "cancelled") {
+          alert('사용자가 결제를 취소하였습니다. 결제를 진행할 수 없습니다.');
+          scheduleService.updatePayment(KORN_FLNM, USER_BRDT, 0);
+
+        } else {
+          alert('입력하신 정보와 일치하는 사용자 정보가 없습니다. 결제를 진행할 수 없습니다.');
+        }
+      }
+    });
+
+}
+</script>
 <script>
 $(function(){
     $("#Admission").click(function(){
@@ -64,7 +135,10 @@ $(function(){
 });
 
 
+
 </script>
+
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -651,6 +725,7 @@ cursor: pointer;
 		 					성함&emsp;&emsp;<input type="text" name="search_name" class="contenText" id="passName"><br>
 		 					생년월일 <input type="text" name="search_brd" class="contenText" id="passBrd" placeholder="ex)19981102">
 		 					
+		 					
 		 				</span>
 		 			</div>
 		 		</div>
@@ -682,6 +757,7 @@ cursor: pointer;
 		 					
 		 					이름&emsp;<input type="text" name="apyname" class="contenText" id="apyname"><br>
 		 					생년월일 <input type="text" name="apybirthdate" class="contenText" id="apybirthdate" placeholder="ex)19981102">
+		 					<button onclick="requestPay()">결제하기</button> 
 		 					
 		 					
 		 				</span>
@@ -1024,70 +1100,9 @@ window.onclick = function(event) {
         </div>
     </div>
 </div>
-<!-- 지원자 결제 자바스크립트 -->
 
-<script>
-  	
-    function createOrderNum(){
-        const date = new Date();
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const day = String(date.getDate()).padStart(2, "0");
-        
-        let orderNum = year + month + day;
-        for(let i=0;i<10;i++) {
-            orderNum += Math.floor(Math.random() * 8);    
-        }
-        return orderNum;
-    }
 
-    var IMP = window.IMP; 
-    IMP.init("imp75220550"); 
-    
-    function requestPay() {
-        const apyname = $('#apyname').val();
-        const apybirthdate = $('#apybirthdate').val();
-        const orderNum = createOrderNum();
-             
 
-        // 서버에 결제할 사용자 정보가 있는지 확인
-        $.ajax({
-            url: "/pms",
-            data: { KORN_FLNM: name, USER_BRDT: birthdate },
-            success: function(data) {
-            	if (data === "success") { // 수정된 부분                    // 결제 진행
-                    IMP.request_pay({
-                        pg: 'html5_inicis',
-                        pay_method: 'card',
-                        merchant_uid: orderNum,
-                        name: 'CAU대학교 지원서',
-                        amount: 100,
-                        buyer_email: 'Iamport@chai.finance',
-                        buyer_name: name,
-                        buyer_tel: '010-1234-5678',
-                        buyer_addr: '서울특별시 강남구 삼성동',
-                        buyer_postcode: '123-456'
-                    }, function(rsp) {
-                        console.log(rsp);
-                        if (rsp.success) {
-                            var msg = '결제가 완료되었습니다.';
-                            alert(msg);
-                            location.href = "http://localhost/main";
-                        } else {
-                            var msg = '결제에 실패하였습니다.';
-                            msg += '에러내용 : ' + rsp.error_msg;
-                            alert(msg);
-                        }
-                    });
-                }  else if (data === "blocked") {
-                    alert('이미 결제된 지원서입니다. 결제를 진행할 수 없습니다.');
-                } else {
-                    alert('입력하신 정보와 일치하는 사용자 정보가 없습니다. 결제를 진행할 수 없습니다.');
-                }
-            }
-        });
-    }
-    </script>   
 </body>
 <script type="text/javascript">
 

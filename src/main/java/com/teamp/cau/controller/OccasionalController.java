@@ -31,6 +31,7 @@ public class OccasionalController {
 	public List<StudentDTO> ocs() {
 		
 		List<StudentDTO> data = occasionalService.data();
+		
 	    return data;
 		
 	}

@@ -86,11 +86,11 @@
 							lengthChange: false,
 							//표시 기능 숨기기
 							info:true,
-							paging: false,
-						        //페이징 기능 끄기
-						        scrollY: '400px',
-						        //스크롤을 사용할 공간 지정
-						        scrollCollapse: true,
+// 							paging: false,
+// 						        //페이징 기능 끄기
+// 						        scrollY: '400px',
+// 						        //스크롤을 사용할 공간 지정
+// 						        scrollCollapse: true,
 						        //스크롤이 작동할 때, 테이블 크기를 조정할지 여부 설정
 							//정보 표시 기능 숨기기
 							
@@ -100,6 +100,12 @@
             type: 'GET',
             dataSrc: ''
         },
+        columnDefs: [
+            { targets: 7, visible: false } // 7번째 컬럼 passed를 숨김
+        ],
+        order: [
+            [0, 'asc']
+        ],
         columns: [
             { data: "appl_NO" },
             { data: "korn_FLNM" },
@@ -127,11 +133,11 @@
 									render : function(data,
 											type, row) {
 										var options = '<option value="지원자">지원자</option>'
-												+ '<option value="합격">합격</option>'
+											+ '<option value="합격">합격</option>'
+
 												+ '<option value="불합격">불합격</option>';
 
 										var selected = data
-												|| 'applicant'; // passed 값이 null 이면 'applicant'로 설정
 
 										return '<select id="passed-' + row.appl_NO + '" name="classification" class="form-control">'
 												+ options
@@ -209,11 +215,14 @@
 						    for (var i = 0; i < tableData.length; i++) {
 						        var row = tableData[i];
 						        var passed = $('#passed-' + row.appl_NO).val()
-						        updatedData.push({
-						            appl_NO : row.appl_NO,
-						            passed : passed
-												});
-											}
+						        
+						        if (passed) { // passed 값이 있는 경우에만 업데이트할 객체에 추가
+						            updatedData.push({
+						                appl_NO : row.appl_NO,
+						                passed : passed
+						            });
+						        }
+						    }
 						    // 서버에 변경된 데이터를 저장하고, 페이지를 다시 로드하여 변경된 데이터를 불러옴
 						    $.ajax({
 						        type : 'POST',
@@ -222,6 +231,7 @@
 						        contentType : 'application/json; charset=utf-8',
 						        success : function(result) {
 						            alert('저장되었습니다.');
+						            location.reload();
 						        },
 						        error : function() {
 						            alert('저장 중 오류가 발생하였습니다.');
