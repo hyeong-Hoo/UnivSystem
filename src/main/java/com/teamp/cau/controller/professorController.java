@@ -1,23 +1,18 @@
 package com.teamp.cau.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.session.SqlSession;
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.teamp.cau.dto.professorDTO;
@@ -77,16 +72,12 @@ public class professorController {
 	
 	// 교수본인정보 수정 
 	@PostMapping("/pr_self")
-	public String self_save(HttpServletRequest req) {
-		String pr_no = req.getParameter("pr_no");
-		String name_kr = req.getParameter("name_kr");
-		String name_en = req.getParameter("name_en");
-		String roadAddrPart1 = req.getParameter("roadAddrPart1");
-		String addrDetail = req.getParameter("addrDetail");
-		String pr_telno = req.getParameter("pr_telno");
-		String pr_email = req.getParameter("pr_email");
-		String pr_birth = req.getParameter("pr_birth");
-		String pr_gender = req.getParameter("pr_gender");
+	public String self_save(@RequestParam("pr_no") String pr_no, @RequestParam("name_kr") String name_kr, 
+			@RequestParam("name_en") String name_en,@RequestParam("roadAddrPart1") String roadAddrPart1,@RequestParam("addrDetail") String addrDetail,
+			@RequestParam("pr_telno") String pr_telno,@RequestParam("pr_email") String pr_email,@RequestParam("pr_birth") String pr_birth,
+			@RequestParam("pr_gender") String pr_gender,@RequestParam("image") MultipartFile image) {
+
+	    ConvertBinary convert = new ConvertBinary();
 		Map<String, Object> selfmodi = new HashMap<>();
 		selfmodi.put("pr_no", pr_no);
 		selfmodi.put("name_kr", name_kr);
@@ -97,8 +88,11 @@ public class professorController {
 		selfmodi.put("pr_email", pr_email);
 		selfmodi.put("pr_birth", pr_birth);
 		selfmodi.put("pr_gender", pr_gender);
+		String images;
+	    images = convert.convertBinary(image);
+	    selfmodi.put("IMG_FILE", images);
 		System.out.println(selfmodi);
-		Integer modify = prService.selfSave(selfmodi);
+		prService.selfSave(selfmodi);
 		return "self_modify";
 	}
 	

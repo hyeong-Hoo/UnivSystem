@@ -8,7 +8,7 @@
     <!-- 교수아이디 넘기기 -->
     <insert id="instr_user">
     	insert into USER_INFO(INSTR_NO, TELNO, EML_ADDR, USER_BRDT, KORN_FLNM, USER_ID, PSWD, ROLE_CODE )
-    	values (#{pr_no}, #{pr_telno}, #{pr_email}, #{pr_birth}, #{pr_name}, #{pr_id},#{pr_pw}, PROFESSOR);
+    	values (#{pr_no}, #{pr_telno}, #{pr_email}, #{pr_birth}, #{pr_name}, #{pr_id},#{pr_pw}, "PROFESSOR");
     </insert>
     
     

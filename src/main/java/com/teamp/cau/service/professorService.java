@@ -15,6 +15,8 @@ public class professorService {
 
 	@Autowired
 	private professorDAO prDAO;
+	
+   //private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 	// 교수정보 불러오기 
 	public List<professorDTO> prinfo() {
@@ -28,6 +30,8 @@ public class professorService {
 
 	//교수정보입력 저장 
 	public Integer prinfo_save(Map<String, Object> infoEnter) {
+		
+	//	infoEnter.put("pr_pw",passwordEncoder.encode(infoEnter.get("pr_pw")));
 		return prDAO.prSave(infoEnter);
 	}
 
