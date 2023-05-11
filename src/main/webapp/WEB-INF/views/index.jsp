@@ -64,14 +64,13 @@ font-size: 12px;
 
 .contentbox{
 width: 100%;
-min-height: 500px;
-height:auto;
+height:570px;
 position: relative;
 background-color: white;
 }
 .testcontent{
 width: inherit;
-height: inherit;
+height: 570px;
 position: absolute;
 background-color: white;
 overflow: scroll;

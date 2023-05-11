@@ -10,21 +10,8 @@
     body{margin: 0;padding: 0}
     .main-body{
     width:1920px;
-    height:2100px;
+    height:1000px;
     background-color: #e6e6e6;
-    }
-    .container{
-    margin: 0 auto;
-    width:1440px;
-    height:2000px;
-    background-color: #e6e6e6;
-    }
-    .container2{
-        position: relative;
-        top:30px;
-        width:1440px;
-        height: 1900px;
-        background: white;
     }
     .top-line{
         width:1340px;
