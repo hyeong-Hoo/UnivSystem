@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.teamp.cau.dao.StudentDAO;
-import com.teamp.cau.dto.StudentDTO;
+import com.teamp.cau.dto.PassDTO;
 
 @Service
 public class StudentService {
@@ -14,7 +14,7 @@ public class StudentService {
 	@Autowired
 	private StudentDAO studentDAO;
 
-	public List<StudentDTO> studentList(String KORN_FLNM) {
+	public List<PassDTO> studentList(String KORN_FLNM) {
 	 return studentDAO.studentList(KORN_FLNM);
 	 
 	}

@@ -7,7 +7,7 @@
 
 		  SELECT *
   		  FROM APPL_INFO
-  		  WHERE RECRT_SCHDL_CD='2'
+  		  WHERE RECRT_SCHDL_CD='2' AND payment='1'
 	   
 
 	</select>
