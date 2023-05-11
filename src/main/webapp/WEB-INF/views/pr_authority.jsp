@@ -21,22 +21,31 @@ td{ text-align: center;}
 input{ width:100%;}
 .send_btn{background-color: #3E74C7; color: white; border-radius: 3px;  height: 30px; width: 60px;}
 .container-fluid{height: 100%;} 
-
+.test{border: none; text-align: center;}
+.test:focus{outline: none;}
+.no{border: none; text-align: center;}
+.no:focus{outline: none;}
+.score{text-align: center;}
 </style>
+
+
 <script type="text/javascript">
+$(function(){
+	
+	$(document).on("change", ".score", function(){
+	
+		var appl_no = $(this).parent().prev().prev().prev().prev().prev().prev().prev().text(); // 지원자 번호 
+		var gradeScore = $(this).parent().prev().text(); //학생부 점수 
+		
+		var interviewScore = $(this).val(); // 면접 점수 
+		var totalScore = Number(gradeScore)+Number(interviewScore); // 총 점수 
+	
+		$(this).parent().next().find(".test").val(totalScore);
 
-function score(obj){
-	
-	
-	var gradeScore = parseFloat($(obj).parent().prev().text()); //학생부 점수 
-	var interviewScore = parseFloat($(obj).val()); // 면접 점수 
-	var totalScore = gradeScore + interviewScore; // 총 점수 
-	
-	$(obj).parent().next().html(totalScore);  //총점수에 totalScore값을 넣어주는 식 
-	
-	
-};
+	});
 
+
+});
 </script>
 <head>
     <meta charset="UTF-8">
@@ -287,15 +296,18 @@ function score(obj){
                         <tbody id="auth_body">
                         <c:forEach items="${appl_list }" var="appl">
                         	<tr>
-                        		<td class="appl_no" id="appl_no">${appl.appl_NO }</td>
+                        		<td class="appl_no">
+                        		<input class="no" type="number" name="appl_no" value="${appl.appl_NO }"readonly="readonly"></td>
                         		<td class="appl_code">${appl.CRCLM_CD }</td>
                         		<td class="appl_year">${appl.RECRT_YEAR }</td>
                         		<td class="appl_name">${appl.KORN_FLNM }</td>
                         		<td class="appl_gender">${appl.GENDER_CD }</td>
                         		<td class="appl_department">${appl.department }</td>
-                        		<td class="appl_grade" id="grade_score" name="grade_score">${appl.grade }</td>
-                        		<td class="appl_interview"><input type="text" value="${appl.interview }" name="inter_score" id="inter_score" onchange="score(this)"></td>
-                        		<td class="appl_total" name="total_score" id="total_score"> ${appl.total }</td>
+                        		<td class="appl_grade" name="grade_score">${appl.grade }</td>
+                        		<td class="appl_interview">
+                        		<input type="text" value="${appl.interview }" name="inter_score" class="score" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');" maxlength="2"></td>
+                        		<td class="appl_total" >
+                        		<input type="number" class="test" name="totalscore" value="${appl.total }"readonly="readonly"></td>
                         	</tr>
  						</c:forEach>                   
                         </tbody>

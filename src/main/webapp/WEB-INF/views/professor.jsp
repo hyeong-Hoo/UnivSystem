@@ -253,7 +253,7 @@ input{ height: 35px; width:100%;}
                     	<ul>
                     		<li class="divide"></li>
                     		<li class="Title1">아이디 </li>
-                    		<li class="Answer1"><input type="text" class="text1" id="pr_id" name="pr_id"></li>
+                    		<li class="Answer1"><input type="text" class="text1" id="pr_id" name="pr_id" ></li>
                     		<li class="divide"></li>
                     		<li class="Title1">비밀번호</li>
                     		<li class="Answer1"><input type="password" class="text1" id="pr_pw" name="pr_pw"></li>
@@ -265,10 +265,10 @@ input{ height: 35px; width:100%;}
                     	<ul>
                     		<li class="divide"></li>
                     		<li class="Title1">교수번호 </li>
-                    		<li class="Answer1"><input type="text" class="text1" id="pr_no" name="pr_no"></li>
+                    		<li class="Answer1"><input type="text" class="text1" id="pr_no" name="pr_no" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');"></li>
                     		<li class="divide"></li>
                     		<li class="Title1">학과코드</li>
-                    		<li class="Answer1"><input type="text" class="text1" id="pr_dep" name="pr_dep"></li>
+                    		<li class="Answer1"><input type="text" class="text1" id="pr_dep" name="pr_dep" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');"></li>
                     		<li class="divide"></li>
                     	</ul>
                     </div>
@@ -280,14 +280,15 @@ input{ height: 35px; width:100%;}
                     		<li class="Answer1"><input type="text" class="text1" id="pr_name" name="pr_name"></li>
                     		<li class="divide"></li>
                     		<li class="Title1">생년월일</li>
-                    		<li class="Answer1"><input type="text" class="text1" id="pr_birth" name="pr_birth" placeholder=" 예) 030201로 입력하세요"></li>
+                    		<li class="Answer1"><input type="text" class="text1" id="pr_birth" name="pr_birth" maxlength="6" placeholder=" 예) 030201로 입력하세요" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');"></li>
                     		<li class="divide"></li>
                     		<li class="Title1">이메일 </li>
-                    		<li class="Answer1"><input type="text" class="text1" id="pr_email" name="pr_email"></li>
+                    		<li class="Answer1"><input type="text" class="text1" id="pr_email" name="pr_email" placeholder=" 예) hong12@gamil.com "></li>
                     		<li class="divide"></li>
                     		<li class="Title1">연락처 </li>
-                    		<li class="Answer1"><input type="text" class="text1" id="pr_telno" name="pr_telno" placeholder=" - 없이 입력하세요"></li>
+                    		<li class="Answer1"><input type="text" class="text1" id="pr_telno" name="pr_telno" maxlength="11" placeholder=" - 없이 입력하세요" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');"></li>
                     		<li class="divide"></li>
+                    		<li class="cole"><input type="hidden" value="PROFESSOR"></li>
                     	</ul>
                     </div>
                     <br>

@@ -1,6 +1,9 @@
 package com.teamp.cau.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -32,13 +35,14 @@ public class professorController {
 		return "index";
 	}
 	
+	
 	// 교수정보입력 페이지 
 	@GetMapping("/professor")
 	public String pro_write() {
 		return "professor";
 	}
 	
-	//교수정보입력 저장 
+	// 교수정보입력 저장 
 	@PostMapping("/professor_info")
 	public String info_save(HttpServletRequest req) {
 		String pr_id = req.getParameter("pr_id");
@@ -59,20 +63,19 @@ public class professorController {
 		infoEnter.put("pr_birth", pr_birth);
 		infoEnter.put("pr_email", pr_email);
 		System.out.println(infoEnter);
-		Integer enter = prService.insert("prinfo_save", infoEnter);
+		Integer enter = prService.prinfo_save(infoEnter);	// instr_info로
+		Integer enter2 = prService.instr_user(infoEnter);	// user_info로 
 		return "professor";
 	}
 	
 	
-	
-	//교수본인정보 수정 불러오기 
+	// 교수본인정보 수정 불러오기 
 	@GetMapping("/self_modify")
 	public String modify( ) {
-		
 		return "self_modify";
 	}
 	
-	//교수본인정보입력 저장 
+	// 교수본인정보 수정 
 	@PostMapping("/pr_self")
 	public String self_save(HttpServletRequest req) {
 		String pr_no = req.getParameter("pr_no");
@@ -95,12 +98,11 @@ public class professorController {
 		selfmodi.put("pr_birth", pr_birth);
 		selfmodi.put("pr_gender", pr_gender);
 		System.out.println(selfmodi);
-		Integer enter = prService.modify("selfSave", selfmodi);
+		Integer modify = prService.selfSave(selfmodi);
 		return "self_modify";
 	}
 	
 
-	
 	//교수정보 불러오기 
 	@GetMapping("/pr_info")
 	public ModelAndView prinfo(HttpServletRequest request) {
@@ -127,6 +129,21 @@ public class professorController {
 		return mv;
 	}
 	
+	//권한주기 
+	@PostMapping("/pr_info_auth")
+	public String auth(@RequestParam("num") int num, @RequestParam HashMap<String, Object> autest ) {
+		professorDTO authdto = new professorDTO();
+		for (int i = 0; i < num; i++) {
+			int pr_no = Integer.parseInt((String)autest.get("auth_test [" + i + "][no]" ));
+			int authority = Integer.parseInt((String)autest.get("auth_test [" + i + "][auth]" ));
+			authdto.setINSTR_NO(pr_no);
+			authdto.setENDST_NO(authority);
+			prService.test(authdto);
+			System.out.println(pr_no);
+		}
+		
+		return "redirect:/pr_info";
+	}
 	
 	
 	// 면접평가 불러오기
@@ -134,7 +151,7 @@ public class professorController {
 	public ModelAndView call_in() {
 		ModelAndView mv = new ModelAndView("pr_authority");
 		List<HashMap<String, Object>> appl_list = prService.selectList();
-		System.out.println(appl_list);
+		//System.out.println(appl_list);
 		mv.addObject("appl_list", appl_list);
 		return mv;
 	}
@@ -142,14 +159,52 @@ public class professorController {
 	// 면접평가 및 총 점수 저장 
 	@PostMapping("/pr_score")
 	public String score(HttpServletRequest req) {
-		String interview = req.getParameter("inter_score");
-		String total = req.getParameter("total_score");
-		Map<String, Object> scoreSave = new HashMap<>();
-		System.out.println(scoreSave);
-		scoreSave.put("inter_score", interview);
-		scoreSave.put("total_score", total);
-			Integer interviewScore = prService.score("resultScore", scoreSave);
-		return "pr_authority";
+		String[] appl_no = req.getParameterValues("appl_no");
+		String[] interview = req.getParameterValues("inter_score");
+		List<HashMap<String,Integer>> list = new ArrayList<HashMap<String,Integer>>();
+		for(int i=0;i<appl_no.length;i++) {
+			HashMap<String,Integer> res_inner=new HashMap<String,Integer>();
+			res_inner.put("appl_no",Integer.parseInt(appl_no[i]));
+			res_inner.put("inter_score",Integer.parseInt(interview[i]));
+			list.add(res_inner);
+		
+		}
+		int result_row=prService.resultpoint(list);
+//		
+//		for (int i = 0; i < interview.length; i++) {
+//			professorDTO dto = new professorDTO();
+//			if (interview[i] != "0" || interview[i] != null || interview[i] != "") {
+//				dto.setAppl_NO(Integer.parseInt(appl_no[i]));
+//				dto.setInterview(Integer.parseInt(interview[i]));
+//			}
+//			res.add(dto);
+//		}
+//		
+//		for (int i = res.size()-1;  i >= 0; i--) {
+//			if(res.get(i).getInterview() == 0) {
+//				res.remove(i);
+//			}
+//		}
+//		
+		//for (professorDTO d : res) {
+		//	System.out.println(d.getAppl_NO() + ":::" + d.getInterview());
+		//}
+		
+		
+		professorDTO dto = new professorDTO();
+		System.out.println(req.getParameterValues("inter_score"));
+		for (int i = 0; i < appl_no.length; i++) {
+			
+			//prService.scoreSave(dto);
+		}
+		
+		
+		
+//		scoreSave.put("inter_score", interview);
+//		scoreSave.put("totalscore", total);
+//		System.out.println(Arrays.toString());
+//		Integer interviewScore = prService.resultscore("resultScore", scoreSave);
+		return "redirect:/pr_authority";
 	}
 	
 }

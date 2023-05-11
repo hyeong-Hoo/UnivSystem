@@ -265,7 +265,7 @@ input{ height: 35px;}
                     	<ul>
                     		<li class="divide"></li>
                     		<li class="Title1">교수번호</li>
-                    		<li class="Answer1"><input class="text1" type="text" id="pr_no" name="pr_no"></li>
+                    		<li class="Answer1"><input class="text1" type="text" id="pr_no" name="pr_no" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');"></li>
                     		<li class="divide"></li>
                   		</ul>
                     </div>
@@ -278,7 +278,7 @@ input{ height: 35px;}
     	        	        <li class="Answer1"><input class="text1" type="text" id="name_kr" name="name_kr"></li>
     	        	        <li class="divide"></li>
                 	   		<li class="Title1">이름 [영어]</li>
-           	        	 	<li class="Answer1"><input class="text1" type="text" id="name_en" name="name_en"></li>
+           	        	 	<li class="Answer1"><input class="text1" type="text" id="name_en" name="name_en"  onkeyup="this.value=this.value.replace(/[^a-zA-Z]/g,'');"></li>
             	        </ul>
                    </div>
                    <br>
@@ -312,13 +312,14 @@ input{ height: 35px;}
            	        	 	<li class="Answer2"><input class="text1" type="text" id="addrDetail" name="addrDetail" placeholder=" 상세주소를 입력하세요"></li>
            	        	 	<li class="divide"></li>
            	        	 	<li class="Title2">* 연락처  </li>
-    	        	        <li class="Answer2"><input class="text1" type="text" id="pr_telno" name="pr_telno" placeholder=" - 없이 입력하세요"></li>
+    	        	        <li class="Answer2">
+    	        	        <input class="text1" type="text" id="pr_telno" name="pr_telno" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');" placeholder=" - 없이 입력하세요" maxlength="11"></li>
             	        	<li class="divide"></li>
                 	   		<li class="Title2">* 이메일</li>
-           	        	 	<li class="Answer2"><input class="text1" type="text" id="pr_email" name="pr_email"></li>
+           	        	 	<li class="Answer2"><input class="text1" type="text" id="pr_email" name="pr_email" placeholder=" 예) hong12@gamil.com "></li>
            	        	 	<li class="divide"></li>
            	        	 	<li class="Title3">* 생년월일</li>
-            	        	<li class="Answer3"><input class="text1" type="text" id="pr_birth" name="pr_birth" placeholder=" 예) 890909식으로 입력하세요 "></li>
+            	        	<li class="Answer3"><input class="text1" type="text" id="pr_birth" name="pr_birth" placeholder=" 예) 890909식으로 입력하세요 " maxlength="6" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');"></li>
                 	   		<li class="Title3">* 성별</li>
            	        	 	<li class="Answer3"><input class="text1" type="text" id="pr_gender" name="pr_gender" placeholder=" 예) 남성 또는 여성으로 입력하세요 "></li>
            	        	 	<li class="divide"></li>
@@ -331,34 +332,6 @@ input{ height: 35px;}
                  		<button type="submit" class="save_btn">저장</button>
                    	</div> 
                    	</form>
-<!--  	                   
-<!--             	        		<tr> -->
-<!--                 	    			<th>우편번호</th> -->
-<!--                     				<td> -->
-<!--                     					<input type="hidden" id="confmKey" name="confmKey" value=""  > -->
-<!-- 										<input type="text" id="zipNo" name="zipNo" readonly style="width:68%"> -->
-<!-- 										<input type="button" value="주소검색" class="addr_btn" onclick="goPopup();"> -->
-<!--                     				</td> -->
-<!--          	           				<th>주소</th> -->
-<!--             	        			<td><input type="text" id="roadAddrPart1" name="roadAddrPart1" style="width:100%" readonly></td> -->
-<!--                 	    		</tr> -->
-<!--                     			<tr> -->
-<!--                     				<th>상세주소</th> -->
-<!--                     				<td> -->
-<!--                     					<input type="text" id="addrDetail" name="addrDetail" style="width:100%" value="" placeholder="상세주소 입력하세요"> -->
-<!--                     				</td> -->
-<!--                     				<th>성별</th> -->
-<!--                     				<td> -->
-<!--                     					<input type="text" id="pr_gender" name="pr_gender" placeholder="예) 남성 또는 여성로 입력하세요" > -->
-<!--                     				</td> -->
-<!--                     			</tr>                   		 -->
-<!--                     		</tbody> -->
-<!--                    		</table> -->
-<!--                     <br> -->
-<!--                     <div class="save"> -->
-<!--                    		<button type="submit" class="save_btn">저장</button> -->
-<!--                    	</div> -->
-<!--                     </form> -->
 					<!-- info table 끝 -->
                     </div>
 

@@ -27,25 +27,39 @@ public class professorService {
 	}
 
 	//교수정보입력 저장 
-	public Integer insert(String string, Map<String, Object> infoEnter) {
+	public Integer prinfo_save(Map<String, Object> infoEnter) {
 		return prDAO.prSave(infoEnter);
 	}
-	
-	
 
+	// 지원자 정보 불러오기
 	public List<HashMap<String, Object>> selectList() {
 		return prDAO.select();
 	}
 
-	// 면접점수 저장 
-	public Integer score(String string, Map<String, Object> scoreSave) {
-		return prDAO.result(scoreSave);
+	//교수 아이디 보내기
+	public Integer instr_user(Map<String, Object> infoEnter) {
+		return prDAO.userSave(infoEnter);
 	}
 
-	//본인정보수정 저장 
-	public Integer modify(String string, Map<String, Object> selfmodi) {
-		return prDAO.info_modify(selfmodi);
+	//본인정보 수정 
+	public Integer selfSave(Map<String, Object> selfmodi) {
+		return prDAO.selfModify(selfmodi);
 	}
+
+	//권한주기
+	public Integer test(professorDTO authdto) {
+		return prDAO.authgive(authdto);
+	}
+
+	//점수저장하기
+	public int resultpoint(List<HashMap<String,Integer>> res) {
+		return prDAO.result(res);
+	}
+
+	
+
+
+	
 
 	
 

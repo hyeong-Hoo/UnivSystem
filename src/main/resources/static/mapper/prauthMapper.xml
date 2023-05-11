@@ -7,20 +7,24 @@
     
     <!-- 지원자 정보 불러오기 -->
    	<select id="callin" resultType="HashMap">
-   		select appl_NO, CRCLM_CD, RECRT_YEAR, KORN_FLNM, GENDER_CD, grade, interview, avg, department from APPL_INFO;
+   		select appl_NO, CRCLM_CD, RECRT_YEAR, KORN_FLNM, GENDER_CD, grade, interview, avg, department, total from APPL_INFO;
    	</select>
-   	
-   	<!-- 평가 점수 저장  -->
-   	<insert id="resultScore" parameterType="HashMap">
-   		insert into APPL_INFO(interview, total)
-   		values (#{inter_score}, #{total_score});
-   	</insert>
 
 	<!-- 평가 점수 저장  -->
-<!-- 	<update id="resultScore" parameterType="HashMap"> -->
-<!-- 		update APPL_INFO set -->
-<!-- 		interview=#{inter_score}, total=#{total_score} -->
-<!-- 		where appl_no = #{appl_no}; -->
-<!-- 	</update> -->
+	<!-- 
+	<update id="resultScore" parameterType="list">
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+	update APPL_INFO set interview=#{item.inter_score}, total=grade+#{item.inter_score} where appl_NO = #{item.appl_no};
+		</foreach>
+	</update>
+	 -->
+	
+ <update id="resultScore" parameterType="java.util.List"> 
+  <foreach collection="list" item="item" index="index"> 
+    UPDATE 	APPL_INFO
+    SET		interview=#{item.inter_score}
+    WHERE 	appl_NO=#{item.appl_no}
+  </foreach> 
+</update>
 	
 	</mapper>

@@ -36,13 +36,18 @@
     </insert>
    	
    	
-   	
+   	<!-- 권한주기 -->
+   	<update id="INSTR_auth" parameterType="HashMap">
+   		update INSTR_INFO set
+   		ENDST_NO = #{authority}
+   		where INSTR_NO = #{pr_no};
+   	</update>
    	
    	<!-- 본인정보수정 수정 및 저장  -->
    	<update id="self_modify" parameterType="HashMap">
    		update INSTR_INFO set 
    		ENG_FLNM=#{name_en}, ADDR=#{roadAddrPart1}, DADDR=#{addrDetail}, GENDER=#{pr_gender}
-   		where ENG_FLNM, ADDR, DADDR, GENDER is null;
+   		where INSTR_NO=#{pr_no};
    	</update>
    	
     </mapper>

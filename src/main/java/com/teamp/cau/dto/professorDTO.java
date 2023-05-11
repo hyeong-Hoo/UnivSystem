@@ -1,20 +1,36 @@
-package com.teamp.cau.dto;
+package com.teamp.cau.dto; 
 
 import org.springframework.web.multipart.MultipartFile;
 
 public class professorDTO {
 
-	private String KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, ADDR, DADDR, GENDER, ENDST_NO, CRCLM_CD, 
-					GENDER_CD, department, INSTR_ID, INSTR_PW;
-	private int INSTR_NO, appl_NO, RECRT_YEAR, total, grade, interview;
-	private String MultipartFile;
-	
-	public String getMultipartFile() {
-		return MultipartFile;
+	private String KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, ADDR, DADDR, GENDER, CRCLM_CD, 
+					GENDER_CD, department, INSTR_ID, INSTR_PW, ENG_FLNM, ROLE_CODE;
+	public String getROLE_CODE() {
+		return ROLE_CODE;
 	}
 
-	public void setMultipartFile(String multipartFile) {
-		MultipartFile = multipartFile;
+	public void setROLE_CODE(String rOLE_CODE) {
+		ROLE_CODE = rOLE_CODE;
+	}
+
+	private int INSTR_NO, appl_NO, RECRT_YEAR, total, grade, ENDST_NO, interview;
+	private MultipartFile IMG_FILE;
+
+	public String getENG_FLNM() {
+		return ENG_FLNM;
+	}
+
+	public void setENG_FLNM(String eNG_FLNM) {
+		ENG_FLNM = eNG_FLNM;
+	}
+
+	public MultipartFile getIMG_FILE() {
+		return IMG_FILE;
+	}
+
+	public void setIMG_FILE(MultipartFile iMG_FILE) {
+		IMG_FILE = iMG_FILE;
 	}
 
 	public String getINSTR_ID() {
@@ -172,11 +188,12 @@ public class professorDTO {
 		GENDER = gENDER;
 	}
 
-	public String getENDST_NO() {
+	public int getENDST_NO() {
 		return ENDST_NO;
 	}
 
-	public void setENDST_NO(String eNDST_NO) {
+	public void setENDST_NO(int eNDST_NO) {
 		ENDST_NO = eNDST_NO;
 	}
+
 }
