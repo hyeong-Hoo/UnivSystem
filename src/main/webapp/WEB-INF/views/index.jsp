@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <head>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <meta charset="UTF-8">
@@ -15,7 +16,7 @@
    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
    crossorigin="anonymous">
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-    <title>SB Admin 2 - Dashboard</title>
+    <title>중앙대학교 - 학사관리페이지</title>
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -101,6 +102,7 @@ $(function() {
                    var btn = "<div class='tap'><span class='barmenu'"+"id="+menuid+"></span><input class='closebtn' type='button' value='x'"+"id="+btnid+"></div>";
                    var content = "<div class='testcontent'"+"id="+contentid+"></div>";
                    var close = '<input type="button" value="x" id="close">';
+                   $(".collapse").css("z-index", "200");
                    if($("#"+contentid).length){
     					$("#"+contentid).css("z-index", "100");
           			  $("#"+contentid).siblings().css("z-index", "10");
@@ -226,6 +228,7 @@ $(function() {
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
+                                       <c:if test="${not empty userRole and userRole == 'ADMIN'}">
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -233,18 +236,19 @@ $(function() {
                     <span>관리자관리</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="bg-white py-2 collapse-inner rounded" >
                         <h6 class="collapse-header">관리자관리</h6>
-                        <a class="collapse-item" href="buttons" id="1-1">코드관리</a>
+                        <a class="collapse-item"  id="1-1">코드관리</a>
                         <a class="collapse-item" href="cards" id="1-2">사용자정보 관리</a>
                     </div>
                 </div>
             </li>
-
+                        </c:if>
             <!-- Nav Item - Utilities Collapse Menu -->
+                           <c:if test="${not empty userRole and userRole == 'ADMIN'}">
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-fw fa-users"></i>
                     <span>학생관리</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -257,11 +261,13 @@ $(function() {
                     </div>
                 </div>
             </li>
+                        </c:if>
+            
               <!-- Nav Item - Utilities Collapse Menu -->
 <c:if test="${not empty userRole and userRole == 'STUDENT'}">
             <li class="nav-item" >
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStudents" aria-expanded="true" aria-controls="collapseStudents">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-fw fa-user"></i>
                     <span>학생메뉴</span>
                 </a>
                 <div id="collapseStudents" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -279,7 +285,7 @@ $(function() {
               <c:if test="${not empty userRole and userRole == 'PROFESSOR'}">
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProfessor" aria-expanded="true" aria-controls="collapseProfessor">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-fw fa-mortar-board"></i>
                     <span>교수메뉴</span>
                 </a>
                 <div id="collapseProfessor" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -294,14 +300,16 @@ $(function() {
             </li>
             </c:if>
             <!-- Nav Item - Pages Collapse Menu -->
+               <c:if test="${not empty userRole and userRole == 'ADMIN'}">
+            
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
+                    aria-expanded="true" aria-controls="collapsePages" style="z-index: 200;">
+                    <i class="fas fa-fw fa-check-square"></i>
                     <span>입시관리</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="bg-white py-2 collapse-inner rounded" style="z-index: 200;">
                         <h6 class="collapse-header">입시관리</h6>
                         <a class="collapse-item" id="5-1">수시 지원자 관리</a>
                         <a class="collapse-item" id="5-2">정시 지원자 관리</a>
@@ -314,12 +322,14 @@ $(function() {
                     </div>
                 </div>
             </li>
+</c:if>
 
             <!-- Nav Item - Charts -->
+              <c:if test="${not empty userRole and userRole == 'ADMIN'}">
             <li class="nav-item">
                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCharts"
                     aria-expanded="true" aria-controls="collapseCharts">
-                    <i class="fas fa-fw fa-folder"></i>
+                    <i class="fas fa-fw fa-cloud"></i>
                     <span>등록관리</span>
                 </a>
                    <div id="collapseCharts" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -336,11 +346,13 @@ $(function() {
 <!--                     <a class="collapse-item" id="20">등록금 결제</a> -->
 <!--                    </div> -->
             </li>
-
+            </c:if>
+            
+  <c:if test="${not empty userRole and userRole == 'ADMIN'}">
              <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProfessoredit" aria-expanded="true" aria-controls="collapseProfessoredit">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-fw fa-sitemap"></i>
                     <span>교직관리</span>
                 </a>
                 <div id="collapseProfessoredit" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -351,6 +363,7 @@ $(function() {
                     </div>
                 </div>
             </li>
+</c:if>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -415,12 +428,13 @@ $(function() {
                                     Settings
                                 </a>
                              
-                                    <form action="/logout" method="post">
-                                <div class="dropdown-divider"></div>
-       		 <a><button type="submit" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">Logout</button></a>
-        	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-   			 </form>
+                                  
+                               <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
                                 </a>
+<!--    			 </form> -->
                             </div>
                         </li>
 
@@ -463,21 +477,21 @@ $(function() {
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
+<!--     Logout Modal -->
+  
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">Ã</span>
-                    </button>
+                    <h5 class="modal-title" id="exampleModalLabel">로그아웃</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">X</button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">정말로 로그아웃을 하시겠습니까?</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login">Logout</a>
+                    <form action="/logout" method="post">
+                    <a><button type="submit" class="btn btn-primary" >Logout</button></a>
                 </div>
             </div>
         </div>

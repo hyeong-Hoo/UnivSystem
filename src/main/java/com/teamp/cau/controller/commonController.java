@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.teamp.cau.security.CustomAuthenticationToken;
 import com.teamp.cau.vo.UserVo;
+import com.teamp.cau.vo.UserVo.UserRoleEnum;
 
 @Controller
 public class commonController {
@@ -18,12 +19,13 @@ public class commonController {
 		UserVo userVo = ((CustomAuthenticationToken) authentication).getUserVo();
 		if (userVo != null) {
 			   String kornFlnm = userVo.getKORN_FLNM();
+			   UserRoleEnum userRole = userVo.getROLE_CODE();
 		Integer studNo = userVo.getSTUD_NO();
 		Integer instrNo = userVo.getINSTR_NO();
-		  System.err.println(userVo);
+			System.err.println(userVo);
 		    System.err.println(studNo);
 		    System.err.println(instrNo);
-
+		    model.addAttribute("userRole", userRole);
             model.addAttribute("kornFlnm", kornFlnm);
 
 		}
