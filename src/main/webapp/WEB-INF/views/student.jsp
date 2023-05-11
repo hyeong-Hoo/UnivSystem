@@ -59,12 +59,10 @@
 								+ '<td class="korzip" style="display:none;">' + info.zip + '</td>' 
 								+ '<td class="koradr" style="display:none;">' + info.addr + '</td>' 
 								+ '<td class="kordar" style="display:none;">' + info.daddr + '</td>' 
-								+ '<td class="photofile" style="display:none;">' + info.photo_FILE + '</td>'
-								
+								+ '<td class="photofile" style="display:none;">' + info.photo_FILE + '</td>'								
 								+ '</tr>';
-																			
+																	
 										
-
 								$('.table_body').append(str);
 														
 							
@@ -94,6 +92,7 @@
 			  $('#pic').html(imgTag);	
 
 			  // 입력란에 값을 채웁니다.
+			  
 			  $('#no').val(appl_NO);
 			  $('#name2').val(korn_FLNM);
 			  $('#age').val(age);
@@ -108,8 +107,7 @@
 			  $('#detailadr').val(daddr);
 			  
 			  // 나머지 입력란에도 마찬가지로 값을 채워줍니다.
-			  // ...
-
+		
 			});
 	});
 </script>
@@ -275,10 +273,11 @@ overflow: scroll;
 	<br>
 	<br> 
 	
-	학생 이름:
+	학생 이름
 	<input type="text" id="name">
 	<button type="button" id="searchStudent">검색</button>
 	<div class="scroll">
+	
 	<table class="table">
 		<thead>
 			<tr>
