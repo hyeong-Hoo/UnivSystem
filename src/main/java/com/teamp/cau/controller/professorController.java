@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.teamp.cau.dto.professorDTO;
 import com.teamp.cau.service.professorService;
+import com.teamp.cau.util.ConvertBinary;
 
 @Controller
 public class professorController {
@@ -24,11 +25,6 @@ public class professorController {
 	@Autowired
 	private professorService prService;
 	
-	// 메인페이지 
-	@GetMapping("/index")
-	public String test() {
-		return "index";
-	}
 	
 	
 	// 교수정보입력 페이지 
@@ -75,7 +71,7 @@ public class professorController {
 	public String self_save(@RequestParam("pr_no") String pr_no, @RequestParam("name_kr") String name_kr, 
 			@RequestParam("name_en") String name_en,@RequestParam("roadAddrPart1") String roadAddrPart1,@RequestParam("addrDetail") String addrDetail,
 			@RequestParam("pr_telno") String pr_telno,@RequestParam("pr_email") String pr_email,@RequestParam("pr_birth") String pr_birth,
-			@RequestParam("pr_gender") String pr_gender,@RequestParam("image") MultipartFile image) {
+			@RequestParam("pr_gender") String pr_gender,@RequestParam("image") MultipartFile image) throws Exception {
 
 	    ConvertBinary convert = new ConvertBinary();
 		Map<String, Object> selfmodi = new HashMap<>();

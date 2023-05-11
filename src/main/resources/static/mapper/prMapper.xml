@@ -31,8 +31,8 @@
     
     <!-- 교수정보 입력  -->
     <insert id="prinfo_save" parameterType="HashMap" >
-    	insert into INSTR_INFO(INSTR_NO, KORN_FLNM, CRCLM_CD, USER_BRDT, EML_ADDR, TELNO, INSTR_ID, INSTR_PW)
-    	values (#{pr_no}, #{pr_name}, #{pr_dep}, #{pr_birth}, #{pr_email}, #{pr_telno}, #{pr_id}, #{pr_pw});
+    	insert into INSTR_INFO(INSTR_NO, KORN_FLNM, CRCLM_CD, USER_BRDT, EML_ADDR, TELNO)
+    	values (#{pr_no}, #{pr_name}, #{pr_dep}, #{pr_birth}, #{pr_email}, #{pr_telno});
     </insert>
    	
    	

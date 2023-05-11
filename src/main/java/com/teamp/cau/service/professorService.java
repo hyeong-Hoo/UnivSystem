@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.teamp.cau.dao.professorDAO;
@@ -16,7 +18,7 @@ public class professorService {
 	@Autowired
 	private professorDAO prDAO;
 	
-   //private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+   private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 	// 교수정보 불러오기 
 	public List<professorDTO> prinfo() {
@@ -31,7 +33,7 @@ public class professorService {
 	//교수정보입력 저장 
 	public Integer prinfo_save(Map<String, Object> infoEnter) {
 		
-	//	infoEnter.put("pr_pw",passwordEncoder.encode(infoEnter.get("pr_pw")));
+		infoEnter.put("pr_pw",passwordEncoder.encode((CharSequence) infoEnter.get("pr_pw")));
 		return prDAO.prSave(infoEnter);
 	}
 
