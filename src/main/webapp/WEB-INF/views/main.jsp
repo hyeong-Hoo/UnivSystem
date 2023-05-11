@@ -74,8 +74,7 @@ function requestPay() {
           alert('이미 결제된 지원서입니다. 결제를 진행할 수 없습니다.');
         } else if (data === "cancelled") {
           alert('사용자가 결제를 취소하였습니다. 결제를 진행할 수 없습니다.');
-          scheduleService.updatePayment(KORN_FLNM, USER_BRDT, 0);
-
+          
         } else {
           alert('입력하신 정보와 일치하는 사용자 정보가 없습니다. 결제를 진행할 수 없습니다.');
         }
