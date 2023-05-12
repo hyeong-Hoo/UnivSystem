@@ -25,6 +25,12 @@ public class OccasionalService {
 	    }
 	}
 
+	public List<StudentDTO> occList(String KORN_FLNM) {
+		return occasionalDAO.occList(KORN_FLNM);
+	}
+	
+	
+
 
 
 }

@@ -12,10 +12,8 @@
    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
    rel="stylesheet"
    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-   crossorigin="anonymous">
-   
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-   
+   crossorigin="anonymous">   
+  
 
     <title>중앙대학교 - 학사관리페이지</title>
     <!-- Custom fonts for this template-->
@@ -38,7 +36,6 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
        
 
     
