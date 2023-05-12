@@ -12,20 +12,34 @@
    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
    rel="stylesheet"
    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-   crossorigin="anonymous">
-   
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-   
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+   crossorigin="anonymous">   
+  
+
     <title>중앙대학교 - 학사관리페이지</title>
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
+   
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"></script>
+      <!-- jquery CDN -->
+
+<!-- grid  -->
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+
+       
+
+    
+    
 <style type="text/css">
 
 span{
@@ -93,6 +107,7 @@ float: right;
 </style>    
 <script type="text/javascript">
 $(function() {
+	
 	
     if($("#menubar").children().length < 11){
     $(".collapse-item").click(function() {
@@ -189,6 +204,7 @@ $(function() {
     	alert("메뉴를 더 이상 추가할 수 없습니다.");
     }
     
+    
  });
 </script>
 
@@ -250,7 +266,7 @@ $(function() {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-users"></i>
-                    <span>학생관리</span>
+                    <span id="plz">학생관리</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -514,16 +530,7 @@ $(function() {
 
 
 
-<script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-      crossorigin="anonymous"></script>
-      <!-- jquery CDN -->
-<script src="https://code.jquery.com/jquery-3.6.4.js"
-	integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
-	crossorigin="anonymous"></script>
-<!-- grid  -->
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
 
 </body>
 </html>

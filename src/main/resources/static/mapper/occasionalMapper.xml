@@ -3,20 +3,22 @@
 
 <mapper namespace="com.teamp.cau.dao.OccasionalDAO">
 
-	<select id="data" resultType="com.teamp.cau.dto.StudentDTO">
+	<select id="occList" parameterType="com.teamp.cau.dto.StudentDTO" resultType="com.teamp.cau.dto.StudentDTO">
 
 		  SELECT *
   		  FROM APPL_INFO
-  		  WHERE RECRT_SCHDL_CD='2' AND payment='1'
+  		  WHERE KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%') AND RECRT_SCHDL_CD='2' AND payment='1'
 	   
 
 	</select>
 	
-	<update id="updateAssessment">ㅐ
+	<update id="updateOccasional">	
+	
 		UPDATE APPL_INFO SET
 		passed = #{passed}
 		WHERE appl_NO = #{appl_NO}
-	</update>
+		
+</update>
 
 
 

@@ -13,5 +13,10 @@ public interface OccasionalDAO {
 
 	List<StudentDTO> data();
 
+	void updateOccasional(StudentDTO occasional);
+
+	List<StudentDTO> occList(String KORN_FLNM);
+
+
 
 }

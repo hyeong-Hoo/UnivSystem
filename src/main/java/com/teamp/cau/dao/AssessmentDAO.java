@@ -12,11 +12,13 @@ import com.teamp.cau.dto.StudentDTO;
 @Mapper
 public interface AssessmentDAO {
 
-	List<StudentDTO> data();
+	List<StudentDTO> aplyList(String KORN_FLNM);
 
 	void updateAssessment(StudentDTO assessment);
 
 	Map<String, Object> selectPdf();
+
+	
 
 
 	

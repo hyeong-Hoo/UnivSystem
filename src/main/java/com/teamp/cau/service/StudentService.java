@@ -15,6 +15,7 @@ public class StudentService {
 	private StudentDAO studentDAO;
 
 	public List<PassDTO> studentList(String KORN_FLNM) {
+		
 	 return studentDAO.studentList(KORN_FLNM);
 	 
 	}
