@@ -292,7 +292,11 @@ $(function() {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">교수메뉴</h6>
                         <span class="collapse-item" id="4-1">개인정보 조회 및 수정</span>
+                        
+                                    <c:if test="${not empty userRole and userRole == 'PROFESSOR'}">
                         <span class="collapse-item" id="4-2">면접평가</span>
+                                    </c:if>
+                                    
                         <span class="collapse-item" id="4-3">강좌 개설</span>
                         <span class="collapse-item" id="4-4">학과 관리</span>
                         <span class="collapse-item" id="3-4">비밀번호변경</span>
