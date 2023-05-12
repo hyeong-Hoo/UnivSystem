@@ -43,9 +43,14 @@ $(function(){
 		$(this).parent().next().find(".test").val(totalScore);
 
 	});
-
-
+	$(document).ready(function(){
+		$("#disableButton").click(function(){
+			$("input[name='inter_score']").prop("readonly", true);
+		});
+	});
 });
+
+ 
 </script>
 <head>
     <meta charset="UTF-8">
@@ -305,7 +310,8 @@ $(function(){
                         		<td class="appl_department">${appl.department }</td>
                         		<td class="appl_grade" name="grade_score">${appl.grade }</td>
                         		<td class="appl_interview">
-                        		<input type="text" value="${appl.interview }" name="inter_score" class="score" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');" maxlength="2"></td>
+                        		<input type="number" value="${appl.interview }" name="inter_score" class="score" min="0" max="50"
+                        		oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');" maxlength="2" ></td>
                         		<td class="appl_total" >
                         		<input type="number" class="test" name="totalscore" value="${appl.total }"readonly="readonly"></td>
                         	</tr>
@@ -313,7 +319,7 @@ $(function(){
                         </tbody>
 					 </table>
 					 <br>
-					 <button type="submit" class="send_btn">저장</button>
+					 <button type="submit" class="send_btn" id="disableButton">저장</button>
                 	</form>
                 </div>
                 <!-- /.container-fluid -->

@@ -391,7 +391,7 @@ $(function(){
 			auth_test[i] = {"no" : prof_no , "auth" : prof_auth};
 		}
 		$.ajax({
-			url: "pr_info_auth",
+			url: "/pr_info_auth",
 			type : "post",
 			data : {"auth_test" : auth_test, "num" : num },
 			success : function(){

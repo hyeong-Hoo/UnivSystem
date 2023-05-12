@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,6 +25,11 @@ public class professorController {
 	@Autowired
 	private professorService prService;
 
+	@GetMapping("/pr_test")
+	public String test() {
+		return "pr_test";
+	}
+	
 	
 
 	// 교수정보입력 페이지
@@ -65,31 +71,31 @@ public class professorController {
 	}
 
 	// 교수본인정보 수정
-	@PostMapping("/pr_self")
-	public String self_save(@RequestParam("pr_no") String pr_no, @RequestParam("name_kr") String name_kr,
-			@RequestParam("name_en") String name_en, @RequestParam("roadAddrPart1") String roadAddrPart1,
-			@RequestParam("addrDetail") String addrDetail, @RequestParam("pr_telno") String pr_telno,
-			@RequestParam("pr_email") String pr_email, @RequestParam("pr_birth") String pr_birth,
-			@RequestParam("pr_gender") String pr_gender, @RequestParam("image") MultipartFile image) {
-
-		ConvertBinary convert = new ConvertBinary();
-		Map<String, Object> selfmodi = new HashMap<>();
-		selfmodi.put("pr_no", pr_no);
-		selfmodi.put("name_kr", name_kr);
-		selfmodi.put("name_en", name_en);
-		selfmodi.put("roadAddrPart1", roadAddrPart1);
-		selfmodi.put("addrDetail", addrDetail);
-		selfmodi.put("pr_telno", pr_telno);
-		selfmodi.put("pr_email", pr_email);
-		selfmodi.put("pr_birth", pr_birth);
-		selfmodi.put("pr_gender", pr_gender);
-		String images;
-		images = convert.convertBinary(image);
-		selfmodi.put("IMG_FILE", images);
-		System.out.println(selfmodi);
-		prService.selfSave(selfmodi);
-		return "self_modify";
-	}
+//	@PostMapping("/pr_self")
+//	public String self_save(@RequestParam("pr_no") String pr_no, @RequestParam("name_kr") String name_kr,
+//			@RequestParam("name_en") String name_en, @RequestParam("roadAddrPart1") String roadAddrPart1,
+//			@RequestParam("addrDetail") String addrDetail, @RequestParam("pr_telno") String pr_telno,
+//			@RequestParam("pr_email") String pr_email, @RequestParam("pr_birth") String pr_birth,
+//			@RequestParam("pr_gender") String pr_gender, @RequestParam("image") MultipartFile image) {
+//
+//		//ConvertBinary convert = new ConvertBinary();
+//		Map<String, Object> selfmodi = new HashMap<>();
+//		selfmodi.put("pr_no", pr_no);
+//		selfmodi.put("name_kr", name_kr);
+//		selfmodi.put("name_en", name_en);
+//		selfmodi.put("roadAddrPart1", roadAddrPart1);
+//		selfmodi.put("addrDetail", addrDetail);
+//		selfmodi.put("pr_telno", pr_telno);
+//		selfmodi.put("pr_email", pr_email);
+//		selfmodi.put("pr_birth", pr_birth);
+//		selfmodi.put("pr_gender", pr_gender);
+//		String images;
+//		//images = convert.convertBinary(image);
+//		//selfmodi.put("IMG_FILE", images);
+//		System.out.println(selfmodi);
+//		prService.selfSave(selfmodi);
+//		return "self_modify";
+//	}
 
 	// 교수정보 불러오기
 	@GetMapping("/pr_info")
@@ -119,16 +125,24 @@ public class professorController {
 
 	// 권한주기
 	@PostMapping("/pr_info_auth")
-	public String auth(@RequestParam("num") int num, @RequestParam HashMap<String, Object> autest) {
+	@ResponseBody
+	public String auth(@RequestParam HashMap<String, Object> autest, @RequestParam("num") int num) {
 		professorDTO authdto = new professorDTO();
+		System.out.println("DDDDDDDDDDDDD"+autest);
+		System.out.println("ㄷㄷㄷㄷㄷㄷ"+autest.get("auth_test[7][auth]"));
+		
 		for (int i = 0; i < num; i++) {
-			int pr_no = Integer.parseInt((String) autest.get("auth_test [" + i + "][no]"));
-			int authority = Integer.parseInt((String) autest.get("auth_test [" + i + "][auth]"));
-			authdto.setINSTR_NO(pr_no);
-			authdto.setENDST_NO(authority);
-			prService.test(authdto);
+			String pr_no = (String)autest.get("auth_test [" + i + "][no]");
 			System.out.println(pr_no);
+//			int pr_no = Integer.parseInt((String) autest.get("auth_test [" + i + "][no]"));
+//			int authority = Integer.parseInt((String) autest.get("auth_test [" + i + "][auth]"));
+			System.out.println("ㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+			//authdto.setINSTR_NO(pr_no);
+			//authdto.setENDST_NO(authority);
+			
+			prService.giveautest(authdto);
 		}
+		System.out.println(authdto);
 
 		return "redirect:/pr_info";
 	}
@@ -157,7 +171,31 @@ public class professorController {
 
 		}
 		int result_row = prService.resultpoint(list);
-//		
+
+		return "redirect:/pr_authority";
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //		for (int i = 0; i < interview.length; i++) {
 //			professorDTO dto = new professorDTO();
 //			if (interview[i] != "0" || interview[i] != null || interview[i] != "") {
@@ -166,29 +204,21 @@ public class professorController {
 //			}
 //			res.add(dto);
 //		}
-//		
 //		for (int i = res.size()-1;  i >= 0; i--) {
 //			if(res.get(i).getInterview() == 0) {
 //				res.remove(i);
 //			}
 //		}
-//		
-		// for (professorDTO d : res) {
-		// System.out.println(d.getAppl_NO() + ":::" + d.getInterview());
-		// }
-
-		professorDTO dto = new professorDTO();
-		System.out.println(req.getParameterValues("inter_score"));
-		for (int i = 0; i < appl_no.length; i++) {
-
-			// prService.scoreSave(dto);
-		}
-
+// for (professorDTO d : res) {
+// System.out.println(d.getAppl_NO() + ":::" + d.getInterview());
+// }
+//		professorDTO dto = new professorDTO();
+//		System.out.println(req.getParameterValues("inter_score"));
+//		for (int i = 0; i < appl_no.length; i++) {
+//
+//			 prService.scoreSave(dto);
+//		}
 //		scoreSave.put("inter_score", interview);
 //		scoreSave.put("totalscore", total);
 //		System.out.println(Arrays.toString());
 //		Integer interviewScore = prService.resultscore("resultScore", scoreSave);
-		return "redirect:/pr_authority";
-	}
-
-}

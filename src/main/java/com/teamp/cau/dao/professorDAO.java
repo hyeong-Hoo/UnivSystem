@@ -47,13 +47,18 @@ public class professorDAO {
 	}
 
 	//권한주기
-	public Integer authgive(professorDTO authdto) {
-		return sqlsession.update("INSTR_INFO.INSTR_auth", authdto);
-	}
+//	public Integer authgive(professorDTO authdto) {
+//		return sqlsession.update("INSTR_INFO.INSTR_auth", authdto);
+//	}
 
 	//점수 저장하기
 	public int result(List<HashMap<String,Integer>> list) {
 		return sqlsession.update("APPL_INFO.resultScore", list);
+	}
+
+	//권한주기
+	public Object givesave(professorDTO authdto) {
+		return sqlsession.update("INSTR_INFO.INSTR_auth", authdto);
 	}
 
 

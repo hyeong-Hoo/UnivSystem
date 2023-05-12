@@ -259,7 +259,7 @@ input{ height: 35px;}
           			<hr class="sidebar-divider">
           			
                     <div class="info_table">
-                    <form action="/pr_self" name="form" id="form" method="post">
+                    <form action="/pr_self" name="form" id="form" method="post" enctype="multipart/form-data">
                    
                     <div class="top_box">
                     	<ul>
