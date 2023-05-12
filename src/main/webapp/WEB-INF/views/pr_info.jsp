@@ -68,7 +68,7 @@ container-fluid{height: 100%;}
 						oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');"
 						value=${code_search }></li>
 					<li class="t3"><button class="search_btn" type="button">
-							<img alt="icon" src="img/search_icon.png" width="20" height="20">
+						<img alt="icon" src="img/search_icon.png" width="20" height="20">
 						</button></li>
 				</ul>
 			</form>
@@ -123,6 +123,12 @@ container-fluid{height: 100%;}
 	</div>
 	<!-- /.container-fluid -->
 	<br>
+	<!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 </body>
 <script>
 	$(function() {
