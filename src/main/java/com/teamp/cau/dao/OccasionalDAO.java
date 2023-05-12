@@ -13,5 +13,8 @@ public interface OccasionalDAO {
 
 	List<StudentDTO> data();
 
+	void updateOccasional(StudentDTO occasional);
+
+
 
 }

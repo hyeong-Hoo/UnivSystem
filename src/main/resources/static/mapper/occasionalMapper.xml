@@ -12,11 +12,13 @@
 
 	</select>
 	
-	<update id="updateAssessment">ㅐ
+	<update id="updateOccasional">	
+	
 		UPDATE APPL_INFO SET
 		passed = #{passed}
 		WHERE appl_NO = #{appl_NO}
-	</update>
+		
+</update>
 
 
 
