@@ -118,28 +118,18 @@ public class professorController {
 	}
 
 	// 권한주기
-	@PostMapping("/pr_info_auth")
-	@ResponseBody
-	public String auth(@RequestParam HashMap<String, Object> autest, @RequestParam("num") int num) {
-		professorDTO authdto = new professorDTO();
-		System.out.println("DDDDDDDDDDDDD"+autest);
-		System.out.println("ㄷㄷㄷㄷㄷㄷ"+autest.get("auth_test[7][auth]"));
-		
-		for (int i = 0; i < num; i++) {
-			String pr_no = (String)autest.get("auth_test [" + i + "][no]");
-			System.out.println(pr_no);
-//			int pr_no = Integer.parseInt((String) autest.get("auth_test [" + i + "][no]"));
-//			int authority = Integer.parseInt((String) autest.get("auth_test [" + i + "][auth]"));
-			System.out.println("ㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
-			//authdto.setINSTR_NO(pr_no);
-			//authdto.setENDST_NO(authority);
-			
-			prService.giveautest(authdto);
+		@PostMapping("/pr_info_auth")
+		@ResponseBody
+		public String auth(@RequestParam HashMap<String, Object> autest, @RequestParam("num") int num) {	
+			List<HashMap<String,Integer>> dto= new ArrayList<>();
+			for (int i = 0; i < num; i++) {
+				HashMap<String,Integer> map= new HashMap<>();
+				map.put("INSTR_NO", Integer.parseInt((String) autest.get("auth_test[" + i + "][no]")));
+				map.put("ENDST_NO", Integer.parseInt((String) autest.get("auth_test[" + i + "][auth]")));
+				dto.add(map);}
+			prService.giveautest(dto);
+			return "redirect:/pr_info";
 		}
-		System.out.println(authdto);
-
-		return "redirect:/pr_info";
-	}
 
 	// 면접평가 불러오기
 	@GetMapping("/pr_authority")

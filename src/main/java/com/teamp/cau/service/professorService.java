@@ -58,9 +58,10 @@ public class professorService {
 	}
 
 	//권한주기  
-	public Object giveautest(professorDTO authdto) {
+	public int giveautest(List<HashMap<String, Integer>> authdto) {
 		return prDAO.givesave(authdto);
 	}
+
 
 	
 

@@ -34,14 +34,16 @@
     	insert into INSTR_INFO(INSTR_NO, KORN_FLNM, CRCLM_CD, USER_BRDT, EML_ADDR, TELNO)
     	values (#{pr_no}, #{pr_name}, #{pr_dep}, #{pr_birth}, #{pr_email}, #{pr_telno});
     </insert>
-   	
-   	
-   	<!-- 권한주기 -->
-   	<update id="INSTR_auth" parameterType="HashMap">
-   		update INSTR_INFO set
-   		ENDST_NO = #{authority}
-   		where INSTR_NO = #{pr_no};
-   	</update>
+
+
+	<!-- 권한주기 -->
+	<update id="INSTR_auth">
+		<foreach collection="list" item="qqq" separator=";">
+			update INSTR_INFO set ENDST_NO =#{qqq.ENDST_NO} where
+			INSTR_NO=#{qqq.INSTR_NO}
+		</foreach>
+		;
+	</update>
    	
    	<!-- 본인정보수정 수정 및 저장  -->
    	<update id="self_modify" parameterType="HashMap">
