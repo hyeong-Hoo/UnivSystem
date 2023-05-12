@@ -264,7 +264,7 @@ $(function() {
                         </c:if>
             
               <!-- Nav Item - Utilities Collapse Menu -->
-<%-- <c:if test="${not empty userRole and userRole == 'STUDENT'}"> --%>
+<c:if test="${not empty userRole and userRole == 'STUDENT'}">
             <li class="nav-item" >
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStudents" aria-expanded="true" aria-controls="collapseStudents">
                     <i class="fas fa-fw fa-user"></i>
@@ -280,7 +280,7 @@ $(function() {
                     </div>
                 </div>
             </li>
-<%-- </c:if> --%>
+</c:if>
               <!-- Nav Item - Utilities Collapse Menu -->
               <c:if test="${not empty userRole and userRole == 'PROFESSOR'}">
             <li class="nav-item">
@@ -295,6 +295,8 @@ $(function() {
                         <span class="collapse-item" id="4-2">면접평가</span>
                         <span class="collapse-item" id="4-3">강좌 개설</span>
                         <span class="collapse-item" id="4-4">학과 관리</span>
+                        <span class="collapse-item" id="3-4">비밀번호변경</span>
+                        
                     </div>
                 </div>
             </li>
