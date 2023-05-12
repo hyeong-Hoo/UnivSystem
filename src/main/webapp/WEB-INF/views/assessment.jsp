@@ -18,10 +18,6 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 </head>
-
-
-
-
 <body>
 	<br>
 	<h2>정시 지원자 관리</h2>

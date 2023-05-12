@@ -63,6 +63,7 @@ font-size: 12px;
 }
 
 .contentbox{
+padding-top: 20px;
 width: 100%;
 height:570px;
 position: relative;
