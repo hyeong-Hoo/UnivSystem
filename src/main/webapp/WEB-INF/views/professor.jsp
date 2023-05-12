@@ -84,10 +84,10 @@ li {
 	margin: auto;
 }
 
-input {
-	height: 35px;
-	width: 100%;
-}
+/* input { */
+/* 	height: 35px; */
+/* 	width: 100%; */
+/* } */
 
 .save_btn {
 	background-color: #3E74C7;
@@ -183,6 +183,12 @@ input {
 	</div>
 	<!-- End of Main Content -->
 	<br>
+	<!-- Bootstrap core JavaScript-->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="js/sb-admin-2.min.js"></script>
 </body>
 
 </html>

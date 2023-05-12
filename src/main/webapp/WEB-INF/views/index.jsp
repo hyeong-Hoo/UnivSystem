@@ -264,7 +264,7 @@ $(function() {
                         </c:if>
             
               <!-- Nav Item - Utilities Collapse Menu -->
-<c:if test="${not empty userRole and userRole == 'STUDENT'}">
+<%-- <c:if test="${not empty userRole and userRole == 'STUDENT'}"> --%>
             <li class="nav-item" >
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStudents" aria-expanded="true" aria-controls="collapseStudents">
                     <i class="fas fa-fw fa-user"></i>
@@ -280,7 +280,7 @@ $(function() {
                     </div>
                 </div>
             </li>
-</c:if>
+<%-- </c:if> --%>
               <!-- Nav Item - Utilities Collapse Menu -->
               <c:if test="${not empty userRole and userRole == 'PROFESSOR'}">
             <li class="nav-item">

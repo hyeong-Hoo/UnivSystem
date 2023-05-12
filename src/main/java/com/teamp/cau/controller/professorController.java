@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.teamp.cau.dto.professorDTO;
 import com.teamp.cau.service.professorService;
+import com.teamp.cau.util.ConvertBinary;
 
 @Controller
 public class professorController {
@@ -69,9 +70,9 @@ public class professorController {
 			@RequestParam("name_en") String name_en, @RequestParam("roadAddrPart1") String roadAddrPart1,
 			@RequestParam("addrDetail") String addrDetail, @RequestParam("pr_telno") String pr_telno,
 			@RequestParam("pr_email") String pr_email, @RequestParam("pr_birth") String pr_birth,
-			@RequestParam("pr_gender") String pr_gender, @RequestParam("image") MultipartFile image) {
+			@RequestParam("pr_gender") String pr_gender, @RequestParam("image") MultipartFile image) throws Exception {
 
-		//ConvertBinary convert = new ConvertBinary();
+		ConvertBinary convert = new ConvertBinary();
 		Map<String, Object> selfmodi = new HashMap<>();
 		selfmodi.put("pr_no", pr_no);
 		selfmodi.put("name_kr", name_kr);
@@ -83,8 +84,8 @@ public class professorController {
 		selfmodi.put("pr_birth", pr_birth);
 		selfmodi.put("pr_gender", pr_gender);
 		String images;
-		//images = convert.convertBinary(image);
-		//selfmodi.put("IMG_FILE", images);
+		images = convert.convertBinary(image);
+		selfmodi.put("IMG_FILE", images);
 		System.out.println(selfmodi);
 		prService.selfSave(selfmodi);
 		return "self_modify";

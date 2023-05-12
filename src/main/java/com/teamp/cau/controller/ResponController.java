@@ -31,7 +31,15 @@ public class ResponController {
 		    result="/student/stuinfo";
 		}  else if(test2.equals("3-4")) { //학생 - 비밀번호변경
 		    result="/update";
-		} else if(test2.equals("5-1")) { //수시 지원자 관리
+		}  else if(test2.equals("4-1")) { //교수 - 개인 정보 조회 및 수정
+		    result="/self_modify";
+		}   else if(test2.equals("4-2")) { //교수 - 면접평가
+		    result="/pr_authority";
+		}   else if(test2.equals("6-1")) { //교직관리 - 교수관리
+		    result="/professor";
+		}   else if(test2.equals("6-2")) { //교직관리 - 교수권한
+		    result="/pr_info";
+		}  else if(test2.equals("5-1")) { //수시 지원자 관리
 		    result="/occasional";
 		} else if(test2.equals("5-2")) { //정시 지원자 관리
 		    result="/assessment";

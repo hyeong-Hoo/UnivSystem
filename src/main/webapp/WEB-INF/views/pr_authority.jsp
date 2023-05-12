@@ -19,7 +19,7 @@
 table {color: black;}
 th {text-align: center; background-color: #a2bfdd; border: solid 0.5px;}
 td {text-align: center;}
-input {width: 100%;}
+/* input {width: 100%;} */
 .send_btn {background-color: #3E74C7; color: white; border-radius: 3px; height: 30px; width: 60px;}
 .container-fluid {height: 100%;}
 .test {border: none; text-align: center;}
