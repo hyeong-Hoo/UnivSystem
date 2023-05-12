@@ -26,4 +26,26 @@
 		WHERE RECRT_YEAR = #{RECRT_YEAR } AND RECRT_SCHDL_CD = #{RECRT_SCHDL_CD }
 	</insert>
 	
+<!-- 	결제 매퍼 -->
+	
+	<select id="paymentList" parameterType="com.teamp.cau.dto.StudentDTO" resultType="com.teamp.cau.dto.StudentDTO">
+    SELECT *        
+    FROM APPL_INFO
+    WHERE KORN_FLNM = #{param1} AND USER_BRDT = #{param2}
+   </select>
+
+	<update id="updatePayment">
+		UPDATE APPL_INFO 
+		SET payment = 1 
+		WHERE KORN_FLNM=#{param1} AND USER_BRDT=#{param2} AND payment=0
+		
+	</update>
+	
+	<update id="updatePayments">
+		UPDATE APPL_INFO 
+		SET payment = 0 
+		WHERE KORN_FLNM=#{param1} AND USER_BRDT=#{param2} AND payment=1
+		
+	</update>
+	
 </mapper>

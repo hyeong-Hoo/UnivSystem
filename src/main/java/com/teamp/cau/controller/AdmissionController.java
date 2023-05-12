@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -53,6 +54,43 @@ public class AdmissionController {
 			 }
 		return mv;
 	}
+	
+//	결제 시스템 컨트롤러
+	
+	@ResponseBody
+	@GetMapping("/pmss")	
+	public String payments(@RequestParam("KORN_FLNM") String KORN_FLNM, @RequestParam("USER_BRDT") String USER_BRDT) {
+		
+		try {
+		    // payment 값 조회
+		    int payment = scheduleService.paymentList(KORN_FLNM, USER_BRDT);
+
+		    if (payment == 0) { // payment 값이 0일 경우에만 업데이트
+		        if (scheduleService.checkPayment(KORN_FLNM, USER_BRDT, payment)) {
+		            scheduleService.updatePayment(KORN_FLNM, USER_BRDT, payment);
+		            return "success";
+		        } else {
+		            return "failed";
+		        }
+		    } else if (payment == 1) { // payment 값이 1일 경우에는 결제를 막고 실패를 반환
+		        return "blocked";
+		    } else {
+		        // 결제 취소
+		        scheduleService.updatePayments(KORN_FLNM, USER_BRDT, payment);
+		        return "cancelled";
+		    }
+		} catch (NullPointerException e) {
+		    return "failed";
+		} catch (Exception e) {
+		    // 결제 실패 시 payment를 1에서 0으로 변경
+		    scheduleService.updatePayments(KORN_FLNM, USER_BRDT, 1);
+		    return "failed";
+		}
+	}
+		
+	
+	
+	
 	@GetMapping("/Admission")
 	public String Admission(){
 		return "Admission";

@@ -3,11 +3,10 @@
 
 <mapper namespace="com.teamp.cau.dao.StudentDAO">
 	
-	<select id="studentList" parameterType="com.teamp.cau.dto.StudentDTO" resultType="com.teamp.cau.dto.StudentDTO">
+	<select id="studentList" parameterType="com.teamp.cau.dto.PassDTO" resultType="com.teamp.cau.dto.PassDTO">
 	
-		SELECT APPL_NO, KORN_FLNM, USER_BRDT, GENDER_CD, EML_ADDR, TELNO, REL_TELNO,
-	        REL_CD, ZIP, ADDR, DADDR, AGE, PHOTO_FILE
-	    FROM APPL_INFO
+		SELECT *
+	    FROM STUD_INFO
 		WHERE KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
 	
 	</select>
