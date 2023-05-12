@@ -52,4 +52,12 @@
    		where INSTR_NO=#{pr_no};
    	</update>
    	
+   	
+   	
+   	<select id="getEndstNoByInstrNo" resultType="int" parameterType="int">
+		SELECT ENDST_NO
+		FROM INSTR_INFO
+		WHERE INSTR_NO = #{instrNo}
+	</select>
+   	
     </mapper>

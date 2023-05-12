@@ -293,7 +293,7 @@ $(function() {
                         <h6 class="collapse-header">교수메뉴</h6>
                         <span class="collapse-item" id="4-1">개인정보 조회 및 수정</span>
                         
-                                    <c:if test="${not empty userRole and userRole == 'PROFESSOR'}">
+                                    <c:if test="${endstNo == '1'}">
                         <span class="collapse-item" id="4-2">면접평가</span>
                                     </c:if>
                                     

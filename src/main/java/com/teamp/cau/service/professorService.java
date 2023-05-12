@@ -62,8 +62,10 @@ public class professorService {
 		return prDAO.givesave(authdto);
 	}
 
-
 	
+	  public Integer getEndstNoByInstrNo(Integer instrNo) {
+	        return prDAO.getEndstNoByInstrNo(instrNo);
+	    }
 
 
 	
