@@ -46,7 +46,7 @@
    	<!-- 본인정보수정 수정 및 저장  -->
    	<update id="self_modify" parameterType="HashMap">
    		update INSTR_INFO set 
-   		ENG_FLNM=#{name_en}, ADDR=#{roadAddrPart1}, DADDR=#{addrDetail}, GENDER=#{pr_gender}, IMG_FILE =#{IMG_FILE}
+   		EML_ADDR=#{pr_email},TELNO=#{pr_telno}, ENG_FLNM=#{name_en}, ADDR=#{roadAddrPart1}, DADDR=#{addrDetail}, GENDER=#{pr_gender}, IMG_FILE =#{IMG_FILE}
    		where INSTR_NO=#{pr_no};
    	</update>
    	

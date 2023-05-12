@@ -52,14 +52,14 @@ public class professorService {
 		return prDAO.selfModify(selfmodi);
 	}
 
-	//권한주기
-	public Integer test(professorDTO authdto) {
-		return prDAO.authgive(authdto);
-	}
-
 	//점수저장하기
 	public int resultpoint(List<HashMap<String,Integer>> res) {
 		return prDAO.result(res);
+	}
+
+	//권한주기  
+	public Object giveautest(professorDTO authdto) {
+		return prDAO.givesave(authdto);
 	}
 
 	
