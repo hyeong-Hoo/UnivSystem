@@ -24,14 +24,7 @@ public class professorController {
 
 	@Autowired
 	private professorService prService;
-
-	@GetMapping("/pr_test")
-	public String test() {
-		return "pr_test";
-	}
 	
-	
-
 	// 교수정보입력 페이지
 	@GetMapping("/professor")
 	public String pro_write() {
@@ -71,31 +64,31 @@ public class professorController {
 	}
 
 	// 교수본인정보 수정
-//	@PostMapping("/pr_self")
-//	public String self_save(@RequestParam("pr_no") String pr_no, @RequestParam("name_kr") String name_kr,
-//			@RequestParam("name_en") String name_en, @RequestParam("roadAddrPart1") String roadAddrPart1,
-//			@RequestParam("addrDetail") String addrDetail, @RequestParam("pr_telno") String pr_telno,
-//			@RequestParam("pr_email") String pr_email, @RequestParam("pr_birth") String pr_birth,
-//			@RequestParam("pr_gender") String pr_gender, @RequestParam("image") MultipartFile image) {
-//
-//		//ConvertBinary convert = new ConvertBinary();
-//		Map<String, Object> selfmodi = new HashMap<>();
-//		selfmodi.put("pr_no", pr_no);
-//		selfmodi.put("name_kr", name_kr);
-//		selfmodi.put("name_en", name_en);
-//		selfmodi.put("roadAddrPart1", roadAddrPart1);
-//		selfmodi.put("addrDetail", addrDetail);
-//		selfmodi.put("pr_telno", pr_telno);
-//		selfmodi.put("pr_email", pr_email);
-//		selfmodi.put("pr_birth", pr_birth);
-//		selfmodi.put("pr_gender", pr_gender);
-//		String images;
-//		//images = convert.convertBinary(image);
-//		//selfmodi.put("IMG_FILE", images);
-//		System.out.println(selfmodi);
-//		prService.selfSave(selfmodi);
-//		return "self_modify";
-//	}
+	@PostMapping("/pr_self")
+	public String self_save(@RequestParam("pr_no") String pr_no, @RequestParam("name_kr") String name_kr,
+			@RequestParam("name_en") String name_en, @RequestParam("roadAddrPart1") String roadAddrPart1,
+			@RequestParam("addrDetail") String addrDetail, @RequestParam("pr_telno") String pr_telno,
+			@RequestParam("pr_email") String pr_email, @RequestParam("pr_birth") String pr_birth,
+			@RequestParam("pr_gender") String pr_gender, @RequestParam("image") MultipartFile image) {
+
+		//ConvertBinary convert = new ConvertBinary();
+		Map<String, Object> selfmodi = new HashMap<>();
+		selfmodi.put("pr_no", pr_no);
+		selfmodi.put("name_kr", name_kr);
+		selfmodi.put("name_en", name_en);
+		selfmodi.put("roadAddrPart1", roadAddrPart1);
+		selfmodi.put("addrDetail", addrDetail);
+		selfmodi.put("pr_telno", pr_telno);
+		selfmodi.put("pr_email", pr_email);
+		selfmodi.put("pr_birth", pr_birth);
+		selfmodi.put("pr_gender", pr_gender);
+		String images;
+		//images = convert.convertBinary(image);
+		//selfmodi.put("IMG_FILE", images);
+		System.out.println(selfmodi);
+		prService.selfSave(selfmodi);
+		return "self_modify";
+	}
 
 	// 교수정보 불러오기
 	@GetMapping("/pr_info")
@@ -195,7 +188,7 @@ public class professorController {
 
 
 
-
+// test 
 //		for (int i = 0; i < interview.length; i++) {
 //			professorDTO dto = new professorDTO();
 //			if (interview[i] != "0" || interview[i] != null || interview[i] != "") {
