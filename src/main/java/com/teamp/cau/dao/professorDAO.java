@@ -19,8 +19,8 @@ public class professorDAO {
 	private SqlSession sqlsession;
 
 	// 교수정보 검색 
-	public List<professorDTO> search(HashMap<String,String> map){
-		return sqlsession.selectList("INSTR_INFO.search",map);
+	public List<Map<String, Object>> search(professorDTO dto){
+		return sqlsession.selectList("INSTR_INFO.search",dto);
 	}
 	
 	//교수정보 입력 저장

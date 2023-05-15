@@ -12,17 +12,17 @@
     </select>
     
     <!-- 교수정보 검색 -->
-    <select id="search" parameterType="HashMap" resultType="com.teamp.cau.dto.professorDTO">
+    <select id="search" parameterType="com.teamp.cau.dto.professorDTO" resultType="HashMap">
     	select * from INSTR_INFO
     		<choose>
-    			<when test="name_search != null and code_search != null">
-    				where korn_flnm like '%${name_search}%' and crclm_cd like '%${code_search}%';
+    			<when test="KORN_FLNM != 'all' and CRCLM_CD != 'all'">
+    				where korn_flnm like CONCAT('%',#{KORN_FLNM },'%') and crclm_cd like CONCAT('%',#{CRCLM_CD },'%');
     			</when>
-    			<when test="name_search != null and (code_search == null or code_search == '')">
-    				where korn_flnm like '%${name_search}%';
+    			<when test="KORN_FLNM != 'all' and CRCLM_CD == 'all'">
+    				where korn_flnm like CONCAT('%',#{KORN_FLNM },'%');
     			</when>
-    			<when test="(name_search == null or name_search =='') and code_search != null">
-    			where crclm_cd like '%${code_search}%';
+    			<when test="KORN_FLNM == 'all' and CRCLM_CD != 'all'">
+    			where crclm_cd like CONCAT('%',#{CRCLM_CD },'%');
     			</when>
     			<otherwise>
 				</otherwise>

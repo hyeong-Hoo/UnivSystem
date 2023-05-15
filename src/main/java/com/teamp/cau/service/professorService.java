@@ -26,8 +26,8 @@ public class professorService {
 	}
 
 	//교수정보 검색 
-	public List<professorDTO> selectList(HashMap<String, String> search) {
-		return prDAO.search(search);
+	public List<Map<String, Object>> selectList(professorDTO dto) {
+		return prDAO.search(dto);
 	}
 
 	//교수정보입력 저장 

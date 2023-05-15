@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.teamp.cau.dto.RecruitDTO;
 import com.teamp.cau.dto.professorDTO;
+import com.teamp.cau.service.RecruitService;
 import com.teamp.cau.service.professorService;
 import com.teamp.cau.util.ConvertBinary;
 
@@ -25,6 +27,9 @@ public class professorController {
 
 	@Autowired
 	private professorService prService;
+	
+	@Autowired
+	private RecruitService recruitService;
 	
 	// 교수정보입력 페이지
 	@GetMapping("/professor")
@@ -96,25 +101,24 @@ public class professorController {
 	public ModelAndView prinfo(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("pr_info");
 		List<professorDTO> list = prService.prinfo();
+		List<RecruitDTO> depart = recruitService.depart();
 		mv.addObject("list", list);
+		mv.addObject("depart",depart);
 		return mv;
 	}
 
 	// 교수정보 검색
-	@PostMapping("/pr_info_search")
-	public ModelAndView search(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("pr_info");
-		HashMap<String, Object> search = new HashMap<>();
-		String name_search = request.getParameter("name_search");
-		String code_search = request.getParameter("code_search");
-//		System.out.println(name_search);
-//		System.out.println(code_search);
-		HashMap<String, String> map = new HashMap<>();
-		map.put("name_search", name_search);
-		map.put("code_search", code_search);
-		List<professorDTO> list = prService.selectList(map);
-		mv.addObject("list", list);
-		return mv;
+	@GetMapping("/pr_info_search")
+	@ResponseBody
+	public List<Map<String, Object>> search(@RequestParam("code") String code, @RequestParam("name") String name) {
+		if(name == "") {
+			name = "all";
+		}
+		professorDTO dto = new professorDTO();
+		dto.setCRCLM_CD(code);
+		dto.setKORN_FLNM(name);
+		List<Map<String, Object>> list = prService.selectList(dto);
+		return list;
 	}
 
 	// 권한주기

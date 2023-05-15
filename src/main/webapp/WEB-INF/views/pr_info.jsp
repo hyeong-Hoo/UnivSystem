@@ -62,21 +62,25 @@ container-fluid{height: 100%;}
 				<!-- searchbox -->
 				<ul class="box">
 					<li class="t1">교수이름 &nbsp; <input type="text"
-						name="name_search" id="name_search" value=${name_search }></li>
-					<li class="t2">학과코드 &nbsp; <input type="text"
-						name="code_search" id="code_search"
-						oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');"
-						value=${code_search }></li>
+						name="name_search" id="name_search"></li>
+					<li class="t2">학과코드 &nbsp; 
+					<select name="code_search" id="code_search">
+					<option value="all">학과 선택</option>
+					<c:set var="code" value="1"></c:set>
+					<c:forEach items="${depart }" var="de">
+					<option value="${code }"> ${de.DEPARTMENT } </option>
+					<c:set var="code" value="${code+1 }"></c:set>
+					</c:forEach>
+					</select> </li>
 					<li class="t3"><button class="search_btn" type="button">
 						<img alt="icon" src="img/search_icon.png" width="20" height="20">
 						</button></li>
 				</ul>
-			</form>
+			
 		</div>
 		<br>
 
 		<!-- 페이지 리스트  -->
-		<form action="/pr_info_save" name="save" id="save" method="post">
 			<table border="1">
 				<thead>
 					<tr>
@@ -119,7 +123,6 @@ container-fluid{height: 100%;}
 			</table>
 			<br>
 			<button type="button" id="authbtn" class="auth_btn">권한주기</button>
-		</form>
 	</div>
 	<!-- /.container-fluid -->
 	<br>
@@ -133,9 +136,39 @@ container-fluid{height: 100%;}
 <script>
 	$(function() {
 		$(".search_btn").click(function() {
-			$("#code_search").val();
-			$("#name_search").val();
-			$("#alt").submit();
+			var code = $("#code_search").val();
+			var name = $("#name_search").val();
+			$.ajax({
+				url : "/pr_info_search",
+				type : "GET",
+				data : {"code" : code, "name" : name},
+				datatype : "json",
+				success : function(data){
+					if($("#authlist").children().length){
+						$("#authlist").empty();
+					}
+					$.each(data,function(i, list){
+						var tableList = '<tr>'
+										+'<td class="pr_no">'+list.INSTR_NO+'</td>'
+										+'<td class="major">'+list.CRCLM_CD +'</td>'
+										+'<td class="name">'+list.KORN_FLNM +'</td>'
+										+'<td class="birth">'+list.USER_BRDT +'</td>'
+										+'<td class="email">'+list.EML_ADDR +'</td>'
+										+'<td class="telno">'+list.TELNO +'</td>'
+										+'<td class="addr">'+list.ADDR +'</td>'
+										+'<td class="detail_addr">'+list.DADDR +'</td>'
+										+'<td class="gender">'+list.GENDER +'</td>'
+										+'<td class="authority">'
+										+'<select name="auth" id="auth">'
+										+'<option id="0" value="0">없음</option>'
+										+'<option id="1" value="1">권한</option>'
+										+'</select></td>'
+										+'</tr>'
+										
+										$("#authlist").append(tableList);
+					})		
+				}
+			});
 		});
 
 		$("#authbtn").click(
