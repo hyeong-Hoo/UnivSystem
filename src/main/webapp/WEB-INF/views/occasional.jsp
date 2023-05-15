@@ -48,12 +48,22 @@ $(function() {
 						      '<option value="합격">합격</option>' +
 						      '<option value="불합격">불합격</option>';
 						    var selected = info.passed;
+						    var depart = "";
+						    if(info.crclm_CD == 1){
+						 		depart = "기계과";
+						 	}else if(info.crclm_CD == 2){
+						 		depart = "컴퓨터공학과";
+						 	}else if(info.crclm_CD == 3){
+						 		depart = "전기전자과";
+						 	}else{
+						 		depart = "화학공학과";
+						 	}
 						 
 			                
 						    var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
 						    	+ '<th scope="row" class="occno">' + info.appl_NO + '</th>' 
 						    	+ '<td class="occname">' + info.korn_FLNM + '</td>' 
-						    	+ '<td class="occdep">' + info.department + '</td>'
+						    	+ '<td class="occdep">' + depart + '</td>'
 						    	+ '<td class="occgrade">' + info.grade + '</td>'
 						    	+ '<td class="occinter">' + info.interview + '</td>'
 						    	+ '<td class="occavg">' + info.avg + '</td>'
