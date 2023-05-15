@@ -9,8 +9,7 @@
 	rel="stylesheet"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <title>모집 일정 관리</title>
 <script type="text/javascript">
 $(function(){
@@ -100,7 +99,43 @@ $(function(){
  			$(this).parent().parent().find('.end').val(start);
  			$(this).parent().parent().find('.end').attr('min',start);
  			
- 		})
+ 		});
+ 		$("#scheduleAdd").on('click',function(){
+ 			if($("#scheduleBody").children().first().attr('class') == 'trAdd'){
+ 					$(document).on('click','#addSubmit', function(){
+ 	 					//여기에 ajax로 insert하고 목록 불러오기
+ 	 				});
+ 			}else{
+ 				if($("#scheduleBody").children().length && confirm("항목을 추가하시겠습니까?")){		 			
+ 					var date = new Date();
+ 	 				var year = date.getFullYear();
+ 	 				var addList = '<tr class="trAdd">'
+								+ '<td class="scheduleYear">'+ year +'</td>'
+								+ '<td><select class="addselect" id="scheduleCategory">'
+								+ '<option value="1">정시</option>'
+								+ '<option value="2">수시</option>'
+								+ '</select></td>'
+								+ '<td><input class="day start" type="date"></td>'
+								+ '<td><input class="day end" type="date"></td>'
+								+ '<td><input type="button" id="addDel" value="취소"></td>'
+								+ '</tr>';
+					$("#scheduleBody").prepend(addList);
+ 					$("#scheduleAdd").attr('value','추가완료');
+ 	 				$("#scheduleAdd").attr('id','addSubmit');
+ 				
+ 				}else{
+ 				alert("항목 추가를 취소하셨습니다.");
+ 				}
+ 			}
+ 		});
+ 		$(document).on("click","#addDel",function(){
+ 			if(confirm("항목 추가를 취소하시겠습니까?")){
+ 			$(this).parent().parent().empty(); 				
+ 			}
+ 		});
+ 		$(document).on("click","#scheduleSubmit", function(){
+ 			
+ 		});
 });
 </script>
 <style type="text/css">
@@ -180,6 +215,7 @@ width: 100%;
 		<option>${y.RECRT_YEAR}</option>
 	</c:forEach>
 </select>
+<input type="button" value="추가" class="btn" id="scheduleAdd">
 <input type="button" value="저장" class="btn" id="scheduleSave">
 <input type="button" value="조회" class="btn save" id="scheduleCheck">
 </div>

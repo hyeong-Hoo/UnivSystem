@@ -90,6 +90,16 @@ $(function(){
 		
 	});
 	
+	$("#recruitAdd").click(function(){
+		if($("#recruitBody").children().length && confirm("항목을 추가하시겠습니까?")){
+			alert("네");
+		}else if($("#recruitBody").children().length == 0){
+				alert("없잖아요");
+			}else{
+				alert("항목 추가를 취소하셨습니다.");
+			}
+	});
+	
 });
 </script>
 <style type="text/css">
@@ -177,6 +187,7 @@ border-right: 1px solid silver;
 			<option value="1">정시</option>
 			<option value="2">수시</option>
 		</select>
+		<button type="button" class="btn" id="recruitAdd">추가</button>
 		<button type="button" class="btn" id="recruitSave">저장</button>
 		<button type="button" class="btn" id="recruitCheck">조회</button>
 	</div>
