@@ -79,13 +79,13 @@ font-size: 12px;
 .contentbox{
 padding-top: 20px;
 width: 100%;
-height:570px;
+height:90vh;
 position: relative;
 background-color: white;
 }
 .testcontent{
 width: inherit;
-height: 570px;
+height: 90vh;
 position: absolute;
 background-color: white;
 overflow: scroll;

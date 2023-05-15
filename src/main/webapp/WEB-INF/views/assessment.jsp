@@ -17,10 +17,6 @@
 	crossorigin="anonymous">
 
 </head>
-<<<<<<< HEAD
-=======
-
-
 <script>
 $(function() {
 	$('#searchStudent').click(function() {
@@ -153,7 +149,7 @@ function openPdf(pdfData) {
 border-bottom: solid 1px black;
 }
 </style>
->>>>>>> refs/heads/fighting2
+
 <body>
 	<br>
 	<h3 class="top">정시 지원자 관리</h3>	
