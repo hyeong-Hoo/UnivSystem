@@ -45,9 +45,7 @@ public class ResponController {
 		    result="/assessment";
 		} else if(test2.equals("5-3")) { //모집요강
 		    result="/schedule";
-		} else if(test2.equals("20")) { //결제시스템
-		    result="/payment";
-		}
+		} 
 
 		return result;
 	}

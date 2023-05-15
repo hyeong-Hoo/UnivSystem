@@ -962,7 +962,7 @@ window.onclick = function(event) {
   var modal = document.getElementById("myModal");
   var findPassModal = document.getElementById("findPassModal");
   var findResultModal = document.getElementById("myFindResultModal");
-  
+  var findResultPassModal = document.getElementById("myFindResultPassModal");
   if (event.target == modal) {
     closeModal();
   }
@@ -972,6 +972,9 @@ window.onclick = function(event) {
   if (event.target == findResultModal) {
     closeresultModal();
   }
+  if (event.target == findResultPassModal) {
+	    closeresultModal();
+	  }
 }
 
 </script>

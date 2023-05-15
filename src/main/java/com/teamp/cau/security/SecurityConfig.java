@@ -74,12 +74,11 @@ public class SecurityConfig {
     	http.csrf().disable();
         http
             .authorizeRequests()
-            	.antMatchers("/**").permitAll()
-                .antMatchers("/main","/login","/loginpage", "/findid" , "/findpass", "/resultid" ,"/resultpass" ,"/admission","/admission2").permitAll()
-                .antMatchers("/First","/First3","/signup" , "userListPage").permitAll()
-                .antMatchers("/css/**","/js/**","/vendor/**" ,"/img/**" , "/images/**").permitAll()
+//            	.antMatchers("/**").permitAll()
+                .antMatchers("/main", "/findid" , "/findpass", "/resultid" ,"/resultpass" ,"/admission","/admission2" , "/payment").permitAll()
+                .antMatchers("/css/**","/js/**","/vendor/**" ,"/img/**" , "/images/**" , "/mapper/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/First3").hasAnyRole("STUDENT","PROFESSOR")
+                .antMatchers("/index/**").hasAnyRole("STUDENT","PROFESSOR","ADMIN")
                 .anyRequest().authenticated();
 		// login 설정
         http
