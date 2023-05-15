@@ -93,11 +93,30 @@ public class AdmissionController {
 	
 	@GetMapping("/Admission")
 	public String Admission(){
+		
+		
 		return "Admission";
 	}
 	@GetMapping("/Admission2")
-	public String Admission2(){
-		return "Admission2";
+	public ModelAndView Admission2(){
+		ModelAndView mv = new ModelAndView("Admission2");
+		ScheduleDTO dto = new ScheduleDTO();
+		LocalDate now = LocalDate.now();
+		int year = now.getYear();
+		dto.setRECRT_YEAR(Integer.toString(year));
+		List<Map<String, Object>> list = scheduleService.scheduleCheck(dto);
+		for(int i=0; i<list.size(); i++) {
+			if(list.get(i).get("SCHDL_NAME").equals("정시")) {
+				Map<String, Object> asList = list.get(i);
+				mv.addObject("as",asList);
+			}else {
+				Map<String, Object> ocList = list.get(i);
+				mv.addObject("oc",ocList);
+			}
+		}
+		mv.addObject("list",list);
+		
+		return mv;
 	}
 	@PostMapping("/Admission2")
 	public String Admission3(Stud_infoDTO dto)throws Exception{

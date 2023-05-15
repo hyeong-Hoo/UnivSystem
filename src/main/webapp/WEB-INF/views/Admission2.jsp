@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html>
 <html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,7 +10,29 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 $(function(){
-
+	
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth()+1;
+	var day = date.getDate();
+	if(month < 10){
+		month = '0'+month;
+	}
+	if(day < 10){
+		day = '0'+day;
+	}
+	var today = year+"-"+month+"-"+day;
+	if("${as.SCHDL_START}" <= today && today <= "${as.SCHDL_END_DT}"){
+		$("#SAT").attr('disabled', false);
+	}else{
+		$("#SAT").attr('disabled', true);
+	}
+	if("${oc.SCHDL_START}" <= today && today <= "${oc.SCHDL_END_DT}"){
+		$("#ED").attr('disabled', false);
+	}else{
+		$("#ED").attr('disabled', true);
+	}
+	
     $(".add-btn").click(function(){
         if(!$('input[name="newtranschcek"]').is(":checked")){
             alert("신편입구분을 체크를 확인해주세요");
@@ -71,6 +94,7 @@ $(function(){
              $("#sta").attr("disabled",true);
          }
     });
+ 
 });
 
 </script>
