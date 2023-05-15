@@ -20,11 +20,16 @@
 <script>
 $(function() {
 	$('#searchStudent').click(function() {
+		var departmentFilter = $('#filter_department').val();
+		  var passedFilter = $('#passedFilter').val();
+		  
 				$.ajax({
 					url : '/asm',
 					type : 'GET',
 					data : {
 						"KORN_FLNM" : $('#name').val()
+						'CRCLM_CD': departmentFilter,
+					    'PASSED': passedFilter
 					},
 					dataType : "json",
 					success : function(data) {
@@ -60,6 +65,9 @@ $(function() {
 						 	}else{
 						 		depart = "화학공학과";
 						 	}
+						    
+						    if ((!departmentFilter || info.crclm_CD == departmentFilter) &&
+						            (!passedFilter || info.passed == passedFilter)) {
 
 						    var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
 						    	+ '<th scope="row" class="asmno">' + info.appl_NO + '</th>' 
@@ -79,6 +87,7 @@ $(function() {
 																
 									
 							$('.table_body').append(str);
+						    }
 													
 						
 						});
@@ -154,6 +163,32 @@ function openPdf(pdfData) {
 </script>
 
 <style>
+.sear {
+  margin: 20px auto;
+  text-align: center;
+  padding: 20px;
+  background-color: #AAB3C4;
+  color: white;
+}
+
+.sear input,
+.sear select {	
+  margin: 10px;
+}
+
+.sear button {
+  margin-top: 20px;
+}
+#resetBtn1,
+#saveBtn1{
+margin-left: 15px;
+
+}
+.table_body,
+.thead-dark{
+text-align: center;
+margin-top: 40px;
+}
 .top{
 border-bottom: solid 1px black;
 }
@@ -164,22 +199,41 @@ border-bottom: solid 1px black;
 	<h3 class="top">정시 지원자 관리</h3>	
 	<br>
 	
-	학생 이름
+	<div class="sear">
+
+학생 이름
 	<input type="text" id="name">
-	<button type="button" id="searchStudent">검색</button>
 	
-	<table id="asstable" style="width: 100%">
-		<thead>
+<select id="filter_department">
+  <option value="">지원학과</option>
+  <option value="1">기계과</option>
+  <option value="2">컴퓨터공학과</option>
+  <option value="3">전기전자과</option>
+  <option value="4">화학공학과</option>
+</select>
+
+<select id="passedFilter">
+  <option value="">구분</option>
+  <option value="지원자">지원자</option>
+  <option value="서류합격">서류합격</option>
+  <option value="불합격">불합격</option>
+</select>
+
+	<button type="button" id="searchStudent">검색</button>
+
+</div>
+	<table id="asstable" style="width: 100%" class="table table-hover" >
+		<thead class="thead-dark">
 			<tr>
-				<th>번호</th>
-				<th>이름</th>
-				<th>지원학과</th>
-				<th>언어</th>
-				<th>수학</th>
-				<th>영어</th>
-				<th>평균</th>
-				<th>제출서류</th>
-				<th>구분</th>
+				<th scope="col">번호</th>
+				<th scope="col">이름</th>
+				<th scope="col">지원학과</th>
+				<th scope="col">언어</th>
+				<th scope="col">수학</th>
+				<th scope="col">영어</th>
+				<th scope="col">평균</th>
+				<th scope="col">제출서류</th>
+				<th scope="col">구분</th>
 
 
 

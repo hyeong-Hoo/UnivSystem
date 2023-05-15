@@ -20,16 +20,24 @@
 <script>
 $(function() {
 	$('#searchStudent2').click(function() {
+		  var departmentFilter = $('#filter_department').val();
+		  var passedFilter = $('#passedFilter').val();
+
+
 				$.ajax({
 					url : '/ocs',
 					type : 'GET',
 					data : {
-						"KORN_FLNM" : $('#name2').val()
+						'KORN_FLNM' : $('#name2').val(),
+					    'CRCLM_CD': departmentFilter,
+					    'PASSED': passedFilter
+
+					  
 					},
 					dataType : "json",
 					success : function(data) {
 						
-						  $('.table_body').empty(); // 기존 테이블 데이터를 지웁니다.
+						  $('.table_body2').empty(); // 기존 테이블 데이터를 지웁니다.
 						  $('#occno').val('');
 						  $('#occname').val('');
 						  $('#occdep').val('');
@@ -45,9 +53,10 @@ $(function() {
 						    
 
 						    var options = '<option value="지원자">지원자</option>' +
-						      '<option value="합격">합격</option>' +
+						      '<option value="서류합격">서류합격</option>' +
 						      '<option value="불합격">불합격</option>';
 						    var selected = info.passed;
+						    
 						    var depart = "";
 						    if(info.crclm_CD == 1){
 						 		depart = "기계과";
@@ -59,7 +68,9 @@ $(function() {
 						 		depart = "화학공학과";
 						 	}
 						 
-			                
+						    if ((!departmentFilter || info.crclm_CD == departmentFilter) &&
+						            (!passedFilter || info.passed == passedFilter)) {
+
 						    var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
 						    	+ '<th scope="row" class="occno">' + info.appl_NO + '</th>' 
 						    	+ '<td class="occname">' + info.korn_FLNM + '</td>' 
@@ -77,6 +88,7 @@ $(function() {
 																
 									
 							$('.table_body2').append(str);
+						    }
 													
 						
 						});
@@ -150,25 +162,80 @@ function openPdf(pdfData) {
 
 
 </script>
+<style>
+.sear {
+  margin: 20px auto;
+  text-align: center;
+  padding: 20px;
+  background-color: #AAB3C4;
+  color: white;
+}
+
+.sear input,
+.sear select {	
+  margin: 10px;
+}
+
+.sear button {
+  margin-top: 20px;
+}
+#resetBtn2,
+#saveBtn2{
+margin-left: 15px;
+
+}
+.table_body2,
+.thead-dark{
+text-align: center;
+margin-top: 40px;
+}
+.top1{
+border-bottom: solid 1px black;
+
+}
+</style>
+
 
 
 <body>
+<br>
+	<h3 class="top1">수시 지원자 관리</h3>	
+	<br>
+<div class="sear">
 
 학생 이름
 	<input type="text" id="name2">
+	
+<select id="filter_department">
+  <option value="">지원학과</option>
+  <option value="1">기계과</option>
+  <option value="2">컴퓨터공학과</option>
+  <option value="3">전기전자과</option>
+  <option value="4">화학공학과</option>
+</select>
+
+<select id="passedFilter">
+  <option value="">구분</option>
+  <option value="지원자">지원자</option>
+  <option value="서류합격">서류합격</option>
+  <option value="불합격">불합격</option>
+</select>
+
 	<button type="button" id="searchStudent2">검색</button>
 
-<table id="occtable" style="width: 100%">
-        <thead>
+</div>
+
+		<table id="occtable" style="width: 100%" class="table table-hover">
+        <thead class="thead-dark">
             <tr>
-                <th>번호</th>
-                <th>이름</th>  
-                <th>지원학과</th>   
-                <th>내신등급점수</th>        
-                <th>면접점수</th>
-                <th>평균</th>                                
-                <th>제출서류</th>
-                <th>구분</th>
+                <th scope="col">번호</th>
+                <th scope="col">이름</th>  
+                <th scope="col">지원학과</th>   
+                <th scope="col">내신등급점수</th>        
+                <th scope="col">면접점수</th>
+                <th scope="col">평균</th>                                
+                <th scope="col">제출서류</th>
+                <th scope="col">구분</th>
                 
                 
                
