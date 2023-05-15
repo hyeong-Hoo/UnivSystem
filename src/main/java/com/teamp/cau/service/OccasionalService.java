@@ -18,6 +18,18 @@ public class OccasionalService {
 	public List<StudentDTO> data() {
 		return occasionalDAO.data() ;
 	}
+	
+	public void updateOccasional(List<StudentDTO> occaisonals) {
+	    for (StudentDTO occasional : occaisonals) {
+	        occasionalDAO.updateOccasional(occasional);
+	    }
+	}
+
+	public List<StudentDTO> occList(String KORN_FLNM) {
+		return occasionalDAO.occList(KORN_FLNM);
+	}
+	
+	
 
 
 
