@@ -75,7 +75,7 @@ public class SecurityConfig {
         http
             .authorizeRequests()
 //            	.antMatchers("/**").permitAll()
-                .antMatchers("/main", "/findid" , "/findpass", "/resultid" ,"/resultpass" ,"/admission","/admission2" , "/payment").permitAll()
+                .antMatchers("/main", "/findid" , "/findpass", "/resultid" ,"/resultpass" ,"/Admission","/Admission2" , "/payment","/pmss").permitAll()
                 .antMatchers("/css/**","/js/**","/vendor/**" ,"/img/**" , "/images/**" , "/mapper/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/index/**").hasAnyRole("STUDENT","PROFESSOR","ADMIN")
