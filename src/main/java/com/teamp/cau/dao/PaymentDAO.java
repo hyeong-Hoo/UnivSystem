@@ -18,6 +18,8 @@ public interface PaymentDAO {
 
 	StudentDTO paymentList(String KORN_FLNM, String USER_BRDT);
 
+	void failPayment(String kORN_FLNM, String uSER_BRDT, int payment);
+
 
 }
 	

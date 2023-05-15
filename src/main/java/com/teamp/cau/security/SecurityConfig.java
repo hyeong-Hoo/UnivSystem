@@ -74,8 +74,8 @@ public class SecurityConfig {
     	http.csrf().disable();
         http
             .authorizeRequests()
-//            	.antMatchers("/**").permitAll()
-                .antMatchers("/main", "/findid" , "/findpass", "/resultid" ,"/resultpass" ,"/Admission","/Admission2" , "/payment","/pmss").permitAll()
+            	.antMatchers("/**").permitAll()
+                .antMatchers("/main", "/findid" , "/findpass", "/resultid" ,"/resultpass" ,"/Admission","/Admission2" , "/payment","/pmss","/pms").permitAll()
                 .antMatchers("/css/**","/js/**","/vendor/**" ,"/img/**" , "/images/**" , "/mapper/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/index/**").hasAnyRole("STUDENT","PROFESSOR","ADMIN")

@@ -16,7 +16,12 @@
 		
 	</update>
 	
-
+<update id="failPayment">
+		UPDATE APPL_INFO 
+		SET payment = 0 
+		WHERE KORN_FLNM=#{param1} AND USER_BRDT=#{param2} AND payment=1
+		
+	</update>
 	
 	
 

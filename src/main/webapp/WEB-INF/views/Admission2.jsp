@@ -330,14 +330,14 @@ $(function(){
                 </tr>
                 <tr class="tr1">
                     <th class="thee" rowspan="8">최종학력</th>
-                    <th class="t1">&emsp;<input type="radio" name="s_final" value="전문대학 졸업(예정)">&nbsp;전문대학 졸업(예정)</th>
+                    <th class="t1">&emsp;<input type="radio" name="s_final" value="고등학교 졸업">&nbsp;고등학교 졸업</th>
                 </tr>
+                <tr class="tr1"><th class="t1">&emsp;<input type="radio" name="s_final" value="전문대학 졸업(예정)">&nbsp;전문대학 졸업(예정)</th></tr>
                 <tr class="tr1"><th class="t1">&emsp;<input type="radio" name="s_final" value="4년제 대학교 수료(재학,재적)">&nbsp;4년제 대학교 수료(재학,재적)</th></tr>
                 <tr class="tr1"><th class="t1">&emsp;<input type="radio" name="s_final" value="4년제 대학교 졸업(예정)">&nbsp;4년제 대학교 졸업(예정)</th></tr>
                 <tr class="tr1"><th class="t1">&emsp;<input type="radio" name="s_final" value="대학원 석사졸업">&nbsp;대학원 석사 졸업</th></tr>
                 <tr class="tr1"><th class="t1">&emsp;<input type="radio" name="s_final" value="대학원 박사졸업">&nbsp;대학원 박사 졸업</th></tr>
                 <tr class="tr1"><th class="t1">&emsp;<input type="radio" name="s_final" value="학점은행제">&nbsp;학점은행제</th></tr>
-                <tr class="tr1"><th class="t1">&emsp;<input type="radio" name="s_final" value="독학사">&nbsp;독학사</th></tr>
                 <tr>
                 <th class="thee1">
                     <ul>

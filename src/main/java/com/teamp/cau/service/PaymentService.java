@@ -31,7 +31,10 @@ public class PaymentService {
 		    return studentDTO.getPayment();
 		}
 
-
+	 public void failPayment(String KORN_FLNM, String USER_BRDT, int payment) {
+			paymentDAO.failPayment(KORN_FLNM, USER_BRDT, payment);
+			
+		}
 	
 
 }

@@ -43,7 +43,7 @@ function requestPay() {
     var payment = 0; // payment 변수 선언 및 초기화
 
     $.ajax({
-      url: "/pmss",
+      url: "/pms",
       data: { KORN_FLNM: name, USER_BRDT: birthdate },
       success: function(data) {
         if (data === "success") { // 수정된 부분                    // 결제 진행
@@ -68,6 +68,25 @@ function requestPay() {
               var msg = '결제에 실패하였습니다.';
               msg += '에러내용 : ' + rsp.error_msg;
               alert(msg);
+              
+              
+              $.ajax({
+            	  url: "/failpay",
+            	  data: { KORN_FLNM: name, USER_BRDT: birthdate },
+            	  success: function(response) {
+            	    if (response === "fail") {
+            	      console.log("payment 값을 0으로 업데이트하였습니다.");
+            	      // 추가로 필요한 처리를 진행할 수 있습니다.
+            	    } else {
+            	      console.error("payment 값을 업데이트하는데 실패하였습니다.");
+            	    }
+            	  },
+            	  error: function() {
+            	    console.error("서버와의 통신 중 오류가 발생하였습니다.");
+            	  }
+            	});
+
+              
             }
           });
         } else if (data === "blocked") {
@@ -78,6 +97,10 @@ function requestPay() {
         } else {
           alert('입력하신 정보와 일치하는 사용자 정보가 없습니다. 결제를 진행할 수 없습니다.');
         }
+        
+      
+        
+        
       }
     });
 
@@ -756,7 +779,6 @@ cursor: pointer;
 		 					
 		 					이름&emsp;<input type="text" name="apyname" class="contenText" id="apyname"><br>
 		 					생년월일 <input type="text" name="apybirthdate" class="contenText" id="apybirthdate" placeholder="ex)19981102">
-		 					<button onclick="requestPay()">결제하기</button> 
 		 					
 		 					
 		 				</span>
@@ -764,7 +786,7 @@ cursor: pointer;
 		 		</div>
 		 		</div>
 		 		<div class="popup-foot"><!--하단 버튼 -->
-		 			<span class="pop-btn confirm" id="pay_confirm">확인</span>
+		 			<span class="pop-btn confirm" id="pay_confirm" onclick="requestPay()">결제하기</span>
         			<span class="pop-btn close" id="pay_close">창 닫기</span>
 		 		</div>
 		 	</div>

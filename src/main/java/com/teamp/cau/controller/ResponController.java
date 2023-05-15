@@ -19,9 +19,9 @@ public class ResponController {
 	@PostMapping("/tester")
 	public String tester(@RequestParam("id") String test2 ) {
 		String result = null;
-		if(test2.equals("2-1")) { //1차필터
+		if(test2.equals("2-1")) { //합격자 조회
 		    result="/student";
-		} else if(test2.equals("2-2")) { //합격관리
+		} else if(test2.equals("2-2")) { //학적부여관리
 		    result="/pass";
 		} else if(test2.equals("2-3")) { //입학정원관리
 		    result="/get_stud";

@@ -337,10 +337,6 @@ $(function() {
                         <a class="collapse-item" id="5-1">수시 지원자 관리</a>
                         <a class="collapse-item" id="5-2">정시 지원자 관리</a>
                         <a class="collapse-item" id="5-3">모집요강</a>
-                        <a class="collapse-item" id="5-4">모집일 관리</a>
-                        <a class="collapse-item" id="5-5">입학학생관리</a>
-                        <a class="collapse-item" href="blank">총원합격관리</a>
-                        <a class="collapse-item" href="blank">합격확정관리</a>
                         
                     </div>
                 </div>
