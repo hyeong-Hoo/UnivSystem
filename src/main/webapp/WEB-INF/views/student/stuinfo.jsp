@@ -215,7 +215,10 @@ $('.add-btn').click(function() {
             cache : false,
             processData: false,
             contentType: false,
-            data: formData     
+            data: formData,     
+            success: function(response) {
+				alert("수정을 완료하였습니다.");
+            }
         });
     }
 });
