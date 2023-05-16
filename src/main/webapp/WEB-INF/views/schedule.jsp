@@ -118,15 +118,12 @@ $(function(){
  	 						alert("날짜를 입력해주세요.");
  	 						
  	 					}else{
- 	 						alert("왜 안돼");
  	 						$.ajax({
  	 							url : '/addSch',
  	 							type : 'POST',
- 	 							dataType : 'json',
  	 							data : {'year' : schYear, 'cd' : schCate, 'start' : schStr, 'end' : schEnd},
  	 							success : function(result){
- 	 								let AddResult = JSON.parse(result);
- 	 								if(AddResult == "fail"){
+ 	 								if(result == "fail"){
  	 									alert("중복된 모집 일정입니다.");
  	 								}else{
  	 									var date = new Date();
@@ -144,6 +141,7 @@ $(function(){
  	 					            						+ '</tr>';
  	 					             						$("#scheduleBody").append(tableList);
  	 									});
+ 	 									alert("저장 완료");
  	 								}
  	 							}
  	 						});

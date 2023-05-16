@@ -76,6 +76,7 @@ public class ScheduleController {
 		int result = scheduleService.result(dto);
 		
 		if(result == 0) {
+			dto.setRECRT_YEAR("all");
 		List<Map<String, Object>> list = scheduleService.scheduleCheck(dto);
 		return list;
 		}else{
