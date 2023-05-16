@@ -215,7 +215,7 @@ border-bottom: solid 1px black;
 <select id="passedFilter">
   <option value="">구분</option>
   <option value="지원자">지원자</option>
-  <option value="서류합격">서류합격</option>
+  <option value="합격">합격</option>
   <option value="불합격">불합격</option>
 </select>
 

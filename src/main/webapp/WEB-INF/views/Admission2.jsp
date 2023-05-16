@@ -294,7 +294,7 @@ $(function(){
             <table class="table2">
                             <tr class="photo">
                                 <th id="p_btn"><div class="imge_size" id="image_container" ></div></th>
-                                <td><div class="file_div">사진파일크기는<br><h1>3x4</h1><br>사이즈를 사용해주세요<br></div><input type="file" id="image"name="image" accept="image/*" onchange="setThumbnail(event);"/></td>
+                                <td><div class="file_div">사진파일크기는<br><h1>3x4</h1><br><b>사진파일은 jpg로 하시길 바랍니다</b><br></div><input type="file" id="image"name="image" accept="image/*" onchange="setThumbnail(event);"/></td>
                                 <td class="t1" colspan="2">&emsp;<img src="./images/img3.png" alt="증명사진"></td>
                             </tr>
                             <tr class="tr1">

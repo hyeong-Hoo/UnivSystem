@@ -46,14 +46,32 @@
 							  $('#studadr').val('');
 							  
 							$.each(data, function(i, info) {
+								
+							 	var depart = "";
+							    if(info.crclm_CD == 1){
+							 		depart = "기계과";
+							 	}else if(info.crclm_CD == 2){
+							 		depart = "컴퓨터공학과";
+							 	}else if(info.crclm_CD == 3){
+							 		depart = "전기전자과";
+							 	}else{
+							 		depart = "화학공학과";
+							 	}
+							    var category = "";
+							    if(info.recrt_SCHDL_CD == 1){
+							    	category = "정시";
+							 	}else if(info.recrt_SCHDL_CD == 2){
+							 		category = "수시";
+							 	}
+
 
 								var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
 								+ '<th scope="row" class="stuno">' + info.student_ID	+ '</th>' 
 								+ '<td class="stuname">' + info.korn_FLNM + '</td>' 
 								+ '<td class="stubrdt" style="display:none;">' + info.user_BRDT + '</td>'
 								+ '<td class="stuage" style="display:none;">' + info.age + '</td>'
-								+ '<td class="stucat" style="display:none;">' + info.category + '</td>'
-								+ '<td class="studep">' + info.department + '</td>'
+								+ '<td class="stucat" style="display:none;">' + category + '</td>'
+								+ '<td class="studep">' + depart + '</td>'
 								+ '<td class="stugen" style="display:none;">' + info.gender_CD + '</td>'
 								+ '<td class="stutel" style="display:none;">' + info.telno + '</td>'
 								+ '<td class="stuemtel" style="display:none;">' + info.rel_TELNO + '</td>'
