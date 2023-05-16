@@ -18,18 +18,20 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function() {
-		$('#searchStudent').click(
-				function() {
+		$('#searchStudent').click(function() {		
+
 					$.ajax({
 						url : '/info',
 						type : 'GET',
 						data : {
-							"KORN_FLNM" : $('#name').val()
+							'KORN_FLNM' : $('#name').val()					
+							
 						},
 						dataType : "json",
 						success : function(data) {
 							
 							  $('.table_body').empty(); // 기존 테이블 데이터를 지웁니다.
+							  $('#pic').empty();
 							  $('#stuno').val('');
 							  $('#stuname').val('');
 							  $('#stubrdt').val('');
@@ -44,7 +46,10 @@
 							  $('#stuzip').val('');
 							  $('#stuadr').val('');
 							  $('#studadr').val('');
+							  $('#pic').val('');
+
 							  
+														  
 							$.each(data, function(i, info) {
 								
 							 	var depart = "";
@@ -57,13 +62,15 @@
 							 	}else{
 							 		depart = "화학공학과";
 							 	}
+							    
 							    var category = "";
 							    if(info.recrt_SCHDL_CD == 1){
 							    	category = "정시";
 							 	}else if(info.recrt_SCHDL_CD == 2){
 							 		category = "수시";
 							 	}
-
+							    
+							   							    
 
 								var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
 								+ '<th scope="row" class="stuno">' + info.student_ID	+ '</th>' 
@@ -85,6 +92,7 @@
 																	
 										
 								$('.table_body').append(str);
+							   
 														
 							
 							});
@@ -111,6 +119,7 @@
 			  var addr = $(this).find('.stuadr').text();
 			  var daddr = $(this).find('.studadr').text();
 			  var pic = $(this).find('.photofile').text();
+			  
 			  var imgTag = '<img src="data:image/jpeg;base64,' + pic + '" />';
 			  $('#pic').html(imgTag);	
 
@@ -295,9 +304,9 @@ overflow: scroll;
       
     
     </div>
+        </form>
+    
     </div>        
-    </form>
-    </div>
     
   
       
@@ -305,10 +314,12 @@ overflow: scroll;
 	
 	<br>
 	<br> 
-	
+
 	학생 이름
-	<input type="text" id="name">
+	<input type="text" id="name">	
 	<button type="button" id="searchStudent">검색</button>
+	
+	
 	<div class="scroll">
 	
 	<table class="table">
@@ -339,7 +350,7 @@ overflow: scroll;
 
 
 
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<!-- JavaScript Bundle with Popper -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
