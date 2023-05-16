@@ -63,6 +63,11 @@ public class professorDAO {
 	}
 
 
+	//교수정보 불러오기 
+		public Object infoload(professorDTO dto) {
+			sqlsession.selectOne("list.selfload", dto);
+			return sqlsession.selectOne("list.selfload", dto);
+		}
 
 
 

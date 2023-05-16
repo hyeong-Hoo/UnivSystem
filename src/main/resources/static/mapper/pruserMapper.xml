@@ -5,6 +5,13 @@
     
     <mapper namespace="USER_INFO">
     
+    <!-- 교수정보 불러오기 -->
+    <select id="selfload" resultType="com.teamp.cau.dto.professorDTO">
+    	select INSTR_INFO
+    	from USER_INFO
+    	where INSTR_NO=#{pr_no};
+    </select>
+    
     <!-- 교수아이디 넘기기 -->
     <insert id="instr_user">
     	insert into USER_INFO(INSTR_NO, TELNO, EML_ADDR, USER_BRDT, KORN_FLNM, USER_ID, PSWD, ROLE_CODE )

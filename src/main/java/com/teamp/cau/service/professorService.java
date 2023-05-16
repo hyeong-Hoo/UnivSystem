@@ -67,6 +67,10 @@ public class professorService {
 	        return prDAO.getEndstNoByInstrNo(instrNo);
 	    }
 
+	//로그인 정보 불러오기 
+		public Object infoload(professorDTO dto) {
+			return prDAO.infoload(dto);
+		}
 
 	
 

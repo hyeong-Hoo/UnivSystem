@@ -63,10 +63,18 @@ public class professorController {
 		return "professor";
 	}
 
+
 	// 교수본인정보 수정 불러오기
 	@GetMapping("/self_modify")
-	public String modify() {
-		return "self_modify";
+	public ModelAndView modify() {
+		professorDTO dto = new professorDTO();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String USER_NO = authentication.getName(); // "user_NO" 컬럼에서 사용자 이름을 가져옴
+		dto.setUSER_NO(USER_NO);
+		prService.infoload(dto);
+		ModelAndView mv = new ModelAndView("self_modify");
+		mv.addObject("dto", dto);
+		return mv;
 	}
 
 	// 교수본인정보 수정

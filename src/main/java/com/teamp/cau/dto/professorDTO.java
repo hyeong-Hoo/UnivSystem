@@ -14,7 +14,15 @@ public class professorDTO {
 		ROLE_CODE = rOLE_CODE;
 	}
 
-	private int INSTR_NO, appl_NO, RECRT_YEAR, total, grade, ENDST_NO, interview, RECRT_SCHDL_CD;
+	private int INSTR_NO, appl_NO, RECRT_YEAR, total, grade, ENDST_NO, interview, RECRT_SCHDL_CD, USER_NO;
+	public int getUSER_NO() {
+		return USER_NO;
+	}
+
+	public void setUSER_NO(int uSER_NO) {
+		USER_NO = uSER_NO;
+	}
+
 	public int getRECRT_SCHDL_CD() {
 		return RECRT_SCHDL_CD;
 	}
