@@ -34,4 +34,16 @@
 			SET APPL_NUM = #{APPL_NUM }
 			WHERE RECRT_YEAR = #{RECRT_YEAR } AND RECRT_SCHDL_CD = #{RECRT_SCHDL_CD } AND DEPARTMENT = #{DEPARTMENT }
 	</update>
+	
+	<select id="result" parameterType="com.teamp.cau.dto.RecruitDTO" resultType="int">
+			SELECT COUNT(*)
+			FROM CRCLM_INFO
+			WHERE RECRT_YEAR = #{RECRT_YEAR } AND CRCLM_CD = #{CRCLM_CD } AND RECRT_SCHDL_CD = #{RECRT_SCHDL_CD }
+	</select>
+	
+	<insert id="addRec" parameterType="com.teamp.cau.dto.RecruitDTO">
+			INSERT INTO CRCLM_INFO (RECRT_YEAR, CRCLM_CD, RECRT_SCHDL_CD, DEPARTMENT, APPL_NUM)
+			VALUE (#{RECRT_YEAR }, #{CRCLM_CD }, #{RECRT_SCHDL_CD }, #{DEPARTMENT }, #{APPL_NUM })
+	</insert>
+	
 </mapper>

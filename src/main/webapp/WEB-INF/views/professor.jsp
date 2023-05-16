@@ -185,7 +185,7 @@ $(function(){
             </div>
             <br>
             <div class="save">
-               <button type="submit" class="save_btn" id="save_btn" onclick="check_email();">저장</button>
+               <button type="button" class="save_btn" id="save_btn" onclick="check_email();">저장</button>
             </div>
          </form>
          <!-- info table 끝 -->

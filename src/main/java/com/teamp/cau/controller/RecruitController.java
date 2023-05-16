@@ -61,4 +61,24 @@ public class RecruitController {
 		
 		return "";
 	}
+	
+	@PostMapping("/addRec")
+	@ResponseBody
+	public Object addRec(@RequestParam("year")String year,@RequestParam("cd")int cd,@RequestParam("type")int type,@RequestParam("num")int num,@RequestParam("depart")String depart) {
+		RecruitDTO dto = new RecruitDTO();
+		dto.setRECRT_YEAR(year);
+		dto.setRECRT_SCHDL_CD(cd);
+		dto.setCRCLM_CD(type);
+		dto.setDEPARTMENT(depart);
+		dto.setAPPL_NUM(num);
+		int result = recruitService.result(dto);
+		if(result == 0) {
+			dto.setDEPARTMENT("all");
+			List<Map<String, Object>> list = recruitService.check(dto);
+			return list;
+		}else {
+			return "fail";
+		}
+	}
+	
 }

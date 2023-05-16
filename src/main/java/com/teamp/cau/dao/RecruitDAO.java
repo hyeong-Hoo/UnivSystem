@@ -20,4 +20,8 @@ public interface RecruitDAO {
 
 	void saveNum(RecruitDTO dto);
 
+	int result(RecruitDTO dto);
+
+	void addRec(RecruitDTO dto);
+
 }

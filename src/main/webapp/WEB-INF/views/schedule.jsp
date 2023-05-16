@@ -52,10 +52,11 @@ $(function(){
 					$("#scheduleBody").empty();
 					$.each(data, function(i, list){
 						var check = list.RECRT_YEAR < nowYear ? 'disabled' : '';
+						var min = nowYear + '-01-01';
 	            		var tableList = '<tr>'
 	            						+ '<td class="scheduleYear">'+list.RECRT_YEAR +'</td>'
 	            						+ '<td>'+list.SCHDL_NAME +'</td>'
-	            						+ '<td><input class="day start" type="date" value='+list.SCHDL_START +' '+check + '></td>'
+	            						+ '<td><input class="day start" type="date" value='+list.SCHDL_START +' '+check + ' min='+min+'></td>'
 	            						+ '<td><input class="day end" type="date" value='+list.SCHDL_END_DT +' '+check + ' min='+list.SCHDL_START+ '></td>'
 	            						+ '<input class="recCD" type="hidden" value='+list.RECRT_SCHDL_CD + '>'
 	            						+ '</tr>';
@@ -116,7 +117,7 @@ $(function(){
  	 					let schStr = $(".trAdd").children(".Sdate").find(".start").val();
  	 					let schEnd = $(".trAdd").children(".Edate").find(".end").val();
  	 					if(schStr == ''){
- 	 						alert("날짜를 입력해주세요.");
+ 	 						alert("모집 날짜를 입력해주세요.");
  	 						
  	 					}else{
  	 						$.ajax({
@@ -125,7 +126,7 @@ $(function(){
  	 							data : {'year' : schYear, 'cd' : schCate, 'start' : schStr, 'end' : schEnd},
  	 							success : function(result){
  	 								if(result == "fail"){
- 	 									alert("중복된 모집 일정입니다.");
+ 	 									alert("중복입니다.");
  	 								}else{
  	 									var date = new Date();
  	 									var nowYear = date.getFullYear();
@@ -143,6 +144,8 @@ $(function(){
  	 					             						$("#scheduleBody").append(tableList);
  	 									});
  	 									alert("저장 완료");
+ 	 									$("#scheduleAdd").attr('value','추가');
+ 	 									$("#scheduleAdd").css('width','60');
  	 								}
  	 							}
  	 						});
@@ -162,7 +165,7 @@ $(function(){
 								+ '</select></td>'
 								+ '<td class="Sdate"><input class="day start" type="date" min='+min+'></td>'
 								+ '<td class="Edate"><input class="day end" type="date" min='+min+'></td>'
-								+ '<td><input type="button" id="addDel" value="취소"></td>'
+								+ '<td><input type="button" class="btn" id="addDel" value="취소"></td>'
 								+ '</tr>';
 					$("#scheduleBody").prepend(addList);
  					$("#scheduleAdd").attr('value','추가완료');

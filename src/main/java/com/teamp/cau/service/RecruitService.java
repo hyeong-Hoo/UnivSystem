@@ -35,4 +35,12 @@ public class RecruitService {
 		
 	}
 
+	public int result(RecruitDTO dto) {
+		int result = recruitDAO.result(dto);
+		if(result == 0) {
+			recruitDAO.addRec(dto);
+		}
+		return result;
+	}
+
 }
