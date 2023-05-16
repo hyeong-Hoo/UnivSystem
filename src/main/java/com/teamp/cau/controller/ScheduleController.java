@@ -69,7 +69,6 @@ public class ScheduleController {
 	@ResponseBody
 	public Object addSch(@RequestParam("year") String year,@RequestParam("cd") String cd,@RequestParam("start") String start, @RequestParam("end") String end){
 		ScheduleDTO dto = new ScheduleDTO();
-		System.out.println(year+"--"+cd+"----"+start);
 		dto.setRECRT_YEAR(year);
 		dto.setRECRT_SCHDL_CD(cd);
 		dto.setSCHDL_START(start);
@@ -81,7 +80,7 @@ public class ScheduleController {
 		List<Map<String, Object>> list = scheduleService.scheduleCheck(dto);
 		return list;
 		}else{
-			System.out.println("fail");
+			
 			return "fail";
 		}
 	}
