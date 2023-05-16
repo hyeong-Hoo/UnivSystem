@@ -6,6 +6,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>CAU - 면접평가</title>
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+<!-- Custom fonts for this template-->
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+<!--  jquery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <style>
 .app_no {width: 10%; text-align: center;}
 .crclm_code {width: 10%;}
@@ -19,14 +38,13 @@
 table {color: black;}
 th {text-align: center; background-color: #a2bfdd; border: solid 0.5px;}
 td {text-align: center;}
-/* input {width: 100%;} */
 .send_btn {background-color: #3E74C7; color: white; border-radius: 3px; height: 30px; width: 60px;}
 .container-fluid {height: 100%;}
 .test {border: none; text-align: center;}
 .test:focus {outline: none;}
 .no {border: none; text-align: center;}
 .no:focus {outline: none;}
-.score {text-align: center;}
+.score {text-align: center; width: 100%;}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -53,30 +71,18 @@ td {text-align: center;}
 			});
 		});
 	});
+	
+	 function restrictToNumbers(input) {
+		    input.value = input.value.replace(/\D/g, '');
+		  }
+
+		  function checkMaxValue(input, max) {
+		    if (parseInt(input.value) > max) {
+		      alert("입력 값이 " + max + "을(를) 초과합니다.");
+		      input.value = max;
+		    }
+		  }
 </script>
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<title>CAU - 면접평가</title>
-<link rel="stylesheet"
-	href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-<!-- Custom fonts for this template-->
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
-	type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
-
-<!-- Custom styles for this template-->
-<link href="css/sb-admin-2.min.css" rel="stylesheet">
-<!--  jquery -->
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
 	<br>
@@ -118,10 +124,9 @@ td {text-align: center;}
 							<td class="appl_department">${appl.department }</td>
 							<td class="appl_grade" name="grade_score">${appl.grade }</td>
 							<td class="appl_interview"><input type="number"
-								value="${appl.interview }" name="inter_score" class="score"
-								min="0" max="50"
-								oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');"
-								maxlength="2"></td>
+								value="${appl.interview }" name="inter_score" class="score" id="inter_score"
+								oninput="restrictToNumbers(this); checkMaxValue(this, 50);" maxlength="2">
+							</td>
 							<td class="appl_total"><input type="number" class="test"
 								name="totalscore" value="${appl.total }" readonly="readonly"></td>
 						</tr>

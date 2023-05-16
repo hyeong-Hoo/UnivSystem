@@ -1,7 +1,5 @@
 package com.teamp.cau.dto;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data

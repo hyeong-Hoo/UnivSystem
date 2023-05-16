@@ -64,4 +64,24 @@ public class ScheduleController {
 		}
 		return "";
 	}
+	@PostMapping("/addSch")
+	@ResponseBody
+	public Object addSch(@RequestParam("year") String year,@RequestParam("cd") String cd,@RequestParam("start") String start, @RequestParam("end") String end){
+		ScheduleDTO dto = new ScheduleDTO();
+		System.out.println(year+"--"+cd+"----"+start);
+		dto.setRECRT_YEAR(year);
+		dto.setRECRT_SCHDL_CD(cd);
+		dto.setSCHDL_START(start);
+		dto.setSCHDL_END_DT(end);
+		int result = scheduleService.result(dto);
+		
+		if(result == 0) {
+			dto.setRECRT_YEAR("all");
+		List<Map<String, Object>> list = scheduleService.scheduleCheck(dto);
+		return list;
+		}else{
+			System.out.println("fail");
+			return "fail";
+		}
+	}
 }
