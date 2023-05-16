@@ -50,6 +50,7 @@ public class ScheduleController {
 	@PostMapping("/ScheduleSave")
 	@ResponseBody
 	public String ScheduleSave(@RequestParam HashMap<String, Object> map, @RequestParam("num") int num) {
+		System.out.println(map);
 		ScheduleDTO dto = new ScheduleDTO();
 		for(var i=0; i<num; i++) {
 			String recCD = (String)map.get("schArray[" + i + "][recCD]");

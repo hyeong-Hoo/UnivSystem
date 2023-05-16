@@ -14,6 +14,9 @@
 <title>모집인원관리</title>
 <script type="text/javascript">
 $(function(){
+	var nowdate = new Date();
+	var selectYear = nowdate.getFullYear();
+	$("#recruitYear").val(selectYear).attr('selected', 'selected');
 	$("#recruitCheck").click(function(){
 		var date = new Date();
 		var nowyear = date.getFullYear();
@@ -92,9 +95,9 @@ $(function(){
 	
 	$("#recruitAdd").click(function(){
 		if($("#recruitBody").children().length && confirm("항목을 추가하시겠습니까?")){
-			alert("네");
+			
 		}else if($("#recruitBody").children().length == 0){
-				alert("없잖아요");
+			
 			}else{
 				alert("항목 추가를 취소하셨습니다.");
 			}

@@ -40,6 +40,9 @@ $(function(){
 			var year = $("#scheduleYear").val();
 			var date = new Date();
 			var nowYear = date.getFullYear();
+			if($("#scheduleBody").children().first().attr('class') == 'trAdd'){
+				alert("추가 항목 설정을 완료해주세요.");
+			}else{
 			$.ajax({
 				url: '/scheduleCheck',
 				type: 'GET',
@@ -57,31 +60,31 @@ $(function(){
 	            						+ '<input class="recCD" type="hidden" value='+list.RECRT_SCHDL_CD + '>'
 	            						+ '</tr>';
 	             						$("#scheduleBody").append(tableList);
-					});
-					
-				}
-			});
+						});
+					}
+				});
+			}
 		});
  		$("#scheduleSave").click(function(){
  			var date = new Date();
  			var year = date.getFullYear();
  			var length = $("#scheduleBody").children().length;
+ 			
  			var schArray = new Array();
 			var num = 0;
 			if($("#scheduleBody").children().first().attr('class') == 'trAdd'){
 				alert("추가 항목 설정을 완료해주세요.");
 			}else{
-			if(confirm("저장하시겠습니까?")){
- 			if($("#scheduleBody").children().length){
+			if($("#scheduleBody").children().length && confirm("저장하시겠습니까?")){
  				for(var i=0; i < length; i++){
- 					if($("#scheduleBody").children().eq(i).children(".scheduleYear").text() == year){
+ 					if($("#scheduleBody").children().eq(i).children(".scheduleYear").text() >= year){
  						var recCD = $("#scheduleBody").children().eq(i).find(".recCD").val();
  						var start = $("#scheduleBody").children().eq(i).find(".start").val();
  						var end = $("#scheduleBody").children().eq(i).find(".end").val();
  						num = num+1;
  						schArray[i] = {"recCD" : recCD, "start" : start, "end" : end, "year" : year};
  					}else{
- 						break;
+ 						
  					}
  				}
  				$.ajax({
@@ -93,9 +96,7 @@ $(function(){
  						alert("저장이 완료되었습니다.");
  					}
  				});
- 			}else{
- 				
- 				}
+ 			
  			}
 		}
  	});
