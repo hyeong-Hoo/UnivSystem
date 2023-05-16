@@ -13,15 +13,14 @@
 	</select>
 	
 	<select id="studentList" parameterType="com.teamp.cau.dto.PassDTO" resultType="com.teamp.cau.dto.PassDTO">
-
+		<![CDATA[
 		SELECT *
 		FROM APPL_INFO
-		WHERE PASS_INFO  <![CDATA[<]]> 3 
-		AND CRCLM_CD = #{CRCLM_CD} AND RECRT_SCHDL_CD =#{RECRT_SCHDL_CD} AND
-		passed="합격" AND RECRT_YEAR=#{RECRT_YEAR} AND 
-		payment="1" AND	KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
-		ORDER BY avg DESC
-
+		WHERE PASS_INFO < 3 
+		AND CRCLM_CD = #{CRCLM_CD} AND RECRT_SCHDL_CD = #{RECRT_SCHDL_CD} AND (RECRT_SCHDL_CD <> 2 OR interview IS NOT NULL) 
+		AND passed = "합격" AND RECRT_YEAR = #{RECRT_YEAR} AND payment = "1" AND KORN_FLNM LIKE CONCAT('%', #{KORN_FLNM}, '%')
+		ORDER BY CASE WHEN RECRT_SCHDL_CD = 2 THEN total ELSE avg 	END DESC
+		]]>
 	</select>
 	<update id="Passupdate" parameterType="com.teamp.cau.dto.PassDTO">
 		UPDATE APPL_INFO
@@ -54,13 +53,13 @@
 	
 	<insert id="studentSubmit1" parameterType="com.teamp.cau.dto.PassDTO">
 	INSERT INTO STUD_INFO (Student_ID,appl_NO,KORN_FLNM,USER_BRDT,GENDER_CD,
-    AGE,TELNO,REL_TELNO, REL_CD,  EML_ADDR,  ZIP, ADDR, DADDR, USER_NO,CRCLM_CD,CRCLM_CYCL,
-    PASS_INFO, category, avg, passed, department
+    AGE,TELNO,REL_TELNO, REL_CD,  EML_ADDR,  ZIP, ADDR, DADDR,CRCLM_CD,CRCLM_CYCL,
+    PASS_INFO, category, avg, passed, department,PHOTO_FILE
 )
 VALUES (
 	#{Student_ID}, #{appl_NO}, #{KORN_FLNM}, #{USER_BRDT},  #{GENDER_CD},  #{AGE},  #{TELNO},  #{REL_TELNO},
-    #{REL_CD},  #{EML_ADDR},  #{ZIP},  #{ADDR},  #{DADDR},  #{USER_NO},  #{CRCLM_CD},
-    #{CRCLM_CYCL},  #{PASS_INFO},  #{category},  #{avg},  #{passed},  #{department}
+    #{REL_CD},  #{EML_ADDR},  #{ZIP},  #{ADDR},  #{DADDR},  #{CRCLM_CD},
+    #{CRCLM_CYCL},  #{PASS_INFO},  #{category},  #{avg},  #{passed},  #{department},#{PHOTO_FILE}
 )
 	</insert> 
 	<select id="studentValue1" parameterType="com.teamp.cau.dto.PassDTO" resultType="com.teamp.cau.dto.PassDTO">

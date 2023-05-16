@@ -107,6 +107,43 @@ function requestPay() {
 }
 </script>
 <script>
+//팝업 창을 닫을 때의 처리
+function closePopup() {
+  $('.popup_container').hide();  // 팝업 창 숨기기
+
+  // '오늘 더이상 보지않기' 체크 여부 확인
+  if ($('#no_show_today').is(':checked')) {
+    var today = new Date();
+    var expirationDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+    document.cookie = 'popupClosed=true; expires=' + expirationDate.toUTCString() + '; path=/';
+  }
+}
+
+// 쿠키 확인 함수
+function checkPopupCookie() {
+  var cookies = document.cookie.split(';');
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i].trim();
+    if (cookie.indexOf('popupClosed=') === 0) {
+      return true;  // 쿠키가 존재하면 true 반환
+    }
+  }
+  return false;  // 쿠키가 존재하지 않으면 false 반환
+}
+
+// 페이지 로드 시 팝업 창 상태 확인
+$(document).ready(function() {
+  if (!checkPopupCookie()) {
+    $('.popup_container').show();  // 팝업 창 표시
+  }
+  
+  // 닫기 버튼 클릭 시 팝업 창 닫기
+  $('#close_btn').click(function() {
+    closePopup();
+  });
+});
+
+
 $(function(){
     $("#Admission").click(function(){
     	var date = new Date();
@@ -162,7 +199,7 @@ $(function(){
 
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>CAU</title>
 <style>
     div{font-family: 'IBM Plex Sans KR', sans-serif;}
     span{display: block}
@@ -727,6 +764,7 @@ cursor: pointer;
    	</div>
    </c:forEach>
     </div>
+    <p style="color: white; margin-top: 95%;">오늘 더이상 보지않기<input type="checkbox" name="no_show_today" id="no_show_today"></p>
     </div>
 <!--   	합격자조회 팝업 -->
 	
@@ -1118,7 +1156,7 @@ window.onclick = function(event) {
         </div>
         <div class="service2-bottom">
             <div class="head-text">QnA</div>
-            <div class="notice_text"> 연세대학교&emsp;| &emsp;입학지원&emsp; | &emsp;2023.4.23 </div>
+            <div class="notice_text"> Cau대학교&emsp;| &emsp;입학지원&emsp; | &emsp;2023.4.23 </div>
             <small class="service2-bottom-text">06134 서울특별시 강남구 테헤란로7길7</small>
         </div>
         </div>
