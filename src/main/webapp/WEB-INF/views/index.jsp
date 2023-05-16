@@ -280,7 +280,7 @@ $(function() {
                 </div>
             </li>
                         </c:if>
-            
+               
               <!-- Nav Item - Utilities Collapse Menu -->
 <c:if test="${not empty userRole and userRole == 'STUDENT'}">
             <li class="nav-item" >

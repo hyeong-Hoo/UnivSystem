@@ -123,7 +123,7 @@ public class AdmissionController {
 		LocalDate now = LocalDate.now();
 		ConvertBinary convert = new ConvertBinary();
 		RandomScore ran = new RandomScore();
-
+		
 		double grade;
 		double avg;
 		
