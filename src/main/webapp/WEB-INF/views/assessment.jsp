@@ -27,7 +27,7 @@ $(function() {
 					url : '/asm',
 					type : 'GET',
 					data : {
-						"KORN_FLNM" : $('#name').val()
+						"KORN_FLNM" : $('#name').val(),
 						'CRCLM_CD': departmentFilter,
 					    'PASSED': passedFilter
 					},
