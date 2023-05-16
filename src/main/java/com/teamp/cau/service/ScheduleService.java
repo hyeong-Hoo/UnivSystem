@@ -54,6 +54,20 @@ public class ScheduleService {
 		
 	}
 
+	public int result(ScheduleDTO dto) {
+		int result = scheduleDAO.result(dto);
+		if(dto.getRECRT_SCHDL_CD() == "1") {
+			dto.setSCHDL_NAME("정시");
+		}else {
+			dto.setSCHDL_NAME("수시");
+		}
+		if(result == 0) {
+			scheduleDAO.addSch(dto);
+		}
+		
+		return result;
+	}
+
 	
 	
 }

@@ -27,4 +27,8 @@ public interface ScheduleDAO {
 
 	void updatePayments(String KORN_FLNM, String USER_BRDT, int payment);
 
+	int result(ScheduleDTO dto);
+
+	void addSch(ScheduleDTO dto);
+
 }

@@ -22,11 +22,12 @@ $(function(){
             data: {},
             success: function(data){
             	$.each(data, function(i, list){
-            		var check = list.RECRT_YEAR != year ? 'disabled' : '';
+            		var check = list.RECRT_YEAR < year ? 'disabled' : '';
+            		var min = list.RECRT_YEAR + "-01-01";
             		var tableList = '<tr>'
             						+ '<td class="scheduleYear">'+list.RECRT_YEAR +'</td>'
             						+ '<td>'+list.SCHDL_NAME +'</td>'
-            						+ '<td><input class="day start" type="date" value='+list.SCHDL_START +' '+check + '></td>'
+            						+ '<td><input class="day start" type="date" value='+list.SCHDL_START +' '+check + ' min='+ min +'></td>'
             						+ '<td><input class="day end" type="date" value='+list.SCHDL_END_DT +' '+check + ' min='+list.SCHDL_START+'></td>'
             						+ '<input class="recCD" type="hidden" value='+list.RECRT_SCHDL_CD + '>'
             						+ '</tr>';
@@ -47,7 +48,7 @@ $(function(){
 				success: function(data){
 					$("#scheduleBody").empty();
 					$.each(data, function(i, list){
-						var check = list.RECRT_YEAR != nowYear ? 'disabled' : '';
+						var check = list.RECRT_YEAR < nowYear ? 'disabled' : '';
 	            		var tableList = '<tr>'
 	            						+ '<td class="scheduleYear">'+list.RECRT_YEAR +'</td>'
 	            						+ '<td>'+list.SCHDL_NAME +'</td>'
@@ -67,6 +68,9 @@ $(function(){
  			var length = $("#scheduleBody").children().length;
  			var schArray = new Array();
 			var num = 0;
+			if($("#scheduleBody").children().first().attr('class') == 'trAdd'){
+				alert("추가 항목 설정을 완료해주세요.");
+			}else{
 			if(confirm("저장하시겠습니까?")){
  			if($("#scheduleBody").children().length){
  				for(var i=0; i < length; i++){
@@ -81,7 +85,7 @@ $(function(){
  					}
  				}
  				$.ajax({
- 					url: 'ScheduleSave',
+ 					url: '/ScheduleSave',
  					type: 'POST',
  					cache: false,
  					data: {"schArray" : schArray, "num" : num},
@@ -91,37 +95,80 @@ $(function(){
  				});
  			}else{
  				
+ 				}
  			}
- 		}
+		}
  	});
  		$(document).on("change",".start",function(){
  			var start = $(this).val();
+ 			$(this).parent().siblings('.scheduleYear').text(start.substring(0,4));
  			$(this).parent().parent().find('.end').val(start);
  			$(this).parent().parent().find('.end').attr('min',start);
  			
  		});
  		$("#scheduleAdd").on('click',function(){
+ 			
  			if($("#scheduleBody").children().first().attr('class') == 'trAdd'){
- 					$(document).on('click','#addSubmit', function(){
- 	 					//여기에 ajax로 insert하고 목록 불러오기
- 	 				});
+ 				
+ 						let schYear = $(".trAdd").children(".scheduleYear").text();
+ 						let schCate = $(".trAdd").children(".addCate").find("#scheduleCategory").val();
+ 	 					let schStr = $(".trAdd").children(".Sdate").find(".start").val();
+ 	 					let schEnd = $(".trAdd").children(".Edate").find(".end").val();
+ 	 					if(schStr == ''){
+ 	 						alert("날짜를 입력해주세요.");
+ 	 						
+ 	 					}else{
+ 	 						alert("왜 안돼");
+ 	 						$.ajax({
+ 	 							url : '/addSch',
+ 	 							type : 'POST',
+ 	 							dataType : 'json',
+ 	 							data : {'year' : schYear, 'cd' : schCate, 'start' : schStr, 'end' : schEnd},
+ 	 							success : function(result){
+ 	 								let AddResult = JSON.parse(result);
+ 	 								if(AddResult == "fail"){
+ 	 									alert("중복된 모집 일정입니다.");
+ 	 								}else{
+ 	 									var date = new Date();
+ 	 									var nowYear = date.getFullYear();
+ 	 									$("#scheduleBody").empty();
+ 	 									$.each(result, function(i, list){
+ 	 										var check = list.RECRT_YEAR < nowYear ? 'disabled' : '';
+ 	 										var min = nowYear + '-01-01';
+ 	 					            		var tableList = '<tr>'
+ 	 					            						+ '<td class="scheduleYear">'+list.RECRT_YEAR +'</td>'
+ 	 					            						+ '<td>'+list.SCHDL_NAME +'</td>'
+ 	 					            						+ '<td><input class="day start" type="date" value='+list.SCHDL_START +' '+check + ' min='+min+'></td>'
+ 	 					            						+ '<td><input class="day end" type="date" value='+list.SCHDL_END_DT +' '+check + ' min='+list.SCHDL_START+ '></td>'
+ 	 					            						+ '<input class="recCD" type="hidden" value='+list.RECRT_SCHDL_CD + '>'
+ 	 					            						+ '</tr>';
+ 	 					             						$("#scheduleBody").append(tableList);
+ 	 									});
+ 	 								}
+ 	 							}
+ 	 						});
+ 	 					}
+ 	 			
  			}else{
  				if($("#scheduleBody").children().length && confirm("항목을 추가하시겠습니까?")){		 			
  					var date = new Date();
  	 				var year = date.getFullYear();
+ 	 				var min = year+"-01-01";
  	 				var addList = '<tr class="trAdd">'
 								+ '<td class="scheduleYear">'+ year +'</td>'
-								+ '<td><select class="addselect" id="scheduleCategory">'
+								+ '<td class="addCate">'
+								+ '<select class="addselect" id="scheduleCategory">'
 								+ '<option value="1">정시</option>'
 								+ '<option value="2">수시</option>'
 								+ '</select></td>'
-								+ '<td><input class="day start" type="date"></td>'
-								+ '<td><input class="day end" type="date"></td>'
+								+ '<td class="Sdate"><input class="day start" type="date" min='+min+'></td>'
+								+ '<td class="Edate"><input class="day end" type="date" min='+min+'></td>'
 								+ '<td><input type="button" id="addDel" value="취소"></td>'
 								+ '</tr>';
 					$("#scheduleBody").prepend(addList);
  					$("#scheduleAdd").attr('value','추가완료');
- 	 				$("#scheduleAdd").attr('id','addSubmit');
+ 	 				$("#scheduleAdd").css('width','90');
+ 	 				$("#scheduleAdd").css('text-align','center');
  				
  				}else{
  				alert("항목 추가를 취소하셨습니다.");
@@ -130,12 +177,12 @@ $(function(){
  		});
  		$(document).on("click","#addDel",function(){
  			if(confirm("항목 추가를 취소하시겠습니까?")){
- 			$(this).parent().parent().empty(); 				
+ 			$(this).parent().parent().remove();
+			$("#scheduleAdd").attr('value','추가');
+			$("#scheduleAdd").css('width','60');
  			}
  		});
- 		$(document).on("click","#scheduleSubmit", function(){
- 			
- 		});
+ 		
 });
 </script>
 <style type="text/css">

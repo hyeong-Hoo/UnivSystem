@@ -48,4 +48,16 @@
 		
 	</update>
 	
+	<select id="result" resultType="int" parameterType="com.teamp.cau.dto.ScheduleDTO">
+		SELECT COUNT(*)
+		FROM RECRT_SCHDL
+		WHERE RECRT_YEAR = #{RECRT_YEAR } AND RECRT_SCHDL_CD = #{RECRT_SCHDL_CD }
+	</select>
+	
+	<insert id="addSch" parameterType="com.teamp.cau.dto.ScheduleDTO">
+		INSERT INTO RECRT_SCHDL (RECRT_YEAR, RECRT_SCHDL_CD, SCHDL_NAME, SCHDL_START, SCHDL_END_DT)
+		VALUE (#{RECRT_YEAR }, #{RECRT_SCHDL_CD }, #{SCHDL_NAME }, #{SCHDL_START },#{SCHDL_END_DT })
+	</insert>
+	
+	
 </mapper>
