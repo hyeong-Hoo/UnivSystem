@@ -275,6 +275,7 @@ $(function() {
                         <span class="collapse-item" id="2-2">학적부여관리</span>
                         <span class="collapse-item" id="2-3">입학정원관리</span>
                         <span class="collapse-item" id="2-4">개인신상조회</span>
+                        <span class="collapse-item" id="2-5">학생아이디추가생성</span>
                     </div>
                 </div>
             </li>

@@ -27,6 +27,8 @@ public class ResponController {
 		    result="/get_stud";
 		} else if(test2.equals("2-4")) { //개인신상조회
 		    result="/grid";
+		} else if(test2.equals("2-5")) { //개인신상조회
+			result="/pass_id";
 		} else if(test2.equals("3-1")) { //학생 - 개인정보 조회 및 수정
 		    result="/student/stuinfo";
 		}  else if(test2.equals("3-4")) { //학생 - 비밀번호변경
