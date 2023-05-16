@@ -68,6 +68,7 @@ $(function(){
 							+ '<td>' + info.rel_TELNO + '</td>'
 							+ '<td>' + info.avg + '</td>'
 							+'<input class="CRCLMCD" type="hidden" value='+info.crclm_CD + '>'
+							+'<input class="RECRTSCHDLCD" type="hidden" value='+info.recrt_SCHDL_CD + '>'
 							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
 							$('.table_body_pass').append(str);
 							$('#'+selectid).val(info.pass_INFO).attr("selected", "selected");
@@ -154,16 +155,30 @@ $(function(){
 	  $("input:checkbox[name='checkbox_c']:checked").each(function(i) {
 	 		 var  state= $(this).closest('tr').find('.appl_no').text();
 	 		 var  crclm= $(this).closest('tr').find('.CRCLMCD').val();
+	 		 var  recrt= $(this).closest('tr').find('.RECRTSCHDLCD').val();
+	 		 var  find= $(this).closest('tr').find('.find_Select').children(".creditSelect").val();
 	 		 
+	 		 if(find!="2"){
+	 			 alert(state+"번호의 학생이 상태값이 합격이아닙니다.");
+	 		 }
+	 		 else{
 			num=num+1;
-			 var Student_id=nowYear+crclm+num;
+			//학번만드는로직 요번년도+학과코드+모집전형코드+점점늘어나는숫자
+			 var Student_id=nowYear+crclm+recrt+num;
 		  	checkBoxArr[i] = {"no" : i, "appl_NO" : state,"Student_id" : Student_id}
-		});
+	 		 }});
 	$.ajax({	
 			url : "/admission",
 			type : "post",
 			cache : false,
-      		data: { "checkBoxArr" : checkBoxArr ,"num" : num }
+      		data: { "checkBoxArr" : checkBoxArr ,"num" : num },
+      		success: function(){
+          alert('데이터저장에  성공하였습니다.');			
+      		},
+        error: function() {
+          // 저장 실패 시
+          alert('데이터저장에 실패였습니다.');
+        }
 		});
 		}
 	});
