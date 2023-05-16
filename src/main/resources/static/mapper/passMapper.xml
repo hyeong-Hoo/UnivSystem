@@ -54,12 +54,12 @@
 	<insert id="studentSubmit1" parameterType="com.teamp.cau.dto.PassDTO">
 	INSERT INTO STUD_INFO (Student_ID,appl_NO,KORN_FLNM,USER_BRDT,GENDER_CD,
     AGE,TELNO,REL_TELNO, REL_CD,  EML_ADDR,  ZIP, ADDR, DADDR,CRCLM_CD,CRCLM_CYCL,
-    PASS_INFO, category, avg, passed, department,PHOTO_FILE
+    PASS_INFO, category, avg, passed, department,PHOTO_FILE, RECRT_SCHDL_CD
 )
 VALUES (
 	#{Student_ID}, #{appl_NO}, #{KORN_FLNM}, #{USER_BRDT},  #{GENDER_CD},  #{AGE},  #{TELNO},  #{REL_TELNO},
     #{REL_CD},  #{EML_ADDR},  #{ZIP},  #{ADDR},  #{DADDR},  #{CRCLM_CD},
-    #{CRCLM_CYCL},  #{PASS_INFO},  #{category},  #{avg},  #{passed},  #{department},#{PHOTO_FILE}
+    #{CRCLM_CYCL},  #{PASS_INFO},  #{category},  #{avg},  #{passed},  #{department},#{PHOTO_FILE}, #{RECRT_SCHDL_CD}
 )
 	</insert> 
 	<select id="studentValue1" parameterType="com.teamp.cau.dto.PassDTO" resultType="com.teamp.cau.dto.PassDTO">
