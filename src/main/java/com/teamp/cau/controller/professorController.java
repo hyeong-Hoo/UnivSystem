@@ -1,13 +1,17 @@
 package com.teamp.cau.controller;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Base64.Encoder;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.teamp.cau.dto.PassDTO;
 import com.teamp.cau.dto.RecruitDTO;
 import com.teamp.cau.dto.professorDTO;
 import com.teamp.cau.service.RecruitService;
@@ -67,41 +72,55 @@ public class professorController {
 	// 교수본인정보 수정 불러오기
 	@GetMapping("/self_modify")
 	public ModelAndView modify() {
-		professorDTO dto = new professorDTO();
+		professorDTO professorDTO = new professorDTO();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String USER_NO = authentication.getName(); // "user_NO" 컬럼에서 사용자 이름을 가져옴
-		dto.setUSER_NO(USER_NO);
-		prService.infoload(dto);
+		professorDTO.setUSER_NO(USER_NO);
+		professorDTO dto = prService.infoload(professorDTO);
+		byte[] PHOTO_FILE = dto.getPHOTO_FILE();
+		if (PHOTO_FILE != null) {
+
+			dto.setPa("");
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < PHOTO_FILE.length; i++) {
+				sb.append((char) PHOTO_FILE[i]);
+			}
+			dto.setPa(sb.toString());
+		}
 		ModelAndView mv = new ModelAndView("self_modify");
 		mv.addObject("dto", dto);
 		return mv;
 	}
 
 	// 교수본인정보 수정
+	@ResponseBody
 	@PostMapping("/pr_self")
-	public String self_save(@RequestParam("pr_no") String pr_no, @RequestParam("name_kr") String name_kr,
+	public String self_save(@RequestParam("pr_no") int pr_no, @RequestParam("name_kr") String name_kr,
 			@RequestParam("name_en") String name_en, @RequestParam("roadAddrPart1") String roadAddrPart1,
 			@RequestParam("addrDetail") String addrDetail, @RequestParam("pr_telno") String pr_telno,
 			@RequestParam("pr_email") String pr_email, @RequestParam("pr_birth") String pr_birth,
 			@RequestParam("pr_gender") String pr_gender, @RequestParam("image") MultipartFile image) throws Exception {
 
-		ConvertBinary convert = new ConvertBinary();
-		Map<String, Object> selfmodi = new HashMap<>();
-		selfmodi.put("pr_no", pr_no);
-		selfmodi.put("name_kr", name_kr);
-		selfmodi.put("name_en", name_en);
-		selfmodi.put("roadAddrPart1", roadAddrPart1);
-		selfmodi.put("addrDetail", addrDetail);
-		selfmodi.put("pr_telno", pr_telno);
-		selfmodi.put("pr_email", pr_email);
-		selfmodi.put("pr_birth", pr_birth);
-		selfmodi.put("pr_gender", pr_gender);
-		String images;
-		images = convert.convertBinary(image);
-		selfmodi.put("IMG_FILE", images);
-		System.out.println(selfmodi);
-		prService.selfSave(selfmodi);
-		return "self_modify";
+//		ConvertBinary convert = new ConvertBinary();
+		professorDTO prDTO = new professorDTO();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String USER_NO = authentication.getName(); // "user_NO" 컬럼에서 사용자 이름을 가져옴
+        prDTO.setUSER_NO(USER_NO);
+		prDTO.setINSTR_NO(pr_no);
+		prDTO.setKORN_FLNM(name_kr);
+		prDTO.setENG_FLNM(name_en);
+		prDTO.setADDR(roadAddrPart1);
+		prDTO.setDADDR(addrDetail);
+		prDTO.setTELNO(pr_telno);
+		prDTO.setEML_ADDR(pr_email);
+		prDTO.setUSER_BRDT(pr_birth);
+		prDTO.setGENDER(pr_gender);
+		Encoder encoder = Base64.getEncoder();
+		byte[] bytes = image.getBytes();
+		byte[] te = encoder.encode(bytes);
+		prDTO.setPHOTO_FILE(te);
+		prService.prchange(prDTO);
+		return "";
 	}
 
 	// 교수정보 불러오기

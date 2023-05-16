@@ -32,7 +32,10 @@ $(function(){
 					url : '/passInfo',
 					type : 'GET',
 					data : {
-						"KORN_FLNM" : $('#name').val(),"CRCLM_CD" : $('#department').val(), "RECRT_SCHDL_CD":$('#category').val(),"RECRT_YEAR":$('#year').val()},
+						"KORN_FLNM" : $('#name').val(),
+						"CRCLM_CD" : $('#department').val(), 
+						"RECRT_SCHDL_CD":$('#category').val(),
+						"RECRT_YEAR":$('#year').val()},
 					dataType : "json",
 					success : function(data) {
 						var iii = data.list_L;

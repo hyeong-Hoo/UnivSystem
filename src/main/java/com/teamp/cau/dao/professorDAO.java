@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.teamp.cau.dto.PassDTO;
 import com.teamp.cau.dto.professorDTO;
 
 @Repository
@@ -64,9 +65,17 @@ public class professorDAO {
 
 
 	//교수정보 불러오기 
-		public Object infoload(professorDTO dto) {
-			sqlsession.selectOne("list.selfload", dto);
-			return sqlsession.selectOne("list.selfload", dto);
+		public professorDTO infoload(professorDTO dto) {
+			
+			professorDTO reDTO = sqlsession.selectOne("USER_INFO.studno", dto);
+			dto.setINSTR_NO(reDTO.getINSTR_NO());
+			return sqlsession.selectOne("USER_INFO.selfload", dto);
+		}
+
+		public void prchange(professorDTO prDTO) {
+			professorDTO reDTO = sqlsession.selectOne("USER_INFO.studno", prDTO);
+			prDTO.setINSTR_NO(reDTO.getINSTR_NO());
+			sqlsession.selectList("USER_INFO.modifypr", prDTO);			
 		}
 
 

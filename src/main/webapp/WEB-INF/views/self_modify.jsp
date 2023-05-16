@@ -16,33 +16,31 @@
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 <style>
 ul{list-style: none; color: black;}
 li{float: left; color: black; padding-left:0;}
-input{ height: 35px;}
-.top_box{ width: 100%; height: 50px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
-.middle_box{ width: 100%; height:90px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
-.bottom_box{ width: 100%; height: 250px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd;}
+.top_box{ width: 60%; height: 50px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
+.middle_box{ width: 60%; height:90px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
+.bottom_box{ width: 60%; height: 250px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd;}
 .Title1{ width: 15%; height: 35px; text-align: left; line-height: 35px; }
 .Answer1{ width: 85%; height: 35px;}
 .Title2{ width: 15%; height: 35px; line-height: 35px;}
 .Answer2{ width: 85%; height: 35px;}
 .Title3{ width: 15%; height: 35px; line-height: 35px;}
 .Answer3{ width: 33.5%; height: 35px;}
-.Answer4{ width: 70%; height: 35px;}
-.text1{ width: 95%; margin: auto;}
+.Answer4{ width: 60%; height: 35px;}
+.text1{ width: 95%; margin: auto; height: 35px;}
 .divide{ width: 100%; height: 5px;}
-.img_box{width: 32%; height: 200px; border: 1px solid; line-height: 200px; text-align: center; background-color: white;}
-.blank{ width: 30%; height: 200px;}
-.addr_btn{ width: 10%; height: 30px; border-radius: 3px; background-color: #ccc;}
-.imgfile{ width: 50%; height: 250px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd;}
+.img_box{width: 180px; height: 215px; border: 1px solid; line-height: 200px; text-align: center; background-color: white;}
+.blank{ width: 180px; height: 215px;}
+.addr_btn{ width: 15%; height: 30px; border-radius: 3px; background-color: #ccc;}
+.imgfile{ width: 60%; height: 300px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd;}
 .container-fluid{height: 90%;} 
 .save_btn{background-color: #3E74C7; color: white; border-radius: 3px;  height: 30px; width: 60px;}
 </style>
@@ -61,7 +59,7 @@ input{ height: 35px;}
 		<hr class="sidebar-divider">
 
 		<div class="info_table">
-			<form action="/pr_self" name="form" id="form" method="post"
+			<form action="/pr_self" name="form" id="form" method="post" onsubmit="return check();"
 				enctype="multipart/form-data">
 
 				<div class="top_box">
@@ -69,7 +67,7 @@ input{ height: 35px;}
 						<li class="divide"></li>
 						<li class="Title1">교수번호</li>
 						<li class="Answer1"><input class="text1" type="text"
-							id="pr_no" name="pr_no"
+							id="pr_no" name="pr_no" value="${dto.INSTR_NO}"
 							oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');"></li>
 						<li class="divide"></li>
 					</ul>
@@ -80,12 +78,12 @@ input{ height: 35px;}
 					<ul>
 						<li class="divide"></li>
 						<li class="Title1">이름 [한글]</li>
-						<li class="Answer1"><input class="text1" type="text"
-							id="name_kr" name="name_kr"></li>
+						<li class="Answer1"><input class="text1" type="text" 
+							id="name_kr" name="name_kr"value="${dto.KORN_FLNM}" ></li>
 						<li class="divide"></li>
 						<li class="Title1">이름 [영어]</li>
 						<li class="Answer1"><input class="text1" type="text"
-							id="name_en" name="name_en"
+							id="name_en" name="name_en" maxlength="15" value="${dto.ENG_FLNM}" 
 							onkeyup="this.value=this.value.replace(/[^a-zA-Z]/g,' ');"></li>
 					</ul>
 				</div>
@@ -94,55 +92,57 @@ input{ height: 35px;}
 					<ul>
 						<li class="divide"></li>
 						<li class="Title1">* 이미지</li>
-						<li class="img_box">3 X 4 사이즈</li>
+						<li class="img_box"><img id="image1" src="data:image/jpeg;base64,${dto.pa}"></li>
 						<li class="blank"></li>
 						<li class="divide"></li>
 						<li class="Title1"></li>
 						<li><input type="file" id="image" name="image"
 							accept="image/*" onchange="setThumbnail(event);" /></li>
+						
+						<li><p>3 X 4 사이즈로 해주세요.</p></li>
 						<li class="divide"></li>
 					</ul>
 				</div>
-
 				<br>
+				
 
 				<div class="bottom_box">
 					<ul>
 						<li class="divide"></li>
 						<li class="Title2">* 우편번호</li>
 						<li class="Answer4"><input type="hidden" id="confmKey"
-							name="confmKey" value=""> <input class="text1"
-							type="text" readonly id="zipNo" name="zipNo"></li>
+							name="confmKey" value=""> <input class="text1" 
+							type="text"  id="zipNo" name="zipNo"></li>
 						<input type="button" value="주소검색" class="addr_btn"
 							onclick="goPopup();">
 						<li class="divide"></li>
 						<li class="Title2">* 주소</li>
-						<li class="Answer2"><input class="text1" type="text"
-							id="roadAddrPart1" name="roadAddrPart1" readonly></li>
+						<li class="Answer2"><input class="text1" type="text" value="${dto.ADDR}" 
+							id="roadAddrPart1" name="roadAddrPart1" ></li>
 						<li class="divide"></li>
 						<li class="Title2">* 상세주소</li>
-						<li class="Answer2"><input class="text1" type="text"
+						<li class="Answer2"><input class="text1" type="text" value="${dto.DADDR}" 
 							id="addrDetail" name="addrDetail" placeholder=" 상세주소를 입력하세요"></li>
 						<li class="divide"></li>
 						<li class="Title2">* 연락처</li>
-						<li class="Answer2"><input class="text1" type="text"
+						<li class="Answer2"><input class="text1" type="text" value="${dto.TELNO}" 
 							id="pr_telno" name="pr_telno"
 							oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');"
 							placeholder=" - 없이 입력하세요" maxlength="11"></li>
 						<li class="divide"></li>
 						<li class="Title2">* 이메일</li>
-						<li class="Answer2"><input class="text1" type="text"
+						<li class="Answer2"><input class="text1" type="text"  value="${dto.EML_ADDR}" 
 							id="pr_email" name="pr_email" placeholder=" 예) hong12@gamil.com "></li>
 						<li class="divide"></li>
 						<li class="Title3">* 생년월일</li>
-						<li class="Answer3"><input class="text1" type="text"
+						<li class="Answer3"><input class="text1" type="text" value="${dto.USER_BRDT}" 
 							id="pr_birth" name="pr_birth" placeholder=" 예) 890909식으로 입력하세요 "
-							maxlength="6"
+							maxlength="6" 
 							oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');"></li>
 						<li class="Title3">* 성별</li>
-						<li class="Answer3"><input class="text1" type="text"
+						<li class="Answer3"><input class="text1" type="text" value="${dto.GENDER}" 
 							id="pr_gender" name="pr_gender"
-							placeholder=" 예) 남성 또는 여성으로 입력하세요 "></li>
+							placeholder=" 예) 남성 또는 여성으로 입력하세요" oninput="this.value=this.value.replace(/[^ㄱ-힣]gi,'');"></li>
 						<li class="divide"></li>
 					</ul>
 				</div>
@@ -150,7 +150,7 @@ input{ height: 35px;}
 
 				<p>* 필수로 입력해야합니다.</p>
 				<div class="save">
-					<button type="submit" class="save_btn">저장</button>
+					<button type="submit" class="save_btn" id="save_btn" onclick="check_email();">저장</button>
 				</div>
 			</form>
 			<!-- info table 끝 -->
@@ -219,5 +219,75 @@ input{ height: 35px;}
 
 		reader.readAsDataURL(event.target.files[0]);
 	}
+	
+    function check_email() {
+        let input = document.getElementById("pr_email").value
+
+        let email_format = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+        if (email_format.test(input)) alert("이메일 입력 성공!");
+        else {
+            alert("잘못된 이메일 형식입니다");
+            document.getElementById("pr_email").value = "";
+        }
+    }
+    
+    function check(){
+    	var f = document.form;
+    	
+    	//name_en
+    	if(f.name_en.value == ""){
+    		alert("교수번호를 입력해주세요.");
+    		f.name_en.focus();
+    		return false;
+    	}
+    	return true;
+    };
+    
+    $('.add-btn').click(function() {
+        if(confirm("수정하진 내용을 저장하시겠습니까?")) {
+        	var KORN_FLNM = $("#name_kr").val();
+    		var ENG_FLNM = $("#name_eg").val();
+    		var TELNO = $("#pr_telno").val();
+    		var INSTR_NO = $("#pr_no").val();
+    		var ADDR = $("#roadAddrPart1").val();
+    		var DADDR = $("#addrDetail").val();
+    		var EML_ADDR = $("#pr_email").val();
+    		var USER_BRDT = $("#pr_birth").val();
+    		var GENDER = $("#pr_gender").val();
+    		if($("#image")[0].files[0]){ var FileInput = $("#image")[0].files[0];}
+    		else{
+    		// 이미지 데이터를 가져와서 Blob 객체로 변환
+    		var imageSrc = $("#image1").attr("src");
+    		var byteCharacters = atob(imageSrc.split(',')[1]);
+    		var byteNumbers = new Array(byteCharacters.length);
+    		for (var i = 0; i < byteCharacters.length; i++) {
+      		byteNumbers[i] = byteCharacters.charCodeAt(i);
+    		}
+    		var byteArray = new Uint8Array(byteNumbers);
+    		var imageBlob = new Blob([byteArray], { type: 'image/jpeg' });
+    		// Blob 객체를 File 객체로 변환
+    		var fileName = "default.jpg";
+    		var FileInput = new File([imageBlob], fileName);}
+    		
+    		var formData = new FormData();
+            formData.append('pr_no', KORN_FLNM);
+            formData.append('pr_telno', TELNO);
+            formData.append('pr_email', EML_ADDR);
+            formData.append('roadAddrPart1', ADDR);
+            formData.append('addrDetail', DADDR);
+            formData.append('pr_birth', USER_BRDT);
+            formData.append('pr_gender', GENDER);
+            formData.append('image', FileInput);
+            
+            $.ajax({
+                url : "/pr_self",
+                type : "post",
+                cache : false,
+                processData: false,
+                contentType: false,
+                data: formData     
+            });
+        }
+    });
+    
 </script>
-</html>

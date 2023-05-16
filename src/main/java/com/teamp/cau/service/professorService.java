@@ -68,8 +68,12 @@ public class professorService {
 	    }
 
 	//로그인 정보 불러오기 
-		public Object infoload(professorDTO dto) {
-			return prDAO.infoload(dto);
+		public professorDTO infoload(professorDTO professorDTO) {
+			return prDAO.infoload(professorDTO);
+		}
+
+		public void prchange(professorDTO prDTO) {
+			prDAO.prchange(prDTO);	
 		}
 
 	
