@@ -108,9 +108,18 @@ container-fluid{height: 100%;}
                      <td class="detail_addr">${pr.DADDR }</td>
                      <td class="gender">${pr.GENDER }</td>
                      <td class="authority">
-                        <!-- 옵션 선택으로 --> <select name="auth" id="auth">
-                           <option id="0" value="0">없음</option>
-                           <option id="1" value="1">권한</option>
+                        <!-- 옵션 선택으로 --> 
+                        <select name="auth" class="auth">
+                        <c:choose>
+                        	<c:when test="${pr.ENDST_NO eq 0 }">
+                           <option value="0" selected="selected">없음</option>
+                           <option value="1">권한</option>
+                           </c:when>
+                           <c:when test="${pr.ENDST_NO eq 1 }">
+                           <option value="0">없음</option>
+                           <option value="1" selected="selected">권한</option>
+                           </c:when>
+                        </c:choose>
                      </select>
                      </td>
                   </tr>
@@ -144,6 +153,8 @@ container-fluid{height: 100%;}
                   $("#authlist").empty();
                }
                $.each(data,function(i, list){
+            	   var check1 = list.ENDST_NO == 0 ? 'selected' : '';
+            	   var check2 = list.ENDST_NO == 1 ? 'selected' : '';
                   var tableList = '<tr>'
                               +'<td class="pr_no">'+list.INSTR_NO+'</td>'
                               +'<td class="major">'+list.CRCLM_CD +'</td>'
@@ -155,14 +166,14 @@ container-fluid{height: 100%;}
                               +'<td class="detail_addr">'+list.DADDR +'</td>'
                               +'<td class="gender">'+list.GENDER +'</td>'
                               +'<td class="authority">'
-                              +'<select name="auth" id="auth">'
-                              +'<option id="0" value="0">없음</option>'
-                              +'<option id="1" value="1">권한</option>'
+                              +'<select name="auth" class="auth">'
+                              +'<option id="0" value="0"'+check1+'>없음</option>'
+                              +'<option id="1" value="1"'+check2+'>권한</option>'
                               +'</select></td>'
                               +'</tr>'
                               
                               $("#authlist").append(tableList);
-               })      
+               }); 
             }
          });
       });
