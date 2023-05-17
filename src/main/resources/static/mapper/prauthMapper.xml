@@ -24,7 +24,7 @@
 	
 	  <update id="resultScore">
     <foreach collection="list" item="qqq" separator=";">
-	update APPL_INFO set interview =#{qqq.inter_score},total=grade+#{qqq.inter_score} where appl_NO=#{qqq.appl_no}</foreach>
+	update APPL_INFO set interview =#{qqq.inter_score},total=grade+#{qqq.inter_score}, passed='합격' where appl_NO=#{qqq.appl_no}</foreach>
     ;
     </update>
 	
