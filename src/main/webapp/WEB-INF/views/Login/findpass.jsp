@@ -47,7 +47,7 @@
         <label for="password">핸드폰번호</label>
       </div>
        <div><input type="radio" id="sms" name="sms" value="true" class="">SMS발송</div>
-       <div><input type="radio" id="im" name="none" value="false" class="">발송은 돈이들어요</div>
+<!--        <div><input type="radio" id="im" name="none" value="false" class="">발송은 돈이들어요</div> -->
       <div><input type="submit" class="button" value="찾기" class="aim" id="submutBtnPass" onclick="openFindResultPassModal('${tempPassword}')"></div>
       	          <a onclick="openModal()" class="discrete" >아이디 찾기</a>
       

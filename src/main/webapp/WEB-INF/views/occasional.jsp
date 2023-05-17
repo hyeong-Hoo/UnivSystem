@@ -42,7 +42,6 @@ $(function() {
 						  $('#occname').val('');
 						  $('#occdep').val('');
 						  $('#occgrade').val('');	
-						  $('#occinter').val('');
 						  $('#occpdf').val('');
 						  $('#occpas').val('');						  
 						  
@@ -75,7 +74,6 @@ $(function() {
 						    	+ '<td class="occname">' + info.korn_FLNM + '</td>' 
 						    	+ '<td class="occdep">' + depart + '</td>'
 						    	+ '<td class="occgrade">' + info.grade + '</td>'
-						    	+ '<td class="occinter">' + info.interview + '</td>'
 						    	+ '<td class="occpdf"><button id="pdf-' + info.appl_NO + '" class="btn btn-sm btn-outline-primary" onclick="openPdf(\'' + decodedPdf + '\')">PDF</button></td>'
 						    	+ '<td class="occpas">'+
 						        '<select id="passed-' + info.appl_NO + '" name="classification" class="form-control">' +
@@ -236,7 +234,6 @@ border-bottom: solid 1px black;
                 <th scope="col">이름</th>  
                 <th scope="col">지원학과</th>   
                 <th scope="col">내신등급점수</th>        
-                <th scope="col">면접점수</th>
                 <th scope="col">제출서류</th>
                 <th scope="col">구분</th>
                 
