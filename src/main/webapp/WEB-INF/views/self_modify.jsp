@@ -27,7 +27,7 @@ ul{list-style: none; color: black;}
 li{float: left; color: black; padding-left:0;}
 .top_box{ width: 60%; height: 50px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
 .middle_box{ width: 60%; height:90px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd; }
-.bottom_box{ width: 60%; height: 250px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd;}
+.bottom_box{ width: 60%; height: 215px; border: 1px solid; border-radius: 3px; background-color: #a2bfdd;}
 .Title1{ width: 15%; height: 35px; text-align: left; line-height: 35px; }
 .Answer1{ width: 85%; height: 35px;}
 .Title2{ width: 15%; height: 35px; line-height: 35px;}
@@ -112,16 +112,16 @@ li{float: left; color: black; padding-left:0;}
             <div class="bottom_box">
                <ul>
                   <li class="divide"></li>
-                  <li class="Title2">* 우편번호</li>
-                  <li class="Answer4"><input type="hidden" id="confmKey"
-                     name="confmKey" value=""> <input class="text1" 
-                     type="text"  id="zipNo" name="zipNo" readonly></li>
+<!--                   <li class="Title2">* 우편번호</li> -->
+<!--                   <li class="Answer4"><input type="hidden" id="confmKey" -->
+<!--                      name="confmKey" value=""> <input class="text1"  -->
+<!--                      type="text"  id="zipNo" name="zipNo" readonly></li> -->
+                  <li class="Title2">* 주소</li>
+                  <li class="Answer4"><input class="text1" type="text" value="${dto.ADDR}" 
+                     id="roadAddrPart1" name="roadAddrPart1" readonly></li>
                   <input type="button" value="주소검색" class="addr_btn"
                      onclick="goPopup();">
-                  <li class="divide"></li>
-                  <li class="Title2">* 주소</li>
-                  <li class="Answer2"><input class="text1" type="text" value="${dto.ADDR}" 
-                     id="roadAddrPart1" name="roadAddrPart1" readonly></li>
+<!--                   <li class="divide"></li> -->
                   <li class="divide"></li>
                   <li class="Title2">* 상세주소</li>
                   <li class="Answer2"><input class="text1" type="text" value="${dto.DADDR}" 
@@ -204,7 +204,7 @@ li{float: left; color: black; padding-left:0;}
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById('zipNo').value = data.zonecode;
+            //document.getElementById('zipNo').value = data.zonecode;
             document.getElementById("roadAddrPart1").value = addr;
             // 커서를 상세주소 필드로 이동한다.
             document.getElementById("addrDetail").focus();
