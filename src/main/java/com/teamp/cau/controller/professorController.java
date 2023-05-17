@@ -189,7 +189,6 @@ public class professorController {
          res_inner.put("appl_no", Integer.parseInt(appl_no[i]));
          res_inner.put("inter_score", Integer.parseInt(interview[i]));
          list.add(res_inner);
-
       }
       int result_row = prService.resultpoint(list);
       List<HashMap<String, Object>> appl_list = prService.selectList();

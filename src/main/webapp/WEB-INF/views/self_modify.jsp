@@ -210,7 +210,8 @@ li{float: left; color: black; padding-left:0;}
             document.getElementById("addrDetail").focus();
          }
       }).open();
-   }
+   };
+   // 이미지 썸네일 
    function setThumbnail(event) {
       var reader = new FileReader();
 
@@ -289,4 +290,4 @@ li{float: left; color: black; padding-left:0;}
         }
     });
     
-</script
+</script>
