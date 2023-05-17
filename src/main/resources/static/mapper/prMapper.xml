@@ -13,7 +13,8 @@
     
     <!-- 교수정보 검색 -->
     <select id="search" parameterType="com.teamp.cau.dto.professorDTO" resultType="HashMap">
-    	select * from INSTR_INFO
+    	SELECT INSTR_NO, CRCLM_CD, KORN_FLNM, USER_BRDT, EML_ADDR, TELNO, ADDR, DADDR, GENDER, ENDST_NO 
+    	FROM INSTR_INFO
     		<choose>
     			<when test="KORN_FLNM != 'all' and CRCLM_CD != 'all'">
     				where korn_flnm like CONCAT('%',#{KORN_FLNM },'%') and crclm_cd like CONCAT('%',#{CRCLM_CD },'%');

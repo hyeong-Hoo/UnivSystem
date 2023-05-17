@@ -51,8 +51,10 @@ public class ScheduleController {
 	@ResponseBody
 	public String ScheduleSave(@RequestParam HashMap<String, Object> map, @RequestParam("num") int num) {
 		System.out.println(map);
+		System.out.println(num);
 		ScheduleDTO dto = new ScheduleDTO();
-		for(var i=0; i<num; i++) {
+		for(var i = 0; i < num; i++) {
+			System.out.println(map.get("schArray[" + i + "][year]"));
 			String recCD = (String)map.get("schArray[" + i + "][recCD]");
 			String year = (String) map.get("schArray[" + i + "][year]");
 			String start = (String) map.get("schArray[" + i + "][start]");

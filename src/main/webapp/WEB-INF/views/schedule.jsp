@@ -78,12 +78,13 @@ $(function(){
 			}else{
 			if($("#scheduleBody").children().length && confirm("저장하시겠습니까?")){
  				for(var i=0; i < length; i++){
- 					if($("#scheduleBody").children().eq(i).children(".scheduleYear").text() >= year){
+ 					var confirmYear = $("#scheduleBody").children().eq(i).children(".scheduleYear").text();
+ 					if(confirmYear >= year){
  						var recCD = $("#scheduleBody").children().eq(i).find(".recCD").val();
  						var start = $("#scheduleBody").children().eq(i).find(".start").val();
  						var end = $("#scheduleBody").children().eq(i).find(".end").val();
  						num = num+1;
- 						schArray[i] = {"recCD" : recCD, "start" : start, "end" : end, "year" : year};
+ 						schArray[i] = {"recCD" : recCD, "start" : start, "end" : end, "year" : confirmYear};
  					}else{
  						
  					}
@@ -104,7 +105,9 @@ $(function(){
  		$(document).on("change",".start",function(){
  			var start = $(this).val();
  			$(this).parent().siblings('.scheduleYear').text(start.substring(0,4));
+ 			if(start > $(this).parent().parent().find('.end').val()){
  			$(this).parent().parent().find('.end').val(start);
+ 			}
  			$(this).parent().parent().find('.end').attr('min',start);
  			
  		});

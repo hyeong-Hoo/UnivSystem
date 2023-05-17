@@ -58,7 +58,6 @@ container-fluid{height: 100%;}
       <hr class="sidebar-divider">
       <!-- 페이지 헤더  -->
       <div class="search">
-         <form action="/pr_info_search" method="post" id="alt">
             <!-- searchbox -->
             <ul class="box">
                <li class="t1">교수이름 &nbsp; <input type="text"
@@ -197,4 +196,5 @@ container-fluid{height: 100%;}
                });
             });
    });
-</scrip
+</script>
+</html>
