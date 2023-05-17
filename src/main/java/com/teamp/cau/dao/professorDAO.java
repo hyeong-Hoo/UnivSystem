@@ -75,7 +75,7 @@ public class professorDAO {
 		public void prchange(professorDTO prDTO) {
 			professorDTO reDTO = sqlsession.selectOne("USER_INFO.studno", prDTO);
 			prDTO.setINSTR_NO(reDTO.getINSTR_NO());
-			sqlsession.selectList("USER_INFO.modifypr", prDTO);			
+			sqlsession.update("USER_INFO.modifypr", prDTO);			
 		}
 
 

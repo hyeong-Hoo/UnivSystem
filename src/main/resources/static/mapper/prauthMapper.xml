@@ -7,7 +7,7 @@
     
     <!-- 지원자 정보 불러오기 -->
    	<select id="callin" resultType="HashMap">
-   		select appl_NO, CRCLM_CD, RECRT_YEAR, KORN_FLNM, GENDER_CD, grade, interview, avg, department, total from APPL_INFO
+   		select appl_NO, CRCLM_CD, RECRT_YEAR, KORN_FLNM, GENDER_CD, grade, interview, avg, total from APPL_INFO
    		where RECRT_SCHDL_CD ='2';
    	</select>
 
