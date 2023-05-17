@@ -43,7 +43,6 @@ $(function() {
 						  $('#occdep').val('');
 						  $('#occgrade').val('');	
 						  $('#occinter').val('');
-						  $('#occavg').val('');
 						  $('#occpdf').val('');
 						  $('#occpas').val('');						  
 						  
@@ -77,7 +76,6 @@ $(function() {
 						    	+ '<td class="occdep">' + depart + '</td>'
 						    	+ '<td class="occgrade">' + info.grade + '</td>'
 						    	+ '<td class="occinter">' + info.interview + '</td>'
-						    	+ '<td class="occavg">' + info.avg + '</td>'
 						    	+ '<td class="occpdf"><button id="pdf-' + info.appl_NO + '" class="btn btn-sm btn-outline-primary" onclick="openPdf(\'' + decodedPdf + '\')">PDF</button></td>'
 						    	+ '<td class="occpas">'+
 						        '<select id="passed-' + info.appl_NO + '" name="classification" class="form-control">' +
@@ -139,10 +137,16 @@ $(function() {
 
 					    }
 					  });
+					
 					});
+				
 				$('#resetBtn2').on('click', function() {
-					  $('#name2').val(''); // 검색 필드 초기화
-					  $('.table_body2').empty(); // 검색 결과 테이블 초기화
+
+					  $('#name2').val(''); // 검색 필드 초기화	
+					  $('#filter_department').val('');
+				    	$('#passedFilter').val('');
+						  $('.table_body2').empty(); // 검색 결과 테이블 초기화
+				
 
 					});
 
@@ -233,7 +237,6 @@ border-bottom: solid 1px black;
                 <th scope="col">지원학과</th>   
                 <th scope="col">내신등급점수</th>        
                 <th scope="col">면접점수</th>
-                <th scope="col">평균</th>                                
                 <th scope="col">제출서류</th>
                 <th scope="col">구분</th>
                 

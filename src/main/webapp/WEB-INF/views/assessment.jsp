@@ -20,6 +20,7 @@
 <script>
 $(function() {
 	$('#searchStudent').click(function() {
+		
 		var departmentFilter = $('#filter_department').val();
 		  var passedFilter = $('#passedFilter').val();
 		  
@@ -97,7 +98,7 @@ $(function() {
 				});
 				
 				$('#saveBtn1').unbind('click').on('click', function() {
-					// 저장 버튼 비활성화
+
 					  $(this).prop('disabled', true);
 					
 					  var tableRows = $('.table_body tr');
@@ -123,11 +124,6 @@ $(function() {
 					    contentType : 'application/json; charset=utf-8',
 					    success : function(result) {
 					      alert('저장되었습니다.');
-					      
-// 					      location.reload();
-					  
-// 					        document.getElementById("5-2").click();
-							// 저장 버튼 활성화
     					  $('#saveBtn1').prop('disabled', false);
 					      $('#saveBtn1').prop('disabled', false);
 
@@ -138,10 +134,15 @@ $(function() {
 
 					    }
 					  });
+										
 					});
 				$('#resetBtn1').on('click', function() {
+					
 					  $('#name').val(''); // 검색 필드 초기화
-					  $('.table_body').empty(); // 검색 결과 테이블 초기화
+					  $('#filter_department').val('');
+				    	$('#passedFilter').val('');
+						  $('.table_body').empty(); // 검색 결과 테이블 초기화
+					
 
 					});
 
@@ -168,7 +169,7 @@ function openPdf(pdfData) {
   text-align: center;
   padding: 20px;
   background-color: #AAB3C4;
-  color: white;
+  color: black;
 }
 
 .sear input,
@@ -192,7 +193,10 @@ margin-top: 40px;
 .top{
 border-bottom: solid 1px black;
 }
+
+
 </style>
+
 
 <body>
 	<br>
@@ -200,11 +204,11 @@ border-bottom: solid 1px black;
 	<br>
 	
 	<div class="sear">
-
+	
 학생 이름
 	<input type="text" id="name">
 	
-<select id="filter_department">
+<select id="filter_department" >
   <option value="">지원학과</option>
   <option value="1">기계과</option>
   <option value="2">컴퓨터공학과</option>
@@ -213,11 +217,14 @@ border-bottom: solid 1px black;
 </select>
 
 <select id="passedFilter">
+
   <option value="">구분</option>
   <option value="지원자">지원자</option>
   <option value="합격">합격</option>
   <option value="불합격">불합격</option>
 </select>
+
+
 
 	<button type="button" id="searchStudent">검색</button>
 
@@ -247,7 +254,7 @@ border-bottom: solid 1px black;
 
 
     <button id="saveBtn1" >저장</button>
-	<button id="resetBtn1">초기화</button>
+	<button id="resetBtn1" >초기화</button>
 
 
 
