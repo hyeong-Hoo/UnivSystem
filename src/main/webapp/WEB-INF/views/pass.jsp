@@ -56,6 +56,7 @@ $(function(){
 						  $('#PASS_INFO').val('');
 						$.each(data.list, function(i, info) {
 							var selectid="creditSelect"+info.appl_NO;
+							if($('#category').val()=="1"){ var abc=info.avg}else{ var abc= info.total};
 							var str = '<tr onmouseover="this.style.backgroundColor=\'#eee\';" onmouseout="this.style.backgroundColor=\'\';">'
 							+ '<td scope="row" class="checkbox_i"> <input type="checkbox" class="checkbox_a" name="checkbox_c"></td>' 
 							if(i<data.list_L){str += '<td class="passrank">' + (i+1)	+ '번</td>' ;}
@@ -68,7 +69,7 @@ $(function(){
 							+ '<td>' + info.eml_ADDR + '</td>'
 							+ '<td class="telno_m">' + info.telno + '</td>'
 							+ '<td>' + info.rel_TELNO + '</td>'
-							+ '<td>' + info.avg + '</td>'
+							+ '<td>' + abc + '</td>'
 							+'<input class="CRCLMCD" type="hidden" value='+info.crclm_CD + '>'
 							+'<input class="RECRTSCHDLCD" type="hidden" value='+info.recrt_SCHDL_CD + '>'
 							+ '<td class="find_Select"> <select id='+selectid+' class="creditSelect"><option value=0>문자대기</option><option value=1>예치금 대기</option><option value=2>합격</option><option value=3>합격의지없음</option><option value=4>예치금반환(환불)</option></select></td>'
@@ -139,7 +140,10 @@ $(function(){
 			url : "/passUpdate1",
 			type : "post",
 			cache : false,
-      		data: { "checkBoxArr" : checkBoxArr ,"num" : num }
+      		data: { "checkBoxArr" : checkBoxArr ,"num" : num },
+      		 success: function() {
+      			 alert("저장을완료했습니다.");
+      		 }
 		});
 		}
 		
