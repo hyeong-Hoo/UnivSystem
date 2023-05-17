@@ -28,6 +28,7 @@ import com.teamp.cau.dto.RecruitDTO;
 import com.teamp.cau.dto.professorDTO;
 import com.teamp.cau.service.RecruitService;
 import com.teamp.cau.service.professorService;
+import com.teamp.cau.util.ConvertBinary;
 
 @Controller
 public class professorController {
@@ -47,7 +48,7 @@ public class professorController {
    // 교수정보입력 저장
    @ResponseBody
    @PostMapping("/professor_info")
-   public String info_save(HttpServletRequest req) {
+   public Integer info_save(HttpServletRequest req) {
       String pr_id = req.getParameter("pr_id");
       String pr_pw = req.getParameter("pr_pw");
       String pr_no = req.getParameter("pr_no");
@@ -68,7 +69,7 @@ public class professorController {
       //System.out.println(infoEnter);
       Integer enter = prService.prinfo_save(infoEnter); // instr_info로
       Integer enter2 = prService.instr_user(infoEnter); // user_info로
-      return "professor";
+      return enter;
    }
 
 
@@ -105,7 +106,7 @@ public class professorController {
          @RequestParam("pr_email") String pr_email, @RequestParam("pr_birth") String pr_birth,
          @RequestParam("pr_gender") String pr_gender, @RequestParam("image") MultipartFile image) throws Exception {
 
-//      ConvertBinary convert = new ConvertBinary();
+     // ConvertBinary convert = new ConvertBinary();
       professorDTO prDTO = new professorDTO();
       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
       String USER_NO = authentication.getName(); // "user_NO" 컬럼에서 사용자 이름을 가져옴

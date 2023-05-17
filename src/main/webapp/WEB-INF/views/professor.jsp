@@ -95,16 +95,22 @@ $(function(){
    $("#save_btn").on("click", function(){
       var form1 = $("#form").serialize();
       
-      alert(form);
+     // alert(form);
       $.ajax({
          type: "post",
          url: "/professor_info",
          data: form1,
          dataType: "json",
          success: function(data){
-              alert("저장하셨습니다.");
-              window.location.reload(); // 페이지 전체를 갱신
-            },
+             $("#pr_id").val("");  // 아이디 input text 비움
+             $("#pr_pw").val("");  // 비밀번호 input text 비움
+             $("#pr_no").val("");  // 교수번호 input text 비움
+             $("#pr_dep").val("");  // 학과코드 input text 비움
+             $("#pr_name").val("");  // 이름 input text 비움
+             $("#pr_birth").val("");  // 생년월일 input text 비움
+             $("#pr_email").val("");  // 이메일 input text 비움
+             $("#pr_telno").val("");  // 연락처 input text 비움
+           },
             error: function(request, status, error){
               alert("실패");
             }
