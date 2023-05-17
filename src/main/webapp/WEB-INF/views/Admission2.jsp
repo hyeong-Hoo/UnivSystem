@@ -77,6 +77,7 @@ $(function(){
             alert("최종학력 체크를 확인해주세요");
         }else{
         alert("지원완료되었습니다.");
+        alert("결제를 진행해주시기 바랍니다.");
         alert("메인페이지로 이동합니다.");
         $("#admission2").submit();
         }
