@@ -183,7 +183,7 @@ $('.add-btn').click(function() {
         var USER_BRDT = $("#user_brdt").val();
         if($("#image")[0].files[0]){ var FileInput = $("#image")[0].files[0];}
 		else{
-			// 이미지 데이터를 가져와서 Blob 객체로 변환
+		// 이미지 데이터를 가져와서 Blob 객체로 변환
 		var imageSrc = $("#image1").attr("src");
 		var byteCharacters = atob(imageSrc.split(',')[1]);
 		var byteNumbers = new Array(byteCharacters.length);
